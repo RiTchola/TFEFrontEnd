@@ -29,10 +29,10 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Gestionnaire',
                 items: [
-                    { label: 'Résident', icon: 'pi pi-fw pi-briefcase', routerLink: ['/gestionnaire/'] },
-                    { label: 'Menu de la semaine', icon: 'pi pi-fw pi-stopwatch', routerLink: ['/gestionnaire/'] },
-                    { label: 'Meet-Up', icon: 'pi pi-fw pi-megaphone', routerLink: ['/gestionnaire/'] },
-                    { label: 'Blog', icon: 'pi pi-fw pi-comment', routerLink: ['/gestionnaire/'] }
+                    { label: 'Résident', icon: 'pi pi-fw pi-briefcase', routerLink: ['/gestionnaire/resident'] },
+                    { label: 'Menu de la semaine', icon: 'pi pi-fw pi-stopwatch', routerLink: ['/gestionnaire/menu-semaine'] },
+                    { label: 'Meet-Up', icon: 'pi pi-fw pi-megaphone', routerLink: ['/gestionnaire/meet-up'] },
+                    { label: 'Blog', icon: 'pi pi-fw pi-comment', routerLink: ['/gestionnaire/blog'] }
                 ]
             },
             {
