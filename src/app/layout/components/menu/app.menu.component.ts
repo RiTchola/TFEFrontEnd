@@ -17,7 +17,7 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Dashboard',
                 items: [
-                    { label: 'Accueil', icon: 'pi pi-fw pi-home', routerLink: ['/'] }
+                    { label: 'Accueil', icon: 'pi pi-fw pi-home', routerLink: ['/dashboard/accueil'] }
                 ]
             },
             {
@@ -43,7 +43,7 @@ export class AppMenuComponent implements OnInit {
                 ]
             },
             {
-                label: 'Outils',
+                label: 'Parametre',
                 items: [
                     { label: 'Paramètre de compte', icon: 'pi pi-fw pi-cog', routerLink: ['/xcxc'] },
                     { label: 'Deconnexion', icon: 'pi pi-fw pi-sign-out', routerLink: ['/xcxc'] }

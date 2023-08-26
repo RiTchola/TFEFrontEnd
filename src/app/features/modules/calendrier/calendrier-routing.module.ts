@@ -1,8 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CalendrierComponent } from './calendrier.component';
+import { ActivitesComponent } from './activites/activites.component';
+import { EvenementsComponent } from './evenements/evenements.component';
 
-const routes: Routes = [{ path: '', component: CalendrierComponent }];
+const routes: Routes = [
+  { path: '', redirectTo: 'activites', pathMatch: 'full' },
+  { path: 'activites', component: ActivitesComponent},
+  { path: 'evenements', component: EvenementsComponent}
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
