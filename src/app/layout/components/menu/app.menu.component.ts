@@ -23,30 +23,30 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Calendrier',
                 items: [
-                    { label: 'Calendrier des activités', icon: 'pi pi-fw pi-calendar-plus', routerLink: ['/xcx'] },
-                    { label: 'Calendrier des évenements', icon: 'pi pi-fw pi-calendar-plus', routerLink: ['/xcxc'] }                ]
+                    { label: 'Calendrier des activités', icon: 'pi pi-fw pi-calendar-plus', routerLink: ['/calendrier/'] },
+                    { label: 'Calendrier des évenements', icon: 'pi pi-fw pi-calendar-plus', routerLink: ['/calendrier/'] }                ]
             },
             {
                 label: 'Gestionnaire',
                 items: [
-                    { label: 'Résident', icon: 'pi pi-fw pi-briefcase', routerLink: ['/cxcx'] },
-                    { label: 'Menu de la semaine', icon: 'pi pi-fw pi-stopwatch', routerLink: ['/xcxc'] },
-                    { label: 'Meet-Up', icon: 'pi pi-fw pi-megaphone', routerLink: ['/xcxc'] },
-                    { label: 'Blog', icon: 'pi pi-fw pi-comment', routerLink: ['/xcx'] }
+                    { label: 'Résident', icon: 'pi pi-fw pi-briefcase', routerLink: ['/gestionnaire/'] },
+                    { label: 'Menu de la semaine', icon: 'pi pi-fw pi-stopwatch', routerLink: ['/gestionnaire/'] },
+                    { label: 'Meet-Up', icon: 'pi pi-fw pi-megaphone', routerLink: ['/gestionnaire/'] },
+                    { label: 'Blog', icon: 'pi pi-fw pi-comment', routerLink: ['/gestionnaire/'] }
                 ]
             },
             {
                 label: 'Outils',
                 items: [
-                    { label: 'Image/Video', icon: 'pi pi-fw pi-video', routerLink: ['/xcx'] },
-                    { label: 'Rapport de visite', icon: 'pi pi-fw pi-file-edit', routerLink: ['/xcxc'] }
+                    { label: 'Image/Video', icon: 'pi pi-fw pi-video', routerLink: ['/outils'] },
+                    { label: 'Rapport de visite', icon: 'pi pi-fw pi-file-edit', routerLink: ['/outils'] }
                 ]
             },
             {
                 label: 'Parametre',
                 items: [
-                    { label: 'Paramètre de compte', icon: 'pi pi-fw pi-cog', routerLink: ['/xcxc'] },
-                    { label: 'Deconnexion', icon: 'pi pi-fw pi-sign-out', routerLink: ['/xcxc'] }
+                    { label: 'Paramètre de compte', icon: 'pi pi-fw pi-cog', routerLink: ['/parametre'] },
+                    { label: 'Deconnexion', icon: 'pi pi-fw pi-sign-out', routerLink: ['/parametre'] }
                 ]
             }
 
