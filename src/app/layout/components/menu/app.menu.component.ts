@@ -15,43 +15,40 @@ export class AppMenuComponent implements OnInit {
     ngOnInit() {
         this.model = [
             {
-                label: 'Home',
+                label: 'Dashboard',
                 items: [
-                    { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/'] }
+                    { label: 'Accueil', icon: 'pi pi-fw pi-home', routerLink: ['/'] }
                 ]
             },
             {
-                label: 'Pages',
-                icon: 'pi pi-fw pi-briefcase',
+                label: 'Calendrier',
                 items: [
-                    {
-                        label: 'Auth',
-                        icon: 'pi pi-fw pi-user',
-                        items: [
-                            {
-                                label: 'Login',
-                                icon: 'pi pi-fw pi-sign-in',
-                                routerLink: ['/auth/login']
-                            },
-                            {
-                                label: 'Error',
-                                icon: 'pi pi-fw pi-times-circle',
-                                routerLink: ['/auth/error']
-                            },
-                            {
-                                label: 'Access Denied',
-                                icon: 'pi pi-fw pi-lock',
-                                routerLink: ['/auth/access']
-                            }
-                        ]
-                    },
-                    {
-                        label: 'Not Found',
-                        icon: 'pi pi-fw pi-exclamation-circle',
-                        routerLink: ['/notfound']
-                    },
+                    { label: 'Calendrier des activités', icon: 'pi pi-fw pi-calendar-plus', routerLink: ['/xcx'] },
+                    { label: 'Calendrier des évenements', icon: 'pi pi-fw pi-calendar-plus', routerLink: ['/xcxc'] }                ]
+            },
+            {
+                label: 'Gestionnaire',
+                items: [
+                    { label: 'Résident', icon: 'pi pi-fw pi-briefcase', routerLink: ['/cxcx'] },
+                    { label: 'Menu de la semaine', icon: 'pi pi-fw pi-stopwatch', routerLink: ['/xcxc'] },
+                    { label: 'Meet-Up', icon: 'pi pi-fw pi-megaphone', routerLink: ['/xcxc'] },
+                    { label: 'Blog', icon: 'pi pi-fw pi-comment', routerLink: ['/xcx'] }
                 ]
             },
+            {
+                label: 'Outils',
+                items: [
+                    { label: 'Image/Video', icon: 'pi pi-fw pi-video', routerLink: ['/xcx'] },
+                    { label: 'Rapport de visite', icon: 'pi pi-fw pi-file-edit', routerLink: ['/xcxc'] }
+                ]
+            },
+            {
+                label: 'Outils',
+                items: [
+                    { label: 'Paramètre de compte', icon: 'pi pi-fw pi-cog', routerLink: ['/xcxc'] },
+                    { label: 'Deconnexion', icon: 'pi pi-fw pi-sign-out', routerLink: ['/xcxc'] }
+                ]
+            }
 
         ];
     }
