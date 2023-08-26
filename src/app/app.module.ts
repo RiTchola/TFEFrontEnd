@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppLayoutModule } from './layout/app.layout.module';
@@ -14,9 +13,7 @@ import { NotfoundComponent } from './features/components/notfound/notfound.compo
         AppRoutingModule,
         AppLayoutModule
     ],
-    providers: [
-        { provide: LocationStrategy, useClass: HashLocationStrategy }
-    ],
+    providers: [],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
