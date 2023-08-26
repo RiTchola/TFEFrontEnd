@@ -38,8 +38,8 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Outils',
                 items: [
-                    { label: 'Image/Video', icon: 'pi pi-fw pi-video', routerLink: ['/outils'] },
-                    { label: 'Rapport de visite', icon: 'pi pi-fw pi-file-edit', routerLink: ['/outils'] }
+                    { label: 'Image/Video', icon: 'pi pi-fw pi-video', routerLink: ['/outils/images-video'] },
+                    { label: 'Rapport de visite', icon: 'pi pi-fw pi-file-edit', routerLink: ['/outils/rapport-visite'] }
                 ]
             },
             {

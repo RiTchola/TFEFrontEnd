@@ -1,8 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { OutilsComponent } from './outils.component';
+import { ImagesVideoComponent } from './images-video/images-video.component';
+import { RapportVisiteComponent } from './rapport-visite/rapport-visite.component';
 
-const routes: Routes = [{ path: '', component: OutilsComponent }];
+
+const routes: Routes = [
+  { path: '', redirectTo: 'images-video', pathMatch: 'full' },
+  { path: 'images-video', component: ImagesVideoComponent},
+  { path: 'rapport-visite', component: RapportVisiteComponent}
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
