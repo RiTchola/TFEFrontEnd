@@ -1,23 +1,11 @@
 import { Component } from '@angular/core';
-import { LayoutService } from 'src/app/layout/services/app.layout.service';
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styles: [`
-        :host ::ng-deep .pi-eye,
-        :host ::ng-deep .pi-eye-slash {
-            transform:scale(1.6);
-            margin-right: 1rem;
-            color: var(--primary-color) !important;
-        }
-    `]
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
+    password:string='';
 
-    valCheck: string[] = ['remember'];
-
-    password!: string;
-
-    constructor(public layoutService: LayoutService) { }
 }
