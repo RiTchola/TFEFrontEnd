@@ -1,6 +1,6 @@
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { NotfoundComponent } from './features/components/notfound/notfound.component';
+import { NotfoundComponent } from './shared/components/notfound/notfound.component';
 import { AppLayoutComponent } from "./layout/app.layout.component";
 
 @NgModule({
@@ -10,14 +10,14 @@ import { AppLayoutComponent } from "./layout/app.layout.component";
                 path: '', component: AppLayoutComponent,
                 children: [
                     { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
-                    { path: 'dashboard', loadChildren: () => import('./features/modules/dashboard/dashboard.module').then(m => m.DashboardModule) },
-                    { path: 'calendrier', loadChildren: () => import('./features/modules/calendrier/calendrier.module').then(m => m.CalendrierModule) },
-                    { path: 'gestionnaire', loadChildren: () => import('./features/modules/gestionnaire/gestionnaire.module').then(m => m.GestionnaireModule) },
-                    { path: 'outils', loadChildren: () => import('./features/modules/outils/outils.module').then(m => m.OutilsModule) },
-                    { path: 'parametre', loadChildren: () => import('./features/modules/parametre/parametre.module').then(m => m.ParametreModule) },
+                    { path: 'dashboard', loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule) },
+                    { path: 'calendrier', loadChildren: () => import('./pages/calendrier/calendrier.module').then(m => m.CalendrierModule) },
+                    { path: 'gestionnaire', loadChildren: () => import('./pages/gestionnaire/gestionnaire.module').then(m => m.GestionnaireModule) },
+                    { path: 'outils', loadChildren: () => import('./pages/outils/outils.module').then(m => m.OutilsModule) },
+                    { path: 'parametre', loadChildren: () => import('./pages/parametre/parametre.module').then(m => m.ParametreModule) },
                 ]
             },
-            { path: 'auth', loadChildren: () => import('./features/modules/auth/auth.module').then(m => m.AuthModule) },
+            { path: 'auth', loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthModule) },
             { path: 'notfound', component: NotfoundComponent },
             { path: '**', redirectTo: '/notfound' },
         ])
