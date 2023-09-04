@@ -1,23 +1,47 @@
-import { Component } from '@angular/core';
-import { LayoutService } from 'src/app/layout/services/app.layout.service';
+import {Component, OnDestroy} from '@angular/core';
+import {AuthenticationRequest} from "../../../../core/models/authentication-request";
+import {AuthService} from "../../../../core/services/auth.service";
+import {MessageService} from "primeng/api";
+import {Subscription} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styles: [`
-        :host ::ng-deep .pi-eye,
-        :host ::ng-deep .pi-eye-slash {
-            transform:scale(1.6);
-            margin-right: 1rem;
-            color: var(--primary-color) !important;
-        }
-    `]
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
+  providers: [MessageService]
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy{
 
-    valCheck: string[] = ['remember'];
+    private subscriptions: Subscription[] = [];
+    authRequest: AuthenticationRequest = {
+        username: "",
+        password: ""
+    };
 
-    password!: string;
+    constructor(private authService: AuthService, private router: Router, private messageService: MessageService) {
+    }
 
-    constructor(public layoutService: LayoutService) { }
+    login(){
+        this.subscriptions.push(
+            this.authService.authenticate(this.authRequest).subscribe(
+                {
+                    next: (res)=>{
+                        sessionStorage.setItem('accessToken', res.accessToken);
+                        this.authService.setLoggedIn(true);
+                        this.router.navigate(["/"]);
+                    },
+                    error: (err)=>{
+                        this.messageService.add({severity: "error", summary: "Error ("+err.status+")", detail: "Invalid username or password ("+err.message+")" });
+                    }
+                }
+            )
+        );
+    }
+
+    ngOnDestroy(): void {
+        this.subscriptions.forEach((subscription) => {
+            subscription.unsubscribe();
+        });
+    }
 }
