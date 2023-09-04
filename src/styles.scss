@@ -44,8 +44,8 @@ $gutter: 1rem; //for primeflex grid system
 }
 
 body {
-    background-color: var(--background);
-    color: var(--color-primary);
+    background-color: var(--background) !important;
+    color: var(--color-primary) !important;
     font-family: var(--font-family);
 }
 
@@ -67,7 +67,7 @@ input {
 }
 
 a {
-    color: var(--orange-400);
+    color: var(--orange-400) !important;
     text-decoration: underline;
 }
 
@@ -89,6 +89,15 @@ li > div {
     background-color: var(--orange-400);
     color: var(--color-primary);
     border-radius: 2px;
+}
+.p-button{
+    background-color: var(--orange-400);
+    color: var(--color-primary);
+}
+
+.p-button:hover{
+    background-color: var(--orange-200) !important;
+    color: var(--color-primary) !important;
 }
 
 .btn-outline-primary {
@@ -117,4 +126,8 @@ li > div {
 
 .line {
     color: #d8d8d8;
+}
+
+.authBg{
+    background-color: var(--background) !important;
 }
