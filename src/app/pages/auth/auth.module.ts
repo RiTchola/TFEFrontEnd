@@ -9,6 +9,7 @@ import {ButtonModule} from "primeng/button";
 import {RippleModule} from "primeng/ripple";
 import {InputTextModule} from "primeng/inputtext";
 import {DividerModule} from "primeng/divider";
+import {ToastModule} from "primeng/toast";
 
 @NgModule({
     imports: [
@@ -19,7 +20,8 @@ import {DividerModule} from "primeng/divider";
         ButtonModule,
         RippleModule,
         InputTextModule,
-        DividerModule
+        DividerModule,
+        ToastModule
     ],
     declarations: [
       LoginComponent,
