@@ -12,3 +12,109 @@ $gutter: 1rem; //for primeflex grid system
 @import "assets/demo/styles/flags/flags.css";
 @import "assets/demo/styles/badges.scss";
 @import "assets/demo/styles/code.scss";
+
+:root {
+    --background: #fff7ef;
+    --font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+        Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji,
+        Segoe UI Symbol;
+    /* Orange */
+    --orange-50: #fff8f3;
+    --orange-100: #feddc7;
+    --orange-200: #fcc39b;
+    --orange-300: #fba86f;
+    --orange-400: #fa8e42;
+    --orange-500: #f97316;
+    --orange-600: #d46213;
+    --orange-700: #ae510f;
+    --orange-800: #893f0c;
+    --orange-900: #642e09;
+
+    --success: #42EA3E;
+    --danger: #FF0303;
+
+    /* Text colors */
+    --color-primary: #495057;
+    --color-secondary: #6c757d;
+    --color-tertiary: #6e6b7b;
+    --color-medium: #ced4da;
+    --color-light: #eef1f4;
+    --color-white: #ffffff;
+    --color-black: #000000;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--color-primary);
+    font-family: var(--font-family);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--orange-400);
+}
+
+p {
+    color: var(--color-primary);
+}
+
+input {
+    border: var(--color-tertiary);
+}
+
+a {
+    color: var(--orange-400);
+    text-decoration: underline;
+}
+
+ul a {
+    text-decoration: none !important;
+    color: #232323 !important;
+}
+
+ul a.active-route {
+    color: var(--orange-400) !important;
+    text-decoration: none !important;
+}
+
+li > div {
+    text-transform: none !important;
+}
+
+.btn-primary {
+    background-color: var(--orange-400);
+    color: var(--color-primary);
+    border-radius: 2px;
+}
+
+.btn-outline-primary {
+    border: 1px solid var(--orange-400);
+    color: var(--color-primary);
+    border-radius: 2px;
+}
+
+.btn-secondary {
+    background-color: var(--orange-200);
+    color: var(--color-primary);
+    border-radius: 2px;
+}
+
+.btn-outline-secondary {
+    border: 1px solid var(--orange-200);
+    color: var(--color-primary);
+    border-radius: 2px;
+}
+
+.btn-outline-login {
+    border: 1px solid var(--orange-200);
+    color: #cb9a45;
+    border-radius: 2px;
+}
+
+.line {
+    color: #d8d8d8;
+}
