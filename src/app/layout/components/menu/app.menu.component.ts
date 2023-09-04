@@ -29,24 +29,25 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Gestionnaire',
                 items: [
-                    { label: 'Résident', icon: 'pi pi-fw pi-briefcase', routerLink: ['/gestionnaire/resident'] },
-                    { label: 'Menu de la semaine', icon: 'pi pi-fw pi-stopwatch', routerLink: ['/gestionnaire/menu-semaine'] },
-                    { label: 'Meet-Up', icon: 'pi pi-fw pi-megaphone', routerLink: ['/gestionnaire/meet-up'] },
-                    { label: 'Blog', icon: 'pi pi-fw pi-comment', routerLink: ['/gestionnaire/blog'] }
+                    { label: 'Résidents', icon: 'pi pi-fw pi-users', routerLink: ['/gestionnaire/resident'] },
+                    { label: 'Menu de la semaine', icon: 'pi pi-fw pi-box', routerLink: ['/gestionnaire/menu-semaine'] },
+                    { label: 'Meet-Up', icon: 'pi pi-fw pi-file-edit', routerLink: ['/gestionnaire/meet-up'] },
+                    { label: 'Blog', icon: 'pi pi-fw pi-megaphone', routerLink: ['/gestionnaire/blog'] }
                 ]
             },
             {
                 label: 'Outils',
                 items: [
                     { label: 'Image/Video', icon: 'pi pi-fw pi-video', routerLink: ['/outils/images-video'] },
-                    { label: 'Rapport de visite', icon: 'pi pi-fw pi-file-edit', routerLink: ['/outils/rapport-visite'] }
+                    { label: 'Rapport de visite', icon: 'pi pi-fw pi-comment', routerLink: ['/outils/rapport-visite'] },
+                    { label: 'Etablissement', icon: 'pi pi-fw pi-building', routerLink: ['/outils/rapport-visite'] }
                 ]
             },
             {
                 label: 'Parametre',
                 items: [
-                    { label: 'Paramètre de compte', icon: 'pi pi-fw pi-cog', routerLink: ['/parametre/compte'] },
-                    { label: 'Deconnexion', icon: 'pi pi-fw pi-sign-out', routerLink: ['/parametre/deconnexion'] }
+                    {label: 'Paramètre de compte', icon: 'pi pi-fw pi-cog', routerLink: ['/parametre/compte'] },
+                    {label: 'Deconnexion', icon: 'pi pi-fw pi-sign-out',  routerLink: ['/parametre/deconnexion'] }
                 ]
             }
 
