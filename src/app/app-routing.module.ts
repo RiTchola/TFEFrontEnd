@@ -2,12 +2,13 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { NotfoundComponent } from './shared/components/notfound/notfound.component';
 import { AppLayoutComponent } from "./layout/app.layout.component";
+import {adminGuard} from "./core/guards/auth.guard";
 
 @NgModule({
     imports: [
         RouterModule.forRoot([
             {
-                path: '', component: AppLayoutComponent,
+                path: '', canActivate: [adminGuard], component: AppLayoutComponent,
                 children: [
                     { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
                     { path: 'dashboard', loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule) },

@@ -45,8 +45,8 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Parametre',
                 items: [
-                    { label: 'Paramètre de compte', icon: 'pi pi-fw pi-cog', routerLink: ['/parametre/compte'] },
-                    { label: 'Deconnexion', icon: 'pi pi-fw pi-sign-out', routerLink: ['/parametre/deconnexion'] }
+                    {label: 'Paramètre de compte', icon: 'pi pi-fw pi-cog', routerLink: ['/parametre/compte'] },
+                    {label: 'Deconnexion', icon: 'pi pi-fw pi-sign-out',  routerLink: ['/parametre/deconnexion'] }
                 ]
             }
 
