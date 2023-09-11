@@ -8,7 +8,8 @@ import {adminGuard} from "./core/guards/auth.guard";
     imports: [
         RouterModule.forRoot([
             {
-                path: '', canActivate: [adminGuard], component: AppLayoutComponent,
+                path: '', //canActivate: [adminGuard],
+                component: AppLayoutComponent,
                 children: [
                     { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
                     { path: 'dashboard', loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule) },
