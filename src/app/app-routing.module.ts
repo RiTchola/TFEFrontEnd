@@ -21,6 +21,7 @@ import {adminGuard} from "./core/guards/auth.guard";
             },
             { path: 'auth', loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthModule) },
             { path: 'notfound', component: NotfoundComponent },
+            { path: 'submit-visit-report', loadChildren: () => import('./pages/submit-visit-report/submit-visit-report.module').then(m => m.SubmitVisitReportModule) },
             { path: '**', redirectTo: '/notfound' },
         ])
     ],
