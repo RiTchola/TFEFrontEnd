@@ -1,0 +1,30 @@
+<p-card>
+    <ng-template pTemplate="title"> Remplir les informations de la visite </ng-template>
+    <ng-template pTemplate="subtitle"> subTitle </ng-template>
+    <ng-template pTemplate="content">
+        <div class="p-fluid formgrid grid">
+            <div class="field col-12 md:col-6">
+                <label for="class">test1</label>
+                <p-dropdown inputId="class"  placeholder="Select a Test1"></p-dropdown>
+            </div>
+            <div class="field col-12 md:col-6">
+                <label for="wagon">test2</label>
+                <p-dropdown inputId="wagon"  placeholder="Select a Test2"></p-dropdown>
+            </div>
+            <div class="field col-12">
+                <label for="seat">test3</label>
+                <p-dropdown inputId="seat"   placeholder="Select a Test3"></p-dropdown>
+            </div>
+            <div class="field col-12">
+                <label for="firstname">Test4</label>
+                <input id="firstname" type="text" required pInputText/>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <div class="grid grid-nogutter justify-content-between">
+            <p-button label="Back"  icon="pi pi-angle-left"></p-button>
+            <p-button label="Next" icon="pi pi-angle-right" iconPos="right"></p-button>
+        </div>
+    </ng-template>
+</p-card>
