@@ -1,0 +1,95 @@
+<div class="container">
+    <div class="col-12">
+        <div class="card">
+            <h5>Nouveau résident</h5>
+            <div class="grid">
+                <div class="col-12 md:col-3">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                        <input type="text" pInputText placeholder="Nom" [(ngModel)]="lastname">
+                    </div>
+                </div>
+                <div class="col-12 md:col-3">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                        <input type="text" pInputText placeholder="Prenom" [(ngModel)]="firstname">
+                    </div>
+                </div>
+                <div class="col-12 md:col-3">
+                    <div class="p-inputgroup">
+                        <p-calendar [(ngModel)]="dob" [showIcon]="true" placeholder="Date de naissance"></p-calendar>
+                    </div>
+                </div>
+                <div class="col-12 md:col-3">
+                    <p-dropdown [options]="statusList" [(ngModel)]="status" optionLabel="name"></p-dropdown>
+                </div>
+                <div class="col-12 md:col-4">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-inbox"></i></span>
+                        <input type="text" pInputText placeholder="Email" [(ngModel)]="email">
+                    </div>
+                </div>
+                <div class="col-12 md:col-4">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-phone"></i></span>
+                        <input type="number" pInputText placeholder="Téléphone" [(ngModel)]="tel">
+                    </div>
+                </div>
+                <div class="col-12 md:col-4">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-globe"></i></span>
+                        <input type="text" pInputText placeholder="Adresse" [(ngModel)]="address">
+                    </div>
+                </div>
+                <div class="col-12 md:col-3">
+                    <div class="p-inputgroup">
+                        <p-calendar [(ngModel)]="entryDate" [showIcon]="true" placeholder="Date entrée"></p-calendar>
+                    </div>
+                </div>
+                <div class="col-12 md:col-3">
+                    <div class="p-inputgroup">
+                        <input type="text" pInputText placeholder="Motif entrée" [(ngModel)]="reasonEntry">
+                    </div>
+                </div>
+                <div class="col-12 md:col-3">
+                    <div class="p-inputgroup">
+                        <p-calendar [(ngModel)]="exitDate" [showIcon]="true" placeholder="Date sortie"></p-calendar>
+                    </div>
+                </div>
+                <div class="col-12 md:col-3">
+                    <div class="p-inputgroup">
+                        <input type="text" pInputText placeholder="Motif sortie" [(ngModel)]="reasonExit">
+                    </div>
+                </div>
+                <div class="col-12 md:col-6">
+                    <div class="p-inputgroup">
+                        <input type="text" pInputText placeholder="Ant médical" [(ngModel)]="antMedical">
+                    </div>
+                </div>
+                <div class="col-12 md:col-6">
+                    <div class="p-inputgroup">
+                        <input type="text" pInputText placeholder="Ant chirugical" [(ngModel)]="antChirugical">
+                    </div>
+                </div>
+                <div class="col-12 md:col-3">
+                    <div class="p-inputgroup">
+                        <input type="number" pInputText placeholder="Nombre d'enfanrt" [(ngModel)]="nbOfChild">
+                    </div>
+                </div>
+                <div class="col-12 md:col-3">
+                    <div class="p-inputgroup">
+                        <input type="number" pInputText placeholder="Chambre" [(ngModel)]="room">
+                    </div>
+                </div>
+                <div class="col-12 md:col-3">
+                    <div class="p-inputgroup">
+                        <input type="text" pInputText placeholder="Etat santé" [(ngModel)]="healthStatus">
+                    </div>
+                </div>
+                <div class="col-12 md:col-3">
+                    <p-dropdown [options]="statusList" [(ngModel)]="status" optionLabel="name"></p-dropdown>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
