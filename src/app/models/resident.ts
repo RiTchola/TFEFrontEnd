@@ -3,7 +3,6 @@ import { MedecinTraitant } from "./medecin-traitant";
 import { PersonContact } from "./person-contact";
 import { RapportVisite } from "./rapport-visite";
 import { RapportQuotidien } from "./rapport-quotidien";
-import { Status } from "../shared/interfaces/person-status";
 import { User } from "./user";
 
 export class Resident {
@@ -14,7 +13,7 @@ export class Resident {
     email!: string;
     tel!: string;
     adresse!: string;
-    statut!: Status;
+    statut!: string;
     dateEntree!: string;
     motifEntree!: string;
     dateSortie!: string;
