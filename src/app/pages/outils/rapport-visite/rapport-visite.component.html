@@ -1,1 +1,37 @@
-<p>rapport-visite works!</p>
+<h3>RAPPORT DE VISITE</h3>
+<p>Liste des rapports de visites</p>
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <p-table [value]="rapportVisiteTable2" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                [rowsPerPageOptions]="[5, 10, 25, 50]">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="name">Nom <p-sortIcon field="name"></p-sortIcon></th>
+                        <th  pSortableColumn="prenom">Prénom <p-sortIcon field="prenom"></p-sortIcon></th>
+                        <th pSortableColumn="typePersonne">Type de Personne <p-sortIcon field="typePersonne"></p-sortIcon></th>
+                        <th  pSortableColumn="name">Actions</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rvt>
+                    <tr>
+                        <td>
+                            {{rvt.nom}}
+                        </td>
+                        <td>
+                            {{rvt.prenom}}
+                        </td>
+                        <td>
+                            {{rvt.typePersonne}}
+                        </td>
+                       
+                        <td>
+                            <i class="pi pi-eye"  (click)="view()"></i>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>

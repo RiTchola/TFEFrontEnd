@@ -64,6 +64,13 @@ import { adminGuard } from './core/guards/auth.guard';
                     ),
             },
             { path: 'notfound', component: NotfoundComponent },
+            {
+                path: 'rapport-visite',
+                loadChildren: () =>
+                    import(
+                        './pages/outils/rapport-visite/submit-visit-report/submit-visit-report.module'
+                    ).then((m) => m.SubmitVisitReportModule),
+            },
             { path: '**', redirectTo: '/notfound' },
         ]),
     ],
