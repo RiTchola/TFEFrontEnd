@@ -41,6 +41,13 @@ import { adminGuard } from './core/guards/auth.guard';
                             ),
                     },
                     {
+                        path: 'etablissement',
+                        loadChildren: () =>
+                            import(
+                                './pages/outils/etablissement/etablissement.module'
+                            ).then((m) => m.EtablissementModule),
+                    },
+                    {
                         path: 'parametre',
                         loadChildren: () =>
                             import('./pages/parametre/parametre.module').then(
@@ -57,13 +64,6 @@ import { adminGuard } from './core/guards/auth.guard';
                     ),
             },
             { path: 'notfound', component: NotfoundComponent },
-            {
-                path: 'submit-visit-report',
-                loadChildren: () =>
-                    import(
-                        './pages/submit-visit-report/submit-visit-report.module'
-                    ).then((m) => m.SubmitVisitReportModule),
-            },
             { path: '**', redirectTo: '/notfound' },
         ]),
     ],

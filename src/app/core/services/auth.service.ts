@@ -11,7 +11,7 @@ import {AuthenticationResponse} from "../models/authentication-response";
   providedIn: 'root'
 })
 export class AuthService {
-    private authPath = environment.apiPath + "/auth";
+    private authPath = environment.apiPath + "/api/v1/auth";
     private jwtHelper = new JwtHelperService();
 
   constructor(

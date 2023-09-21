@@ -1,0 +1,35 @@
+<p-card>
+    <ng-template pTemplate="title"> Informations de la personne Externe</ng-template>
+    <ng-template pTemplate="subtitle"> Remplir les informations de la personne externe </ng-template>
+    <ng-template pTemplate="content">
+        <div class="p-fluid formgrid grid">
+            <div class="field col-12">
+                <label for="name">Nom</label>
+                <input id="name" type="text" required pInputText/>
+            </div>
+            <div class="field col-12">
+                <label for="prenom">Prenom</label>
+                <input id="prenom" type="text" required pInputText/>
+            </div>   
+            <div class="field col-12">
+                <label for="prenom">Telephone</label>
+                <input id="prenom" type="text" required pInputText/>
+            </div>   
+            <div class="field col-12">
+                <label for="prenom">Email</label>
+                <input id="prenom" type="text" required pInputText/>
+            </div>   
+            <div class="field col-12">
+                <label for="choix">Choix</label>
+                <p-dropdown inputId="choix"   placeholder="Select a Test3"></p-dropdown>
+            </div> 
+        </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <div class="p-fluid formgrid grid">
+            <div class="field col-12">
+                <p-button routerLink="/outils/rapport-visite/info-visite" label="Prochaine Etape"></p-button>
+            </div>
+        </div>
+    </ng-template>
+</p-card>

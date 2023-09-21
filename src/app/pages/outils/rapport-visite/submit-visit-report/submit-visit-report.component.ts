@@ -10,24 +10,16 @@ import { MenuItem, MessageService } from 'primeng/api';
 export class SubmitVisitReportComponent {
     items: MenuItem[] = [
         {
-            label: "Information de l'établissement",
             routerLink: 'info-etablissement',
         },
         {
-            label: 'Information du residant',
             routerLink: 'info-residant',
         },
         {
-            label: 'Informations de la personne Externe',
             routerLink: 'info-person-externe',
         },
         {
-            label: 'Remplir les informations de la visite',
             routerLink: 'info-visite',
-        },
-        {
-            label: 'Confirmation',
-            routerLink: 'confirmation',
-        },
+        }
     ];
 }

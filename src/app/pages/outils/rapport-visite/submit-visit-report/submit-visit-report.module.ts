@@ -7,13 +7,15 @@ import { InfoEtablissementComponent } from './info-etablissement/info-etablissem
 import { InfoResidantComponent } from './info-residant/info-residant.component';
 import { InfoPersonExterneComponent } from './info-person-externe/info-person-externe.component';
 import { InfoVisiteComponent } from './info-visite/info-visite.component';
-import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { ToastModule } from 'primeng/toast';
 import { StepsModule } from 'primeng/steps';
 import { CardModule } from 'primeng/card';
 import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { CalendarModule } from 'primeng/calendar';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
   declarations: [
@@ -21,8 +23,7 @@ import { InputTextModule } from 'primeng/inputtext';
     InfoEtablissementComponent,
     InfoResidantComponent,
     InfoPersonExterneComponent,
-    InfoVisiteComponent,
-    ConfirmationComponent
+    InfoVisiteComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +33,10 @@ import { InputTextModule } from 'primeng/inputtext';
     CardModule,
     DropdownModule,
     ButtonModule,
-    InputTextModule
+    InputTextModule,
+    CalendarModule,
+    InputTextareaModule,
+    CheckboxModule
   ]
 })
 export class SubmitVisitReportModule { }

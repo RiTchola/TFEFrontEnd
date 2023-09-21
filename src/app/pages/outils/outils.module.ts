@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { OutilsRoutingModule } from './outils-routing.module';
 import { ImagesVideoComponent } from './images-video/images-video.component';
 import { RapportVisiteComponent } from './rapport-visite/rapport-visite.component';
+
 
 
 @NgModule({
@@ -14,6 +14,7 @@ import { RapportVisiteComponent } from './rapport-visite/rapport-visite.componen
   imports: [
     CommonModule,
     OutilsRoutingModule
+
   ]
 })
 export class OutilsModule { }

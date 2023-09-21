@@ -1,0 +1,23 @@
+<p-card>
+    <ng-template pTemplate="title"> Information de l'établissement </ng-template>
+    <ng-template pTemplate="subtitle"> Remplir les informations de l'établissement </ng-template>
+    <ng-template pTemplate="content">
+        <div class="p-fluid formgrid grid">
+            <div class="field col-12">
+                <label for="name">Nom 1</label>
+                <input id="name" type="text" required pInputText/>
+            </div>
+            <div class="field col-12">
+                <label for="adresse">Adresse</label>
+                <input id="adresse" type="text" required pInputText/>
+            </div>   
+        </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <div class="p-fluid formgrid grid">
+            <div class="field col-12">
+                <p-button label="Prochaine Etape" routerLink="/outils/rapport-visite/info-residant"></p-button>
+            </div>
+        </div>
+    </ng-template>
+</p-card>

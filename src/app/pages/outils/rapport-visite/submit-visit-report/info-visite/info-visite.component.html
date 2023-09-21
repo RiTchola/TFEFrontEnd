@@ -1,0 +1,27 @@
+<p-card>
+    <ng-template pTemplate="title"> Remplir les informations de la visite </ng-template>
+    <ng-template pTemplate="subtitle"> subTitle </ng-template>
+    <ng-template pTemplate="content">
+        <div class="p-fluid formgrid grid">
+            <div class="field col-12">
+                <label for="adresse">Date de creation</label>
+                <p-calendar  [showIcon]="true"></p-calendar>
+            </div> 
+            <div class="field col-12">
+                <label for="commentaire">Commentaire</label>
+                <textarea id="commentaire" rows="6" pInputTextarea></textarea>
+            </div>
+            <div class="field col-12">
+                <p-checkbox inputId="visible" ></p-checkbox>
+                <label for="visible">Visible</label>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <div class="p-fluid formgrid grid">
+            <div class="field col-12">
+                <p-button label="Enregistrer"></p-button>
+            </div>
+        </div>
+    </ng-template>
+</p-card>
