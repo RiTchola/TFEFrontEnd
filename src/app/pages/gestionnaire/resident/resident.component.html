@@ -1,0 +1,51 @@
+<h3>RESIDENTS</h3>
+<p>Liste des résidents de l'établissement</p>
+<div class="mb-4 flex justify-content-end">
+    <p-button label="Enrégistrer un résident" routerLink="/gestionnaire/resident/1"></p-button>
+</div>
+<div class="grid" *ngIf="residents2.length > 0">
+    <div class="col-12">
+        <div class="card">
+            <p-table [value]="residents2" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                [rowsPerPageOptions]="[5, 10, 25, 50]">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th id="name" pSortableColumn="name">Nom <p-sortIcon field="name"></p-sortIcon></th>
+                        <th id="email" pSortableColumn="email">Email <p-sortIcon field="email"></p-sortIcon></th>
+                        <th id="dob" pSortableColumn="dob">Date Naissance <p-sortIcon field="dob"></p-sortIcon></th>
+                        <th id="account" pSortableColumn="account">Compte <p-sortIcon field="account"></p-sortIcon></th>
+                        <th id="room" pSortableColumn="room">Chambre <p-sortIcon field="room"></p-sortIcon></th>
+                        <th id="action" pSortableColumn="name">Actions</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-resident>
+                    <tr>
+                        <td style="min-width: 200px;">
+                            {{resident.nom}}
+                        </td>
+                        <td style="min-width: 200px;">
+                            {{resident.email}}
+                        </td>
+                        <td style="min-width: 200px;">
+                            {{resident.dateNaissance}}
+                        </td>
+                        <td style="min-width: 200px;">
+                            <p-tag [value]="resident.actif ? 'ACTIVER':'DESACTIVER'"
+                                severity="{{resident.actif  ? 'success' : 'danger'}}"></p-tag>
+                        </td>
+                        <td style="min-width: 200px;">
+                            {{resident.chambre}}
+                        </td>
+                        <td>
+                            <i class="pi pi-eye" style="color: red; margin-right: 8px" (click)="view()"></i>
+                            <i class="pi pi-pencil" (click)="edit()"></i>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>
+
+<p *ngIf="residents2.length === 0">Il y'a pas de résident enrégistré pour l'instant.</p>

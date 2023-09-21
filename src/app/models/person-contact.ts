@@ -1,5 +1,4 @@
 import { PersonContactType } from "../shared/interfaces/person-contact-type";
-import { Status } from "../shared/interfaces/person-status";
 import { User } from "./user";
 
 export class PersonContact {
@@ -11,7 +10,7 @@ export class PersonContact {
     tel1!: string;
     tel2?: string;
     adresse!: string;
-    statut!: Status;
+    statut!: string;
     choix!: PersonContactType;
     user!: User;
 }

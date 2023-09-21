@@ -1,4 +1,4 @@
-export interface Status {
+export const Status = {
     celibataire: 'CELIBATAIRE',
     marie: 'MARIE',
     divorce: 'DIVORCE',

@@ -9,8 +9,8 @@ import { environment } from 'src/environments/environment';
 })
 export class DashboardService {
 
-    private urlResident = `${environment.apiPath}/residents`;
-    private urlRapport = `${environment.apiPath}/rapports-quotidiens`;
+    private urlResident = `${environment.apiPath}/resident`;
+    private urlRapport = `${environment.apiPath}/rapport-quotidien`;
 
     constructor(private http: HttpClient) { }
 
