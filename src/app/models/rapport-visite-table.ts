@@ -1,6 +1,23 @@
+export type TypePersonne =
+    | "EPOUX"
+    | "EPOUSE"
+    | "PARENT"
+    | "ENFANT"
+    | "PETIT_FILS"
+    | "PETITE_FILLE"
+    | "AUTRE_FAMILLE"
+    | "AMI"
+    | "AVOCAT"
+    | "MEDECIN_TRAITANT"
+    | "KINESITHERAPEUTE"
+    | "AUTRE";
 export interface RapportVisiteTable{
     id: number,
-    nom: string,
-    prenom: string,
-    typePersonne: string
+    nomResid: string,
+    prenomResid: string,
+    dateBirthResid: Date,
+    commentaire: string,
+    dateVisite: Date,
+    nomVisiteur: string,
+    typePersonne: TypePersonne
 }

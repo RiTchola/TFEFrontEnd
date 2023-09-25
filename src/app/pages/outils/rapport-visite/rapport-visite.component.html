@@ -4,30 +4,27 @@
     <div class="col-12">
         <div class="card">
             <p-table [value]="rapportVisiteTable2" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
-                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                [rowsPerPageOptions]="[5, 10, 25, 50]">
+                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                     [rowsPerPageOptions]="[5, 10, 25, 50]">
                 <ng-template pTemplate="header">
                     <tr>
-                        <th pSortableColumn="name">Nom <p-sortIcon field="name"></p-sortIcon></th>
-                        <th  pSortableColumn="prenom">Prénom <p-sortIcon field="prenom"></p-sortIcon></th>
+                        <th pSortableColumn="nomResid">Nom Résident <p-sortIcon field="nomResid"></p-sortIcon></th>
+                        <th pSortableColumn="prenomResid">Prénom Résident <p-sortIcon field="prenomResid"></p-sortIcon></th>
+                        <th pSortableColumn="dateVisite">Date de Visite <p-sortIcon field="dateVisite"></p-sortIcon></th>
+                        <th pSortableColumn="nomVisiteur">Nom Visiteur <p-sortIcon field="nomVisiteur"></p-sortIcon></th>
                         <th pSortableColumn="typePersonne">Type de Personne <p-sortIcon field="typePersonne"></p-sortIcon></th>
-                        <th  pSortableColumn="name">Actions</th>
+                        <th>Actions</th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-rvt>
                     <tr>
+                        <td>{{rvt.nomResid}}</td>
+                        <td>{{rvt.prenomResid}}</td>
+                        <td>{{rvt.dateVisite | date}}</td>
+                        <td>{{rvt.nomVisiteur}}</td>
+                        <td>{{rvt.typePersonne}}</td>
                         <td>
-                            {{rvt.nom}}
-                        </td>
-                        <td>
-                            {{rvt.prenom}}
-                        </td>
-                        <td>
-                            {{rvt.typePersonne}}
-                        </td>
-                       
-                        <td>
-                            <i class="pi pi-eye"  (click)="view()"></i>
+                            <i class="pi pi-eye" (click)="showDialog(rvt)"></i>
                         </td>
                     </tr>
                 </ng-template>
@@ -35,3 +32,38 @@
         </div>
     </div>
 </div>
+<p-dialog  [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+    <ng-template pTemplate="header">
+        <h4>DETAIL DU RAPPORT</h4>
+    </ng-template>
+    <h5 style="color: black">Information Personnelle</h5>
+    <div class="p-fluid formgrid grid">
+        <div class="field col-4">
+            <h6>Nom Résident</h6>
+            <p>{{rapportVisiteHelper.nomResid}}</p>
+        </div>
+        <div class="field col-4">
+            <h6>Prenom Résident</h6>
+            <p>{{rapportVisiteHelper.prenomResid}}</p>
+        </div>
+        <div class="field col-4">
+            <h6>Date de naissance</h6>
+            <p>{{rapportVisiteHelper.dateBirthResid | date}}</p>
+        </div>
+        <div class="field col-4">
+            <h6>Nom Visiteur</h6>
+            <p>{{rapportVisiteHelper.nomVisiteur}}</p>
+        </div>
+        <div class="field col-4">
+            <h6>Type de personne</h6>
+            <p>{{rapportVisiteHelper.typePersonne}}</p>
+        </div>
+        <div class="field col-4">
+            <h6>Date visite</h6>
+            <p>{{rapportVisiteHelper.dateVisite | date}}</p>
+        </div>
+    </div>
+    <h5 style="color: black">Commentaire</h5>
+    <p>{{rapportVisiteHelper.commentaire}}</p>
+</p-dialog>
+
