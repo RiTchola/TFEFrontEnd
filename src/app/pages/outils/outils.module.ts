@@ -7,6 +7,7 @@ import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
 import {DialogModule} from 'primeng/dialog';
 import {InputTextModule} from "primeng/inputtext";
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import {InputTextModule} from "primeng/inputtext";
         OutilsRoutingModule,
         TableModule,
         DialogModule,
+        HttpClientModule,
         ButtonModule,
         InputTextModule
 

@@ -28,6 +28,7 @@ export class RapportVisiteComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.loadRapports();
         this.rapportVisiteTable2 = [
             {
                 id: 0,
@@ -52,8 +53,10 @@ export class RapportVisiteComponent implements OnInit {
         ]
     }
 
-    view(rv: RapportVisiteTable) {
-
+    loadRapports() {
+        this.rvt.getAllRapports().subscribe(data => {
+            this.rapportVisiteTable = data;
+        });
     }
 
     showDialog(rv: RapportVisiteTable) {
