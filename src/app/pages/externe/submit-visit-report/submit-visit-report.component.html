@@ -1,0 +1,57 @@
+<p-toast></p-toast>
+<div class="p-fluid formgrid grid p-10">
+    <div class="field col-12">
+        <h1>le logo au centre</h1>
+    </div>
+    <div class="field col-6">
+        <p-card>
+            <ng-template pTemplate="title"> Remplir les informations de la visite </ng-template>
+            <ng-template pTemplate="content">
+                <div class="p-fluid formgrid grid">
+                    <div class="field col-6">
+                        <label>Date de visite</label>
+                        <p-calendar [showIcon]="true"></p-calendar>
+                    </div>
+                    <div class="field col-6">
+                        <label>Date de naissance du resident</label>
+                        <p-calendar [showIcon]="true"></p-calendar>
+                    </div>
+                    <div class="field col-6">
+                        <label>Nom Resident</label>
+                        <input  type="text" required pInputText/>
+                    </div>
+                    <div class="field col-6">
+                        <label>Prenom Resident</label>
+                        <input  type="text" required pInputText/>
+                    </div>
+                    <div class="field col-6">
+                        <label>Nom Visiteur</label>
+                        <input  type="text" required pInputText/>
+                    </div>
+                    <div class="field col-6">
+                        <label>Type de Personne</label>
+                        <p-dropdown></p-dropdown>
+                    </div>
+                    <div class="field col-12">
+                        <label for="commentaire">Commentaire</label>
+                        <textarea id="commentaire" rows="6" pInputTextarea></textarea>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="footer">
+                <div class="p-fluid formgrid grid">
+                    <div class="field col-12">
+                        <p-button label="Enregistrer" routerLink="/outils/rapport-visite/info-residant"></p-button>
+                    </div>
+                </div>
+            </ng-template>
+        </p-card>
+
+    </div>
+    <div class="field col-6">
+        <p>Ici  l'image</p>
+    </div>
+</div>
+
+
+
