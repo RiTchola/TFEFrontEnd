@@ -1,10 +1,23 @@
-import { Etablissement } from "./etablissement";
-import { PersonExtern } from "./person-extern";
-
-export class RapportVisite {
-    id?: string;
-    dateVisite!: string;
-    commentaire?: string;
-    etablissement!: Etablissement;
-    personneExterne!: PersonExtern[];
+export type TypePersonne =
+    | "EPOUX"
+    | "EPOUSE"
+    | "PARENT"
+    | "ENFANT"
+    | "PETIT_FILS"
+    | "PETITE_FILLE"
+    | "AUTRE_FAMILLE"
+    | "AMI"
+    | "AVOCAT"
+    | "MEDECIN_TRAITANT"
+    | "KINESITHERAPEUTE"
+    | "AUTRE";
+export interface RapportVisite {
+    id: number,
+    nomResid: string,
+    prenomResid: string,
+    dateBirthResid: Date,
+    commentaire: string,
+    dateVisite: Date,
+    nomVisiteur: string,
+    typePersonne: TypePersonne
 }

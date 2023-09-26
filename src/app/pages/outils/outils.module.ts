@@ -8,6 +8,7 @@ import {ButtonModule} from 'primeng/button';
 import {DialogModule} from 'primeng/dialog';
 import {InputTextModule} from "primeng/inputtext";
 import {HttpClientModule} from "@angular/common/http";
+import {ToastModule} from "primeng/toast";
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {HttpClientModule} from "@angular/common/http";
         DialogModule,
         HttpClientModule,
         ButtonModule,
-        InputTextModule
+        InputTextModule,
+        ToastModule
 
     ]
 })
