@@ -135,3 +135,9 @@ li > div {
 td i {
     cursor: pointer;
 }
+
+label.required {
+    content: " *";
+    color: red;
+    font-weight: bold;
+}
