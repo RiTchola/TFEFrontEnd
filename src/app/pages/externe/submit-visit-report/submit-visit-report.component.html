@@ -11,31 +11,31 @@
                     <ng-template pTemplate="content">
                         <div class="p-fluid formgrid grid">
                             <div class="field col-6">
-                                <label>Date de visite</label>
+                                <label>Date de visite *</label>
                                 <p-calendar [(ngModel)]="rapportVisite.dateVisite" [showIcon]="true"></p-calendar>
                             </div>
                             <div class="field col-6">
-                                <label>Date de naissance du resident</label>
+                                <label>Date de naissance du resident *</label>
                                 <p-calendar [(ngModel)]="rapportVisite.dateBirthResid" [showIcon]="true"></p-calendar>
                             </div>
                             <div class="field col-6">
-                                <label>Nom Resident</label>
+                                <label>Nom Resident *</label>
                                 <input [(ngModel)]="rapportVisite.nomResid" type="text" required pInputText/>
                             </div>
                             <div class="field col-6">
-                                <label>Prenom Resident</label>
+                                <label>Prenom Resident *</label>
                                 <input [(ngModel)]="rapportVisite.prenomResid" type="text" required pInputText/>
                             </div>
                             <div class="field col-6">
-                                <label>Nom Visiteur</label>
+                                <label>Nom Visiteur *</label>
                                 <input [(ngModel)]="rapportVisite.nomVisiteur" type="text" required pInputText/>
                             </div>
                             <div class="field col-6">
-                                <label>Type de Personne</label>
+                                <label>Type de Personne *</label>
                                 <p-dropdown [options]="typePersonnes" [(ngModel)]="rapportVisite.typePersonne"></p-dropdown>
                             </div>
                             <div class="field col-12">
-                                <label for="commentaire">Commentaire</label>
+                                <label for="commentaire">Commentaire *</label>
                                 <textarea id="commentaire" [(ngModel)]="rapportVisite.commentaire" rows="6" pInputTextarea></textarea>
                             </div>
                         </div>
