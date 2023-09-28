@@ -1,0 +1,50 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <h5>Création d'un Établissement</h5>
+            <div class="p-fluid formgrid grid">
+                <div class="field col-6">
+                    <label>Nom de l'établissement</label>
+                    <input [(ngModel)]="name" type="text" required pInputText />
+                </div>
+                <div class="field col-6">
+                    <label>Etab username</label>
+                    <input [(ngModel)]="username" type="text" required pInputText />
+                </div>
+                <div class="field col-6">
+                    <label>Email 1</label>
+                    <input [(ngModel)]="email1" type="text" required pInputText />
+                </div>
+
+                <div class="field col-6">
+                    <label>Email 2</label>
+                    <input [(ngModel)]="email2" type="text" required pInputText />
+                </div>
+                <div class="field col-6">
+                    <label>Téléphone 1</label>
+                    <input [(ngModel)]="tel1" type="text" required pInputText />
+                </div>
+
+                <div class="field col-6">
+                    <label>Téléphone 2</label>
+                    <input [(ngModel)]="tel2" type="text" required pInputText />
+                </div>
+
+                <div class="field col-6">
+                    <label>Adresse</label>
+                    <input [(ngModel)]="adresse" type="text" required pInputText />
+                </div>
+
+                <div class="field col-6">
+                    <label>Date de création</label>
+                    <p-calendar [(ngModel)]="dateCreation" [showIcon]="true"></p-calendar>
+                </div>
+            </div>
+            <div class="p-fluid formgrid grid">
+                <div class="field col-6 ml-auto">
+                    <p-button label="Enregistrer" (onClick)="save()"></p-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
