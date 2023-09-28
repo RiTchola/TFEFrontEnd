@@ -1,21 +1,26 @@
 <h4>ETABLISSEMENT</h4>
 <P>Créer votre établissement</P>
+<p-toast key="tst"></p-toast>
 <div class="grid mt-3">
     <div class="col-12">
         <div class="card">
             <div class="col-12 grid">
                 <div class="col-6 flex">
-                    <img src="assets/images/young_woman_waving_her_hand_while_sitting_at_the_computer.png"
-                        alt="computer" class="col-10 mx-auto my-auto" />
+                    <img src="assets/images/group_221.png" alt="computer" class="col-10 mx-auto my-auto" />
                 </div>
-                <div class="col-6 flex">
+                <div class="col-6 flex" *ngIf="!currentEtab">
                     <div class="my-auto align-items-center justify-content-center">
-                        <div class="text-center" *ngIf="!currentEtab">
+                        <div class="text-center">
                             <h5>Vous n'avez aucun établissement sur votre compte</h5>
                             <p-button label="Ajouter" (onClick)="showForm()"></p-button>
                         </div>
-                        <div class="col-12 grid" *ngIf="currentEtab">
-                            <h5 style="color: black; font-weight: 700; text-transform: uppercase;">Votre établissement</h5>
+                    </div>
+                </div>
+                <div class="col-6 my-auto">
+                    <div *ngIf="currentEtab">
+                        <h5 style="color: black; font-weight: 700; text-transform: uppercase;">Votre établissement
+                        </h5>
+                        <div class="p-fluid p-formgrid grid mt-5">
                             <div class="col-6">
                                 <h6>Nom</h6>
                                 <h6>Email 1</h6>
@@ -25,23 +30,22 @@
                                 <h6>Adresse</h6>
                                 <h6>Date de création</h6>
                             </div>
-                            <div class="col-6">
-                                <p>Valeur Nom</p>
-                                <p>Valeur Email 1</p>
-                                <p>Valeur Email 2</p>
-                                <p>Valeur Téléphone 2</p>
-                                <p>Valeur Téléphone 2</p>
-                                <p>Valeur Adresse</p>
-                                <p>Valeur Date de création</p>
+                            <div class="col-6 content">
+                                <h6>{{currentEtab.nom}}</h6>
+                                <h6>{{currentEtab.email1}}</h6>
+                                <h6>{{currentEtab.email2}}</h6>
+                                <h6>{{currentEtab.tel1}}</h6>
+                                <h6>{{currentEtab.tel2}}</h6>
+                                <h6>{{currentEtab.adresse}}</h6>
+                                <h6>{{displayDate(currentEtab.dateCreation)}}</h6>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
 </div>
 <p-dialog [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
-    <app-etablissement-forms></app-etablissement-forms>
+    <app-etablissement-forms (saved)="closeForm($event)"></app-etablissement-forms>
 </p-dialog>

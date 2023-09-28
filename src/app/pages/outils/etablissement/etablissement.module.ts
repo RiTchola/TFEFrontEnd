@@ -6,6 +6,8 @@ import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from "primeng/inputtext";
 import { MessageModule } from 'primeng/message';
 import { CalendarModule } from 'primeng/calendar';
+import { InputMaskModule } from "primeng/inputmask";
+import { ToastModule } from 'primeng/toast';
 import { EtablissementRoutingModule } from './etablissement-routing.module';
 
 import { EtablissementComponent } from './etablissement.component';
@@ -26,7 +28,9 @@ import { EtablissementFormsComponent } from 'src/app/pages/outils/etablissement/
         DialogModule,
         InputTextModule,
         MessageModule,
-        CalendarModule
+        CalendarModule,
+        InputMaskModule,
+        ToastModule
     ]
 })
 export class EtablissementModule { }

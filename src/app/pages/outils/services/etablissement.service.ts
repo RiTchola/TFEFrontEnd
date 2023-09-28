@@ -3,8 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Etablissement } from 'src/app/models/etablissement';
+import { Response } from 'src/app/models/response';
 
 import { environment } from 'src/environments/environment';
+
 
 @Injectable({
     providedIn: 'root'
@@ -19,19 +21,11 @@ export class EtablissementService {
         return this.http.get<Etablissement>(this.url);
     }
 
-    add(data: Etablissement): Observable<string> {
-        console.log(data)
-
-        return this.http.post<string>(this.url, data, {
-            headers: { 'content-type': 'application/json' }
-        });
+    add(data: Etablissement): Observable<Response> {
+        return this.http.post<Response>(this.url, data);
     }
 
     update(data: Etablissement): Observable<Etablissement> {
         return this.http.put<Etablissement>(this.url, data);
-    }
-
-    delete(id: string): Observable<any> {
-        return this.http.delete<any>(`${this.url}/${id}`);
     }
 }
