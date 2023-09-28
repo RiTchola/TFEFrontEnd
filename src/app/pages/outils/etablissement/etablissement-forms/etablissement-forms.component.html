@@ -1,0 +1,79 @@
+<form [formGroup]="dataForm" (ngSubmit)="save()" #form="ngForm">
+    <div class="grid">
+        <div class="col-12">
+            <div class="card">
+                <h5>Création d'un Établissement</h5>
+                <div class="p-fluid formgrid grid">
+                    <div class="field col-6">
+                        <label>Nom de l'établissement</label>
+                        <input name="name" formControlName="name" type="text" required pInputText
+                            class="form-control" />
+                        <small
+                            *ngIf="(dataForm.get('name')?.hasError('required') && dataForm.get('name')?.touched) || (dataForm.get('name')?.hasError('required') && form.submitted)">{{required}}</small>
+                    </div>
+                    <div class="field col-6"></div>
+                    <div class="field col-6">
+                        <label>Email 1</label>
+                        <input formControlName="email1" type="email" required pInputText class="form-control"
+                            placeholder="example@mpac.com" />
+                        <small
+                            *ngIf="dataForm.get('email1')?.hasError('required') && form.submitted">{{required}}</small>
+                        <small
+                            *ngIf="dataForm.get('email1')?.value && dataForm.get('email1')?.invalid && form.submitted">Invalide</small>
+                    </div>
+
+                    <div class="field col-6">
+                        <label>Email 2</label>
+                        <input formControlName="email2" type="email" pInputText class="form-control"
+                            placeholder="example@mpac.com" />
+                        <small
+                            *ngIf="dataForm.get('email2')?.value && dataForm.get('email2')?.invalid && form.submitted">Invalide</small>
+                    </div>
+                    <div class="field col-6">
+                        <label>Téléphone 1</label>
+                        <input formControlName="tel1" type="text" required pInputText class="form-control" minlength="4"
+                            maxlength="30" placeholder="1234" />
+                        <small *ngIf="dataForm.get('tel1')?.hasError('required') && form.submitted">{{required}}</small>
+                        <small
+                            *ngIf="dataForm.get('tel1')?.value && dataForm.get('tel1')?.invalid && form.submitted">Invalide
+                            (sans le +)</small>
+                    </div>
+
+                    <div class="field col-6">
+                        <label>Téléphone 2</label>
+                        <input formControlName="tel2" type="text" pInputText class="form-control" minlength="4"
+                            maxlength="30" placeholder="1234" />
+                        <small
+                            *ngIf="dataForm.get('tel2')?.value && dataForm.get('tel2')?.invalid && form.submitted">Invalide
+                            (sans le +)</small>
+                    </div>
+
+                    <div class="field col-6">
+                        <label>Adresse</label>
+                        <input formControlName="address" type="text" required pInputText class="form-control"
+                            placeholder="Rue de marchant 3, 1000 Bruxelles" />
+                        <small
+                            *ngIf="dataForm.get('address')?.hasError('required') && form.submitted">{{required}}</small>
+                        <small
+                            *ngIf="dataForm.get('address')?.value && dataForm.get('address')?.invalid && form.submitted">Adresse
+                            invalide (Min.
+                            10 caractères)</small>
+                    </div>
+
+                    <div class="field col-6">
+                        <label>Date de création</label>
+                        <p-calendar formControlName="date" [showIcon]="true" [required]="true"></p-calendar>
+                        <small *ngIf="dataForm.get('date')?.hasError('required') && form.submitted">{{required}}</small>
+                        <small *ngIf="dataForm.get('date')?.hasError('greater') && form.submitted">La date ne peut être
+                            supérieur à celle d'aujourd'hui</small>
+                    </div>
+                </div>
+                <div class="p-fluid formgrid grid">
+                    <div class="field col-6 ml-auto">
+                        <p-button label="Enregistrer" type="submit"></p-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

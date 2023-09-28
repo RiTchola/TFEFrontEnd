@@ -29,10 +29,7 @@ export class ResidentComponent implements OnInit {
     }
 
     populateList() {
-        this.srv.fetchAllResidents().subscribe({
-            next: (r) => this.residents = r,
-            error: (err) => console.error(err)
-        });
+
     }
 
     view() {

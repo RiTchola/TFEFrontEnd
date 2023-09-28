@@ -11,12 +11,10 @@ import { environment } from 'src/environments/environment';
 })
 export class ResidentService {
 
-    private url = `${environment.apiPath}/resident`;
+    private url = `${environment.apiPath}/residents`;
 
     constructor(private http: HttpClient) { }
 
-    fetchAllResidents(): Observable<Resident[]> {
-        return this.http.get<Resident[]>(this.url);
-    }
+
 
 }
