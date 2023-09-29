@@ -28,7 +28,6 @@ export class EtablissementComponent implements OnInit {
         this.etabSrv.get().subscribe({
             next: (res) => {
                 if (res) {
-                    console.log(res)
                     this.currentEtab = res
                 }
             },
