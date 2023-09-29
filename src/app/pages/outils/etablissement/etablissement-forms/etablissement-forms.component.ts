@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 
 import { EtablissementService } from '../../services/etablissement.service';
@@ -12,6 +12,7 @@ import { Etablissement } from './../../../../models/etablissement';
     styleUrls: ['./etablissement-forms.component.scss']
 })
 export class EtablissementFormsComponent implements OnInit {
+    @Input() update: boolean = false;
     @Output() saved: EventEmitter<string> = new EventEmitter<string>(undefined);
 
     dataForm = new FormGroup({
@@ -21,12 +22,13 @@ export class EtablissementFormsComponent implements OnInit {
         tel1: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+$')]),
         tel2: new FormControl('', [Validators.pattern('^[0-9]+$'), Validators.minLength(4), Validators.maxLength(30)]),
         address: new FormControl('', [Validators.required, Validators.minLength(10)]),
-        date: new FormControl('', [Validators.required]),
+        date: new FormControl<Date>(new Date(), [Validators.required]),
     });
 
     required = 'Ce champ est requis';
 
     username = '';
+    toUpdate?: Etablissement;
 
     constructor(
         private authSrv: AuthService,
@@ -35,6 +37,31 @@ export class EtablissementFormsComponent implements OnInit {
 
     ngOnInit(): void {
         this.username = this.authSrv.getLoggedUser();
+        if (this.update) {
+            this.getEstablishmentInfo();
+        }
+    }
+
+    getEstablishmentInfo() {
+        this.etablisSrv.get().subscribe({
+            next: (res) => {
+                if (res) {
+                    this.toUpdate = res;
+                    this.populateForm(res);
+                }
+            },
+            error: (err) => console.error(err)
+        });
+    }
+
+    populateForm(value: Etablissement) {
+        this.dataForm.controls.name.setValue(value.nom);
+        this.dataForm.controls.email1.setValue(value.email1);
+        this.dataForm.controls.email2.setValue(value.email2 ?? '');
+        this.dataForm.controls.tel1.setValue(value.tel1.replace('+', ''));
+        this.dataForm.controls.tel2.setValue(value?.tel2?.replace('+', '') ?? '');
+        this.dataForm.controls.address.setValue(value.adresse);
+        this.dataForm.controls.date.setValue(new Date(value.dateCreation));
     }
 
     buildBody() {
@@ -44,7 +71,7 @@ export class EtablissementFormsComponent implements OnInit {
             email2: this.dataForm.controls.email2.value ?? '',
             tel1: `+${this.dataForm.controls.tel1.value}`,
             tel2: `+${this.dataForm.controls.tel2.value}`,
-            dateCreation: this.dataForm.controls.date.value ?? '',
+            dateCreation: this.isoDateToDate(this.dataForm.controls.date.value ?? undefined),
             nom: this.dataForm.controls.name.value ?? '',
             etabUsername: this.username,
         };
@@ -52,7 +79,6 @@ export class EtablissementFormsComponent implements OnInit {
     }
 
     save() {
-
         const data = this.buildBody();
         if (!this.dataForm.controls.email2.value) {
             data.email2 = data.email1 ?? this.username;
@@ -68,7 +94,7 @@ export class EtablissementFormsComponent implements OnInit {
             return;
         }
 
-        if (this.dataForm.valid) {
+        if (this.dataForm.valid && !this.update) {
             this.etablisSrv.add(data).subscribe({
                 next: (result) => {
                     if (result) {
@@ -81,6 +107,29 @@ export class EtablissementFormsComponent implements OnInit {
                 }
             });
         }
+
+        if (this.dataForm.valid && this.update) {
+            console.log(data)
+            data.id = this.toUpdate?.id;
+            this.etablisSrv.update(data).subscribe({
+                next: (result) => {
+                    if (result) {
+                        this.saved.emit(result.email1);
+                    }
+                },
+                error: (err) => {
+                    console.error(err);
+                    this.saved.emit(undefined);
+                }
+            });
+        }
+    }
+
+    private isoDateToDate(date?: Date) {
+        if (!date) return '';
+        date.setDate(date.getDate() + 1);
+        const d = date.toISOString().split('T')[0];
+        return d;
     }
 
 }

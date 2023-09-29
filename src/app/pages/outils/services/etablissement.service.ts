@@ -26,6 +26,6 @@ export class EtablissementService {
     }
 
     update(data: Etablissement): Observable<Etablissement> {
-        return this.http.put<Etablissement>(this.url, data);
+        return this.http.put<Etablissement>(`${this.url}/${data.id}`, data);
     }
 }

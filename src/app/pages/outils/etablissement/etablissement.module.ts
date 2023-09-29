@@ -31,6 +31,7 @@ import { EtablissementFormsComponent } from 'src/app/pages/outils/etablissement/
         CalendarModule,
         InputMaskModule,
         ToastModule
-    ]
+    ],
+    exports: [EtablissementFormsComponent]
 })
 export class EtablissementModule { }

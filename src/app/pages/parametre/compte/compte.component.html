@@ -1,1 +1,7 @@
-<p>compte works!</p>
+<h5>Paramètre du Compte</h5>
+<p>Informations sur l'établissement</p>
+<div class="mt-5">
+    <p-toast key="tst"></p-toast>
+    <app-etablissement-forms [update]="true" (saved)="onSave($event)"></app-etablissement-forms>
+</div>
+
