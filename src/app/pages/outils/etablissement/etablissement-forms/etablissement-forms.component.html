@@ -33,20 +33,20 @@
                     <div class="field col-6">
                         <label>Téléphone 1</label>
                         <input formControlName="tel1" type="text" required pInputText class="form-control" minlength="4"
-                            maxlength="30" placeholder="1234" />
+                            maxlength="30" placeholder="32465488901" />
                         <small *ngIf="dataForm.get('tel1')?.hasError('required') && form.submitted">{{required}}</small>
                         <small
                             *ngIf="dataForm.get('tel1')?.value && dataForm.get('tel1')?.invalid && form.submitted">Invalide
-                            (sans le +)</small>
+                            Exemple : 32465488904</small>
                     </div>
 
                     <div class="field col-6">
                         <label>Téléphone 2</label>
                         <input formControlName="tel2" type="text" pInputText class="form-control" minlength="4"
-                            maxlength="30" placeholder="1234" />
+                            maxlength="30" placeholder="32465488901" />
                         <small
                             *ngIf="dataForm.get('tel2')?.value && dataForm.get('tel2')?.invalid && form.submitted">Invalide
-                            (sans le +)</small>
+                            Exemple : 32465488904</small>
                     </div>
 
                     <div class="field col-6">
