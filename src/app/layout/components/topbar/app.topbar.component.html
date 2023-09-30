@@ -1,4 +1,4 @@
-<div class="layout-topbar">
+<div class="layout-topbar">topbar
     <a class="layout-topbar-logo" routerLink="">
         <img src="assets/logo-transparent.png" alt="Logo-MPAC"  class="mb-3">
     </a>
@@ -7,19 +7,16 @@
         <i class="pi pi-bars"></i>
     </button>
 
-    <button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button" (click)="layoutService.showProfileSidebar()">
+   <!--  <button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button" (click)="layoutService.showProfileSidebar()">
         <i class="pi pi-ellipsis-v"></i>
-    </button>
+    </button> -->
 
     <div #topbarmenu class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
-        <button class="p-link layout-topbar-button">
-            <!--<a class="layout-topbar-logo" >
-                <img *ngIf="roleUtilisateur === 'admin' || 'etablissement'" src="/assets/images/etablissement.jpg" alt="Etablissement" class="mb-6">
-                <img *ngIf="roleUtilisateur === 'resident'" src="/assets/images/resid.jpg" alt="Resident" class="mb-6">
-                <img *ngIf="roleUtilisateur === 'personnecontact'" src="/assets/images/oersonContact.jpg" alt="Personne Contact" class="mb-6">
-            </a>
-            <span>{{ roleUtilisateur }}</span>
-            -->
-        </button>
+        <div class="layout-topbar-logo ">
+                <span>{{ role }}</span>
+                <img *ngIf="role == 'admin' || 'etablissement'" src="/assets/images/etablissement.jpg" alt="Etablissement"   >
+                <img *ngIf="role == 'resident'" src="/assets/images/resid.jpg" alt="Resident" class="mb-6">
+                <img *ngIf="role == 'personnecontact'" src="/assets/images/poersonContact.jpg" alt="Personne Contact" class="mb-6">
+        </div>
     </div>
 </div>
