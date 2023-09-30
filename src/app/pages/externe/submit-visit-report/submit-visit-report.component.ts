@@ -11,6 +11,7 @@ import {take} from "rxjs";
     providers: [MessageService],
 })
 export class SubmitVisitReportComponent {
+    enableForm: boolean = true;
     typePersonnes: string[] = ["EPOUX","EPOUSE","PARENT","ENFANT","PETIT_FILS","PETITE_FILLE","AUTRE_FAMILLE","AMI","AVOCAT","MEDECIN_TRAITANT","KINESITHERAPEUTE","AUTRE"];
     rapportVisite: RapportVisite = {
         id: 0,
@@ -27,11 +28,13 @@ export class SubmitVisitReportComponent {
     }
 
     submit(){
-        this.rapportVisiteService.createRapport(this.rapportVisite).pipe(take(1)).subscribe({
-            next: ()=>{
-                this.messageService.add({severity:'success', summary:'Success', detail:'merci'});
+        this.rapportVisiteService.createRapport(this.rapportVisite).subscribe({
+            next: (res)=>{
+                this.enableForm = false;
+                this.messageService.add({severity:'success', summary:'Success', detail:res.message});
             },
             error: (error) =>{
+                console.log(error.message)
                 this.messageService.add({severity:'error', summary:'Error', detail:error.message},)
             }
         });

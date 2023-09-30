@@ -5,7 +5,7 @@
             <div class="field col-12 centered-image-container">
                 <img src="assets/logo-trans-200.png" class="centered-image" alt="Image centrée" />
             </div>
-            <div class="field col-6">
+            <div *ngIf="enableForm" class="field col-6">
                 <p-card>
                     <ng-template pTemplate="title"> Remplir les informations de la visite </ng-template>
                     <ng-template pTemplate="content">
