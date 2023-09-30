@@ -37,6 +37,11 @@ export class AuthService {
         return jwtToken != "" ? this.jwtHelper.decodeToken(jwtToken).role : "";
     }
 
+    getUsername(): string {
+        const jwtToken = this.getToken();
+        return jwtToken != "" ? this.jwtHelper.decodeToken(jwtToken).username : "";
+    }
+
     getToken(): string {
         const token = sessionStorage.getItem("accessToken");
         return token || '';

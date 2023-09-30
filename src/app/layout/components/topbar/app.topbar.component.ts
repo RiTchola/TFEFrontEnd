@@ -11,6 +11,7 @@ export class AppTopBarComponent {
 
     items!: MenuItem[];
     role!: string;
+    username!: string;
 
     @ViewChild('menubutton') menuButton!: ElementRef;
 
@@ -20,6 +21,8 @@ export class AppTopBarComponent {
 
     constructor(public layoutService: LayoutService, private authService: AuthService) { 
         this.role = authService.getRole().toLowerCase();
+        this.username = authService.getUsername();
+        console.log(this.username);
         if(this.role == 'admin') this.role ='Admin';
         if(this.role == 'etablissement') this.role ='Etablissement';
         if(this.role == 'resident') this.role ='Résident';
