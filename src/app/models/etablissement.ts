@@ -1,13 +1,11 @@
-import { User } from "./user";
-
 export class Etablissement {
-    id?: string;
+    id?: number;
     nom!: string;
     email1!: string;
     email2?: string;
     tel1!: string;
     tel2?: string;
     adresse!: string;
-    dateCreation?: string;
-    user!: User;
+    dateCreation!: string;
+    etabUsername!: string;
 }

@@ -8,7 +8,7 @@ interface Item {
     description: string;
     header: string;
     icon: string;
-    text: string;
+    text: number;
     total: number;
 }
 
@@ -24,27 +24,22 @@ export class AccueilComponent implements OnInit {
     constructor(private dashboardSrv: DashboardService) { }
 
     ngOnInit(): void {
-        this.populateItems();
+        //this.populateItems();
     }
 
     populateItems() {
         this.fetchAllRapports();
-        this.fetchAllResidents();
+        //this.fetchAllResidents();
     }
 
     fetchAllResidents() {
-        this.dashboardSrv.fetchAllResidents().subscribe({
-            next: (r) => {
-                this.items.push({
-                    color: 'orange',
-                    description: "résidents",
-                    icon: PrimeIcons.USER,
-                    text: "150",
-                    header: "Résident",
-                    total: r.length
-                });
-            },
-            error: (err) => console.error(err)
+        this.items.push({
+            color: 'orange',
+            description: "résidents",
+            icon: PrimeIcons.USER,
+            text: 0,
+            header: "Résident",
+            total: 0
         });
     }
 
@@ -55,7 +50,7 @@ export class AccueilComponent implements OnInit {
                     color: 'green',
                     description: "rapports",
                     icon: PrimeIcons.FILE_PDF,
-                    text: "150",
+                    text: r.length,
                     header: "Rapport upload",
                     total: r.length
                 });

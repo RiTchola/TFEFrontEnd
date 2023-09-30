@@ -96,7 +96,7 @@ li > div {
     color: var(--color-primary);
 }
 
-.p-button:hover{
+.p-button:hover {
     background-color: var(--orange-200) !important;
     color: var(--color-primary) !important;
 }
@@ -134,6 +134,10 @@ li > div {
 }
 td i {
     cursor: pointer;
+}
+
+.layout-footer i {
+    color: var(--orange-400) !important;
 }
 
 label.required {
