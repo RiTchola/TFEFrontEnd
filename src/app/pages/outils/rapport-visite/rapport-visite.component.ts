@@ -11,7 +11,6 @@ import {MessageService} from "primeng/api";
 })
 export class RapportVisiteComponent implements OnInit {
     rapportVisite: RapportVisite[] = [];
-    rapportVisiteTable2: RapportVisite[] = [];
 
     rapportVisiteHelper: RapportVisite = {
         id: 0,
@@ -31,28 +30,6 @@ export class RapportVisiteComponent implements OnInit {
 
     ngOnInit(): void {
         this.loadRapports();
-        this.rapportVisiteTable2 = [
-            {
-                id: 0,
-                nomResid: 'Doe',
-                prenomResid: 'check',
-                dateVisite: new Date(),
-                nomVisiteur: 'Hello',
-                typePersonne: 'ENFANT',
-                dateBirthResid: new Date(),
-                commentaire: "Hallllos dsfgdsfgsdfgsd fdsf fdsfdsf"
-            },
-            {
-                id: 1,
-                nomResid: 'Doe',
-                prenomResid: 'check',
-                dateVisite: new Date(),
-                nomVisiteur: 'Hello',
-                typePersonne: 'ENFANT',
-                dateBirthResid: new Date(),
-                commentaire: "Hallllos dsfgdsfgsdfgsd fdsf fdsfdsf"
-            }
-        ]
     }
 
     loadRapports() {

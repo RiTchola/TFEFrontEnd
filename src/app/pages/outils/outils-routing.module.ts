@@ -8,7 +8,7 @@ const routes: Routes = [
     { path: '', redirectTo: 'images-video', pathMatch: 'full' },
     { path: 'images-video', component: ImagesVideoComponent },
     { path: 'rapport-visite', component: RapportVisiteComponent},
-    { path: 'etablissement', component: EtablissementComponent },
+    { path: 'etablissement', component: EtablissementComponent }
 ];
 
 @NgModule({
