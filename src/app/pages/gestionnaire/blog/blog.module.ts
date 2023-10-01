@@ -14,6 +14,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CalendarModule} from "primeng/calendar";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {FileUploadComponent} from "../../../shared/components/file-upload/file-upload.component";
+import {ImageModule} from "primeng/image";
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import {FileUploadComponent} from "../../../shared/components/file-upload/file-u
         FormsModule,
         CalendarModule,
         InputTextareaModule,
-        FileUploadComponent
+        FileUploadComponent,
+        ImageModule
     ],
     providers: [MessageService]
 })

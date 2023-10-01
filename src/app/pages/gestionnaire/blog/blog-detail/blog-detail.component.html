@@ -1,17 +1,12 @@
 <h3>BLOG</h3>
 <p>Notre actualité sur la plateforme</p>
-<div class="grid">
-    <div class="col-12" >
-        <p-card header="{{blog.titre}}" subheader="{{blog.date | date}}" >
-            <ng-template pTemplate="header">
-                <img alt="Card" src="{{blog.fileUrl[0]}}" />
-            </ng-template>
-            <p>
-                {{blog.contenu}}
-            </p>
-            <!--ng-template pTemplate="footer">
-                <p-button label="Read More" ></p-button>
-            </ng-template-->
-        </p-card>
+<div class="card">
+    <h5>{{blog.titre}}</h5>
+    <h6>{{blog.date | date}}</h6>
+    <p>{{blog.contenu}}</p>
+    <div class="p-fluid formgrid grid">
+        <div class="field col-12 md:col-3" *ngFor="let item of blog.fileUrl">
+            <p-image src="{{item}}" alt="Image" width="250" [preview]="true"></p-image>
+        </div>
     </div>
 </div>
