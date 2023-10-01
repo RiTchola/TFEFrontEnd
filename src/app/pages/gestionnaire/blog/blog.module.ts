@@ -9,6 +9,11 @@ import {MessageService} from "primeng/api";
 import {CardModule} from "primeng/card";
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
 import {DialogModule} from "primeng/dialog";
+import {InputTextModule} from "primeng/inputtext";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {CalendarModule} from "primeng/calendar";
+import {InputTextareaModule} from "primeng/inputtextarea";
+import {FileUploadComponent} from "../../../shared/components/file-upload/file-upload.component";
 
 
 @NgModule({
@@ -22,7 +27,13 @@ import {DialogModule} from "primeng/dialog";
         ToastModule,
         ButtonModule,
         CardModule,
-        DialogModule
+        DialogModule,
+        InputTextModule,
+        ReactiveFormsModule,
+        FormsModule,
+        CalendarModule,
+        InputTextareaModule,
+        FileUploadComponent
     ],
     providers: [MessageService]
 })

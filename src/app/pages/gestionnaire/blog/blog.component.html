@@ -1,6 +1,6 @@
+<p-toast></p-toast>
 <h3>BLOG</h3>
 <p>Notre actualité sur la plateforme</p>
-
 <div class="grid">
     <div class="col-12">
         <div class="mb-4 flex justify-content-end">
@@ -18,7 +18,7 @@
                         {{item.contenu}}
                     </p>
                     <ng-template pTemplate="footer">
-                        <p-button label="Save" icon="pi pi-check"></p-button>
+                        <p-button label="Read More" routerLink="/gestionnaire/blog/details/{{item.id}}"></p-button>
                     </ng-template>
                 </p-card>
             </div>
@@ -31,12 +31,31 @@
 
 <p-dialog  [(visible)]="visible" [modal]="true"  [draggable]="false" [resizable]="false">
     <ng-template pTemplate="header">
-        <h4>DETAIL DU RAPPORT</h4>
+        <h4>Créer un communiqué</h4>
     </ng-template>
     <h5 style="color: black">Information Personnelle</h5>
     <div class="p-fluid formgrid grid">
+        <div class="field col-12">
+            <label>Titre *</label>
+            <input [(ngModel)]="newBlog.titre" type="text" required pInputText/>
+        </div>
+        <div class="field col-12">
+            <label>Date *</label>
+            <p-calendar [(ngModel)]="newBlog.date" [showIcon]="true"></p-calendar>
+        </div>
+        <div class="field col-12">
+            <label for="commentaire">Contenu *</label>
+            <textarea id="commentaire" [(ngModel)]="newBlog.contenu" rows="6" pInputTextarea></textarea>
+        </div>
+        <div class="field col-12">
+            <label>Upload de l'image *</label>
+            <app-file-upload></app-file-upload>
+        </div>
+        <div class="field col-12">
+            <div class="mb-4 flex justify-content-end">
+                <p-button label="Enrégistrer un blog" (onClick)="addCommentar()"></p-button>
+            </div>
+        </div>
 
     </div>
-    <h5 style="color: black">Commentaire</h5>
-    <p>xsfdfdsf</p>
 </p-dialog>
