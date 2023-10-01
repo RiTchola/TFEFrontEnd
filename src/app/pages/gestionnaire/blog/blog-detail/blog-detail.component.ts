@@ -30,7 +30,7 @@ export class BlogDetailComponent implements OnInit{
             if (!isNaN(id)) {
                 this.blog = this.communiqueService.getCommuniqueById(id);
             } else {
-                console.error('Invalid ID format'); // Sie können hier eine Fehlerbehandlung hinzufügen
+                console.error('Invalid ID format');
             }
         }
     }

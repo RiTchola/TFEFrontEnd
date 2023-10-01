@@ -11,6 +11,10 @@
     width: 100px;
 }
 
+.card{
+    margin: 5rem !important;
+}
+
 @media screen and (max-width: 600px) {
     .move-down-image {
         margin-top: 30px; /* Ajustez la marge en fonction de vos besoins */
