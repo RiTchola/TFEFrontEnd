@@ -1,17 +1,19 @@
 import {Component, OnInit} from '@angular/core';
-import {RapportVisiteTable} from 'src/app/models/rapport-visite-table';
+import {RapportVisite} from 'src/app/models/rapport-visite';
 import {RapportDeVisiteService} from '../services/rapport-de-visite.service';
+import {MessageService} from "primeng/api";
 
 @Component({
     selector: 'app-rapport-visite',
     templateUrl: './rapport-visite.component.html',
     styleUrls: ['./rapport-visite.component.scss'],
+    providers: [MessageService],
 })
 export class RapportVisiteComponent implements OnInit {
-    rapportVisiteTable: RapportVisiteTable[] = [];
-    rapportVisiteTable2: RapportVisiteTable[] = [];
+    rapportVisite: RapportVisite[] = [];
+    rapportVisiteTable2: RapportVisite[] = [];
 
-    rapportVisiteHelper: RapportVisiteTable = {
+    rapportVisiteHelper: RapportVisite = {
         id: 0,
         nomResid: '',
         prenomResid: '',
@@ -24,7 +26,7 @@ export class RapportVisiteComponent implements OnInit {
 
     visible: boolean = false;
 
-    constructor(private rvt: RapportDeVisiteService) {
+    constructor(private rvt: RapportDeVisiteService, private messageService: MessageService) {
     }
 
     ngOnInit(): void {
@@ -54,12 +56,18 @@ export class RapportVisiteComponent implements OnInit {
     }
 
     loadRapports() {
-        this.rvt.getAllRapports().subscribe(data => {
-            this.rapportVisiteTable = data;
+        this.rvt.getAllRapports().subscribe({
+            next: (data)=>{
+                this.rapportVisite = data;
+                this.messageService.add({severity:'success', summary:'Success', detail:'succès'});
+            },
+            error: (err) =>{
+                this.messageService.add({severity:'error', summary:'Error', detail:err.message},)
+            }
         });
     }
 
-    showDialog(rv: RapportVisiteTable) {
+    showDialog(rv: RapportVisite) {
         this.visible = true;
         this.rapportVisiteHelper = rv;
 

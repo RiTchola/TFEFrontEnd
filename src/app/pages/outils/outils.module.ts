@@ -28,6 +28,7 @@ import { RapportVisiteComponent } from './rapport-visite/rapport-visite.componen
         ButtonModule,
         InputTextModule,
         ToastModule
+
     ]
 })
 export class OutilsModule {

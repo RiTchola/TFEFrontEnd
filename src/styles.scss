@@ -129,7 +129,7 @@ li > div {
     color: #d8d8d8;
 }
 
-.authBg {
+.authBg{
     background-color: var(--background) !important;
 }
 td i {
@@ -138,4 +138,10 @@ td i {
 
 .layout-footer i {
     color: var(--orange-400) !important;
+}
+
+label.required {
+    content: " *";
+    color: red;
+    font-weight: bold;
 }
