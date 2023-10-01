@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {CommuniqueService} from "../../service/communique.service";
-import {Communique} from "../blog.component";
+import {Communique} from "../../../../models/communique";
+
 
 @Component({
   selector: 'app-blog-detail',

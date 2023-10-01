@@ -1,14 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {CommuniqueService} from "../service/communique.service";
 import {MessageService} from "primeng/api";
-
-export interface Communique {
-    id?: number,
-    date: Date,
-    titre: string,
-    contenu: string,
-    fileUrl: string[]
-}
+import {Communique} from "../../../models/communique";
 
 @Component({
     templateUrl: './blog.component.html'

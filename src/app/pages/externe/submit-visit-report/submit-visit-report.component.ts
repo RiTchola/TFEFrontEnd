@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { MenuItem, MessageService } from 'primeng/api';
-import {RapportVisite} from "../../../models/rapport-visite";
+import {RapportVisite, TypePersonne} from "../../../models/rapport-visite";
 import {RapportDeVisiteService} from "../../outils/services/rapport-de-visite.service";
 import {take} from "rxjs";
+import {KeyValue} from "@angular/common";
 
 @Component({
     selector: 'app-submit-visit-report',
@@ -12,7 +13,21 @@ import {take} from "rxjs";
 })
 export class SubmitVisitReportComponent {
     enableForm: boolean = true;
-    typePersonnes: string[] = ["EPOUX","EPOUSE","PARENT","ENFANT","PETIT_FILS","PETITE_FILLE","AUTRE_FAMILLE","AMI","AVOCAT","MEDECIN_TRAITANT","KINESITHERAPEUTE","AUTRE"];
+    typePersonnes: KeyValue<string, TypePersonne>[] = [
+        { key: "Epoux", value: "EPOUX" },
+        { key: "epouse", value: "EPOUSE" },
+        { key: "parent", value: "PARENT" },
+        { key: "enfant", value: "ENFANT" },
+        { key: "petitFils", value: "PETIT_FILS" },
+        { key: "petiteFille", value: "PETITE_FILLE" },
+        { key: "autreFamille", value: "AUTRE_FAMILLE" },
+        { key: "ami", value: "AMI" },
+        { key: "avocat", value: "AVOCAT" },
+        { key: "medecinTraitant", value: "MEDECIN_TRAITANT" },
+        { key: "kinesitherapeute", value: "KINESITHERAPEUTE" },
+        { key: "autre", value: "AUTRE" }
+    ];
+
     rapportVisite: RapportVisite = {
         id: 0,
         nomResid: '',
@@ -28,6 +43,7 @@ export class SubmitVisitReportComponent {
     }
 
     submit(){
+        console.log(this.rapportVisite)
         this.rapportVisiteService.createRapport(this.rapportVisite).subscribe({
             next: (res)=>{
                 this.enableForm = false;

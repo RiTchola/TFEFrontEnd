@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Communique} from "../blog/blog.component";
+import {Communique} from "../../../models/communique";
 
 @Injectable({
   providedIn: 'root'

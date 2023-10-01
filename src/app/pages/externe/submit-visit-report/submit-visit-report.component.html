@@ -32,7 +32,10 @@
                         <div class="field col-12 md:col-6">
                             <label>Type de Personne *</label>
                             <p-dropdown [options]="typePersonnes"
-                                        [(ngModel)]="rapportVisite.typePersonne"></p-dropdown>
+                                        [(ngModel)]="rapportVisite.typePersonne"
+                                        optionLabel="key"
+                                        optionValue="value"
+                            ></p-dropdown>
                         </div>
                         <div class="field col-12">
                             <label for="commentaire">Commentaire *</label>
