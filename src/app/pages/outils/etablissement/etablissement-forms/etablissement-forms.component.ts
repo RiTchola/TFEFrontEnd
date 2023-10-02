@@ -80,14 +80,7 @@ export class EtablissementFormsComponent implements OnInit {
 
     save() {
         const data = this.buildBody();
-        if (!this.dataForm.controls.email2.value) {
-            data.email2 = data.email1 ?? this.username;
-        }
-
-        if (!this.dataForm.controls.tel2.value) {
-            data.tel2 = data.tel1 ?? 'undefined';
-        }
-
+        
         const date = this.dataForm.controls.date.value;
         if (date && new Date(date) > new Date()) {
             this.dataForm.controls.date.setErrors({ 'greater': true, 'required': false });
