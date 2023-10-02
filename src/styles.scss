@@ -140,8 +140,8 @@ td i {
     color: var(--orange-400) !important;
 }
 
-label.required {
-    content: " *";
-    color: red;
-    font-weight: bold;
+.required-field::after {
+    content: "*";
+    color: #f97316;
+    margin-left: 4px 
 }
