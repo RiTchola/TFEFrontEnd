@@ -92,7 +92,7 @@ export class EvenementsComponent {
         else {
             this.changedEvent.allDay= true;
 
-            console.log(this.changedEvent.start)
+
             this.formData.name = this.changedEvent.title;
             this.formData.startDate= this.changedEvent.start
 
@@ -108,6 +108,7 @@ export class EvenementsComponent {
             }
             this.calendarOptions = { ...this.calendarOptions, ...{ events: this.events } };
             this.clickedEvent = null;
+        this.eventService.saveEvenement(this.formData)
         }
 
     }

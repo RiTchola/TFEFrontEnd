@@ -100,6 +100,8 @@ export class ActivitesComponent implements OnInit{
             }
             this.calendarOptions = { ...this.calendarOptions, ...{ events: this.events } };
             this.clickedEvent = null;
+            console.log(this.formData)
+            this.eventService.saveActivity(this.formData)
         }
 
     }
