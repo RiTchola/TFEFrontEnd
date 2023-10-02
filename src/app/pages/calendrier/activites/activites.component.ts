@@ -3,6 +3,7 @@ import {CalendarService} from "../service/calendar.service";
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import {CalendrierInfos} from "../../../models/calendrier-infos";
 @Component({
   selector: 'app-activites',
   templateUrl: './activites.component.html',
@@ -10,11 +11,11 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 })
 export class ActivitesComponent implements OnInit{
     events: any[] = [];
-
+    formData= {} as CalendrierInfos;
     today: string = '';
 
     calendarOptions: any = {
-        initialView: 'dayGridMonth'
+        initialView: 'timeGridDay'
     };
 
     showDialog: boolean = false;
@@ -50,8 +51,9 @@ export class ActivitesComponent implements OnInit{
             headerToolbar: {
                 left: 'prev,next today',
                 center: 'title',
-                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                right: 'timeGridDay,timeGridWeek,dayGridMonth'
             },
+            initialView: 'timeGridDay',
             editable: true,
             selectable: true,
             selectMirror: true,
@@ -83,7 +85,12 @@ export class ActivitesComponent implements OnInit{
             return;
         }
         else {
+            this.changedEvent.end = new Date( this.changedEvent.start.getTime() + 60 * 60 * 1000);
+            this.formData.name = this.changedEvent.title;
+            this.formData.startDate = this.changedEvent.start;
             this.showDialog = false;
+
+
             this.clickedEvent = { ...this.changedEvent, backgroundColor: this.changedEvent.tag.color, borderColor: this.changedEvent.tag.color, textColor: '#212121' };
 
             if (this.clickedEvent.hasOwnProperty('id')) {

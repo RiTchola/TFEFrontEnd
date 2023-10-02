@@ -33,3 +33,29 @@
         }
     }
 }
+.p-input-icon-left{
+    margin-top: 1vh;
+    width: 100%
+}
+
+.date-area{
+    margin-top: 3vh;
+}
+.my-text{
+    color: #e6ac0e;
+    font-size: 18px;
+}
+.text-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%
+}
+button{
+    color: white;
+}
+.required-field::after{
+    content: '*';
+    color: #f97316;
+    margin-left: 4px;
+}

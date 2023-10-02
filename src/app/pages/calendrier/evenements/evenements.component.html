@@ -1,1 +1,55 @@
-<p>evenements works!</p>
+<div class="card">
+    <full-calendar [options]="calendarOptions"></full-calendar>
+
+    <p-dialog #dd [(visible)]="showDialog" [breakpoints]="{'960px': '75vw', '640px': '90vw'}" [style]="{width: '36rem'}" [modal]="true" [closable]="true" (onHide)="view = ''">
+        <ng-template pTemplate="header">
+            <div class="text-header">
+                <span class="my-text">{{view === '' ? changedEvent.title : view === 'new' ? 'Ajouter évènement' : 'Supprimer évènement'}}</span>
+            </div>
+
+        </ng-template>
+        <ng-template pTemplate="content">
+            <div *ngIf="view === 'display'">
+                <span class="text-900 font-semibold block mb-2">Nom</span>
+                <span class="block mb-3">{{changedEvent.title}}</span>
+
+                <div class="grid">
+                    <div class="col-6" [style]="{width: '100%'}">
+                        <div class="text-900 font-semibold mb-2">Date et heure</div>
+                        <p class="flex align-items-center m-0">
+                            <i class="pi pi-fw pi-clock text-700 mr-2"></i>
+                            <span>{{changedEvent.start}} - {{changedEvent.end | date: 'dd/MM/yyyy HH:mm'}}</span>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+            <div *ngIf="view !== 'display'">
+                <div class="global-content">
+                    <div class="name.area">
+                        <label for="title" class="required-field"><strong>Nom</strong></label><br>
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-pencil"></i>
+                            <input id="title" type="text" pInputText placeholder="Nom de l'évènement" [(ngModel)]="changedEvent.title" style="width: 100%;" />
+                        </span>
+
+                    </div>
+
+
+                    <div class="date-area">
+                        <label for="start" class="required-field"><strong>Date et heure</strong></label><br>
+                        <p-calendar [appendTo]="dd" dateFormat="mm-dd-yy" [maxDate]="changedEvent.end" [showTime]="true" [required]="true" inputId="start" [(ngModel)]="changedEvent.start" [style]="{width: '100%', margin: '1vh 0'}"></p-calendar>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="footer">
+            <button pButton *ngIf="view === 'display'" label="Supprimer"  [style]="{width: '100%'}" (click)="delete()"></button>
+            <button pButton *ngIf="view === 'new' || view === 'edit'" label="Ajouter"  (click)="handleSave()" [disabled]="!changedEvent.start || !changedEvent.end" [style]="{width: '100%'}"></button>
+        </ng-template>
+    </p-dialog>
+</div>
