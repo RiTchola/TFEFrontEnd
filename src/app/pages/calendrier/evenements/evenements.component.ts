@@ -3,7 +3,8 @@ import {CalendarService} from "../service/calendar.service";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import {CalendrierInfos} from "../../../models/calendrier-infos";
+
+import {Evenement} from "../../../models/evenement";
 
 
 
@@ -13,7 +14,7 @@ import {CalendrierInfos} from "../../../models/calendrier-infos";
   styleUrls: ['./evenements.component.scss']
 })
 export class EvenementsComponent {
-    formData= {} as CalendrierInfos;
+    formData= {} as Evenement;
     events: any[] = [];
 
     today: string = '';
@@ -25,8 +26,6 @@ export class EvenementsComponent {
     showDialog: boolean = false;
 
     clickedEvent: any = null;
-
-    dateClicked: boolean = false;
 
     edit: boolean = false;
 
@@ -42,7 +41,7 @@ export class EvenementsComponent {
     ngOnInit(): void {
         this.today = '2022-05-11';
 
-        this.eventService.getEvents().then(events => {
+        this.eventService.getAllEvenement().subscribe(events => {
             this.events = events;
             this.calendarOptions = { ...this.calendarOptions, ...{ events: events } };
             this.tags = this.events.map(item => item.tag);
@@ -94,7 +93,7 @@ export class EvenementsComponent {
 
 
             this.formData.name = this.changedEvent.title;
-            this.formData.startDate= this.changedEvent.start
+            this.formData.dateEvent= this.changedEvent.start
 
             this.showDialog = false;
 
@@ -113,14 +112,12 @@ export class EvenementsComponent {
 
     }
 
-    onEditClick() {
-        this.view = 'edit';
-    }
 
     delete() {
         this.events = this.events.filter(i => i.id.toString() !== this.clickedEvent.id.toString());
         this.calendarOptions = { ...this.calendarOptions, ...{ events: this.events } };
         this.showDialog = false;
+        this.eventService.deleteEvenement(1)
     }
 
     validate() {

@@ -1,26 +1,34 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {CalendrierInfos} from "../../../models/calendrier-infos";
+import {Activite} from "../../../models/activite";
+import {Evenement} from "../../../models/evenement";
 
 @Injectable({
     providedIn: 'root'
 })
 export class CalendarService {
-    calendarEvenement =''
-    calendarActivity=''
+    calendarEvenement ='http://localhost:8080/evenement'
+    calendarActivity='http://localhost:8080/activite'
     constructor(private http: HttpClient) {
     }
 
-    getEvents() {
-        return this.http.get<any>('assets/json/scheduleevents.json')
-            .toPromise()
-            .then(res => res.data as any[])
-            .then(data => data);
-    }
-    saveEvenement(data: CalendrierInfos){
+
+    saveEvenement(data: Evenement){
         return this.http.post<any>(this.calendarEvenement, data)
     }
-    saveActivity(data: CalendrierInfos){
+    saveActivity(data: Activite){
         return this.http.post<any>(this.calendarActivity, data)
+    }
+    getAllActivity(){
+        return this.http.get<any>(this.calendarActivity)
+    }
+    getAllEvenement(){
+        return this.http.get<any>(this.calendarEvenement)
+    }
+    deleteActivity(id: number){
+        return this.http.delete<any>(this.calendarActivity+'/'+id)
+    }
+    deleteEvenement(id: number){
+        return this.http.delete<any>(this.calendarEvenement+'/'+id)
     }
 }

@@ -3,7 +3,7 @@ import {CalendarService} from "../service/calendar.service";
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import {CalendrierInfos} from "../../../models/calendrier-infos";
+import {Activite} from "../../../models/activite";
 @Component({
   selector: 'app-activites',
   templateUrl: './activites.component.html',
@@ -11,7 +11,7 @@ import {CalendrierInfos} from "../../../models/calendrier-infos";
 })
 export class ActivitesComponent implements OnInit{
     events: any[] = [];
-    formData= {} as CalendrierInfos;
+    formData= {} as Activite;
     today: string = '';
 
     calendarOptions: any = {
@@ -22,7 +22,6 @@ export class ActivitesComponent implements OnInit{
 
     clickedEvent: any = null;
 
-    dateClicked: boolean = false;
 
     edit: boolean = false;
 
@@ -38,7 +37,7 @@ export class ActivitesComponent implements OnInit{
     ngOnInit(): void {
         this.today = '2022-05-11';
 
-        this.eventService.getEvents().then(events => {
+        this.eventService.getAllActivity().subscribe(events => {
             this.events = events;
             this.calendarOptions = { ...this.calendarOptions, ...{ events: events } };
             this.tags = this.events.map(item => item.tag);
@@ -87,7 +86,7 @@ export class ActivitesComponent implements OnInit{
         else {
             this.changedEvent.end = new Date( this.changedEvent.start.getTime() + 60 * 60 * 1000);
             this.formData.name = this.changedEvent.title;
-            this.formData.startDate = this.changedEvent.start;
+            this.formData.date = this.changedEvent.start;
             this.showDialog = false;
 
 
@@ -106,14 +105,13 @@ export class ActivitesComponent implements OnInit{
 
     }
 
-    onEditClick() {
-        this.view = 'edit';
-    }
+
 
     delete() {
         this.events = this.events.filter(i => i.id.toString() !== this.clickedEvent.id.toString());
         this.calendarOptions = { ...this.calendarOptions, ...{ events: this.events } };
         this.showDialog = false;
+        this.eventService.deleteActivity(1)
     }
 
     validate() {
