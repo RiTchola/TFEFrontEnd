@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PrimeIcons } from 'primeng/api';
 
 import { DashboardService } from '../services/dashboard.service';
+import { ResidentService } from '../../gestionnaire/service/resident.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 interface Item {
     color?: string;
@@ -21,26 +23,34 @@ export class AccueilComponent implements OnInit {
 
     items: Item[] = [];
 
-    constructor(private dashboardSrv: DashboardService) { }
+    constructor(
+        private authSrv: AuthService,
+        private dashboardSrv: DashboardService,
+        private residentSrv: ResidentService
+    ) { }
 
     ngOnInit(): void {
-        //this.populateItems();
+        this.populateItems();
     }
 
     populateItems() {
-        this.fetchAllRapports();
-        //this.fetchAllResidents();
+        //this.fetchAllRapports();
+        this.fetchAllResidents();
     }
 
     fetchAllResidents() {
-        this.items.push({
-            color: 'orange',
-            description: "résidents",
-            icon: PrimeIcons.USER,
-            text: 0,
-            header: "Résident",
-            total: 0
-        });
+        this.residentSrv.fetchResidents(this.authSrv.getLoggedUser()).subscribe({
+            next: (r) => {
+                this.items.push({
+                    color: 'orange',
+                    description: "résidents",
+                    icon: PrimeIcons.USER,
+                    text: r.length,
+                    header: "Résident",
+                    total: r.length
+                });
+            }
+        })
     }
 
     fetchAllRapports() {

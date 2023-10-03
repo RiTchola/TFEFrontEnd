@@ -98,7 +98,7 @@ export class EtablissementFormsComponent implements OnInit {
             this.etablisSrv.add(data).subscribe({
                 next: (result) => {
                     if (result) {
-                        this.saved.emit(result.message);
+                        this.saved.emit(result.msg);
                     }
                 },
                 error: (err) => {

@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 })
 export class DashboardService {
 
-    private urlResident = `${environment.apiPath}/residents`;
+    private urlResident = `${environment.apiPath}/resident`;
     private urlRapport = `${environment.apiPath}/rapport-quotidien`;
 
     constructor(private http: HttpClient, private residentSrv: ResidentService) { }

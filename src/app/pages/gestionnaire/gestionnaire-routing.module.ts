@@ -4,12 +4,32 @@ import { MenuSemaineComponent } from './menu-semaine/menu-semaine.component';
 import { MeetUpComponent } from './meet-up/meet-up.component';
 import { BlogComponent } from './blog/blog.component';
 import { ResidentComponent } from './resident/resident.component';
-import { ResidentFormsComponent } from './resident-forms/resident-forms.component';
+import { ResidentFormsComponent } from './resident/resident-forms/resident-forms.component';
+import { MedecinFormsComponent } from './resident/medecin-forms/medecin-forms.component';
+import { RegisterComponent } from '../auth/components/register/register.component';
+import { ManageComponent } from './resident/manage/manage.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'resident', pathMatch: 'full' },
     { path: 'resident', component: ResidentComponent },
-    { path: 'resident/:id', component: ResidentFormsComponent },
+    {
+        path: 'resident/add', component: ManageComponent,
+        children: [
+            { path: 'user', component: RegisterComponent },
+            { path: 'medecin', component: MedecinFormsComponent },
+            { path: 'resident', component: ResidentFormsComponent },
+            { path: '', redirectTo: 'user', pathMatch: 'full' },
+        ],
+    },
+    {
+        path: 'resident/edit/:id', component: ManageComponent,
+        children: [
+            { path: 'user', component: RegisterComponent },
+            { path: 'medecin', component: MedecinFormsComponent },
+            { path: 'resident', component: ResidentFormsComponent },
+            { path: '', redirectTo: 'user', pathMatch: 'full' },
+        ],
+    },
     { path: 'menu-semaine', component: MenuSemaineComponent },
     { path: 'meet-up', component: MeetUpComponent },
     { path: 'blog', component: BlogComponent },

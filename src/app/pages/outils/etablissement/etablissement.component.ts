@@ -52,6 +52,6 @@ export class EtablissementComponent implements OnInit {
     }
 
     displayDate(date: string) {
-        return Util.getMonth(date);
+        return Util.toDate(date);
     }
 }

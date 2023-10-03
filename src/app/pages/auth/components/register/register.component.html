@@ -1,0 +1,45 @@
+<p class="title mb-0">Remplir les informations du Resident</p>
+<label>Identifiants</label>
+
+<form [formGroup]="formData" #form="ngForm">
+    <div class="grid mt-3">
+        <div class="col-12">
+            <div class="p-fluid formgrid grid">
+                <div class="field col-6">
+                    <label>Nom d'utilisateur</label>
+                    <input name="username" formControlName="username" type="text" required pInputText
+                        class="form-control" />
+                    <small
+                        *ngIf="(formData.get('username')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label>Mot de passe</label>
+                    <input name="pwd1" formControlName="pwd1" type="text" required pInputText class="form-control"
+                        type="password" />
+                    <small *ngIf="(formData.get('pwd1')?.hasError('required') && form.submitted)">{{required}}</small>
+                    <small
+                        *ngIf="(formData.get('pwd1')?.value?.length !== undefined && formData.get('pwd1')?.value?.length ?? 0 < 8)">Au
+                        moins 8 caractéres</small>
+                </div>
+                <div class="field col-6">
+                    <label>Confirmer le mot de passe</label>
+                    <input name="pwd2" formControlName="pwd2" type="text" required pInputText class="form-control"
+                        type="password" />
+                    <small *ngIf="(formData.get('pwd2')?.hasError('required') && form.submitted)">{{required}}</small>
+                    <small
+                        *ngIf="(formData.get('pwd2')?.value?.length !== undefined && formData.get('pwd2')?.value?.length ?? 0 < 8)">Au
+                        moins 8 caractéres</small>
+                    <small
+                        *ngIf="(!formData.get('pwd2')?.hasError('required') && formData.get('pwd1')?.value !== formData.get('pwd2')?.value)">Mot
+                        de passe ne
+                        correspond pas</small>
+                </div>
+            </div>
+            <div class="p-fluid formgrid grid">
+                <div class="field col-6 ml-auto">
+                    <p-button label="Prochaine etape" type="submit" (click)="next()"></p-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

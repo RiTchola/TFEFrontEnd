@@ -1,0 +1,59 @@
+<p class="title mb-0">Remplir les informations du Medecin traitant</p>
+<label>Information personelles</label>
+
+<form [formGroup]="formData" #form="ngForm">
+    <div class="grid mt-3">
+        <div class="col-12">
+            <div class="p-fluid formgrid grid">
+                <div class="field col-6">
+                    <label>Matricule</label>
+                    <input name="mat" formControlName="mat" type="text" required pInputText class="form-control" />
+                    <small *ngIf="(formData.get('mat')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label>Nom</label>
+                    <input name="lastname" formControlName="lastname" type="text" required pInputText
+                        class="form-control" />
+                    <small
+                        *ngIf="(formData.get('lastname')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label>Email</label>
+                    <input name="email" formControlName="email" type="text" required pInputText class="form-control" />
+                    <small *ngIf="(formData.get('email')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label>Prenom</label>
+                    <input name="firstname" formControlName="firstname" type="text" required pInputText
+                        class="form-control" />
+                    <small
+                        *ngIf="(formData.get('firstname')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label>Telephone 1</label>
+                    <input name="tel1" formControlName="tel1" type="text" required pInputText class="form-control" />
+                    <small *ngIf="(formData.get('tel1')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label>Telephone 2</label>
+                    <input name="tel2" formControlName="tel2" type="text" required pInputText class="form-control" />
+                </div>
+                <div class="field col-6">
+                    <label>Adresse</label>
+                    <input name="address" formControlName="address" type="text" required pInputText
+                        class="form-control" />
+                    <small
+                        *ngIf="(formData.get('address')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+            </div>
+            <div class="p-fluid formgrid grid mt-5">
+                <div class="field col-6 ml-auto">
+                    <p-button label="Retour" (click)="back()" class="back-btn"></p-button>
+                </div>
+                <div class="field col-6 ml-auto">
+                    <p-button label="Prochaine etape" type="submit" (click)="next()"></p-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

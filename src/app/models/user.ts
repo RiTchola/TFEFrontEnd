@@ -1,9 +1,8 @@
-import { RoleType } from "../shared/interfaces/roleType";
-
 export class User {
+    id?: number;
     username!: string;
     password!: string;
-    role!: RoleType;
+    role!: string;
     enabled: boolean = false;
     authorities?: [];
     accountNonExpired?: boolean = true;

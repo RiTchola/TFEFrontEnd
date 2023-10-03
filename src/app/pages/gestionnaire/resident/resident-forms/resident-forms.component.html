@@ -1,0 +1,138 @@
+<p-toast></p-toast>
+<p class="title mb-0">Remplir les informations du Resident</p>
+<label>Information personelles</label>
+<form [formGroup]="formData" #form="ngForm">
+    <div class="mt-3">
+        <div class="col-12">
+            <div class="p-fluid formgrid grid">
+                <div class="field col-6">
+                    <label>Nom</label>
+                    <input name="lastname" formControlName="lastname" type="text" required pInputText
+                        class="form-control" />
+                    <small
+                        *ngIf="(formData.get('lastname')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label>Prenom</label>
+                    <input name="firstname" formControlName="firstname" type="text" required pInputText
+                        class="form-control" />
+                    <small
+                        *ngIf="(formData.get('firstname')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label>Email</label>
+                    <input name="email" formControlName="email" type="text" required pInputText class="form-control" />
+                    <small *ngIf="(formData.get('email')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label>Date Naissance</label>
+                    <p-calendar formControlName="dob" [showIcon]="true"></p-calendar>
+                    <small *ngIf="(formData.get('dob')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label>Numero enfant</label>
+                    <input name="nbOfChild" formControlName="nbOfChild" type="number" required pInputText
+                        class="form-control" />
+                    <small
+                        *ngIf="(formData.get('nbOfChild')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label>Status</label>
+                    <p-dropdown [options]="statusList" [(ngModel)]="statusM" optionLabel="name"></p-dropdown>
+                    <small *ngIf="(formData.get('status')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+            </div>
+        </div>
+        <p>Information de contact</p>
+        <div class="col-12">
+            <div class="p-fluid formgrid grid">
+                <div class="field col-6">
+                    <label>Telephone</label>
+                    <input name="tel" formControlName="tel" type="text" required pInputText class="form-control" />
+                    <small *ngIf="(formData.get('tel')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label>Adresse</label>
+                    <input name="address" formControlName="address" type="text" required pInputText
+                        class="form-control" />
+                    <small
+                        *ngIf="(formData.get('address')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+            </div>
+        </div>
+        <p>Information de la residence</p>
+        <div class="col-12">
+            <div class="p-fluid formgrid grid">
+                <div class="field col-6">
+                    <label>Date Entrée</label>
+                    <p-calendar formControlName="entryDate" [showIcon]="true"></p-calendar>
+                    <small
+                        *ngIf="(formData.get('entryDate')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label>Motif Entrée</label>
+                    <input name="reasonEntry" formControlName="reasonEntry" type="text" required pInputText
+                        class="form-control" />
+                    <small
+                        *ngIf="(formData.get('reasonEntry')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label>Date sortie</label>
+                    <p-calendar formControlName="exitDate" [showIcon]="true"></p-calendar>
+                    <small
+                        *ngIf="(formData.get('exitDate')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label>Motif sortie</label>
+                    <input name="reasonExit" formControlName="reasonExit" type="text" required pInputText
+                        class="form-control" />
+                    <small
+                        *ngIf="(formData.get('reasonExit')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label>Numero chambre</label>
+                    <input name="room" formControlName="room" type="number" required pInputText class="form-control" />
+                    <small *ngIf="(formData.get('room')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+            </div>
+        </div>
+        <p>Information santé</p>
+        <div class="col-12">
+            <div class="p-fluid formgrid grid">
+                <div class="field col-6">
+                    <label>Antécédent Médical</label>
+                    <input name="antMedical" formControlName="antMedical" type="text" required pInputText
+                        class="form-control" />
+                    <small
+                        *ngIf="(formData.get('antMedical')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label>Antécédent chirugical</label>
+                    <input name="antChirugical" formControlName="antChirugical" type="text" required pInputText
+                        class="form-control" />
+                    <small
+                        *ngIf="(formData.get('antChirugical')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label>Etat de sortie</label>
+                    <input name="healthStatus" formControlName="healthStatus" type="text" required pInputText
+                        class="form-control" />
+                    <small
+                        *ngIf="(formData.get('healthStatus')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="flex align-items-center gap-1">
+                    <p-checkbox formControlName="actif" [binary]="true" inputId="binary" value="Actif"></p-checkbox>
+                    <label for="ny">Actif</label>
+                </div>
+            </div>
+        </div>
+        <div class="p-fluid formgrid grid mt-5">
+            <div class="field col-6 ml-auto">
+                <p-button label="Retour" (click)="back()" class="btn-secondary"></p-button>
+            </div>
+            <div class="field col-6 ml-auto">
+                <p-button label="Enregitrer" type="submit" (click)="save()"></p-button>
+            </div>
+        </div>
+    </div>
+</form>
