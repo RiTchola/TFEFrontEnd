@@ -6,6 +6,6 @@ export class Etablissement {
     tel1!: string;
     tel2?: string;
     adresse!: string;
-    dateCreation!: string;
+    dateCreation!: Date;
     etabUsername!: string;
 }
