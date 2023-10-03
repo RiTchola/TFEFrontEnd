@@ -2,7 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {CommuniqueService} from "../service/communique.service";
 import {MessageService} from "primeng/api";
 import {Communique} from "../../../models/communique";
-import { Util } from 'src/app/shared/util';
+
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 
 @Component({
@@ -89,9 +89,5 @@ export class BlogComponent implements OnInit {
     addCommentar(){
         this.visible = false;
         this.messageService.add({severity:'success', summary:'Success', detail:'Communiqué enregistré'});
-    }
-
-    displayDate(date: string) {
-        return Util.getMonth(date);
     }
 }

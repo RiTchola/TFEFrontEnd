@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {CommuniqueService} from "../../service/communique.service";
 import {Communique} from "../../../../models/communique";
+import { Util } from 'src/app/shared/util';
 
 
 @Component({
@@ -36,4 +37,10 @@ export class BlogDetailComponent implements OnInit{
         }
     }
 
+    displayDate(date: Date) {
+        const day = new Date(date).getDate();
+        const month = Util.getMonth(new Date(date).getMonth());
+        const year = new Date(date).getFullYear();
+        return `${day} ${month} ${year}`;
+    }
 }
