@@ -54,7 +54,7 @@ export class EvenementsComponent {
             headerToolbar: {
                 left: 'prev,next today',
                 center: 'title',
-                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                right: 'timeGridDay,timeGridWeek,dayGridMonth'
             },
             initialView: 'timeGridDay',
             editable: true,

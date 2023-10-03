@@ -30,7 +30,7 @@
                         <label for="title" class="required-field"><strong>Nom</strong></label><br>
                         <span class="p-input-icon-left">
                             <i class="pi pi-pencil"></i>
-                            <input id="title" type="text" pInputText placeholder="Nom de l'évènement" [(ngModel)]="changedEvent.title" style="width: 100%;" />
+                            <input id="title" type="text" pInputText placeholder="Nom de l'évènement" [(ngModel)]="changedEvent.title" [required]="true" style="width: 100%;" />
                         </span>
 
                     </div>
@@ -49,7 +49,8 @@
 
         <ng-template pTemplate="footer">
             <button pButton *ngIf="view === 'display'" label="Supprimer"  [style]="{width: '100%'}" (click)="delete()"></button>
-            <button pButton *ngIf="view === 'new' || view === 'edit'" label="Ajouter"  (click)="handleSave()" [disabled]="!changedEvent.start || !changedEvent.end" [style]="{width: '100%'}"></button>
+            <button pButton *ngIf="view === 'new' || view === 'edit'" label="Ajouter"  (click)="handleSave()" [disabled]="changedEvent.title ===null || changedEvent.title === '' " [style]="{width: '100%'}"></button>
         </ng-template>
+
     </p-dialog>
 </div>
