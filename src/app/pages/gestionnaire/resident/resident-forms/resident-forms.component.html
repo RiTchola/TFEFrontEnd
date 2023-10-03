@@ -21,7 +21,7 @@
                 </div>
                 <div class="field col-6">
                     <label>Email</label>
-                    <input name="email" formControlName="email" type="text" required pInputText class="form-control" />
+                    <input name="email" formControlName="email" type="text" required pInputText class="form-control" readonly="true"/>
                     <small *ngIf="(formData.get('email')?.hasError('required') && form.submitted)">{{required}}</small>
                 </div>
                 <div class="field col-6">
@@ -38,7 +38,7 @@
                 </div>
                 <div class="field col-6">
                     <label>Status</label>
-                    <p-dropdown [options]="statusList" [(ngModel)]="statusM" optionLabel="name"></p-dropdown>
+                    <p-dropdown [options]="statusList" formControlName="status" optionLabel="name"></p-dropdown>
                     <small *ngIf="(formData.get('status')?.hasError('required') && form.submitted)">{{required}}</small>
                 </div>
             </div>

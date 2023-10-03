@@ -32,6 +32,10 @@ export class ResidentService {
         return this.http.post<Resident>(`${this.url}/${doctorId}/${userId}`, body);
     }
 
+    update(body: Resident) {
+        return this.http.put<Resident>(`${this.url}/${body.id}`, body);
+    }
+
     saveUser(body: User) {
         const data = {
             username: body.username,
@@ -42,7 +46,16 @@ export class ResidentService {
         return this.http.post<Response>(this.userUrl, data);
     }
 
+    updateUser(id: number, body: any) {
+        body = { username: body.username };
+        return this.http.put<Response>(`${this.userUrl}/${id}`, body);
+    }
+
     saveDoctor(body: MedecinTraitant) {
         return this.http.post<MedecinTraitant>(this.doctorUrl, body);
+    }
+
+    updateDoctor(id: number, body: MedecinTraitant) {
+        return this.http.put<MedecinTraitant>(`${this.doctorUrl}/${id}`, body);
     }
 }

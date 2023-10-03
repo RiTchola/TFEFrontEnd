@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MedecinTraitant } from 'src/app/models/medecin-traitant';
 import { ObservableService } from 'src/app/shared/service/observable.service';
+import { ResidentService } from '../../service/resident.service';
 
 @Component({
     selector: 'app-medecin-forms',
@@ -23,8 +24,17 @@ export class MedecinFormsComponent implements OnInit {
     });
 
     residentUser = "";
+    residentId = 0;
 
-    constructor(private router: Router, private observableSrv: ObservableService) {}
+    constructor(
+        private router: Router,
+        private observableSrv: ObservableService,
+        private residentSrv: ResidentService
+    ) {
+        if (this.router.url.includes("edit")) {
+            this.residentId = Number.parseInt(this.router.url.split("/")[4]);
+        }
+    }
 
     ngOnInit(): void {
         this.observableSrv.observableResident.subscribe(v => {
@@ -46,6 +56,11 @@ export class MedecinFormsComponent implements OnInit {
 
             }
         });
+
+        // init form
+        if (this.residentId != 0) {
+            this.getResidentById(this.residentId);
+        }
     }
 
     next() {
@@ -66,13 +81,24 @@ export class MedecinFormsComponent implements OnInit {
                 doctor: JSON.stringify(doctor),
                 resident: ""
             });
-            this.router.navigate(['/gestionnaire/resident/add/resident']);
+
+            if (this.residentId == 0) {
+                this.router.navigate(['/gestionnaire/resident/add/resident']);
+            }
+            else {
+                this.router.navigate([`/gestionnaire/resident/edit/${this.residentId}/resident`]);
+            }
         }
     }
 
     back() {
         if (this.formValid) {
-            this.router.navigate(['/gestionnaire/resident/add/user']);
+            if (this.residentId == 0) {
+                this.router.navigate(['/gestionnaire/resident/add/user']);
+            }
+            else {
+                this.router.navigate([`/gestionnaire/resident/edit/${this.residentId}/user`]);
+            }
         }
     }
 
@@ -82,6 +108,20 @@ export class MedecinFormsComponent implements OnInit {
             return false;
         }
         return true;
+    }
+
+    getResidentById(id: number) {
+        this.residentSrv.fetchById(id).subscribe({
+            next: (r) => {
+                this.formData.controls.mat.setValue(r.medecinTraitant.numInami);
+                this.formData.controls.lastname.setValue(r.medecinTraitant.nom);
+                this.formData.controls.firstname.setValue(r.medecinTraitant.prenom);
+                this.formData.controls.email.setValue(r.medecinTraitant.email);
+                this.formData.controls.tel1.setValue(r.medecinTraitant.tel1);
+                this.formData.controls.tel2.setValue(r.medecinTraitant.tel2 ?? "");
+                this.formData.controls.address.setValue(r.medecinTraitant.adresse);
+            }
+        })
     }
 
 }

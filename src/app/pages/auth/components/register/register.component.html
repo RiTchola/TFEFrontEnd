@@ -15,7 +15,7 @@
                 <div class="field col-6">
                     <label>Mot de passe</label>
                     <input name="pwd1" formControlName="pwd1" type="text" required pInputText class="form-control"
-                        type="password" />
+                        type="password" [readonly]="residentId !== 0" />
                     <small *ngIf="(formData.get('pwd1')?.hasError('required') && form.submitted)">{{required}}</small>
                     <small
                         *ngIf="(formData.get('pwd1')?.value?.length !== undefined && formData.get('pwd1')?.value?.length ?? 0 < 8)">Au
@@ -24,7 +24,7 @@
                 <div class="field col-6">
                     <label>Confirmer le mot de passe</label>
                     <input name="pwd2" formControlName="pwd2" type="text" required pInputText class="form-control"
-                        type="password" />
+                        type="password" [readonly]="residentId !== 0"/>
                     <small *ngIf="(formData.get('pwd2')?.hasError('required') && form.submitted)">{{required}}</small>
                     <small
                         *ngIf="(formData.get('pwd2')?.value?.length !== undefined && formData.get('pwd2')?.value?.length ?? 0 < 8)">Au
