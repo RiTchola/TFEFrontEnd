@@ -29,33 +29,45 @@
 
 
 
-<p-dialog  [(visible)]="visible" [modal]="true"  [draggable]="false" [resizable]="false">
-    <ng-template pTemplate="header">
-        <h4>Créer un communiqué</h4>
-    </ng-template>
-    <h5 style="color: black">Information Personnelle</h5>
-    <div class="p-fluid formgrid grid">
-        <div class="field col-12">
-            <label>Titre *</label>
-            <input [(ngModel)]="newBlog.titre" type="text" required pInputText/>
+<p-dialog  [(visible)]="visible" [modal]="true"   [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+    <form [formGroup]="dataForm" (ngSubmit)="addCommentar()" #form="ngForm">
+        <div class="grid">
+            <div class="col-12">
+                <div class="card">
+                    <h4>Création d'un communiqué</h4>
+                    <div class="p-fluid formgrid grid">
+                        <div class="field col-12">
+                            <label class="required-field">Titre</label>
+                            <input titre="titre" formControlName="titre" type="text" required pInputText class="form-control" />
+                            <small
+                                *ngIf="(dataForm.get('titre')?.hasError('required') && dataForm.get('titre')?.touched) || (dataForm.get('titre')?.hasError('required') && form.submitted)">{{required}}</small>
+                        </div>
+                        <div class="field col-12">
+                            <label class="required-field">Date</label>
+                            <p-calendar formControlName="date" [showIcon]="true" [required]="true"></p-calendar>
+                            <small *ngIf="dataForm.get('date')?.hasError('required') && form.submitted">{{required}}</small>
+                            <small *ngIf="dataForm.get('date')?.hasError('greater') && form.submitted">La date ne peut être
+                                supérieur à celle d'aujourd'hui</small>
+                        </div>
+                        <div class="field col-12">
+                            <label class="required-field">Contenu</label>
+                            <input contenu="contenu" formControlName="contenu" type="text" rows="6" required pInputTextarea
+                                class="form-control" />
+                            <small
+                                *ngIf="(dataForm.get('contenu')?.hasError('required') && dataForm.get('contenu')?.touched) || (dataForm.get('contenu')?.hasError('required') && form.submitted)">{{required}}</small>
+                        </div>
+                        <div class="field col-12">
+                            <label>Upload de l'image </label>
+                            <app-file-upload></app-file-upload>
+                        </div>
+                        <div class="p-fluid formgrid grid">
+                            <div class="field col-6 ml-auto">
+                                <p-button label="Enregistrer" type="submit"></p-button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>       
         </div>
-        <div class="field col-12">
-            <label>Date *</label>
-            <p-calendar [(ngModel)]="newBlog.date" [showIcon]="true"></p-calendar>
-        </div>
-        <div class="field col-12">
-            <label for="commentaire">Contenu *</label>
-            <textarea id="commentaire" [(ngModel)]="newBlog.contenu" rows="6" pInputTextarea></textarea>
-        </div>
-        <div class="field col-12">
-            <label>Upload de l'image *</label>
-            <app-file-upload></app-file-upload>
-        </div>
-        <div class="field col-12">
-            <div class="mb-4 flex justify-content-end">
-                <p-button label="Enrégistrer un blog" (onClick)="addCommentar()"></p-button>
-            </div>
-        </div>
-
-    </div>
+    </form>
 </p-dialog>

@@ -36,7 +36,4 @@ export class BlogDetailComponent implements OnInit{
         }
     }
 
-
-
-
 }
