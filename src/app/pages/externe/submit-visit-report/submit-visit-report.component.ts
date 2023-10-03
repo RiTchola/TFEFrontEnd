@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { MenuItem, MessageService } from 'primeng/api';
+import {  MessageService } from 'primeng/api';
 import {RapportVisite, TypePersonne} from "../../../models/rapport-visite";
 import {RapportDeVisiteService} from "../../outils/services/rapport-de-visite.service";
-import {take} from "rxjs";
 import {KeyValue} from "@angular/common";
+import {take} from "rxjs";
 
 @Component({
     selector: 'app-submit-visit-report',
@@ -44,7 +44,7 @@ export class SubmitVisitReportComponent {
 
     submit(){
         console.log(this.rapportVisite)
-        this.rapportVisiteService.createRapport(this.rapportVisite).subscribe({
+        this.rapportVisiteService.createRapport(this.rapportVisite).pipe(take(1)).subscribe({
             next: (res)=>{
                 this.enableForm = false;
                 this.messageService.add({severity:'success', summary:'Success', detail:res.message});

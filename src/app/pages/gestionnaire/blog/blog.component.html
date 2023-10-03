@@ -14,9 +14,11 @@
                     <ng-template pTemplate="header">
                         <img alt="Card" src="{{item.fileUrl[i]}}" />
                     </ng-template>
-                    <p>
-                        {{item.contenu}}
-                    </p>
+                    <ng-template pTemplate="content">
+                        <p>
+                            {{item.contenu}}
+                        </p>
+                    </ng-template>
                     <ng-template pTemplate="footer">
                         <p-button label="Read More" routerLink="/gestionnaire/blog/details/{{item.id}}"></p-button>
                     </ng-template>
