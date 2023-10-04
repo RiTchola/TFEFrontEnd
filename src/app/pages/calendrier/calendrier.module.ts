@@ -11,6 +11,8 @@ import {FormsModule} from "@angular/forms";
 import {InputTextModule} from "primeng/inputtext";
 import {DialogModule} from "primeng/dialog";
 import {DropdownModule} from "primeng/dropdown";
+import {MessageService} from "primeng/api";
+import {ToastModule} from "primeng/toast";
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import {DropdownModule} from "primeng/dropdown";
         FormsModule,
         InputTextModule,
         DialogModule,
-        DropdownModule
-    ]
+        DropdownModule,
+        ToastModule
+    ],
+    providers: [MessageService]
 })
 export class CalendrierModule { }

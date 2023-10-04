@@ -4,6 +4,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import {Activite} from "../../../models/activite";
+import {MessageService} from "primeng/api";
 @Component({
   selector: 'app-activites',
   templateUrl: './activites.component.html',
@@ -11,8 +12,9 @@ import {Activite} from "../../../models/activite";
 })
 export class ActivitesComponent implements OnInit{
     events: any[] = [];
-    formData= {} as Activite;
-    today: string = '';
+    formData:  Activite= {id: 0, title: "", date: new Date};
+
+
 
     calendarOptions: any = {
         initialView: 'timeGridDay'
@@ -25,28 +27,24 @@ export class ActivitesComponent implements OnInit{
 
     edit: boolean = false;
 
-    tags: any[] = [];
 
     view: string = '';
 
     changedEvent: any;
 
-    constructor(private eventService: CalendarService ) {
+    constructor(private eventService: CalendarService, private messageService: MessageService ) {
     }
 
     ngOnInit(): void {
-        this.today = '2022-05-11';
-
         this.eventService.getAllActivity().subscribe(events => {
             this.events = events;
             this.calendarOptions = { ...this.calendarOptions, ...{ events: events } };
-            this.tags = this.events.map(item => item.tag);
         });
 
         this.calendarOptions = {
             plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
             height: 720,
-            initialDate: this.today,
+            initialDate: this.formatDate(new Date()),
             headerToolbar: {
                 left: 'prev,next today',
                 center: 'title',
@@ -85,22 +83,31 @@ export class ActivitesComponent implements OnInit{
         }
         else {
             this.changedEvent.end = new Date( this.changedEvent.start.getTime() + 60 * 60 * 1000);
-            this.formData.name = this.changedEvent.title;
+            this.formData.title = this.changedEvent.title;
             this.formData.date = this.changedEvent.start;
             this.showDialog = false;
+            this.eventService.saveActivity(this.formData).subscribe({
+                next: value => {
+                    this.messageService.add({severity: "success", summary: "Success", detail: 'Activité enregistré' });
+                    this.clickedEvent = { ...this.changedEvent, backgroundColor: this.changedEvent.tag.color, borderColor: this.changedEvent.tag.color, textColor: '#212121' };
+
+                    if (this.clickedEvent.hasOwnProperty('id')) {
+                        this.events = this.events.map(i => i.id.toString() === this.clickedEvent.id.toString() ? i = this.clickedEvent : i);
+                    } else {
+                        this.events = [...this.events, { ...this.clickedEvent, id: Math.floor(Math.random() * 10000) }];
+                    }
+                    this.calendarOptions = { ...this.calendarOptions, ...{ events: this.events } };
+                    this.clickedEvent = null;
+                },
+                error: err => {
+                    this.messageService.add({severity: "error", summary: "Error", detail: err.message });
+                    this.clickedEvent = null;
+                }
+            });
 
 
-            this.clickedEvent = { ...this.changedEvent, backgroundColor: this.changedEvent.tag.color, borderColor: this.changedEvent.tag.color, textColor: '#212121' };
 
-            if (this.clickedEvent.hasOwnProperty('id')) {
-                this.events = this.events.map(i => i.id.toString() === this.clickedEvent.id.toString() ? i = this.clickedEvent : i);
-            } else {
-                this.events = [...this.events, { ...this.clickedEvent, id: Math.floor(Math.random() * 10000) }];
-            }
-            this.calendarOptions = { ...this.calendarOptions, ...{ events: this.events } };
-            this.clickedEvent = null;
-            console.log(this.formData)
-            this.eventService.saveActivity(this.formData)
+
         }
 
     }
@@ -111,12 +118,26 @@ export class ActivitesComponent implements OnInit{
         this.events = this.events.filter(i => i.id.toString() !== this.clickedEvent.id.toString());
         this.calendarOptions = { ...this.calendarOptions, ...{ events: this.events } };
         this.showDialog = false;
-        this.eventService.deleteActivity(1)
+        this.eventService.deleteActivity(this.clickedEvent.id).subscribe(()=>{
+            this.messageService.add({severity: "success", summary: "Success", detail: 'Activité supprimée' });
+        });
     }
 
     validate() {
         let { start, end } = this.changedEvent;
         return start && end;
+    }
+
+    formatDate(date: Date): string {
+        const year = date.getFullYear();
+        let month = (date.getMonth() + 1).toString();
+        let day = date.getDate().toString();
+
+        // Pad single digit month and day with a leading zero
+        month = month.length < 2 ? '0' + month : month;
+        day = day.length < 2 ? '0' + day : day;
+
+        return `${year}-${month}-${day}`;
     }
 
 }
