@@ -33,7 +33,7 @@ export class ResidentComponent implements OnInit {
         const username = this.authSrv.getLoggedUser();
         this.residentSrv.fetchResidents(username).subscribe({
             next: (r) => this.residents = r,
-            error: (err) => console.log(err),
+            error: (err) => console.log(err)
         })
     }
 
@@ -43,7 +43,7 @@ export class ResidentComponent implements OnInit {
 
 
     view(resident: Resident) {
-
+        this.router.navigate([`/gestionnaire/resident/details/${resident.id}`]);
     }
 
     edit(resident: Resident) {

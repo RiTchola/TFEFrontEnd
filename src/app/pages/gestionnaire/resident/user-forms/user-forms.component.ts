@@ -83,7 +83,13 @@ export class UserFormsComponent implements OnInit {
                 doctor: "",
                 resident: ""
             });
-            this.router.navigate(['/gestionnaire/resident/add/medecin']);
+
+            if (this.residentId == 0) {
+                this.router.navigate(['/gestionnaire/resident/add/medecin']);
+            }
+            else {
+                this.router.navigate([`/gestionnaire/resident/edit/${this.residentId}/medecin`]);
+            }
         }
     }
 
@@ -96,10 +102,10 @@ export class UserFormsComponent implements OnInit {
         return true;
     }
  */
+
     getResidentById(id: number) {
         this.residentSrv.fetchById(id).subscribe({
             next: (r) => {
-                console.log(r)
                 // init form
                 this.formData.controls.username.setValue(r.user.username);
                 this.formData.controls.pwd1.setValue(r.user.password);
