@@ -21,6 +21,7 @@ import { ResidentFormsComponent } from './resident/resident-forms/resident-forms
 import { MedecinFormsComponent } from './resident/medecin-forms/medecin-forms.component';
 import { RegisterComponent } from '../auth/components/register/register.component';
 import { ManageComponent } from './resident/manage/manage.component';
+import { DetailsComponent } from './resident/details/details.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ManageComponent } from './resident/manage/manage.component';
     ResidentFormsComponent,
     RegisterComponent,
     MedecinFormsComponent,
-    ManageComponent
+    ManageComponent,
+    DetailsComponent
   ],
   imports: [
     CommonModule,

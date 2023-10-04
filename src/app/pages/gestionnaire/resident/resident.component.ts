@@ -42,7 +42,7 @@ export class ResidentComponent implements OnInit {
 
 
     view(resident: Resident) {
-        this.router.navigate([`/gestionnaire/resident/view/${resident.id}`]);
+        this.router.navigate([`/gestionnaire/resident/details/${resident.id}`]);
     }
 
     edit(resident: Resident) {

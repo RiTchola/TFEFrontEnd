@@ -8,10 +8,12 @@ import { ResidentFormsComponent } from './resident/resident-forms/resident-forms
 import { MedecinFormsComponent } from './resident/medecin-forms/medecin-forms.component';
 import { RegisterComponent } from '../auth/components/register/register.component';
 import { ManageComponent } from './resident/manage/manage.component';
+import { DetailsComponent } from './resident/details/details.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'resident', pathMatch: 'full' },
     { path: 'resident', component: ResidentComponent },
+    { path: 'resident/details/:id', component: DetailsComponent },
     {
         path: 'resident/add', component: ManageComponent,
         children: [
