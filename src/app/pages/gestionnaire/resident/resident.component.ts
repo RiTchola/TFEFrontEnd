@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
     providers: [MessageService]
 })
 export class ResidentComponent implements OnInit {
+
     residents: Resident[] = [];
 
     constructor(

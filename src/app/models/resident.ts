@@ -1,3 +1,10 @@
+export type StatutM = 
+    | ""
+    | "CELIBATAIRE"
+    | "MARIE"
+    | "DIVORCE"
+    | "VEUF";
+
 export class Resident {
     id?: number;
     nom!: string;
@@ -6,7 +13,7 @@ export class Resident {
     email!: string;
     tel!: string;
     adresse!: string;
-    statut!: string;
+    statut!: StatutM;
     dateEntree!: Date;
     motifEntree!: string;
     dateSortie!: Date;

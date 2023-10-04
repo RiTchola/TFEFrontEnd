@@ -19,7 +19,7 @@ import { MeetUpComponent } from './meet-up/meet-up.component';
 import { BlogComponent } from './blog/blog.component';
 import { ResidentFormsComponent } from './resident/resident-forms/resident-forms.component';
 import { MedecinFormsComponent } from './resident/medecin-forms/medecin-forms.component';
-import { RegisterComponent } from '../auth/components/register/register.component';
+import { UserFormsComponent } from './resident/user-forms/user-forms.component';
 import { ManageComponent } from './resident/manage/manage.component';
 
 @NgModule({
@@ -29,7 +29,7 @@ import { ManageComponent } from './resident/manage/manage.component';
     MeetUpComponent,
     BlogComponent,
     ResidentFormsComponent,
-    RegisterComponent,
+    UserFormsComponent,
     MedecinFormsComponent,
     ManageComponent
   ],

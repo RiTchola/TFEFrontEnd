@@ -6,7 +6,7 @@ import { BlogComponent } from './blog/blog.component';
 import { ResidentComponent } from './resident/resident.component';
 import { ResidentFormsComponent } from './resident/resident-forms/resident-forms.component';
 import { MedecinFormsComponent } from './resident/medecin-forms/medecin-forms.component';
-import { RegisterComponent } from '../auth/components/register/register.component';
+import { UserFormsComponent } from './resident/user-forms/user-forms.component';
 import { ManageComponent } from './resident/manage/manage.component';
 
 const routes: Routes = [
@@ -15,7 +15,7 @@ const routes: Routes = [
     {
         path: 'resident/add', component: ManageComponent,
         children: [
-            { path: 'user', component: RegisterComponent },
+            { path: 'user', component: UserFormsComponent },
             { path: 'medecin', component: MedecinFormsComponent },
             { path: 'resident', component: ResidentFormsComponent },
             { path: '', redirectTo: 'user', pathMatch: 'full' },
@@ -24,7 +24,7 @@ const routes: Routes = [
     {
         path: 'resident/edit/:id', component: ManageComponent,
         children: [
-            { path: 'user', component: RegisterComponent },
+            { path: 'user', component: UserFormsComponent },
             { path: 'medecin', component: MedecinFormsComponent },
             { path: 'resident', component: ResidentFormsComponent },
             { path: '', redirectTo: 'user', pathMatch: 'full' },

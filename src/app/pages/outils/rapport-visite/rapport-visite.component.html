@@ -13,17 +13,27 @@
                         <th pSortableColumn="prenomResid">Prénom Résident <p-sortIcon field="prenomResid"></p-sortIcon></th>
                         <th pSortableColumn="dateVisite">Date de Visite <p-sortIcon field="dateVisite"></p-sortIcon></th>
                         <th pSortableColumn="nomVisiteur">Nom Visiteur <p-sortIcon field="nomVisiteur"></p-sortIcon></th>
-                        <th pSortableColumn="typePersonne">Type de Personne <p-sortIcon field="typePersonne"></p-sortIcon></th>
-                        <th>Actions</th>
+                        <th id="action" pSortableColumn="name" pSortableColumn="typePersonne">Type de Personne <p-sortIcon field="typePersonne"></p-sortIcon></th>
+                        <th >Actions</th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-rvt>
                     <tr>
-                        <td>{{rvt.nomResid}}</td>
-                        <td>{{rvt.prenomResid}}</td>
-                        <td>{{rvt.dateVisite | date}}</td>
-                        <td>{{rvt.nomVisiteur}}</td>
-                        <td>{{rvt.typePersonne}}</td>
+                        <td style="min-width: 200px;">
+                            {{rvt.nomResid}}
+                        </td>
+                        <td style="min-width: 200px;">
+                            {{rvt.prenomResid}}
+                        </td>
+                        <td style="min-width: 200px;">
+                            {{rvt.dateVisite | date}}
+                        </td>
+                        <td style="min-width: 200px;">
+                            {{rvt.nomVisiteur}}
+                        </td>
+                        <td style="min-width: 200px;">
+                            {{rvt.typePersonne}}
+                        </td>
                         <td>
                             <i class="pi pi-eye" (click)="showDialog(rvt)"></i>
                         </td>

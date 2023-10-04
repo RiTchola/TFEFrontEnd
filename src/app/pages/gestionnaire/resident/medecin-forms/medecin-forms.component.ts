@@ -16,10 +16,10 @@ export class MedecinFormsComponent implements OnInit {
         mat: new FormControl('', [Validators.required]),
         lastname: new FormControl('', [Validators.required]),
         firstname: new FormControl('', [Validators.required]),
-        email: new FormControl('', [Validators.required]),
-        tel1: new FormControl('', [Validators.required]),
-        tel2: new FormControl(''),
-        address: new FormControl('', [Validators.required]),
+        email: new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+        tel1: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+$')]),
+        tel2: new FormControl('', [Validators.pattern('^[0-9]+$')]),
+        address: new FormControl('', [Validators.required, Validators.minLength(10)]),
     });
 
     residentUser = "";
@@ -39,7 +39,7 @@ export class MedecinFormsComponent implements OnInit {
                     this.formData.controls.firstname.setValue(doctor.prenom);
                     this.formData.controls.email.setValue(doctor.email);
                     this.formData.controls.tel1.setValue(doctor.tel1);
-                    this.formData.controls.tel2.setValue(doctor.tel2 ?? "");
+                    this.formData.controls.tel2.setValue(doctor.tel2 ?? '');
                     this.formData.controls.address.setValue(doctor.adresse);
                 }
             } catch (error) {
@@ -48,18 +48,47 @@ export class MedecinFormsComponent implements OnInit {
         });
     }
 
-    next() {
-        if (this.formValid) {
-            const doctor: MedecinTraitant = {
-                adresse: this.formData.controls.address.value ?? "",
-                email: this.formData.controls.email.value ?? "",
-                nom: this.formData.controls.lastname.value ?? "",
-                numInami: this.formData.controls.mat.value ?? "",
-                prenom: this.formData.controls.firstname.value ?? "",
-                tel1: this.formData.controls.tel1.value ?? "",
-                tel2: this.formData.controls.tel2.value ?? ""
-            };
+    buildBody()  {
+        const doctor: MedecinTraitant = {
+            adresse: this.formData.controls.address.value ?? '',
+            email: this.formData.controls.email.value ?? '',
+            nom: this.formData.controls.lastname.value ?? '',
+            numInami: this.formData.controls.mat.value ?? '',
+            prenom: this.formData.controls.firstname.value ?? '',
+            tel1: this.formData.controls.tel1.value ?? '',
+            tel2: this.formData.controls.tel2.value ?? ''
+        };
+        return doctor;
+    }
 
+
+    next() {
+        const doctor = this.buildBody() ;
+
+        if (!this.formData.controls.mat.value) {
+            doctor.numInami = doctor.numInami?? 'undefined';
+        }
+
+        if (!this.formData.controls.firstname.value) {
+            doctor.prenom = doctor.prenom?? 'undefined';
+        }
+        
+        if (!this.formData.controls.lastname.value) {
+            doctor.nom = doctor.nom?? 'undefined';
+        }
+
+        if (!this.formData.controls.email.value) {
+            doctor.email = doctor.email ?? '';
+        }
+
+        if (!this.formData.controls.tel1.value) {
+            doctor.tel1 = doctor.tel1 ?? 'undefined';
+        }
+
+        if (!this.formData.controls.address.value) {
+            doctor.adresse= doctor.adresse ?? 'undefined';
+        }
+        if (this.formData.valid) {
             // set the value of the observable object
             this.observableSrv.changeResident({
                 user: this.residentUser,
@@ -71,7 +100,7 @@ export class MedecinFormsComponent implements OnInit {
     }
 
     back() {
-        if (this.formValid) {
+        if (this.formData.valid) {
             this.router.navigate(['/gestionnaire/resident/add/user']);
         }
     }

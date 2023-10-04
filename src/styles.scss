@@ -145,3 +145,8 @@ label.required {
     color: red;
     font-weight: bold;
 }
+
+.custom-steps {
+    column-gap: var(--orange-400);  
+    font-weight: bold; 
+  }
