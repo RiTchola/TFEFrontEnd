@@ -24,7 +24,7 @@
                     <label class="required-field">Date de Naissance</label>
                     <p-calendar formControlName="dob" [showIcon]="true"></p-calendar>
                     <small  *ngIf="formData.get('dob')?.hasError('required') && form.submitted">{{required}}</small>
-                    <small  *ngIf="formData.get('dob')?.hasError('greater') && form.submitted">L'âge dois être supérieur à 25 ans</small>
+                    <small  *ngIf="formData.get('dob')?.hasError('greater')">L'âge dois être supérieur à 25 ans</small>
                 </div>
                 <div class="field col-6">
                     <label class="required-field">Nombre d'enfants</label>
@@ -33,9 +33,9 @@
                 </div>
                 <div class="field col-6">
                     <label class="required-field">Statut Matrimoniale</label>
-                    <p-dropdown [options]="statuts"  optionLabel="key"  optionValue="value"
+                    <p-dropdown [options]="statuts"  optionLabel="key"  optionValue="value" formControlName="statut"
                     ></p-dropdown>
-                    <small *ngIf="formData.get('statut')?.hasError('required') && formData.get('statut')?.touched">
+                    <small *ngIf="(formData.get('statut')?.hasError('required') && formData.get('statut')?.touched) || (formData.get('statut')?.hasError('required') && form.submitted)">
                         Veuillez faire un choix.
                     </small>
 

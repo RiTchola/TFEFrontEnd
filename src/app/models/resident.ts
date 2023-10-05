@@ -1,5 +1,4 @@
 export type StatutM = 
-    | ""
     | "CELIBATAIRE"
     | "MARIE"
     | "DIVORCE"

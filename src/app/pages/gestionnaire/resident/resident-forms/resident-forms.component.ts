@@ -28,9 +28,9 @@ export class ResidentFormsComponent implements OnInit {
         { key: "Veuf", value: "VEUF" },
         { key: "Veuve", value: "VEUF" }
     ]; */
-    statuts: KeyValue<string, StatutM>[] = [
+    statuts: KeyValue<string, string>[] = [
         { key: " Veuillez faire un choix", value: "" },
-        { key: "Célibataire", value: "CELIBATAIRE" },
+        { key: "Célibataire", value:  "CELIBATAIRE"},
         { key: "Marié(e)", value: "MARIE" },
         { key: "Divorcé(e)", value: "DIVORCE" },
         { key: "Veuf(ve)", value: "VEUF" }
@@ -83,6 +83,7 @@ export class ResidentFormsComponent implements OnInit {
                 this.userValue = JSON.parse(v.user);
                 this.doctorValue = JSON.parse(v.doctor);
                 this.formData.controls.email.setValue(this.userValue.username);
+                console.log(v)
             } catch (error) {
 
             }
@@ -185,66 +186,25 @@ export class ResidentFormsComponent implements OnInit {
         let userId = 0;
         let doctorId = 0;
         const data = this.buildBody() ;
-        if (!this.formData.controls.firstname.value) {
-            data.nom= data.nom ?? 'undefined';
-        }
-
-        if (!this.formData.controls.lastname.value) {
-            data.prenom = data.prenom?? 'undefined';
-        }
-
-        if (!this.formData.controls.email.value) {
-            data.email = data.email ?? '';
-        }
-
-        if (!this.formData.controls.tel.value) {
-            data.tel = data.tel ?? 'undefined';
-        }
-
+        console.log(this.formData.controls.statut.value)
         const dob = this.formData.controls.dob.value;
-        if (!dob && ((new Date().getFullYear() - new Date(data.dateNaissance).getFullYear()) >= 25)) {
+        if (!dob || ((new Date().getFullYear() - new Date(dob).getFullYear()) < 26)) {
             this.formData.controls.dob.setErrors({ 'greater': true, 'required': false });
             return;
         }
-
-        if (!this.formData.controls.address.value) {
-            data.adresse= data.adresse ?? 'undefined';
-        }
-
-        if (!this.formData.controls.entryDate.value) {
+       
+        if (this.formData.controls.exitDate.value && (this.formData.controls.entryDate.value?? new Date() > this.formData.controls.exitDate.value) ){
             this.formData.controls.entryDate.setErrors({ 'greater': true, 'required': false });
             return;
         }
 
-        if (!this.formData.controls.reasonEntry.value) {
-            data.motifEntree= data.motifEntree ?? 'undefined';
+        if (this.formData.controls.statut.value == "") {
+            return;
         }
 
-        if (!this.formData.controls.room.value) {
-            data.chambre= data.chambre ?? 'undefined';
-        }
-
-        if (!this.formData.controls.statut.value  && this.formData.controls.statut.value == "") {
-            data.statut= data.statut ?? 'undefined';
-        }
-
-        if (!this.formData.controls.nbOfChild.value) {
-            data.nbEnfant= data.nbEnfant ?? 'undefined';
-        }
-
-        if (!this.formData.controls.antMedical.value) {
-            data.antMedical= data.antMedical?? 'undefined';
-        }
-
-        if (!this.formData.controls.antChirugical.value) {
-            data.antChirugical= data.antChirugical ?? 'undefined';
-        }
-
-        if (!this.formData.controls.healthStatus.value) {
-            data.etatSante= data.etatSante ?? 'undefined';
-        }
-
+        console.log(this.formData.errors)
         if (this.formData.valid ) {
+            console.log("test")
             if (this.residentId == 0) {
                 this.residentSrv.saveUser(this.userValue).subscribe({
                     next: (r) => {
