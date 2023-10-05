@@ -51,7 +51,5 @@ export class EtablissementComponent implements OnInit {
         this.msgSrv.add({ key: 'tst', severity: 'success', summary: 'Success', detail: msg });
     }
 
-    displayDate(date: string) {
-        return Util.getMonth(date);
-    }
+
 }

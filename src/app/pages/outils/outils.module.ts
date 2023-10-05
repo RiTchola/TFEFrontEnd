@@ -10,6 +10,9 @@ import { HttpClientModule } from "@angular/common/http";
 import { ToastModule } from 'primeng/toast';
 import { ImagesVideoComponent } from './images-video/images-video.component';
 import { RapportVisiteComponent } from './rapport-visite/rapport-visite.component';
+import {CalendarModule} from "primeng/calendar";
+import {DropdownModule} from "primeng/dropdown";
+import {FileUploadComponent} from "../../shared/components/file-upload/file-upload.component";
 
 @NgModule({
     declarations: [
@@ -26,7 +29,10 @@ import { RapportVisiteComponent } from './rapport-visite/rapport-visite.componen
         HttpClientModule,
         ButtonModule,
         InputTextModule,
-        ToastModule
+        ToastModule,
+        CalendarModule,
+        DropdownModule,
+        FileUploadComponent
 
     ]
 })

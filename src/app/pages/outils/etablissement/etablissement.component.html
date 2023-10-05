@@ -37,7 +37,7 @@
                                 <h6>{{currentEtab.tel1}}</h6>
                                 <h6>{{currentEtab.tel2}}</h6>
                                 <h6>{{currentEtab.adresse}}</h6>
-                                <h6>{{displayDate(currentEtab.dateCreation)}}</h6>
+                                <h6>{{currentEtab.dateCreation | date : "EEEE, dd MMMM YYYY" }}</h6>
                             </div>
                         </div>
                     </div>

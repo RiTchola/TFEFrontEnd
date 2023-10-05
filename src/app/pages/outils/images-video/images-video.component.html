@@ -2,33 +2,31 @@
 <h3>Images-Videos</h3>
 <p>Liste des fichiers</p>
 <div class="mb-4 flex justify-content-end">
-    <p-button label="Enrégistrer un résident" routerLink="/gestionnaire/resident/1"></p-button>
+    <p-button label="Créer image/video" (click)="showDialog()"></p-button>
 </div>
 <div class="grid">
     <div class="col-12">
         <div class="card">
-            <p-table [value]="rapportVisite" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
+            <p-table [value]="fichier" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
                      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                      [rowsPerPageOptions]="[5, 10, 25, 50]">
                 <ng-template pTemplate="header">
                     <tr>
-                        <th pSortableColumn="nomResid">Nom Résident <p-sortIcon field="nomResid"></p-sortIcon></th>
-                        <th pSortableColumn="prenomResid">Prénom Résident <p-sortIcon field="prenomResid"></p-sortIcon></th>
-                        <th pSortableColumn="dateVisite">Date de Visite <p-sortIcon field="dateVisite"></p-sortIcon></th>
-                        <th pSortableColumn="nomVisiteur">Nom Visiteur <p-sortIcon field="nomVisiteur"></p-sortIcon></th>
-                        <th pSortableColumn="typePersonne">Type de Personne <p-sortIcon field="typePersonne"></p-sortIcon></th>
+                        <th pSortableColumn="date">Date <p-sortIcon field="date"></p-sortIcon></th>
+                        <th pSortableColumn="fileURL">File URL <p-sortIcon field="fileURL"></p-sortIcon></th>
+                        <th pSortableColumn="typeF">Type de Fichier <p-sortIcon field="typeF"></p-sortIcon></th>
                         <th>Actions</th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-rvt>
                     <tr>
-                        <td>{{rvt.nomResid}}</td>
-                        <td>{{rvt.prenomResid}}</td>
-                        <td>{{rvt.dateVisite | date}}</td>
-                        <td>{{rvt.nomVisiteur}}</td>
-                        <td>{{rvt.typePersonne}}</td>
+                        <td>{{rvt.date | date : "EEEE, dd MMMM YYYY"}}</td>
+                        <td>{{rvt.fileURL}}</td>
                         <td>
-                            <i class="pi pi-eye" (click)="showDialog(rvt)"></i>
+                            <i class="pi {{rvt.typeF=='IMAGE'? 'pi-image': 'pi-video'}}" style="font-size: 2.5rem"></i>
+                        </td>
+                        <td>
+                            <i class="pi pi-download" (click)="downloadFile()"></i>
                         </td>
                     </tr>
                 </ng-template>
@@ -38,36 +36,31 @@
 </div>
 <p-dialog  [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
     <ng-template pTemplate="header">
-        <h4>DETAIL DU RAPPORT</h4>
+        <h4>Envoyer une image ou une video</h4>
     </ng-template>
-    <h5 style="color: black">Information Personnelle</h5>
+    <p>S'il vous plait entrer kes informations de votre fichier</p>
     <div class="p-fluid formgrid grid">
-        <div class="field col-4">
-            <h6>Nom Résident</h6>
-            <p>{{rapportVisiteHelper.nomResid}}</p>
+        <div class="field col-12">
+            <label>Date *</label>
+            <p-calendar [(ngModel)]="fichierHelper.date" [showIcon]="true"></p-calendar>
         </div>
-        <div class="field col-4">
-            <h6>Prenom Résident</h6>
-            <p>{{rapportVisiteHelper.prenomResid}}</p>
+        <div class="field col-12">
+            <label>Type de Fichier *</label>
+            <p-dropdown [options]="typeFichiers"
+                        [(ngModel)]="fichierHelper.typeF"
+                        optionLabel="key"
+                        optionValue="value"
+            ></p-dropdown>
         </div>
-        <div class="field col-4">
-            <h6>Date de naissance</h6>
-            <p>{{rapportVisiteHelper.dateBirthResid | date}}</p>
+        <div class="field col-12">
+            <label>Upload de l'image </label>
+            <app-file-upload></app-file-upload>
         </div>
-        <div class="field col-4">
-            <h6>Nom Visiteur</h6>
-            <p>{{rapportVisiteHelper.nomVisiteur}}</p>
-        </div>
-        <div class="field col-4">
-            <h6>Type de personne</h6>
-            <p>{{rapportVisiteHelper.typePersonne}}</p>
-        </div>
-        <div class="field col-4">
-            <h6>Date visite</h6>
-            <p>{{rapportVisiteHelper.dateVisite | date}}</p>
+        <div class="p-fluid formgrid grid">
+            <div class="field col-12">
+                <p-button label="Enregistrer" type="submit"></p-button>
+            </div>
         </div>
     </div>
-    <h5 style="color: black">Commentaire</h5>
-    <p>{{rapportVisiteHelper.commentaire}}</p>
 </p-dialog>
 
