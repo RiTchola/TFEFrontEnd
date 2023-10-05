@@ -125,7 +125,6 @@ export class ContactPersonFormComponent implements OnInit {
     }
 
     add() {
-        alert("save")
         this.contactpersonSrv.add(this.residentId, this.buildBody()).subscribe({
             next: (r) => this.onSuccess('Personne de contact enrégistrée.'),
             error: (err) => {
@@ -141,7 +140,6 @@ export class ContactPersonFormComponent implements OnInit {
     }
 
     update() {
-        alert("up")
         let data = this.buildBody();
         // also set the value of the id
         data.id = this.personId;
