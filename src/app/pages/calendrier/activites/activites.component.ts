@@ -1,10 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {CalendarService} from "../service/calendar.service";
+import { Component, OnInit } from '@angular/core';
+import { CalendarService } from "../service/calendar.service";
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import {Activite} from "../../../models/activite";
-import {MessageService} from "primeng/api";
+import { MessageService } from "primeng/api";
+
+import { Activite } from "../../../models/activite";
+
 @Component({
   selector: 'app-activites',
   templateUrl: './activites.component.html',
@@ -14,22 +16,14 @@ export class ActivitesComponent implements OnInit{
     events: any[] = [];
     formData:  Activite= {id: 0, title: "", date: new Date};
 
-
-
     calendarOptions: any = {
         initialView: 'timeGridDay'
     };
 
     showDialog: boolean = false;
-
     clickedEvent: any = null;
-
-
     edit: boolean = false;
-
-
     view: string = '';
-
     changedEvent: any;
 
     constructor(private eventService: CalendarService, private messageService: MessageService ) {
@@ -68,7 +62,7 @@ export class ActivitesComponent implements OnInit{
 
         this.changedEvent = { ...plainEvent, ...this.clickedEvent };
         this.changedEvent.start = this.clickedEvent.start;
-        this.changedEvent.end = this.clickedEvent.end ? this.clickedEvent.end : this.clickedEvent.start;
+        this.changedEvent.end = this.clickedEvent.end;
     }
 
     onDateSelect(e: any) {
@@ -104,12 +98,7 @@ export class ActivitesComponent implements OnInit{
                     this.clickedEvent = null;
                 }
             });
-
-
-
-
         }
-
     }
 
 

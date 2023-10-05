@@ -1,5 +1,5 @@
 export interface Evenement {
-    id?: number;
-    name: string;
+    id: number;
+    title: string;
     dateEvent: Date;
 }

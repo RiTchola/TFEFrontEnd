@@ -1,60 +1,15 @@
-@media screen and (max-width: 768px) {
-    :host ::ng-deep {
-        .fc .fc-toolbar {
-            justify-content: center;
-        }
-
-        .fc-header-toolbar {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            justify-content: center;
-            text-align: center;
-            flex-wrap: wrap;
-
-            .fc-toolbar-chunk:nth-child(2) {
-                width: 100%;
-                order: 0;
-            }
-
-            .fc-toolbar-chunk:nth-child(1) {
-                order: 1;
-            }
-
-            .fc-toolbar-chunk:nth-child(3) {
-                order: 2;
-
-                .fc-button-group {
-                    .fc-today-button {
-                        margin-left: 2rem;
-                    }
-                }
-            }
-        }
-    }
-}
-.p-input-icon-left{
-    margin-top: 1vh;
-    width: 100%
-}
-
-.date-area{
-    margin-top: 3vh;
-}
-.my-text{
-    color: #e6ac0e;
-    font-size: 18px;
-}
 .text-header{
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%
 }
+
 button{
     color: white;
 }
-.required-field::after{
+
+.required-field:before{
     content: '*';
     color: #f97316;
     margin-left: 4px;
