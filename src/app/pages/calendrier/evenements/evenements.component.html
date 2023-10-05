@@ -1,5 +1,4 @@
 <p-toast></p-toast>
-
 <div class="card">
     <full-calendar [options]="calendarOptions"></full-calendar>
     <p-dialog #dd [(visible)]="showDialog" [breakpoints]="{'960px': '75vw', '640px': '90vw'}" [style]="{width: '36rem'}" [modal]="true" [closable]="true" (onHide)="view = ''">
@@ -18,7 +17,7 @@
                         <div class="text-900 font-semibold mb-2">Date</div>
                         <p class="flex align-items-center m-0">
                             <i class="pi pi-fw pi-clock text-700 mr-2"></i>
-                            <span>{{changedEvent.start}} - {{changedEvent.end | date: 'dd/MM/yyyy'}}</span>
+                            <span>{{changedEvent.start | date: 'dd/MM/yyyy'}}</span>
                         </p>
                     </div>
                 </div>

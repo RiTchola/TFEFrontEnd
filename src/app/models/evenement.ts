@@ -1,5 +1,6 @@
 export interface Evenement {
     id: number;
     title: string;
-    dateEvent: Date;
+    date: Date;
+    allDay: boolean;
 }

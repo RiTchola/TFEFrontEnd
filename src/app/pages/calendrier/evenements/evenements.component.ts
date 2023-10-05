@@ -14,8 +14,8 @@ import frLocale from '@fullcalendar/core/locales/fr';
   styleUrls: ['./evenements.component.scss']
 })
 export class EvenementsComponent implements OnInit{
-    events: any[] = [];
-    formData:  Evenement= {id: 0, title: "", dateEvent: new Date};
+    events: Evenement[] = [];
+    formData:  Evenement= {id: 0, title: "", date: new Date, allDay:true};
 
     calendarOptions: any = {
         initialView: 'timeGridDay'
@@ -67,13 +67,12 @@ export class EvenementsComponent implements OnInit{
         this.changedEvent.start = this.clickedEvent.start;
         this.changedEvent.end = this.clickedEvent.end;
         this.changedEvent.allDay = this.changedEvent.allDay;
-        //? this.clickedEvent.end : this.clickedEvent.start;
     }
 
     onDateSelect(e: any) {
         this.view = 'new'
         this.showDialog = true;
-        this.changedEvent = { ...e, title: null, description: null, location: null, backgroundColor: null, borderColor: null, textColor: null, tag: { color: null, name: null } };
+        this.changedEvent = { ...e, title: null, description: null, location: null, backgroundColor: 'lightorange', borderColor: 'orange',  textColor: 'black', font: 'Times New Roman' };
     }
 
     handleSave() {
@@ -83,12 +82,12 @@ export class EvenementsComponent implements OnInit{
         else {
             this.changedEvent.allDay= true;
             this.formData.title = this.changedEvent.title;
-            this.formData.dateEvent = this.changedEvent.start;
+            this.formData.date = this.changedEvent.start;
             this.showDialog = false;
             this.eventService.saveEvenement(this.formData).subscribe({
                 next: value => {
                     this.messageService.add({severity: "success", summary: "Success", detail: 'Evènement enregistré' });
-                    this.clickedEvent = { ...this.changedEvent, backgroundColor: this.changedEvent.tag.color, borderColor: this.changedEvent.tag.color, textColor: '#212121' };
+                    this.clickedEvent = { ...this.changedEvent,   backgroundColor: 'orange', borderColor: 'gray', textColor: 'black', font: 'Times New Roman', };
 
                     if (this.clickedEvent.hasOwnProperty('id')) {
                         this.events = this.events.map(i => i.id.toString() === this.clickedEvent.id.toString() ? i = this.clickedEvent : i);
@@ -118,7 +117,5 @@ export class EvenementsComponent implements OnInit{
     validate() {
         let { start, end } = this.changedEvent;
         return start && end;
-    }
-
-    
+    }   
 }
