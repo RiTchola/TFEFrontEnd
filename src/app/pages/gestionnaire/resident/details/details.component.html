@@ -1,7 +1,101 @@
-<h5>RESIDENTS</h5>
-<p>Liste des résidents de l'établissement</p>
+<p-toast></p-toast>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<h5>INFORMATIONS DU RÉSIDENT</h5>
+<p>Détails du résident</p>
 <div class="mb-4 flex justify-content-end">
     <p-button label="Voir les personnes de contact" routerLink="/gestionnaire/contact-person/{{residentId}}" class="mr-5"></p-button>
     <p-button label="Voir les rapports cotidiens" routerLink="/gestionnaire/daily-report/{{residentId}}"></p-button>
 </div>
-<p>{{getDate(resident?.dateNaissance)}}</p>
+<div class="grid">
+    <div class="field col-2">
+        <div class="card text-center">
+            <img src="assets/images/photoUser2.jpg" alt="user_img"
+                class="d-flex mx-auto align-items-center col-6" />
+            <p><strong>{{resident?.nom}}  {{resident?.prenom}}</strong></p>
+            <p><em>>{{resident?.chambre}}</em></p>
+            <p-button label="Désactiver Compte" class="p-button-danger" ></p-button>
+            <!-- <p-button label="Supprimer la personne" class="p-button-danger" (click)="remove()"></p-button> -->
+        </div>
+        <div class="col-12 text-center">
+            <p-button label="Modifier le résident" class="d-flex mx-auto align-items-center col-12" (click)="residentEdit()"></p-button>
+        </div>
+    </div>
+    <div class="col-10">
+        <div class="card">
+            <h5>RÉSIDENT</h5>
+            <div class="p-fluid p-formgrid grid mt-5">
+                <div class="col-6">
+                    <p class="my-3"><strong>Informations Personnelles</strong></p>
+                    <div class="col-6">
+                        <h6>Nom</h6>
+                        <p>{{resident?.nom}}</p>
+                        <h6>Date De Naissance</h6>
+                        <p>{{resident?.dateNaissance}}</p>
+                        <h6>Type de residentne</h6>
+                        <p>{{resident?.email}}</p>
+                    </div>
+                    <div class="col-6 content">
+                        <h6>Prénom</h6>
+                        <p>{{resident?.prenom}}</p>
+                        <h6>Status Matrimoniale</h6>
+                        <p>{{resident?.statut}}</p>
+                    </div>   
+                </div>
+                <div class="col-6">
+                    <p class="my-3"><strong>Informations Personnelles</strong></p>
+                    <div class="col-6">
+                        <h6>Nom</h6>
+                        <p>{{resident?.nom}}</p>
+                        <h6>Date De Naissance</h6>
+                        <p>{{resident?.dateNaissance}}</p>
+                        <h6>Type de residentne</h6>
+                        <p>{{resident?.email}}</p>
+                    </div>
+                    <div class="col-6 content">
+                        <h6>Prénom</h6>
+                        <p>{{resident?.prenom}}</p>
+                        <h6>Status Matrimoniale</h6>
+                        <p>{{resident?.statut}}</p>
+                    </div>   
+                </div>
+            </div>
+            <div class="p-fluid p-formgrid grid mt-5">
+                <div class="col-6">
+                    <p class="my-3"><strong>Informations Personnelles</strong></p>
+                    <div class="col-6">
+                        <h6>Nom</h6>
+                        <p>{{resident?.nom}}</p>
+                        <h6>Date De Naissance</h6>
+                        <p>{{resident?.dateNaissance}}</p>
+                        <h6>Type de residentne</h6>
+                        <p>{{resident?.email}}</p>
+                    </div>
+                    <div class="col-6 content">
+                        <h6>Prénom</h6>
+                        <p>{{resident?.prenom}}</p>
+                        <h6>Status Matrimoniale</h6>
+                        <p>{{resident?.statut}}</p>
+                    </div>   
+                </div>
+                <div class="col-6">
+                    <p class="my-3"><strong>Informations Personnelles</strong></p>
+                    <div class="col-6">
+                        <h6>Nom</h6>
+                        <p>{{resident?.nom}}</p>
+                        <h6>Date De Naissance</h6>
+                        <p>{{resident?.dateNaissance}}</p>
+                        <h6>Type de residentne</h6>
+                        <p>{{resident?.email}}</p>
+                    </div>
+                    <div class="col-6 content">
+                        <h6>Prénom</h6>
+                        <p>{{resident?.prenom}}</p>
+                        <h6>Status Matrimoniale</h6>
+                        <p>{{resident?.statut}}</p>
+                    </div>   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

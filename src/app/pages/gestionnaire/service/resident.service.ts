@@ -58,4 +58,8 @@ export class ResidentService {
     updateDoctor(id: number, body: MedecinTraitant) {
         return this.http.put<MedecinTraitant>(`${this.doctorUrl}/${id}`, body);
     }
+
+    /* remove(id: number) {
+        return this.http.delete<Response>(`${this.url}/${id}`);
+    } */
 }
