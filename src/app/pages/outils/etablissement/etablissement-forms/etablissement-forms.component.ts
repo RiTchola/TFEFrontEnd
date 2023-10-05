@@ -21,7 +21,7 @@ export class EtablissementFormsComponent implements OnInit {
         email2: new FormControl('', [Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
         tel1: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+$')]),
         tel2: new FormControl('', [Validators.pattern('^[0-9]+$'), Validators.minLength(4), Validators.maxLength(30)]),
-        address: new FormControl('', [Validators.required, Validators.minLength(10)]),
+        address: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(120)]),
         date: new FormControl<Date>(new Date(), [Validators.required]),
     });
 

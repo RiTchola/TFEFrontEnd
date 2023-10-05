@@ -19,34 +19,42 @@ export class ContactPersonFormComponent implements OnInit {
     formData = new FormGroup({
         name: new FormControl('', [Validators.required]),
         firstname: new FormControl('', [Validators.required]),
-        email: new FormControl('', [Validators.required]),
+        email: new FormControl('', [Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
         dob: new FormControl(new Date(), [Validators.required]),
         status: new FormControl('', [Validators.required]),
         type: new FormControl('', [Validators.required]),
-        address: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(100)]),
-        tel: new FormControl('', [Validators.required]),
-        tel2: new FormControl('', [Validators.required]),
+        address: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(120)]),
+        tel: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+$')]),
+        tel2: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+$')]),
     });
 
     statusList = [
         { name: '', value: '' },
-        { name: 'Celibataire', value: Status.celibataire },
+        { name: 'Célibataire', value: Status.celibataire },
         { name: 'Divorcé', value: Status.divorce },
-        { name: 'Marié(e)', value: Status.marie },
-        { name: 'Veuf', value: Status.veuf }
+        { name: 'Divorcée', value: Status.divorce },
+        { name: 'Marié', value: Status.marie },
+        { name: 'Mariée', value: Status.marie },
+        { name: 'Veuf', value: Status.veuf },
+        { name: 'Veuve', value: Status.veuf }
     ];
 
     typeList = [
-        { name: '', value: '' },
+        { name: 'Veuillez faire un choix', value: '' },
         { name: 'Ami', value: ContactPersonType.ami },
+        { name: 'Amie', value: ContactPersonType.ami },
         { name: 'Autre', value: ContactPersonType.autre },
-        { name: 'Autre Famille', value: ContactPersonType.autre_famille },
+        { name: 'Autre Membre de Famille', value: ContactPersonType.autre_famille },
         { name: 'Avocat', value: ContactPersonType.avocat },
+        { name: 'Avocate', value: ContactPersonType.avocat },
         { name: 'Enfant', value: ContactPersonType.enfant },
-        { name: 'Kinesi Therapeute', value: ContactPersonType.kinesi_therapeute },
-        { name: 'Medecin Traitant', value: ContactPersonType.medecin_traitant },
+        { name: 'Époux', value: ContactPersonType.epoux },
+        { name: 'Épouse', value: ContactPersonType.epouse },
+        { name: 'Kinésithérapeute', value: ContactPersonType.kinesi_therapeute },
+        { name: 'Médécin Traitant', value: ContactPersonType.medecin_traitant },
         { name: 'Parent', value: ContactPersonType.parent },
-        { name: 'Pétit Fils', value: ContactPersonType.petit_fils }
+        { name: 'Pétit-Fils', value: ContactPersonType.petit_fils },
+        { name: 'Pétit-Fille', value: ContactPersonType.petit_fille }
     ];
 
     residentId = 0;
@@ -78,7 +86,7 @@ export class ContactPersonFormComponent implements OnInit {
             next: (r) => {
                 this.formData.controls.address.setValue(r.adresse);
                 this.formData.controls.dob.setValue(new Date(r.dateNaissance));
-                this.formData.controls.email.setValue(r.email);
+                this.formData.controls.email.setValue(r.email ?? "");
                 this.formData.controls.firstname.setValue(r.prenom);
                 this.formData.controls.name.setValue(r.nom);
                 this.formData.controls.status.setValue(r.statut);
@@ -91,25 +99,32 @@ export class ContactPersonFormComponent implements OnInit {
     }
 
     get isFormValid() {
+        const dob = this.formData.controls.dob.value;
         if (this.formData.controls.status.value == "" || this.formData.controls.type.value == "") {
             return false;
+        }
+
+        else if (dob && (dob > new Date()) ){
+            this.formData.controls.dob.setErrors({ 'greater': true, 'required': false });
+            return false;;
         }
         return true;
     }
 
-    buildBody(): ContactPerson {
-        const phone = !this.formData.controls.tel2.value || this.formData.controls.tel2.value == '' ? this.formData.controls.tel.value : this.formData.controls.tel2.value;
-        return {
-            adresse: this.formData.controls.address.value ?? '',
-            choix: this.formData.controls.type.value ?? '',
-            dateNaissance: this.formData.controls.dob.value ?? new Date(),
-            email: this.formData.controls.email.value ?? '',
-            nom: this.formData.controls.name.value ?? '',
-            prenom: this.formData.controls.firstname.value ?? '',
-            statut: this.formData.controls.status.value ?? Status.celibataire,
-            tel1: this.formData.controls.tel.value ?? '',
-            tel2: phone ?? 'undefined'
+    buildBody() {
+        const data: ContactPerson = {
+        //const phone = !this.formData.controls.tel2.value || this.formData.controls.tel2.value == '' ? this.formData.controls.tel.value : this.formData.controls.tel2.value;
+        adresse: this.formData.controls.address.value ?? '',
+        choix: this.formData.controls.type.value ?? '',
+        dateNaissance: this.formData.controls.dob.value ?? new Date(),
+        email: this.formData.controls.email.value ?? '',
+        nom: this.formData.controls.name.value ?? '',
+        prenom: this.formData.controls.firstname.value ?? '',
+        statut: this.formData.controls.status.value ?? Status.celibataire,
+        tel1: this.formData.controls.tel.value ?? '',
+        tel2: this.formData.controls.tel2.value ?? 'undefined'
         }
+        return data;
     }
 
     save() {

@@ -32,7 +32,7 @@ export class ContactPersonComponent implements OnInit {
         })
     }
 
-    getDate(date: any) {
+    getDateOf(date: any) {
         return Util.displayAsDate(date);
     }
 
