@@ -6,6 +6,8 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import { MessageService } from "primeng/api";
 
 import { Activite } from "../../../models/activite";
+import { Util } from 'src/app/shared/util';
+import frLocale from '@fullcalendar/core/locales/fr';
 
 @Component({
   selector: 'app-activites',
@@ -38,13 +40,14 @@ export class ActivitesComponent implements OnInit{
         this.calendarOptions = {
             plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
             height: 720,
-            initialDate: this.formatDate(new Date()),
+            initialDate: new Date(),
             headerToolbar: {
                 left: 'prev,next today',
                 center: 'title',
                 right: 'timeGridDay,timeGridWeek,dayGridMonth'
             },
             initialView: 'timeGridDay',
+            allDaySlot: false,
             editable: true,
             selectable: true,
             selectMirror: true,
@@ -101,8 +104,6 @@ export class ActivitesComponent implements OnInit{
         }
     }
 
-
-
     delete() {
         this.events = this.events.filter(i => i.id.toString() !== this.clickedEvent.id.toString());
         this.calendarOptions = { ...this.calendarOptions, ...{ events: this.events } };
@@ -115,18 +116,6 @@ export class ActivitesComponent implements OnInit{
     validate() {
         let { start, end } = this.changedEvent;
         return start && end;
-    }
-
-    formatDate(date: Date): string {
-        const year = date.getFullYear();
-        let month = (date.getMonth() + 1).toString();
-        let day = date.getDate().toString();
-
-        // Pad single digit month and day with a leading zero
-        month = month.length < 2 ? '0' + month : month;
-        day = day.length < 2 ? '0' + day : day;
-
-        return `${year}-${month}-${day}`;
     }
 
 }

@@ -38,11 +38,13 @@ export class EvenementsComponent implements OnInit{
         this.calendarOptions = {
             plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
             height: 720,
-            initialDate: this.formatDate(new Date()),
+            initialDate: new Date(),
             headerToolbar: {
                 left: 'prev,next today',
                 center: 'title',
-                right: 'timeGridDay,timeGridWeek,dayGridMonth'
+                right: 'timeGridDay,timeGridWeek,dayGridMonth',
+                
+
             },
             initialView: 'timeGridDay',
             editable: true,
@@ -117,15 +119,5 @@ export class EvenementsComponent implements OnInit{
         return start && end;
     }
 
-    formatDate(date: Date): string {
-        const year = date.getFullYear();
-        let month = (date.getMonth() + 1).toString();
-        let day = date.getDate().toString();
-
-        // Pad single digit month and day with a leading zero
-        month = month.length < 2 ? '0' + month : month;
-        day = day.length < 2 ? '0' + day : day;
-
-        return `${year}-${month}-${day}`;
-    }
+    
 }
