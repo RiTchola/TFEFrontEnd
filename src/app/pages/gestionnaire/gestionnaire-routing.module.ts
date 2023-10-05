@@ -6,7 +6,7 @@ import { BlogComponent } from './blog/blog.component';
 import { ResidentComponent } from './resident/resident.component';
 import { ResidentFormsComponent } from './resident/resident-forms/resident-forms.component';
 import { MedecinFormsComponent } from './resident/medecin-forms/medecin-forms.component';
-import { UserFormsComponent } from './resident/user-forms/user-forms.component';
+import { UserFormsComponent } from './user-forms/user-forms.component';
 import { ManageComponent } from './resident/manage/manage.component';
 import { DetailsComponent } from './resident/details/details.component';
 import { DailyReportComponent } from './daily-report/daily-report.component';

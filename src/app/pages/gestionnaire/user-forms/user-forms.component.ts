@@ -1,5 +1,5 @@
-import { ObservableService } from '../../../../shared/service/observable.service';
-import { RoleType } from '../../../../shared/interfaces/roleType';
+import { ObservableService } from '../../../shared/service/observable.service';
+import { RoleType } from '../../../shared/interfaces/roleType';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
@@ -21,7 +21,7 @@ export class UserFormsComponent implements OnInit {
             Validators.minLength(8),
             Validators.pattern(/[A-Z]/),
             Validators.pattern(/[0-9]/)
-        ]), 
+        ]),
         pwd2: new FormControl('', [
             Validators.required,
             Validators.minLength(8)
