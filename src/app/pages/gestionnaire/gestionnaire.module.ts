@@ -21,7 +21,7 @@ import { MeetUpComponent } from './meet-up/meet-up.component';
 import { BlogComponent } from './blog/blog.component';
 import { ResidentFormsComponent } from './resident/resident-forms/resident-forms.component';
 import { MedecinFormsComponent } from './resident/medecin-forms/medecin-forms.component';
-import { RegisterComponent } from '../auth/components/register/register.component';
+import { UserFormsComponent } from './resident/user-forms/user-forms.component';
 import { ManageComponent } from './resident/manage/manage.component';
 import { DetailsComponent } from './resident/details/details.component';
 import { DailyReportComponent } from './daily-report/daily-report.component';
@@ -36,7 +36,7 @@ import { ContactPersonDetailsComponent } from './contact-person/details/details.
         MeetUpComponent,
         BlogComponent,
         ResidentFormsComponent,
-        RegisterComponent,
+        UserFormsComponent,
         MedecinFormsComponent,
         ManageComponent,
         DetailsComponent,

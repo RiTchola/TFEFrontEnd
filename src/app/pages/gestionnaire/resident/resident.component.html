@@ -1,7 +1,7 @@
-<h3>RESIDENTS</h3>
-<p>Liste des résidents de l'établissement</p>
+<h3>RÉSIDENTS</h3>
+<p>Liste des résidents de l'Établissement</p>
 <div class="mb-4 flex justify-content-end">
-    <p-button label="Enrégistrer un résident" routerLink="/gestionnaire/resident/add"></p-button>
+    <p-button label="Ajouter un résident" routerLink="/gestionnaire/resident/add"></p-button>
 </div>
 <div class="grid" *ngIf="residents.length > 0">
     <div class="col-12">
@@ -16,7 +16,7 @@
                         <th id="dob" pSortableColumn="dob">Date Naissance <p-sortIcon field="dob"></p-sortIcon></th>
                         <th id="account" pSortableColumn="account">Compte <p-sortIcon field="account"></p-sortIcon></th>
                         <th id="room" pSortableColumn="room">Chambre <p-sortIcon field="room"></p-sortIcon></th>
-                        <th id="action" pSortableColumn="name">Actions</th>
+                        <th >Actions</th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-resident>
@@ -38,9 +38,14 @@
                             {{resident.chambre}}
                         </td>
                         <td>
-                            <i class="pi pi-eye" style="color: red; margin-right: 8px" (click)="view(resident)"></i>
+                            <i class="pi pi-eye"
+                               [ngClass]="{'active-icon': resident.actif, 'inactive-icon': !resident.actif}"
+                               (click)="resident.actif ? view(resident) : null"
+                               [style.color]="resident.actif ? '#1ec054ce' : 'red'"
+                               style="margin-right: 8px">
+                            </i>
                             <i class="pi pi-pencil" (click)="edit(resident)"></i>
-                        </td>
+                          </td>
                     </tr>
                 </ng-template>
             </p-table>
@@ -48,4 +53,4 @@
     </div>
 </div>
 
-<p *ngIf="residents.length === 0">Il y'a pas de résident enrégistré pour l'instant.</p>
+<p *ngIf="residents.length === 0">Il n'y'a pas de résident enrégistré pour votre établissement.</p>
