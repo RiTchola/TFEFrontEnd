@@ -19,7 +19,7 @@ export class ActivitesComponent implements OnInit{
     formData:  Activite= {id: 0, title: "", date: new Date};
 
     calendarOptions: any = {
-        initialView: 'timeGridDay'
+        initialView: 'timeGridDay',
     };
 
     showDialog: boolean = false;
@@ -34,7 +34,7 @@ export class ActivitesComponent implements OnInit{
     ngOnInit(): void {
         this.eventService.getAllActivity().subscribe(events => {
             this.events = events;
-            this.calendarOptions = { ...this.calendarOptions, ...{ events: events } };
+            this.calendarOptions = { ...this.calendarOptions, ...{ events: events }};
         });
 
         this.calendarOptions = {
@@ -46,7 +46,7 @@ export class ActivitesComponent implements OnInit{
                 center: 'title',
                 right: 'timeGridDay,timeGridWeek,dayGridMonth'
             },
-            initialView: 'timeGridDay',
+            initialView: 'timeGridWeek',
             allDaySlot: false,
             editable: true,
             selectable: true,
@@ -71,7 +71,7 @@ export class ActivitesComponent implements OnInit{
     onDateSelect(e: any) {
         this.view = 'new'
         this.showDialog = true;
-        this.changedEvent = { ...e, title: null, description: null, location: null, backgroundColor: null, borderColor: null, textColor: null, tag: { color: null, name: null } };
+        this.changedEvent = { ...e, title: null, description: null, location: null, backgroundColor: 'lightorange', borderColor: 'orange',  textColor: 'black', font: 'Times New Roman' };
     }
 
     handleSave() {
@@ -86,7 +86,7 @@ export class ActivitesComponent implements OnInit{
             this.eventService.saveActivity(this.formData).subscribe({
                 next: value => {
                     this.messageService.add({severity: "success", summary: "Success", detail: 'Activité enregistré' });
-                    this.clickedEvent = { ...this.changedEvent, backgroundColor: this.changedEvent.tag.color, borderColor: this.changedEvent.tag.color, textColor: '#212121' };
+                    this.clickedEvent = { ...this.changedEvent,   backgroundColor: 'orange', borderColor: 'gray', textColor: 'black', font: 'Times New Roman', };
 
                     if (this.clickedEvent.hasOwnProperty('id')) {
                         this.events = this.events.map(i => i.id.toString() === this.clickedEvent.id.toString() ? i = this.clickedEvent : i);
