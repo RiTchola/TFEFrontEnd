@@ -5,6 +5,7 @@ import { ResidentService } from '../../service/resident.service';
 import { Util } from 'src/app/shared/util';
 import { MessageService } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
+import { MedecinTraitant } from 'src/app/models/medecin-traitant';
 
 @Component({
     selector: 'app-details',
@@ -16,6 +17,7 @@ export class DetailsComponent implements OnInit {
 
     residentId = 0;
     resident?: Resident;
+    medecin?: MedecinTraitant;
 
     constructor(
         private residentSrv: ResidentService,

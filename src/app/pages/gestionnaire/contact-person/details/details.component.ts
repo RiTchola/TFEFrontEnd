@@ -5,6 +5,8 @@ import { ContactPerson } from 'src/app/models/contact-person';
 import { MessageService } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
 
+import { Util } from 'src/app/shared/util';
+
 @Component({
     selector: 'app-details',
     templateUrl: './details.component.html',
@@ -60,6 +62,10 @@ export class ContactPersonDetailsComponent implements OnInit {
         });
     }
 
+    getDate(date: any) {
+        return Util.displayAsDate(date);
+    }
+    
     personEdit() {
         this.router.navigateByUrl(`/gestionnaire/contact-person/edit/${this.residentId}/${this.personId}`);
     }

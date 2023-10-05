@@ -3,23 +3,28 @@
 <h5>INFORMATIONS DE LA PERSONNE CONTACT</h5>
 <p>Détails de la personne</p>
 <div class="grid">
-    <div class="col-4">
-        <div class="card text-center">
-            <img src="assets/images/photoUser2.jpg" alt="user_img"
-                class="d-flex mx-auto align-items-center col-6" />
-            <p><strong>{{person?.nom}}  {{person?.prenom}}</strong></p>
-            <p-button label="Supprimer la personne" class="p-button-danger" (click)="remove()"></p-button>
-        </div>
-        <div class="col-12 text-center">
+    <div class="col-12 md:col-4">
+        <div class="card col-12 md:col-12">
+            <div class="text-center">
+                <img src="assets/images/photoUser2.jpg" alt="user_img"
+                    class="d-flex mx-auto align-items-center col-6" />
+                <p><strong>{{person?.nom}}</strong></p> 
+                <p><strong>{{person?.prenom}}</strong></p>
+                <p-button label="Supprimer la personne" class="p-button-danger" (click)="remove()"></p-button>
+            </div>
+        </div> 
+        <div class="col-12 md:col-12 text-center">
             <p-button label="Modifier la personne" class="d-flex mx-auto align-items-center col-12" (click)="personEdit()"></p-button>
+        </div>
+        <div class="col-12 md:col-12 text-center">
             <p-button label="Modifier les identifiants" class="d-flex mx-auto align-items-center col-12" (click)="personUserEdit()"></p-button>
             <!-- <p-button label="Créer les identifiants" class="d-flex mx-auto align-items-center col-12" (click)="personUserCreate()"></p-button> -->
         </div>
     </div>
-    <div class="col-8">  
-        <div class="card">
+    <div class="col-12 md:col-8">  
+        <div class="card">    
             <h5>PERSONNE DE CONTACT</h5>
-            <p class="my-3"><strong>Informations Personnelles</strong></p>
+            <p><strong>Informations Personnelles</strong></p>
             <div class="p-fluid p-formgrid grid mt-5">
                 <div class="col-6">
                     <h6>Nom</h6>

@@ -51,6 +51,10 @@ export class ResidentService {
         return this.http.put<Response>(`${this.userUrl}/${id}`, body);
     }
 
+    fetchDoctor(id: number) {
+        return this.http.get<any>(`${this.url}/${id}`);
+    }
+
     saveDoctor(body: MedecinTraitant) {
         return this.http.post<MedecinTraitant>(this.doctorUrl, body);
     }
