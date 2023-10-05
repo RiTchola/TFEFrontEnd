@@ -39,6 +39,8 @@ export class ActivitesComponent implements OnInit{
 
         this.calendarOptions = {
             plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
+            locales: [ frLocale ],
+            locale: 'fr',
             height: 720,
             initialDate: new Date(),
             headerToolbar: {

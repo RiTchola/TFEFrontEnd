@@ -6,6 +6,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import { MessageService } from "primeng/api";
 
 import { Evenement } from "../../../models/evenement";
+import frLocale from '@fullcalendar/core/locales/fr';
 
 @Component({
   selector: 'app-evenements',
@@ -37,14 +38,14 @@ export class EvenementsComponent implements OnInit{
 
         this.calendarOptions = {
             plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
+            locales: [ frLocale ],
+            locale: 'fr',
             height: 720,
             initialDate: new Date(),
             headerToolbar: {
                 left: 'prev,next today',
                 center: 'title',
-                right: 'timeGridDay,timeGridWeek,dayGridMonth',
-                
-
+                right: 'timeGridDay,timeGridWeek,dayGridMonth',   
             },
             initialView: 'timeGridDay',
             editable: true,
