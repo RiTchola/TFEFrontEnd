@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {RapportVisiteTable} from "../../../models/rapport-visite-table";
+import {RapportVisite} from "../../../models/rapport-visite";
 import {Observable} from "rxjs";
 import {environment} from "../../../../environments/environment";
 
@@ -10,19 +10,20 @@ import {environment} from "../../../../environments/environment";
 export class RapportDeVisiteService {
 
     private apiUrl: string = environment.apiPath+'/rapport-visite';
+    private apiExternalUrl: string = environment.apiPath+'/externe/rapport-visite';
 
     constructor(private http: HttpClient) { }
 
-    getAllRapports(): Observable<RapportVisiteTable[]> {
-        return this.http.get<RapportVisiteTable[]>(this.apiUrl);
+    getAllRapports(): Observable<RapportVisite[]> {
+        return this.http.get<RapportVisite[]>(this.apiUrl);
     }
 
-    getRapportById(id: number): Observable<RapportVisiteTable> {
-        return this.http.get<RapportVisiteTable>(`${this.apiUrl}/${id}`);
+    getRapportById(id: number): Observable<RapportVisite> {
+        return this.http.get<RapportVisite>(`${this.apiUrl}/${id}`);
     }
 
-    createRapport(rapport: RapportVisiteTable): Observable<any> {
-        return this.http.post(this.apiUrl, rapport);
+    createRapport(rapport: RapportVisite): Observable<any> {
+        return this.http.post(this.apiExternalUrl, rapport);
     }
 
 }

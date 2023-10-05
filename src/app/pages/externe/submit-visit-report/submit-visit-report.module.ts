@@ -12,23 +12,27 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CalendarModule } from 'primeng/calendar';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CheckboxModule } from 'primeng/checkbox';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+
 
 @NgModule({
   declarations: [
     SubmitVisitReportComponent,
   ],
-  imports: [
-    CommonModule,
-    SubmitVisitReportRoutingModule,
-    ToastModule,
-    StepsModule,
-    CardModule,
-    DropdownModule,
-    ButtonModule,
-    InputTextModule,
-    CalendarModule,
-    InputTextareaModule,
-    CheckboxModule
-  ]
+    imports: [
+        CommonModule,
+        SubmitVisitReportRoutingModule,
+        ToastModule,
+        StepsModule,
+        CardModule,
+        DropdownModule,
+        ButtonModule,
+        InputTextModule,
+        CalendarModule,
+        InputTextareaModule,
+        CheckboxModule,
+        FormsModule,
+        ReactiveFormsModule
+    ]
 })
 export class SubmitVisitReportModule { }

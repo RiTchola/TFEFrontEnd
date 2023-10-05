@@ -1,57 +1,86 @@
 <p-toast></p-toast>
-<div class="p-fluid formgrid grid p-10">
-    <div class="field col-12">
-        <h1>le logo au centre</h1>
-    </div>
-    <div class="field col-6">
-        <p-card>
-            <ng-template pTemplate="title"> Remplir les informations de la visite </ng-template>
-            <ng-template pTemplate="content">
-                <div class="p-fluid formgrid grid">
-                    <div class="field col-6">
-                        <label>Date de visite</label>
-                        <p-calendar [showIcon]="true"></p-calendar>
-                    </div>
-                    <div class="field col-6">
-                        <label>Date de naissance du resident</label>
-                        <p-calendar [showIcon]="true"></p-calendar>
-                    </div>
-                    <div class="field col-6">
-                        <label>Nom Resident</label>
-                        <input  type="text" required pInputText/>
-                    </div>
-                    <div class="field col-6">
-                        <label>Prenom Resident</label>
-                        <input  type="text" required pInputText/>
-                    </div>
-                    <div class="field col-6">
-                        <label>Nom Visiteur</label>
-                        <input  type="text" required pInputText/>
-                    </div>
-                    <div class="field col-6">
-                        <label>Type de Personne</label>
-                        <p-dropdown></p-dropdown>
-                    </div>
-                    <div class="field col-12">
-                        <label for="commentaire">Commentaire</label>
-                        <textarea id="commentaire" rows="6" pInputTextarea></textarea>
+<form [formGroup]="dataForm" (ngSubmit)="submit()" #form="ngForm"> 
+    <div class="surface-ground flex align-items-center justify-content-center overflow-hidden authBg">
+        <div class="flex flex-column align-items-center m-5 justify-content-center">
+            <div class="p-fluid formgrid grid">
+                <div class="field col-12 centered-image-container">
+                    <img src="assets/logo-trans-200.png" class="centered-image" alt="Logo MPAC"/>
+                </div>
+                <div *ngIf="enableForm" class="field col-12 md:col-6">
+                    <div class="card">
+                        <h5>Sousmettre un rapport de votre visite</h5>
+                        <div class="p-fluid formgrid grid">
+                            <div class="field col-12 md:col-6">
+                                <label class="required-field">Date de visite</label>
+                                <p-calendar formControlName="dateVisite" [showIcon]="true" [showTime]="true" [showSeconds]="true" [required]="true"></p-calendar>
+                                <small 
+                                    *ngIf="dataForm.get('dateVisite')?.hasError('required') && form.submitted">{{required}}</small>
+                                <small 
+                                    *ngIf="dataForm.get('dateVisite')?.hasError('greater') && form.submitted">La date ne peut être
+                                    supérieur à celle d'aujourd'hui</small>
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <label class="required-field">Nom du visiteur</label>
+                                <input nomVisiteur="nomVisiteur" formControlName="nomVisiteur" type="text" required pInputText class="form-control" />
+                                <small  
+                                    *ngIf="(dataForm.get('nomVisiteur')?.hasError('required') && dataForm.get('nomVisiteur')?.touched) || (dataForm.get('nomVisiteur')?.hasError('required') && form.submitted)">
+                                    {{required}}</small>
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <label class="required-field">Date de naissance du resident</label>
+                                <p-calendar formControlName="dateBirthResid" [showIcon]="true" [required]="true"></p-calendar>
+                                <small 
+                                    *ngIf="dataForm.get('dateBirthResid')?.hasError('required') && form.submitted">{{required}}</small>
+                                <small 
+                                    *ngIf="dataForm.get('dateBirthResid')?.hasError('greater') && form.submitted">Le résident doit avoir plus de 25 ans</small>
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <label class="required-field">Nom du résident</label>
+                                <input nomResid="nomResid" formControlName="nomResid" type="text" required pInputText class="form-control" />
+                                <small  
+                                    *ngIf="(dataForm.get('nomResid')?.hasError('required') && dataForm.get('nomResid')?.touched) || (dataForm.get('nomResid')?.hasError('required') && form.submitted)">
+                                    {{required}}</small>
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <label class="required-field">Prénom du résident</label>
+                                <input prenomResid="prenomResid" formControlName="prenomResid" type="text" required pInputText class="form-control" />
+                                <small  
+                                    *ngIf="(dataForm.get('prenomResid')?.hasError('required') && dataForm.get('prenomResid')?.touched) || (dataForm.get('prenomResid')?.hasError('prenomResid') && form.submitted)">
+                                    {{required}}</small>
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <label class="required-field">Type de Personne</label>
+                                <p-dropdown [options]="typePersonnes"
+                                        optionLabel="key"
+                                        optionValue="value"
+                                        id="typePersonne"
+                                        name="typePersonne"
+                                ></p-dropdown>
+                                <small *ngIf="dataForm.get('typePersonne')?.hasError('required') && dataForm.get('typePersonne')?.touched">
+                                    Veuillez faire un choix.
+                                </small>
+                            </div>
+                            <div class="field col-12">
+                                <label class="required-field">Commentaire</label>
+                                    <textarea formControlName="commentaire" type="text" required pInputTextarea class="form-control" rows="7"></textarea>
+                                    <small
+                                        *ngIf="dataForm.get('commentaire')?.hasError('required') && form.submitted">{{required}}</small>
+                                    <small
+                                        *ngIf="dataForm.get('commentaire')?.value && dataForm.get('commentaire')?.invalid && form.submitted"> Trop court( min 10 caractères)</small>
+                            </div>
+                        </div>
+                        <div class="p-fluid formgrid grid">
+                            <div class="field col-12">
+                                <p-button label="Enregistrer" type="submit"></p-button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </ng-template>
-            <ng-template pTemplate="footer">
-                <div class="p-fluid formgrid grid">
-                    <div class="field col-12">
-                        <p-button label="Enregistrer" routerLink="/outils/rapport-visite/info-residant"></p-button>
-                    </div>
+                <div class="move-down-image ">
+                    <img src="assets/images/young_women_standing.png" height="670" width="450"
+                        alt="Groupe d'amis" style="padding-top: 5rem;"/>
                 </div>
-            </ng-template>
-        </p-card>
-
+            </div>
+        </div>
     </div>
-    <div class="field col-6">
-        <p>Ici  l'image</p>
-    </div>
-</div>
-
-
-
+</form> 

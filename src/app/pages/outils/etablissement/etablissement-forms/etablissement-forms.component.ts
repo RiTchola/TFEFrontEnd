@@ -71,7 +71,7 @@ export class EtablissementFormsComponent implements OnInit {
             email2: this.dataForm.controls.email2.value ?? '',
             tel1: `+${this.dataForm.controls.tel1.value}`,
             tel2: `+${this.dataForm.controls.tel2.value}`,
-            dateCreation: this.isoDateToDate(this.dataForm.controls.date.value ?? undefined),
+            dateCreation: this.dataForm.controls.date.value ?? new Date(),
             nom: this.dataForm.controls.name.value ?? '',
             etabUsername: this.username,
         };
@@ -80,14 +80,7 @@ export class EtablissementFormsComponent implements OnInit {
 
     save() {
         const data = this.buildBody();
-        if (!this.dataForm.controls.email2.value) {
-            data.email2 = data.email1 ?? this.username;
-        }
-
-        if (!this.dataForm.controls.tel2.value) {
-            data.tel2 = data.tel1 ?? 'undefined';
-        }
-
+        
         const date = this.dataForm.controls.date.value;
         if (date && new Date(date) > new Date()) {
             this.dataForm.controls.date.setErrors({ 'greater': true, 'required': false });
@@ -124,12 +117,4 @@ export class EtablissementFormsComponent implements OnInit {
             });
         }
     }
-
-    private isoDateToDate(date?: Date) {
-        if (!date) return '';
-        date.setDate(date.getDate() + 1);
-        const d = date.toISOString().split('T')[0];
-        return d;
-    }
-
 }

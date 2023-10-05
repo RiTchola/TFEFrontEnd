@@ -129,7 +129,7 @@ li > div {
     color: #d8d8d8;
 }
 
-.authBg {
+.authBg{
     background-color: var(--background) !important;
 }
 td i {
@@ -139,6 +139,7 @@ td i {
 .layout-footer i {
     color: var(--orange-400) !important;
 }
+
 
 @media screen and (max-width: 768px) {
     :host ::ng-deep {
@@ -193,3 +194,10 @@ td i {
     font-family: 'Times New Roman', Times, serif;
     font-weight: bold;
 }
+
+.required-field::after {
+    content: "*";
+    color: #f97316;
+    margin-left: 4px 
+}
+
