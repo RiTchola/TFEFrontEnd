@@ -9,6 +9,10 @@ import { MedecinFormsComponent } from './resident/medecin-forms/medecin-forms.co
 import { RegisterComponent } from '../auth/components/register/register.component';
 import { ManageComponent } from './resident/manage/manage.component';
 import { DetailsComponent } from './resident/details/details.component';
+import { DailyReportComponent } from './daily-report/daily-report.component';
+import { ContactPersonComponent } from './contact-person/contact-person.component';
+import { ContactPersonFormComponent } from './contact-person/contact-person-form/contact-person-form.component';
+import { ContactPersonDetailsComponent } from './contact-person/details/details.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'resident', pathMatch: 'full' },
@@ -32,6 +36,11 @@ const routes: Routes = [
             { path: '', redirectTo: 'user', pathMatch: 'full' },
         ],
     },
+    { path: 'daily-report/:id', component: DailyReportComponent },
+    { path: 'contact-person/:id', component: ContactPersonComponent },
+    { path: 'contact-person/:residentId/add', component: ContactPersonFormComponent },
+    { path: 'contact-person/edit/:residentId/:personId', component: ContactPersonFormComponent },
+    { path: 'contact-person/details/:residentId/:personId', component: ContactPersonDetailsComponent },
     { path: 'menu-semaine', component: MenuSemaineComponent },
     { path: 'meet-up', component: MeetUpComponent },
     { path: 'blog', component: BlogComponent },

@@ -1,6 +1,6 @@
 import { Etablissement } from './etablissement';
 import { HumorType } from '../shared/interfaces/humorType';
-export class RapportQuotidien {
+export class DailyReport {
     id?: string;
     numeroR!: boolean;
     date!: string;

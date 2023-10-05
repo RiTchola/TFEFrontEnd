@@ -1,16 +1,14 @@
-import { PersonContactType } from "../shared/interfaces/person-contact-type";
 import { User } from "./user";
 
-export class PersonContact {
+export class ContactPerson {
     id?: number;
     nom!: string;
     prenom!: string;
-    dateNaissance!: string;
+    dateNaissance!: Date;
     email!: string;
     tel1!: string;
     tel2?: string;
     adresse!: string;
     statut!: string;
-    choix!: PersonContactType;
-    user!: User;
+    choix!: string;
 }

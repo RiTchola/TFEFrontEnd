@@ -1,0 +1,78 @@
+<p-toast></p-toast>
+<h5>INFORMATIONS PERSONNE CONTACT</h5>
+<p>Créer une personne</p>
+<form [formGroup]="formData" #form="ngForm">
+    <div class="card mt-5">
+        <p>Remplir les informations de la personne de contact</p>
+        <div class="col-12">
+            <p>Information personnelle</p>
+            <div class="p-fluid formgrid grid">
+                <div class="field col-6">
+                    <label>Nom</label>
+                    <input name="name" formControlName="name" type="text" required pInputText
+                        class="form-control" />
+                    <small
+                        *ngIf="(formData.get('name')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label>Prenom</label>
+                    <input name="firstname" formControlName="firstname" type="text" required pInputText
+                        class="form-control" />
+                    <small
+                        *ngIf="(formData.get('firstname')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label>Email</label>
+                    <input name="email" formControlName="email" type="text" required pInputText
+                        class="form-control" />
+                    <small
+                        *ngIf="(formData.get('email')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label>Date Naissance</label>
+                    <p-calendar formControlName="dob" [showIcon]="true"></p-calendar>
+                    <small *ngIf="(formData.get('dob')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label>Status Matrimoniale</label>
+                    <p-dropdown [options]="statusList" formControlName="status" optionLabel="name" optionValue="value"></p-dropdown>
+                    <small *ngIf="(formData.get('status')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label>Type de personne</label>
+                    <p-dropdown [options]="typeList" formControlName="type" optionLabel="name" optionValue="value"></p-dropdown>
+                    <small *ngIf="(formData.get('type')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <p>Information de contact</p>
+            <div class="p-fluid formgrid grid">
+                <div class="field col-6">
+                    <label>Adresse</label>
+                    <input name="address" formControlName="address" type="text" required pInputText
+                        class="form-control" maxlength="100" min="10"/>
+                    <small
+                        *ngIf="(formData.get('address')?.hasError('required') && form.submitted)">{{required}}</small>
+                        <small
+                        *ngIf="formData.get('address')?.invalid && formData.get('address')?.touched">Valeur invalide</small>
+                </div>
+                <div class="field col-6">
+                    <label>Telephone 1</label>
+                    <input name="tel" formControlName="tel" type="text" required pInputText class="form-control" />
+                    <small *ngIf="(formData.get('tel')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label>Telephone 2</label>
+                    <input name="tel2" formControlName="tel2" type="text" required pInputText class="form-control" />
+                    <small *ngIf="(formData.get('tel2')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+            </div>
+            <div class="p-fluid formgrid grid">
+                <div class="field col-6 ml-auto">
+                    <p-button label="Enrégistrer" type="submit" (click)="save()"></p-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

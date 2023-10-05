@@ -1,4 +1,4 @@
-import { PersonContactType } from "../shared/interfaces/person-contact-type";
+import { PersonContactType } from "../shared/interfaces/contact-person-type";
 
 export class PersonExtern {
     id?: string;

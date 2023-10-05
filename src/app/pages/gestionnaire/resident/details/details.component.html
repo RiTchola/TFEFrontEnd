@@ -1,7 +1,7 @@
 <h5>RESIDENTS</h5>
 <p>Liste des résidents de l'établissement</p>
 <div class="mb-4 flex justify-content-end">
-    <p-button label="Voir les personnes de contact" routerLink="#" class="mr-5"></p-button>
-    <p-button label="Voir les rapports cotidiens" routerLink="#"></p-button>
+    <p-button label="Voir les personnes de contact" routerLink="/gestionnaire/contact-person/{{residentId}}" class="mr-5"></p-button>
+    <p-button label="Voir les rapports cotidiens" routerLink="/gestionnaire/daily-report/{{residentId}}"></p-button>
 </div>
 <p>{{getDate(resident?.dateNaissance)}}</p>

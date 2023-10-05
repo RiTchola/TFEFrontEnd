@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { CheckboxModule } from 'primeng/checkbox';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { StepsModule } from 'primeng/steps';
@@ -22,33 +24,43 @@ import { MedecinFormsComponent } from './resident/medecin-forms/medecin-forms.co
 import { RegisterComponent } from '../auth/components/register/register.component';
 import { ManageComponent } from './resident/manage/manage.component';
 import { DetailsComponent } from './resident/details/details.component';
+import { DailyReportComponent } from './daily-report/daily-report.component';
+import { ContactPersonComponent } from './contact-person/contact-person.component';
+import { ContactPersonFormComponent } from './contact-person/contact-person-form/contact-person-form.component';
+import { ContactPersonDetailsComponent } from './contact-person/details/details.component';
 
 @NgModule({
-  declarations: [
-    ResidentComponent,
-    MenuSemaineComponent,
-    MeetUpComponent,
-    BlogComponent,
-    ResidentFormsComponent,
-    RegisterComponent,
-    MedecinFormsComponent,
-    ManageComponent,
-    DetailsComponent
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    CalendarModule,
-    CheckboxModule,
-    DropdownModule,
-    GestionnaireRoutingModule,
-    ButtonModule,
-    InputTextModule,
-    StepsModule,
-    TableModule,
-    TagModule,
-    ToastModule
-  ]
+    declarations: [
+        ResidentComponent,
+        MenuSemaineComponent,
+        MeetUpComponent,
+        BlogComponent,
+        ResidentFormsComponent,
+        RegisterComponent,
+        MedecinFormsComponent,
+        ManageComponent,
+        DetailsComponent,
+        DailyReportComponent,
+        ContactPersonComponent,
+        ContactPersonFormComponent,
+        ContactPersonDetailsComponent
+    ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        CalendarModule,
+        CheckboxModule,
+        ConfirmDialogModule,
+        ConfirmPopupModule,
+        DropdownModule,
+        GestionnaireRoutingModule,
+        ButtonModule,
+        InputTextModule,
+        StepsModule,
+        TableModule,
+        TagModule,
+        ToastModule
+    ]
 })
 export class GestionnaireModule { }
