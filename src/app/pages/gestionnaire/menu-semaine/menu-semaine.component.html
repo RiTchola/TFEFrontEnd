@@ -1,1 +1,27 @@
-<p>menu-semaine works!</p>
+<h5 class="title">MENU DE LA SEMAINE</h5>
+<p>Menu de la semaine pour les résidents</p>
+<div class="card flex align-items-center justify-content-center mb-2">
+    <p>
+        <i class="pi pi-caret-left"></i>
+        <strong>Début Semaine: {{displayAsDate(date)}}</strong>
+        <i class="pi pi-caret-right"></i>
+    </p>
+</div>
+<div class="mt-0 content">
+    <div class="p-fluid formgrid grid">
+        <div class="field col-3" *ngFor="let item of items" (click)="showDetails(item.id)">
+            <div class="card">
+                <img src="/assets/images/photoUser2.jpg" alt="img" class="col-3" />
+                <h6>{{item.title}}</h6>
+                <div class="p-fluid formgrid grid">
+                    <p class="field col-6">
+                        {{item.subtitle}}
+                    </p>
+                    <p class="field flex ml-auto">
+                        <i class="pi pi-arrow-right"></i>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -31,6 +31,8 @@ import { ContactPersonFormComponent } from './contact-person/contact-person-form
 import { ContactPersonDetailsComponent } from './contact-person/details/details.component';
 import { DailyReportFormsComponent } from './daily-report/daily-report-forms/daily-report-forms.component';
 import { DailyReportDetailsComponent } from './daily-report/daily-report-details/daily-report-details.component';
+import { MenuDetailsComponent } from './menu-semaine/menu-details/menu-details.component';
+import { MenuFormsComponent } from './menu-semaine/menu-forms/menu-forms.component';
 
 @NgModule({
     declarations: [
@@ -48,7 +50,9 @@ import { DailyReportDetailsComponent } from './daily-report/daily-report-details
         ContactPersonFormComponent,
         ContactPersonDetailsComponent,
         DailyReportFormsComponent,
-        DailyReportDetailsComponent
+        DailyReportDetailsComponent,
+        MenuDetailsComponent,
+        MenuFormsComponent
     ],
     imports: [
         CommonModule,

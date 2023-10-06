@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { Resident } from 'src/app/models/resident';
 
 import { environment } from 'src/environments/environment';
-import { User } from 'src/app/models/user';
+
 import { MedecinTraitant } from 'src/app/models/medecin-traitant';
 import { Response } from 'src/app/models/response';
 
