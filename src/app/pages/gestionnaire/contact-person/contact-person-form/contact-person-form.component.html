@@ -26,8 +26,8 @@
                 <div class="field col-6">
                     <label class="required-field">Date de Naissance</label>
                     <p-calendar formControlName="dob" [showIcon]="true"></p-calendar>
-                    <small  *ngIf="formData.get('dob')?.hasError('required') && form.submitted">{{required}}</small>
-                    <small  *ngIf="formData.get('dob')?.hasError('greater')">L'âge dois être supérieur à 1 jour</small>
+                    <small *ngIf="formData.get('dob')?.hasError('required') && form.submitted">{{required}}</small>
+                    <small *ngIf="formData.get('dob')?.hasError('greater')">L'âge dois être supérieur à 1 jour</small>
                 </div>
                 <div class="field col-6">
                     <label>Statut Matrimoniale</label>
@@ -69,7 +69,7 @@
             </div>
             <div class="p-fluid formgrid grid">
                 <div class="field col-6 ml-auto">
-                    <p-button label="Enrégistrer" type="submit" (click)="save()"></p-button>
+                    <button pButton class="btn-primary" label="Enrégistrer" type="submit" (click)="save()"></button>
                 </div>
             </div>
         </div>

@@ -15,7 +15,6 @@ import { Response } from 'src/app/models/response';
 export class ResidentService {
 
     private url = `${environment.apiPath}/resident`;
-    private userUrl = `${environment.apiPath}/api/v1/users`;
     private doctorUrl = `${environment.apiPath}/medecinTraitant`;
 
     constructor(private http: HttpClient) { }
@@ -36,21 +35,6 @@ export class ResidentService {
         return this.http.put<Resident>(`${this.url}/${body.id}`, body);
     }
 
-    saveUser(body: User) {
-        const data = {
-            username: body.username,
-            password: body.password,
-            confirmPassword: body.password,
-            role: body.role
-        }
-        return this.http.post<Response>(this.userUrl, data);
-    }
-
-    updateUser(id: number, body: any) {
-        body = { username: body.username };
-        return this.http.put<Response>(`${this.userUrl}/${id}`, body);
-    }
-
     fetchDoctor(id: number) {
         return this.http.get<any>(`${this.url}/${id}`);
     }
@@ -63,7 +47,7 @@ export class ResidentService {
         return this.http.put<MedecinTraitant>(`${this.doctorUrl}/${id}`, body);
     }
 
-    /* remove(id: number) {
+    remove(id: number) {
         return this.http.delete<Response>(`${this.url}/${id}`);
-    } */
+    }
 }

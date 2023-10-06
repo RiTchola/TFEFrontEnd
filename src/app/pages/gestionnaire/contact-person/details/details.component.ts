@@ -46,8 +46,8 @@ export class ContactPersonDetailsComponent implements OnInit {
             header: 'Êtes vous sure?',
             message: 'Cette action est irréversible',
             icon: 'pi pi-info-circle',
-            acceptButtonStyleClass: 'p-button-danger',
-            rejectButtonStyleClass: 'p-button-outlined',
+            acceptButtonStyleClass: 'btn-danger',
+            rejectButtonStyleClass: 'btn-outlined',
             accept: () => {
                 this.contactpersonSrv.delete(this.personId).subscribe({
                     next: () => this.onSuccess('Le contact à été supprimé'),
@@ -65,7 +65,7 @@ export class ContactPersonDetailsComponent implements OnInit {
     getDate(date: any) {
         return Util.displayAsDate(date);
     }
-    
+
     personEdit() {
         this.router.navigateByUrl(`/gestionnaire/contact-person/edit/${this.residentId}/${this.personId}`);
     }

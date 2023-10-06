@@ -3,8 +3,8 @@
 <h5>INFORMATIONS DU RÉSIDENT</h5>
 <p>Détails du résident</p>
 <div class="mb-4 flex justify-content-end">
-    <p-button label="Voir les personnes de contact" routerLink="/gestionnaire/contact-person/{{residentId}}" class="mr-5"></p-button>
-    <p-button label="Voir les rapports quotidiens" routerLink="/gestionnaire/daily-report/{{residentId}}"></p-button>
+    <button pButton label="Voir les personnes de contact" routerLink="/gestionnaire/contact-person/{{residentId}}" class="mr-5 btn-primary"></button>
+    <button pButton label="Voir les rapports quotidiens" routerLink="/gestionnaire/daily-report/{{residentId}}" class="btn-primary"></button>
 </div>
 <div class="grid">
     <div class="field col-12 md:col-2">
@@ -14,12 +14,11 @@
                 class="d-flex mx-auto align-items-center col-6" />
                 <p><strong>{{resident?.nom}}  {{resident?.prenom}}</strong></p>
                 <p><em>>{{resident?.chambre}}</em></p>
-                <p-button label="Désactiver Compte" class="p-button-danger" ></p-button>
-            <!-- <p-button label="Désactiver Compte" class="p-button-danger" (click)="remove()"></p-button> -->
-            </div>  
+                <button pButton label="Désactiver Compte" class="btn-danger" (click)="disable()"></button>
+            </div>
         </div>
         <div class="col-12 md:col-12 text-center">
-            <p-button label="Modifier le résident" class="d-flex mx-auto align-items-center" (click)="residentEdit()"></p-button>
+            <button pButton label="Modifier le résident" class="d-flex mx-auto align-items-center btn-primary" (click)="residentEdit()"></button>
         </div>
     </div>
     <div class="col-12 md:col-10">
@@ -39,7 +38,7 @@
                         <p>{{getDate(resident?.dateNaissance)}}</p>
                         <h6>Nombre d'enfants</h6>
                         <p>{{resident?.nbEnfant}}</p>
-                    </div>   
+                    </div>
                 </div>
                 <div class="col-12 md:col-6">
                     <p><strong>Informations de Contact</strong></p>
@@ -52,7 +51,7 @@
                     <div class="col-12 md:col-6 content">
                         <h6>Adresse</h6>
                         <p>{{resident?.adresse}}</p>
-                    </div>   
+                    </div>
                 </div>
             </div>
             <div class="p-fluid p-formgrid grid mt-5">
@@ -73,7 +72,7 @@
                         <p>{{resident?.motifSortie}}</p>
                         <h6>Compte Actif</h6>
                         <p>{{resident?.actif}}</p>
-                    </div>   
+                    </div>
                 </div>
                 <div class="col-12 md:col-6">
                     <p><strong>Informations Médicales</strong></p>
@@ -86,7 +85,7 @@
                     <div class="col-12 md:col-6 content">
                         <h6>Antécédents Médicaux</h6>
                         <p>{{resident?.antMedical}}</p>
-                    </div>   
+                    </div>
                 </div>
             </div>
         </div>

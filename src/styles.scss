@@ -85,20 +85,26 @@ li > div {
     text-transform: none !important;
 }
 
-.btn-primary {
-    background-color: var(--orange-400);
-    color: var(--color-primary);
+button {
     border-radius: 2px;
 }
 
 .p-button {
-    background-color: var(--orange-400);
-    color: var(--color-primary);
+    background-color: transparent;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    color: var(--color-primary) !important;
+    border-radius: 2px;
 }
 
 .p-button:hover {
     background-color: var(--orange-200) !important;
     color: var(--color-primary) !important;
+}
+
+.btn-primary {
+    background-color: var(--orange-400);
+    color: var(--color-primary);
+    border-radius: 2px;
 }
 
 .btn-outline-primary {
@@ -125,6 +131,13 @@ li > div {
     border-radius: 2px;
 }
 
+.btn-danger {
+    background: red !important;
+    color: #fff !important;
+    border-radius: 2px;
+    border: 1px solid #fff;
+}
+
 .line {
     color: #d8d8d8;
 }
@@ -147,6 +160,6 @@ label.required {
 }
 
 .custom-steps {
-    column-gap: var(--orange-400);  
-    font-weight: bold; 
+    column-gap: var(--orange-400);
+    font-weight: bold;
   }

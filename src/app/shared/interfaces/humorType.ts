@@ -1,4 +1,4 @@
-export interface HumorType {
+export const HumorType = {
     aucune: 'AUCUNE',
     normal: 'NORMAL',
     joyeux: 'JOYEUX',

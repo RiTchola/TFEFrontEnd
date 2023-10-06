@@ -19,15 +19,14 @@ export class UserFormsComponent implements OnInit {
         pwd1: new FormControl('', [
             Validators.required,
             Validators.minLength(8),
-            Validators.pattern(/[A-Z]/),
-            Validators.pattern(/[0-9]/)
+            Validators.pattern("^[A-Za-z]+[0-9]+$"),
         ]),
         pwd2: new FormControl('', [
             Validators.required,
             Validators.minLength(8)
         ])
     });
-
+    hide = false;
     residentId = 0;
 
     constructor(
@@ -43,10 +42,8 @@ export class UserFormsComponent implements OnInit {
     ngOnInit(): void {
         this.observableSrv.observableResident.subscribe(v => {
             try {
-                const user: User = JSON.parse(v.user);
-                this.formData.controls.username.setValue(user.username);
-                this.formData.controls.pwd1.setValue(user.password);
-                this.formData.controls.pwd2.setValue(user.password);
+                const user = JSON.parse(v.user);
+                this.initForm(user);
             } catch (error) {
 
             }
@@ -69,21 +66,12 @@ export class UserFormsComponent implements OnInit {
 
     next() {
         let data = this.buildBody();
-        if (!this.formData.controls.username.value) {
-            data.username = data.username ?? 'undefined';
-        }
-
-        if (!this.formData.controls.pwd1.value) {
-            data.password = data.password ?? 'undefined';
-        }
-
         if (this.formData.valid) {
             this.observableSrv.changeResident({
-                user: JSON.stringify(data.username),
+                user: JSON.stringify(data),
                 doctor: "",
                 resident: ""
             });
-
             this.navigateToNextPage();
         }
     }
@@ -99,12 +87,23 @@ export class UserFormsComponent implements OnInit {
 
     getResidentById(id: number) {
         this.residentSrv.fetchById(id).subscribe({
-            next: (r) => {
-                // init form
-                this.formData.controls.username.setValue(r.user.username);
-                this.formData.controls.pwd1.setValue(r.user.password);
-                this.formData.controls.pwd2.setValue(r.user.password);
+            next: (r) => this.initForm(r.user),
+            complete: () => {
+                // Since it is an update we remove the password
+                this.hide = true;
+                this.formData.controls.pwd1.setValidators([]);
+                this.formData.controls.pwd2.setValidators([]);
+                this.formData.controls.pwd1.updateValueAndValidity();
+                this.formData.controls.pwd2.updateValueAndValidity();
             }
-        })
+        });
+    }
+
+    initForm(user: User) {
+        if (!user || user == null)
+            return;
+        this.formData.controls.username.setValue(user.username);
+        this.formData.controls.pwd1.setValue(user.password);
+        this.formData.controls.pwd2.setValue(user.password);
     }
 }

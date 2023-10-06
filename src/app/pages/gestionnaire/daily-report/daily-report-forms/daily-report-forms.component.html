@@ -1,0 +1,104 @@
+<form [formGroup]="formData" #form="ngForm">
+    <div class="mt-0">
+        <div class="col-12">
+            <p><strong>Paramètres vitaux</strong></p>
+            <div class="p-fluid formgrid grid">
+                <div class="field col-6">
+                    <label class="required-field">Date</label>
+                    <p-calendar formControlName="date" [showIcon]="true"></p-calendar>
+                    <small *ngIf="formData.get('date')?.hasError('required') && form.submitted">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label>Fréquence Cardiaque</label>
+                    <input name="heart" formControlName="heart" type="text" required pInputText class="form-control" />
+                    <small *ngIf="(formData.get('heart')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label class="required-field">Fréquence Respiratoire</label>
+                    <input name="breathing" formControlName="breathing" type="text" required pInputText
+                        class="form-control" />
+                    <small
+                        *ngIf="(formData.get('breathing')?.hasError('required') && formData.get('breathing')?.touched) || (formData.get('breathing')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label class="required-field">Pression Artérielle</label>
+                    <input name="pressure" formControlName="pressure" type="text" pInputText class="form-control" />
+                    <small
+                        *ngIf="formData.get('pressure')?.value && formData.get('pressure')?.invalid && form.submitted">{{required}}
+                    </small>
+                </div>
+                <div class="field col-6">
+                    <label class="required-field">Temperature</label>
+                    <input name="temp" formControlName="temp" type="text" pInputText class="form-control" />
+                    <small
+                        *ngIf="formData.get('temp')?.value && formData.get('temp')?.invalid && form.submitted">{{required}}
+                    </small>
+                </div>
+                <div class="field col-6">
+                    <label class="required-field">Oxygene</label>
+                    <input name="oxygen" formControlName="oxygen" type="text" pInputText class="form-control" />
+                    <small
+                        *ngIf="formData.get('oxygen')?.value && formData.get('oxygen')?.invalid && form.submitted">{{required}}
+                    </small>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <p><strong>Informations Supplémentaires</strong></p>
+            <div class="p-fluid formgrid grid">
+                <div class="field col-3 flex align-items-center gap-1">
+                    <p-checkbox formControlName="sleep" [binary]="true" inputId="binary" value="sleep"
+                        class="align-items-center my-auto"></p-checkbox>
+                    <label for="Sommeil">Sommeil</label>
+                </div>
+                <div class="field col-3 flex align-items-center gap-1">
+                    <p-checkbox formControlName="urine" [binary]="true" inputId="binary" value="urine"
+                        class="align-items-center my-auto"></p-checkbox>
+                    <label for="Urine">Urine</label>
+                </div>
+                <div class="field col-3 flex align-items-center gap-1">
+                    <p-checkbox formControlName="saddle" [binary]="true" inputId="binary" value="saddle"
+                        class="align-items-center my-auto"></p-checkbox>
+                    <label for="Selle">Selle</label>
+                </div>
+                <div class="field col-3 flex align-items-center gap-1">
+                    <p-checkbox formControlName="clothe" [binary]="true" inputId="binary" value="clothe"
+                        class="align-items-center my-auto"></p-checkbox>
+                    <label for="Vetements">Vetements</label>
+                </div>
+            </div>
+            <div class="p-fluid formgrid grid">
+                <div class="field col-3 flex align-items-center gap-1">
+                    <p-checkbox formControlName="hairstyle" [binary]="true" inputId="binary" value="hairstyle"
+                        class="align-items-center my-auto"></p-checkbox>
+                    <label for="Coiffure">Coiffure</label>
+                </div>
+                <div class="field col-3 flex align-items-center gap-1">
+                    <p-checkbox formControlName="manicure" [binary]="true" inputId="binary" value="manicure"
+                        class="align-items-center my-auto"></p-checkbox>
+                    <label for="Manicure">Manicure</label>
+                </div>
+                <div class="field col-3 flex align-items-center gap-1">
+                    <p-checkbox formControlName="pedicure" [binary]="true" inputId="binary" value="pedicure"
+                        class="align-items-center my-auto"></p-checkbox>
+                    <label for="Pedicure">Pedicure</label>
+                </div>
+                <div class="field col-3 flex align-items-center gap-1">
+                    <p-checkbox formControlName="toilet" [binary]="true" inputId="binary" value="toilet"
+                        class="align-items-center my-auto"></p-checkbox>
+                    <label for="Toillete">Toillete</label>
+                </div>
+                <div class="field col-6 mt-2">
+                    <label>Crise</label>
+                    <p-dropdown [options]="humorTypes" formControlName="status" optionLabel="name" optionValue="value"></p-dropdown>
+                    <small *ngIf="(formData.get('status')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6 mt-2">
+                    <label>Commentaire</label>
+                    <input name="comment" formControlName="comment" type="text" pInputText class="form-control" />
+                </div>
+            </div>
+        </div>
+        <button pButton label="ENREGISTRER" class="btn-primary col-12" (click)="save()"></button>
+    </div>
+</form>
