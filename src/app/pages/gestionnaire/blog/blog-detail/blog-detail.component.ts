@@ -36,11 +36,4 @@ export class BlogDetailComponent implements OnInit{
             }
         }
     }
-
-    displayDate(date: Date) {
-        const day = new Date(date).getDate();
-        const month = Util.getMonth(new Date(date).getMonth());
-        const year = new Date(date).getFullYear();
-        return `${day} ${month} ${year}`;
-    }
 }
