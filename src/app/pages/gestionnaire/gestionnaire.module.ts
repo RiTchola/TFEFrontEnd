@@ -7,6 +7,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { StepsModule } from 'primeng/steps';
@@ -53,6 +54,7 @@ import { ContactPersonDetailsComponent } from './contact-person/details/details.
         CheckboxModule,
         ConfirmDialogModule,
         ConfirmPopupModule,
+        DialogModule,
         DropdownModule,
         GestionnaireRoutingModule,
         ButtonModule,

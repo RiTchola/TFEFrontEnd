@@ -64,7 +64,9 @@ export class ContactPersonDetailsComponent implements OnInit {
         this.router.navigateByUrl(`/gestionnaire/contact-person/edit/${this.residentId}/${this.personId}`);
     }
 
-    personUserEdit() { }
+    personUserEdit() {
+
+    }
 
     onSuccess(msg: string) {
         this.msgSrv.add({ severity: 'success', summary: 'Success', detail: msg });

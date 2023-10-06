@@ -1,7 +1,7 @@
 import { ObservableService } from '../../../shared/service/observable.service';
 import { RoleType } from '../../../shared/interfaces/roleType';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { ResidentService } from 'src/app/pages/gestionnaire/service/resident.service';
@@ -57,7 +57,7 @@ export class UserFormsComponent implements OnInit {
         }
     }
 
-    buildBody()  {
+    buildBody() {
         const data: User = {
             username: this.formData.controls.username.value ?? "",
             password: this.formData.controls.pwd1.value ?? "",
@@ -68,13 +68,13 @@ export class UserFormsComponent implements OnInit {
     }
 
     next() {
-        const data = this.buildBody() ;
+        let data = this.buildBody();
         if (!this.formData.controls.username.value) {
-            data.username= data.username ?? 'undefined';
+            data.username = data.username ?? 'undefined';
         }
 
         if (!this.formData.controls.pwd1.value) {
-            data.password = data.password?? 'undefined';
+            data.password = data.password ?? 'undefined';
         }
 
         if (this.formData.valid) {
@@ -84,24 +84,18 @@ export class UserFormsComponent implements OnInit {
                 resident: ""
             });
 
-            if (this.residentId == 0) {
-                this.router.navigate(['/gestionnaire/resident/add/medecin']);
-            }
-            else {
-                this.router.navigate([`/gestionnaire/resident/edit/${this.residentId}/medecin`]);
-            }
+            this.navigateToNextPage();
         }
     }
 
-    /* get formValid() {
-        if (this.formData.controls.pwd1.value != null && this.formData.controls.pwd1.value?.length < 8 ||
-            this.formData.controls.pwd2.value != null && this.formData.controls.pwd2.value?.length < 8 ||
-            !this.formData.controls.username || this.formData.controls.pwd1.value != this.formData.controls.pwd2.value) {
-            return false;
+    navigateToNextPage() {
+        if (this.residentId == 0) {
+            this.router.navigate(['/gestionnaire/resident/add/medecin']);
         }
-        return true;
+        else {
+            this.router.navigate([`/gestionnaire/resident/edit/${this.residentId}/medecin`]);
+        }
     }
- */
 
     getResidentById(id: number) {
         this.residentSrv.fetchById(id).subscribe({
