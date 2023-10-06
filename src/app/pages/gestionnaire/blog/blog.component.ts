@@ -12,6 +12,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms'
 export class BlogComponent implements OnInit {
 
     visible: boolean = false;
+    isNewRecord: boolean = true;
     blogItems!: Communique[];
 
     dataForm = new FormGroup({
@@ -54,7 +55,7 @@ export class BlogComponent implements OnInit {
         return data;
     }
 
-   save() {
+  /*  save() {
         const data = this.buildBody();
         const date = this.dataForm.controls.date.value;
         if (date && (new Date(date) > new Date())) {
@@ -64,7 +65,7 @@ export class BlogComponent implements OnInit {
         }
 
         this.messageService.add({severity:'success', summary:'Success', detail:'Communiqué enregistré'});
-       /*  if (this.dataForm.valid ) {
+         if (this.dataForm.valid ) {
             this.communiqueService.addCommentar(data).subscribe({
                 next: (result) => {
                     if (result) {
@@ -77,6 +78,29 @@ export class BlogComponent implements OnInit {
                     this.saved.emit(undefined);
                 }
             });
-        } */
-    } 
+        } 
+    }  */
+
+    get isFormValid() {
+        const date = this.dataForm.controls.date.value;
+        if (date && (new Date(date) > new Date())) {
+            this.dataForm.controls.date.setErrors({ 'greater': true, 'required': false });
+            this.messageService.add({severity:'error', summary:'Error', detail:'Communiqué non enregistré'});
+            return false;
+        }
+
+        return true;
+    }
+
+    save() {
+        if (!this.isFormValid) {
+            return;
+        }
+        this.messageService.add({severity:'success', summary:'Success', detail:'Communiqué enregistré'});
+        if (this.isNewRecord) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
