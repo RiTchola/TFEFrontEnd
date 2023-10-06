@@ -32,7 +32,7 @@
 
 
 <p-dialog  [(visible)]="visible" [modal]="true" [style]="{ width: '70vw' }" [draggable]="false" [resizable]="false">
-    <form [formGroup]="dataForm" (ngSubmit)="addCommentar()" #form="ngForm">
+    <form [formGroup]="dataForm" (ngSubmit)="save()" #form="ngForm">
         <div class="grid">
             <div class="col-6 md:col-6">
                 <div class="card">
@@ -62,10 +62,10 @@
                             <label>Ajouter une image </label>
                             <app-file-upload></app-file-upload>
                         </div>
-                        <div class="p-fluid formgrid grid">
-                            <div class="col-6 ml-auto">
-                                <p-button label="Enregistrer" type="submit"></p-button>
-                            </div>
+                    </div>
+                    <div class="p-fluid formgrid grid">
+                        <div class="col-6 ml-auto">
+                            <p-button label="Enregistrer" type="submit"></p-button>
                         </div>
                     </div>
                 </div>

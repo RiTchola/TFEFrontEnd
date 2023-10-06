@@ -91,4 +91,8 @@ export class CommuniqueService {
     getCommuniqueById(id: number){
         return this.blogItems.filter(item=> item.id===id)[0];
     }
+
+    addCommentar(data: Communique){
+        
+    }
 }

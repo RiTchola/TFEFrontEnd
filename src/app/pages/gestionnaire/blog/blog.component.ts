@@ -54,24 +54,18 @@ export class BlogComponent implements OnInit {
         return data;
     }
 
-   /*  save() {
+   save() {
         const data = this.buildBody();
-        if (!this.dataForm.controls.titre.value) {
-            data.titre = data.titre ?? 'undefined';
-        }
-
-        if (!this.dataForm.controls.contenu.value) {
-            data.contenu = data.contenu ?? 'undefined';
-        }
-
         const date = this.dataForm.controls.date.value;
-        if (date && new Date(date) > new Date()) {
+        if (date && (new Date(date) > new Date())) {
             this.dataForm.controls.date.setErrors({ 'greater': true, 'required': false });
+            this.messageService.add({severity:'error', summary:'Error', detail:'Communiqué non enregistré'});
             return;
         }
 
-        if (this.dataForm.valid ) {
-            this.communiqueService.add(data).subscribe({
+        this.messageService.add({severity:'success', summary:'Success', detail:'Communiqué enregistré'});
+       /*  if (this.dataForm.valid ) {
+            this.communiqueService.addCommentar(data).subscribe({
                 next: (result) => {
                     if (result) {
                         this.visible = false;
@@ -83,11 +77,6 @@ export class BlogComponent implements OnInit {
                     this.saved.emit(undefined);
                 }
             });
-        }
-    } */
-
-    addCommentar(){
-        this.visible = false;
-        this.messageService.add({severity:'success', summary:'Success', detail:'Communiqué enregistré'});
-    }
+        } */
+    } 
 }
