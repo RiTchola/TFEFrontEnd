@@ -104,7 +104,7 @@ export class ContactPersonFormComponent implements OnInit {
             return false;
         }
 
-        else if (dob && (dob > new Date()) ){
+        else if (dob && (dob >new Date()) ){
             this.formData.controls.dob.setErrors({ 'greater': true, 'required': false });
             return false;;
         }
