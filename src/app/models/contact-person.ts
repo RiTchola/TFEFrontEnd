@@ -5,7 +5,7 @@ export class ContactPerson {
     nom!: string;
     prenom!: string;
     dateNaissance!: Date;
-    email!: string;
+    email?: string;
     tel1!: string;
     tel2?: string;
     adresse!: string;

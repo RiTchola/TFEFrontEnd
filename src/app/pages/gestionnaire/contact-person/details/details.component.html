@@ -3,21 +3,28 @@
 <h5>INFORMATIONS DE LA PERSONNE CONTACT</h5>
 <p>Détails de la personne</p>
 <div class="grid">
-    <div class="col-4">
-        <div class="card text-center">
-            <img src="assets/images/etablissement-trans.png" alt="user_img"
-                class="d-flex mx-auto align-items-center col-6" />
-            <p>{{person?.nom}} {{person?.prenom}}</p>
-            <p-button label="Supprimer la personne" class="p-button-danger" (click)="remove()"></p-button>
-        </div>
-        <div class="col-12 text-center">
+    <div class="col-12 md:col-4">
+        <div class="card col-12 md:col-12">
+            <div class="text-center">
+                <img src="assets/images/photoUser2.jpg" alt="user_img"
+                    class="d-flex mx-auto align-items-center col-6" />
+                <p><strong>{{person?.nom}}</strong></p> 
+                <p><strong>{{person?.prenom}}</strong></p>
+                <p-button label="Supprimer la personne" class="p-button-danger" (click)="remove()"></p-button>
+            </div>
+        </div> 
+        <div class="col-12 md:col-12 text-center">
             <p-button label="Modifier la personne" class="d-flex mx-auto align-items-center col-12" (click)="personEdit()"></p-button>
+        </div>
+        <div class="col-12 md:col-12 text-center">
             <p-button label="Modifier les identifiants" class="d-flex mx-auto align-items-center col-12" (click)="personUserEdit()"></p-button>
+            <!-- <p-button label="Créer les identifiants" class="d-flex mx-auto align-items-center col-12" (click)="personUserCreate()"></p-button> -->
         </div>
     </div>
-    <div class="col-8">
-        <div class="card">
-            <h5>DETAILS DE LA PERSONNE</h5>
+    <div class="col-12 md:col-8">  
+        <div class="card">    
+            <h5>PERSONNE DE CONTACT</h5>
+            <p><strong>Informations Personnelles</strong></p>
             <div class="p-fluid p-formgrid grid mt-5">
                 <div class="col-6">
                     <h6>Nom</h6>
@@ -30,14 +37,14 @@
                 <div class="col-6 content">
                     <h6>Prénom</h6>
                     <p>{{person?.prenom}}</p>
-                    <h6>Status Matrimoniale</h6>
+                    <h6>Statut Matrimoniale</h6>
                     <p>{{person?.statut}}</p>
                 </div>
             </div>
-            <p class="my-3"><strong>Information de contact</strong></p>
+            <p class="my-3"><strong>Informations de Contact</strong></p>
             <div class="p-fluid p-formgrid grid mt-1">
                 <div class="col-6">
-                    <h6>Telephone 1</h6>
+                    <h6>Téléphone 1</h6>
                     <p>{{person?.tel1}}</p>
                     <h6>Adresse</h6>
                     <p>{{person?.adresse}}</p>
@@ -45,7 +52,7 @@
                 <div class="col-6 content">
                     <h6>Téléphone 2</h6>
                     <p>{{person?.tel1}}</p>
-                    <h6>Email</h6>
+                    <h6>Émail</h6>
                     <p>{{person?.email}}</p>
                 </div>
             </div>

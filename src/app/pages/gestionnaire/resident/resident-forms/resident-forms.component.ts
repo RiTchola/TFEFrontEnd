@@ -4,10 +4,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ObservableService } from 'src/app/shared/service/observable.service';
 import { User } from 'src/app/models/user';
-import { Resident, StatutM } from 'src/app/models/resident';
+import { Resident } from 'src/app/models/resident';
 import { ResidentService } from '../../service/resident.service';
 import { MessageService } from 'primeng/api';
-import {KeyValue} from "@angular/common";
+import { Status } from 'src/app/shared/interfaces/person-status';
 
 
 @Component({
@@ -18,22 +18,15 @@ import {KeyValue} from "@angular/common";
 })
 export class ResidentFormsComponent implements OnInit {
 
-   /*  statuts: KeyValue<string, StatutM>[] = [
-        { key: " Veuillez faire un choix", value: "" },
-        { key: "Célibataire", value: "CELIBATAIRE" },
-        { key: "Marié", value: "MARIE" },
-        { key: "Mariée", value: "MARIE" },
-        { key: "Divorcé", value: "DIVORCE" },
-        { key: "Divorcée", value: "DIVORCE" },
-        { key: "Veuf", value: "VEUF" },
-        { key: "Veuve", value: "VEUF" }
-    ]; */
-    statuts: KeyValue<string, string>[] = [
-        { key: " Veuillez faire un choix", value: "" },
-        { key: "Célibataire", value:  "CELIBATAIRE"},
-        { key: "Marié(e)", value: "MARIE" },
-        { key: "Divorcé(e)", value: "DIVORCE" },
-        { key: "Veuf(ve)", value: "VEUF" }
+    statusList = [
+        { name: '', value: '' },
+        { name: 'Célibataire', value: Status.celibataire },
+        { name: 'Divorcé', value: Status.divorce },
+        { name: 'Divorcée', value: Status.divorce },
+        { name: 'Marié', value: Status.marie },
+        { name: 'Mariée', value: Status.marie },
+        { name: 'Veuf', value: Status.veuf },
+        { name: 'Veuve', value: Status.veuf }
     ];
 
 
@@ -50,7 +43,7 @@ export class ResidentFormsComponent implements OnInit {
         exitDate: new FormControl(),
         reasonExit: new FormControl(''),
         room: new FormControl('', [Validators.required]),
-        statut: new FormControl('', [Validators.required]),
+        status: new FormControl('', [Validators.required]),
         nbOfChild: new FormControl(0, [Validators.required]),
         antMedical: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(800)]),
         antChirugical: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(800)]),
@@ -65,6 +58,7 @@ export class ResidentFormsComponent implements OnInit {
     residentId = 0;
     userId = 0;
     doctorId = 0;
+    isNewRecord = true;
 
     constructor(
         private msgService: MessageService,
@@ -110,8 +104,31 @@ export class ResidentFormsComponent implements OnInit {
         this.formData.controls.reasonEntry.setValue(residentValue.motifEntree);
         this.formData.controls.reasonExit.setValue(residentValue.motifSortie);
         this.formData.controls.room.setValue(residentValue.chambre);
-        this.formData.controls.statut.setValue(residentValue.statut);
+        this.formData.controls.status.setValue(residentValue.statut);
         this.formData.controls.tel.setValue(residentValue.tel);
+    }
+
+    buildBody()  {
+        const data: Resident = {
+            actif: this.formData.controls.actif.value ?? true,
+            adresse: this.formData.controls.address.value ?? '',
+            antChirugical: this.formData.controls.antChirugical.value ?? '',
+            antMedical: this.formData.controls.antMedical.value ?? '',
+            dateNaissance: this.formData.controls.dob.value ?? new Date(),
+            email: this.formData.controls.email.value ?? '',
+            dateEntree: this.formData.controls.entryDate.value ?? new Date(),
+            dateSortie: this.formData.controls.exitDate.value ?? new Date(),
+            prenom: this.formData.controls.firstname.value ??'',
+            etatSante: this.formData.controls.healthStatus.value ?? '',
+            nom: this.formData.controls.lastname.value ?? '',
+            nbEnfant: this.formData.controls.nbOfChild.value ?? 0,
+            motifEntree: this.formData.controls.reasonEntry.value ?? '',
+            motifSortie: this.formData.controls.reasonExit.value ?? '',
+            chambre: this.formData.controls.room.value ?? '',
+            statut: this.formData.controls.status.value ?? Status.celibataire,
+            tel: `+${this.formData.controls.tel.value}`,
+        };
+        return data;
     }
 
     back() {
@@ -123,7 +140,71 @@ export class ResidentFormsComponent implements OnInit {
         }
     }
 
-    saveResident(doctorId: number, userId: number) {
+    get isFormValid() {
+        const dob = this.formData.controls.dob.value;
+        if (!dob || ((new Date().getFullYear() - new Date(dob).getFullYear()) < 26)) {
+            this.formData.controls.dob.setErrors({ 'greater': true, 'required': false });
+            return false;
+        }
+       
+        else if (this.formData.controls.exitDate.value && (this.formData.controls.entryDate.value?? new Date() > this.formData.controls.exitDate.value) ){
+            this.formData.controls.entryDate.setErrors({ 'greater': true, 'required': false });
+            return false;;
+        }
+
+        else if (this.formData.controls.status.value === "") {
+            return false;;
+        }
+
+        return true;
+    }
+
+    save() {
+        if (!this.isFormValid) {
+            return;
+        }
+        if (this.isNewRecord) {
+            this.saveAll();
+        } else {
+            this.update();
+        }
+    }
+    
+    saveAll() {
+        let userId = 0;
+        let doctorId = 0;
+        if (this.formData.valid ) {
+            if (this.residentId == 0) {
+                this.residentSrv.saveUser(this.userValue).subscribe({
+                    next: (r) => {
+                        userId = Number.parseInt(r.msg)
+                    },
+                    error: (err) => {
+                        this.msgService.add({ severity: 'error', summary: 'Error', detail: err })
+                    },
+                    complete: () => {
+                        this.residentSrv.saveDoctor(this.doctorValue).subscribe({
+                            next: (r) => {
+                                doctorId = r.id ?? 0
+                            },
+                            error: (err) => {
+                                this.msgService.add({ severity: 'error', summary: 'Error', detail: 'Erreur de sauvegarde' })
+                            },
+                            complete: () => {
+                                this.add(doctorId, userId),
+                                this.msgService.add({severity:'success', summary:'Success', detail:'Résident enregistré'});
+                            }
+                        });
+                    }
+                });
+            }
+            else {
+                 this.update();
+            }
+        }
+    } 
+
+    add(doctorId: number, userId: number) {
         const data = this.buildBody() ;
         if (this.userValue && this.doctorValue) {
 
@@ -159,82 +240,6 @@ export class ResidentFormsComponent implements OnInit {
         }
     }
 
-    buildBody()  {
-        const data: Resident = {
-            actif: this.formData.controls.actif.value ?? true,
-            adresse: this.formData.controls.address.value ?? '',
-            antChirugical: this.formData.controls.antChirugical.value ?? '',
-            antMedical: this.formData.controls.antMedical.value ?? '',
-            dateNaissance: this.formData.controls.dob.value ?? new Date(),
-            email: this.formData.controls.email.value ?? '',
-            dateEntree: this.formData.controls.entryDate.value ?? new Date(),
-            dateSortie: this.formData.controls.exitDate.value ?? new Date(),
-            prenom: this.formData.controls.firstname.value ??'',
-            etatSante: this.formData.controls.healthStatus.value ?? '',
-            nom: this.formData.controls.lastname.value ?? '',
-            nbEnfant: this.formData.controls.nbOfChild.value ?? 0,
-            motifEntree: this.formData.controls.reasonEntry.value ?? '',
-            motifSortie: this.formData.controls.reasonExit.value ?? '',
-            chambre: this.formData.controls.room.value ?? '',
-            statut:this.formData.controls.statut.value as StatutM,
-            tel: `+${this.formData.controls.tel.value}`,
-        };
-        return data;
-    }
-
-    save() {
-        let userId = 0;
-        let doctorId = 0;
-        const data = this.buildBody() ;
-        console.log(this.formData.controls.statut.value)
-        const dob = this.formData.controls.dob.value;
-        if (!dob || ((new Date().getFullYear() - new Date(dob).getFullYear()) < 26)) {
-            this.formData.controls.dob.setErrors({ 'greater': true, 'required': false });
-            return;
-        }
-       
-        if (this.formData.controls.exitDate.value && (this.formData.controls.entryDate.value?? new Date() > this.formData.controls.exitDate.value) ){
-            this.formData.controls.entryDate.setErrors({ 'greater': true, 'required': false });
-            return;
-        }
-
-        if (this.formData.controls.statut.value == "") {
-            return;
-        }
-
-        console.log(this.formData.errors)
-        if (this.formData.valid ) {
-            console.log("test")
-            if (this.residentId == 0) {
-                this.residentSrv.saveUser(this.userValue).subscribe({
-                    next: (r) => {
-                        userId = Number.parseInt(r.msg)
-                    },
-                    error: (err) => {
-                        this.msgService.add({ severity: 'error', summary: 'Error', detail: err })
-                    },
-                    complete: () => {
-                        this.residentSrv.saveDoctor(this.doctorValue).subscribe({
-                            next: (r) => {
-                                doctorId = r.id ?? 0
-                            },
-                            error: (err) => {
-                                this.msgService.add({ severity: 'error', summary: 'Error', detail: 'Erreur de sauvegarde' })
-                            },
-                            complete: () => {
-                                this.saveResident(doctorId, userId),
-                                this.msgService.add({severity:'success', summary:'Success', detail:'Résident enregistré'});
-                            }
-                        });
-                    }
-                });
-            }
-            else {
-                 this.update();
-            }
-        }
-    }
-
     update() {
         let userId = 0;
         let doctorId = 0;
@@ -253,7 +258,7 @@ export class ResidentFormsComponent implements OnInit {
                     error: (err) => {
                         this.msgService.add({ severity: 'error', summary: 'Error', detail: 'Erreur de sauvegarde' })
                     },
-                    complete: () => this.saveResident(doctorId, userId)
+                    complete: () => this.add(doctorId, userId)
                 });
             }
         });

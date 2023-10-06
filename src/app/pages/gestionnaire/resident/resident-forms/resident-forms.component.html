@@ -17,7 +17,7 @@
                 </div>
                 <div class="field col-6">
                     <label class="required-field">Émail</label>
-                    <input name="email" formControlName="email" type="text" required pInputText class="form-control" />
+                    <input name="email" formControlName="email" type="text" required pInputText class="form-control" placeholder="mpac@gmail.com"/>
                     <small  *ngIf="(formData.get('email')?.hasError('required') && formData.get('email')?.touched) || (formData.get('email')?.hasError('required') && form.submitted)">{{required}}</small>
                 </div>
                 <div class="field col-6">
@@ -32,13 +32,9 @@
                     <small  *ngIf="(formData.get('nbOfChild')?.hasError('required') && formData.get('nbOfChild')?.touched) || (formData.get('nbOfChild')?.hasError('required') && form.submitted)">{{required}}</small>
                 </div>
                 <div class="field col-6">
-                    <label class="required-field">Statut Matrimoniale</label>
-                    <p-dropdown [options]="statuts"  optionLabel="key"  optionValue="value" formControlName="statut"
-                    ></p-dropdown>
-                    <small *ngIf="(formData.get('statut')?.hasError('required') && formData.get('statut')?.touched) || (formData.get('statut')?.hasError('required') && form.submitted)">
-                        Veuillez faire un choix.
-                    </small>
-
+                    <label>Statut Matrimoniale</label>
+                    <p-dropdown [options]="statusList" formControlName="status" optionLabel="name" optionValue="value"></p-dropdown>
+                    <small *ngIf="(formData.get('status')?.hasError('required') && form.submitted)">{{required}}</small>
                 </div>
             </div>
         </div>
@@ -91,7 +87,7 @@
                 </div>
                 <div class="field col-6">
                     <label class="required-field">Numéro de chambre</label>
-                    <input name="room" formControlName="room" type="number" required pInputText class="form-control" />
+                    <input name="room" formControlName="room" type="text" required pInputText class="form-control" />
                     <small  *ngIf="(formData.get('room')?.hasError('required') && form.submitted)">{{required}}</small>
                 </div>
             </div>

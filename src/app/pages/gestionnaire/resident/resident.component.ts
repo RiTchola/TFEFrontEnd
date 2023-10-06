@@ -37,7 +37,7 @@ export class ResidentComponent implements OnInit {
         })
     }
 
-    setDateOfBirth(date: Date) {
+    getDateOf(date: Date) {
         return Util.displayAsDate(date);
     }
 
