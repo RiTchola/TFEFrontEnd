@@ -26,7 +26,7 @@ export class FileUploadComponent {
     @Input()
     styleClass: string = "p-button-outlined font-semibold";
     @Input()
-    chooseLabel = "Upload a File";
+    chooseLabel = "Choisir l'image";
     @Input()
     maxFileSize: number = 10485760;
     @Input()

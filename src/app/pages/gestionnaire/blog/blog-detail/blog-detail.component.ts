@@ -36,4 +36,8 @@ export class BlogDetailComponent implements OnInit{
             }
         }
     }
+
+    getDateOf(date: Date) {
+        return Util.displayAsDate(date);
+    }
 }

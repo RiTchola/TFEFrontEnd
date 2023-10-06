@@ -2,14 +2,14 @@
 <h3>BLOG</h3>
 <p>Notre actualité sur la plateforme</p>
 <div class="grid">
-    <div class="col-12">
+    <div class="col-12 md:col-12">
         <div class="mb-4 flex justify-content-end">
             <p-button label="Enrégistrer un blog" (onClick)="showDialog()"></p-button>
         </div>
     </div>
-    <div class="col-12">
+    <div class="col-12 md:col-12">
         <div class="grid">
-            <div class="col-12 lg:col-4 xl:col-3" *ngFor="let item of blogItems; index as i" >
+            <div class="col-12 md:col-12 lg:col-4 xl:col-3" *ngFor="let item of blogItems; index as i" >
                 <p-card header="{{item.titre}}" subheader="{{item.date | date}}" >
                     <ng-template pTemplate="header">
                         <img alt="Card" src="{{item.fileUrl[i]}}" />
@@ -31,10 +31,10 @@
 
 
 
-<p-dialog  [(visible)]="visible" [modal]="true"   [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+<p-dialog  [(visible)]="visible" [modal]="true" [style]="{ width: '70vw' }" [draggable]="false" [resizable]="false">
     <form [formGroup]="dataForm" (ngSubmit)="addCommentar()" #form="ngForm">
         <div class="grid">
-            <div class="col-12">
+            <div class="col-6 md:col-6">
                 <div class="card">
                     <h4>Création d'un communiqué</h4>
                     <div class="p-fluid formgrid grid">
@@ -59,16 +59,19 @@
                                 *ngIf="(dataForm.get('contenu')?.hasError('required') && dataForm.get('contenu')?.touched) || (dataForm.get('contenu')?.hasError('required') && form.submitted)">{{required}}</small>
                         </div>
                         <div class="field col-12">
-                            <label>Upload de l'image </label>
+                            <label>Ajouter une image </label>
                             <app-file-upload></app-file-upload>
                         </div>
                         <div class="p-fluid formgrid grid">
-                            <div class="field col-6 ml-auto">
+                            <div class="col-6 ml-auto">
                                 <p-button label="Enregistrer" type="submit"></p-button>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="col-6 md:col-6">
+                <img style="width: 620px;  height: 485px;" src="/assets/images/group.png" alt="Image de décoration" />
             </div>       
         </div>
     </form>

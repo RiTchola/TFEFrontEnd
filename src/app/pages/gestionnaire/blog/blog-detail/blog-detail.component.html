@@ -1,8 +1,8 @@
 <h3>BLOG</h3>
-<p>Notre actualité sur la plateforme</p>
+<p>Notre actualité à l'établissement</p>
 <div class="card">
     <h5>{{blog.titre}}</h5>
-    <h6>{{displayDate(blog.date) | date}}</h6>
+    <h6>{{getDateOf(blog.date)}}</h6>
     <p>{{blog.contenu}}</p>
     <div class="p-fluid formgrid grid">
         <div class="field col-12 md:col-3" *ngFor="let item of blog.fileUrl">
