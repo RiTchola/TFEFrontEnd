@@ -1,21 +1,26 @@
-<p><strong>Menu de ...</strong></p>
-<form [formGroup]="formData" #form="ngForm">
-    <div class="p-fluid formgrid grid">
-        <div class="field col-12">
-            <label class="required-field">Petit Déjeuner</label>
-            <input name="breakfast" formControlName="breakfast" type="text" required pInputText class="form-control" />
-            <small *ngIf="(formData.get('breakfast')?.hasError('required') && form.submitted)">{{required}}</small>
+<p-toast></p-toast>
+<div class="pt-0">
+    <p class="mt-5"><strong>Menu de {{getCurrentDay()}}</strong></p>
+    <form [formGroup]="formData" #form="ngForm">
+        <div class="p-fluid formgrid grid">
+            <div class="field col-12">
+                <label class="required-field">Petit Déjeuner</label>
+                <input name="breakfast" formControlName="breakfast" type="text" required pInputText
+                    class="form-control" />
+                <small *ngIf="(formData.get('breakfast')?.hasError('required') && form.submitted)">{{required}}</small>
+            </div>
+            <div class="field col-12">
+                <label class="required-field">Déjeuner</label>
+                <input name="lunch" formControlName="lunch" type="text" required pInputText class="form-control" />
+                <small *ngIf="(formData.get('lunch')?.hasError('required') && form.submitted)">{{required}}</small>
+            </div>
+            <div class="field col-12">
+                <label class="required-field">Diner</label>
+                <input name="dinner" formControlName="dinner" type="text" required pInputText class="form-control" />
+                <small *ngIf="(formData.get('dinner')?.hasError('required') && form.submitted)">{{required}}</small>
+            </div>
         </div>
-        <div class="field col-12">
-            <label class="required-field">Déjeuner</label>
-            <input name="lunch" formControlName="lunch" type="text" required pInputText class="form-control" />
-            <small *ngIf="(formData.get('lunch')?.hasError('required') && form.submitted)">{{required}}</small>
-        </div>
-        <div class="field col-12">
-            <label class="required-field">Diner</label>
-            <input name="dinner" formControlName="dinner" type="text" required pInputText class="form-control" />
-            <small *ngIf="(formData.get('dinner')?.hasError('required') && form.submitted)">{{required}}</small>
-        </div>
-    </div>
-    <button pButton label="Prochaine etape" class="btn-primary col-12"></button>
-</form>
+        <button pButton [label]="(day !== 'dimanche' && isNewRecord) ? 'Prochaine etape' : 'Enregistrer'" class="btn-primary col-12"
+            (click)="next()"></button>
+    </form>
+</div>

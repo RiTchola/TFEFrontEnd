@@ -21,10 +21,10 @@ export class MenuOfTheWeekService {
     }
 
     update(body: Menu) {
-        return this.http.put<Response>(`${this.url}/${body.id}`, body);
+        return this.http.put<Response>(`${this.url}/${body.dateDebutSemaine}`, body);
     }
 
     add(body: Menu) {
-        this.http.post<Menu>(this.url, body);
+        return this.http.post<Menu>(this.url, body);
     }
 }

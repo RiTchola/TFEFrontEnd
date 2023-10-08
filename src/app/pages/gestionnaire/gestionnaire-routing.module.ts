@@ -1,3 +1,4 @@
+import { CreateMenuComponent } from './menu-semaine/create-menu/create-menu.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MenuSemaineComponent } from './menu-semaine/menu-semaine.component';
@@ -15,8 +16,8 @@ import { ContactPersonFormComponent } from './contact-person/contact-person-form
 import { ContactPersonDetailsComponent } from './contact-person/details/details.component';
 import { DailyReportFormsComponent } from './daily-report/daily-report-forms/daily-report-forms.component';
 import { DailyReportDetailsComponent } from './daily-report/daily-report-details/daily-report-details.component';
-import { MenuDetailsComponent } from './menu-semaine/menu-details/menu-details.component';
 import { MenuFormsComponent } from './menu-semaine/menu-forms/menu-forms.component';
+import { EditMenuComponent } from './menu-semaine/edit-menu/edit-menu.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'resident', pathMatch: 'full' },
@@ -50,8 +51,21 @@ const routes: Routes = [
     { path: 'contact-person/edit/user/:userId/:personId', component: UserFormsComponent},
     { path: 'contact-person/add/user/:personId', component: UserFormsComponent},
     { path: 'menu-semaine', component: MenuSemaineComponent },
-    { path: 'menu-semaine/details/:date', component: MenuDetailsComponent },
-    { path: 'menu-semaine/add', component: MenuFormsComponent },
+    { path: 'menu-semaine/:date', component: MenuSemaineComponent },
+    { path: 'menu-semaine/edit/:date/:day', component: EditMenuComponent },
+    {
+        path: 'menu-semaine/add/:date', component: CreateMenuComponent,
+        children: [
+            { path: 'lundi', component: MenuFormsComponent },
+            { path: 'mardi', component: MenuFormsComponent },
+            { path: 'mercredi', component: MenuFormsComponent },
+            { path: 'jeudi', component: MenuFormsComponent },
+            { path: 'vendredi', component: MenuFormsComponent },
+            { path: 'samedi', component: MenuFormsComponent },
+            { path: 'dimanche', component: MenuFormsComponent },
+            { path: '', redirectTo: 'lundi', pathMatch: 'full' },
+        ],
+    },
     { path: 'meet-up', component: MeetUpComponent },
     { path: 'blog', component: BlogComponent },
 ];

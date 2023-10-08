@@ -1,15 +1,15 @@
 <h5 class="title">MENU DE LA SEMAINE</h5>
 <p>Menu de la semaine pour les résidents</p>
 <div class="card flex align-items-center justify-content-center mb-2">
-    <p>
-        <i class="pi pi-caret-left"></i>
+    <div class="grid">
+        <i class="pi pi-caret-left" (click)="previousWeek()"></i>
         <strong>Début Semaine: {{displayAsDate(date)}}</strong>
-        <i class="pi pi-caret-right"></i>
-    </p>
+        <i class="pi pi-caret-right" (click)="nextWeek()"></i>
+    </div>
 </div>
-<div class="mt-0 content">
+<div class="mt-0 content" *ngIf="items.length > 0">
     <div class="p-fluid formgrid grid">
-        <div class="field col-3" *ngFor="let item of items" (click)="showDetails(item.id)">
+        <div class="field col-3" *ngFor="let item of items" (click)="showDetails(item)">
             <div class="card">
                 <img src="/assets/images/photoUser2.jpg" alt="img" class="col-3" />
                 <h6>{{item.title}}</h6>
@@ -25,3 +25,25 @@
         </div>
     </div>
 </div>
+<div *ngIf="items.length === 0" class="mt-2 card">
+    <p>Pas de menu pour cette semaine</p>
+    <button pButton label="Ajouter le menu" class="btn-primary ml-auto mt-5" (click)="createMenu()"></button>
+</div>
+
+<p-dialog [(visible)]="show" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '30vw'}">
+    <ng-template pTemplate="header">
+        <h5 class="title">MENU DE {{displayAsDate(date)}}</h5>
+    </ng-template>
+    <div class="col-12 mt-0">
+        <p><strong>Au Menu le {{selectedItem?.title}}</strong></p>
+        <h6>Petit Déjeuner</h6>
+        <p>{{getValue(0)}}</p>
+        <h6>Déjeuner</h6>
+        <p>{{getValue(1)}}</p>
+        <h6>Diner</h6>
+        <p>{{getValue(2)}}</p>
+    </div>
+    <ng-template pTemplate="footer">
+        <button pButton label="Modifier" class="btn-primary col-12" (click)="editMenu()"></button>
+    </ng-template>
+</p-dialog>
