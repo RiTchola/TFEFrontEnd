@@ -8,6 +8,7 @@ import { Resident } from 'src/app/models/resident';
 import { ResidentService } from '../../service/resident.service';
 import { MessageService } from 'primeng/api';
 import { Status } from 'src/app/shared/interfaces/person-status';
+import { Sexe } from 'src/app/shared/interfaces/sexe';
 import { UserService } from '../../service/user.service';
 
 
@@ -30,6 +31,13 @@ export class ResidentFormsComponent implements OnInit {
         { name: 'Veuve', value: Status.veuf }
     ];
 
+    sexeList = [
+        { name: '', value: '' },
+        { name: 'Masculin', value: Sexe.masculin},
+        { name: 'Féminin', value: Sexe.feminin },
+        { name: 'Neutre', value: Sexe.neutre }
+    ];
+
 
     required = 'Ce champ est requis';
     formData = new FormGroup({
@@ -39,6 +47,7 @@ export class ResidentFormsComponent implements OnInit {
         dob: new FormControl(new Date(), [Validators.required]),
         tel: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+$')]),
         address: new FormControl('', [Validators.required, Validators.minLength(10)]),
+        sexe: new FormControl('', [Validators.required]),
         entryDate: new FormControl(new Date(), [Validators.required]),
         reasonEntry: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(400)]),
         exitDate: new FormControl(),
@@ -94,6 +103,7 @@ export class ResidentFormsComponent implements OnInit {
     formInitialiszation(residentValue: Resident) {
         this.formData.controls.actif.setValue(residentValue.actif);
         this.formData.controls.address.setValue(residentValue.adresse);
+        this.formData.controls.sexe.setValue(residentValue.sexe);
         this.formData.controls.antChirugical.setValue(residentValue.antChirugical);
         this.formData.controls.antMedical.setValue(residentValue.antMedical);
         this.formData.controls.dob.setValue(new Date(residentValue.dateNaissance));
@@ -132,6 +142,7 @@ export class ResidentFormsComponent implements OnInit {
             motifSortie: this.formData.controls.reasonExit.value ?? '',
             chambre: this.formData.controls.room.value ?? '',
             statut: this.formData.controls.status.value ?? Status.celibataire,
+            sexe: this.formData.controls.status.value ?? Sexe.neutre,
             tel: this.formData.controls.tel.value ?? "",
         };
         return data;
@@ -173,7 +184,7 @@ export class ResidentFormsComponent implements OnInit {
             this.formData.controls.entryDate.setErrors({ 'greater': false });
         }
 
-        if (this.formData.controls.status.value === "") {
+        if (this.formData.controls.status.value == "" || this.formData.controls.sexe.value == "") {
             return false;;
         }
 

@@ -8,6 +8,16 @@ td i {
     cursor: pointer;
 }
 
-.p-table .pTemplate > tr > th {
-    background: #6cb2f8;
+i{
+    color: #3e3e3e;
+    margin-right: 8px;
+}
+
+th {
+    color: #3e3e3e !important;
+    background: var(--orange-300) !important;
+}
+
+td {
+    min-width: 200px;
 }

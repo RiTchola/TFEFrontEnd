@@ -6,6 +6,7 @@ export class Resident {
     email!: string;
     tel!: string;
     adresse!: string;
+    sexe!: string;
     statut!: string;
     dateEntree!: Date;
     motifEntree!: string;

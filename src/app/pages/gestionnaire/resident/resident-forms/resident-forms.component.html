@@ -21,8 +21,7 @@
                 </div>
                 <div class="field col-6">
                     <label class="required-field">Émail</label>
-                    <input name="email" formControlName="email" type="text" required pInputText class="form-control"
-                        placeholder="mpac@gmail.com" />
+                    <input name="email" formControlName="email" type="text" required pInputText class="form-control" readonly />
                     <small
                         *ngIf="(formData.get('email')?.hasError('required') && formData.get('email')?.touched) || (formData.get('email')?.hasError('required') && form.submitted)">{{required}}</small>
                 </div>
@@ -33,17 +32,23 @@
                     <small *ngIf="formData.get('dob')?.hasError('greater')">L'âge dois être supérieur à 25 ans</small>
                 </div>
                 <div class="field col-6">
-                    <label class="required-field">Nombre d'enfants</label>
-                    <input name="nbOfChild" formControlName="nbOfChild" type="number" required pInputText
-                        class="form-control" />
-                    <small
-                        *ngIf="(formData.get('nbOfChild')?.hasError('required') && formData.get('nbOfChild')?.touched) || (formData.get('nbOfChild')?.hasError('required') && form.submitted)">{{required}}</small>
+                    <label>Sexe</label>
+                    <p-dropdown [options]="sexeList" formControlName="sexe" optionLabel="name"
+                        optionValue="value"></p-dropdown>
+                    <small *ngIf="(formData.get('sexe')?.hasError('required') && form.submitted)">{{required}}</small>
                 </div>
                 <div class="field col-6">
                     <label>Statut Matrimoniale</label>
                     <p-dropdown [options]="statusList" formControlName="status" optionLabel="name"
                         optionValue="value"></p-dropdown>
                     <small *ngIf="(formData.get('status')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label class="required-field">Nombre d'enfants</label>
+                    <input name="nbOfChild" formControlName="nbOfChild" type="number" required pInputText
+                        class="form-control" />
+                    <small
+                        *ngIf="(formData.get('nbOfChild')?.hasError('required') && formData.get('nbOfChild')?.touched) || (formData.get('nbOfChild')?.hasError('required') && form.submitted)">{{required}}</small>
                 </div>
             </div>
         </div>
@@ -98,9 +103,8 @@
                 </div>
                 <div class="field col-6">
                     <label>Motif Sortie</label>
-                    <input name="reasonExit" formControlName="reasonExit" type="text" required pInputText
+                    <input name="reasonExit" formControlName="reasonExit" type="text" pInputText
                         class="form-control" />
-                    <small *ngIf="(formData.get('reasonExit')?.hasError('required') && form.submitted)">{{required}}</small>
                     <small
                         *ngIf="formData.get('reasonExit')?.value && formData.get('reasonEntry')?.invalid && form.submitted">
                         Attention message compris entre 5 et 400 mots</small>

@@ -19,7 +19,7 @@
                 </div>
                 <div class="field col-6">
                     <label class="required-field">Émail</label>
-                    <input name="email" formControlName="email" type="text" pInputText class="form-control" placeholder="mpac@gmail.com"/>
+                    <input name="email" formControlName="email" type="text" pInputText class="form-control" readonly/>
                     <small *ngIf="formData.get('email')?.value && formData.get('email')?.invalid && form.submitted">Invalide
                         </small>
                 </div>
@@ -28,6 +28,12 @@
                     <p-calendar formControlName="dob" [showIcon]="true"></p-calendar>
                     <small *ngIf="formData.get('dob')?.hasError('required') && form.submitted">{{required}}</small>
                     <small *ngIf="formData.get('dob')?.hasError('greater')">L'âge dois être supérieur à 1 jour</small>
+                </div>
+                <div class="field col-6">
+                    <label>Sexe</label>
+                    <p-dropdown [options]="sexeList" formControlName="sexe" optionLabel="name"
+                        optionValue="value"></p-dropdown>
+                    <small *ngIf="(formData.get('sexe')?.hasError('required') && form.submitted)">{{required}}</small>
                 </div>
                 <div class="field col-6">
                     <label>Statut Matrimoniale</label>
