@@ -1,7 +1,8 @@
+<p-toast></p-toast>
 <form [formGroup]="formData" #form="ngForm">
-    <h4 class="title mb-0">Remplir les informations du Résident</h4>
+    <h4 class="title mb-0">Remplir les informations</h4>
     <h6 >Identifiants</h6>
-    <div class="grid mt-3">
+    <div class="card mt-3">
         <div class="col-12">
             <div class="p-fluid formgrid grid">
                 <div class="field col-6">
@@ -36,7 +37,7 @@
         <div class="col-12">
             <div class="p-fluid formgrid grid">
                 <div [ngClass]="hide ? 'field col-6' : 'field col-6 ml-auto'">
-                    <button pButton label="Prochaine étape" type="submit" class="btn-primary" (click)="next()"></button>
+                    <button pButton [label]="!oneStep ? 'Prochaine étape' : 'Enregistrer'" type="submit" class="btn-primary" (click)="next()"></button>
                 </div>
             </div>
         </div>

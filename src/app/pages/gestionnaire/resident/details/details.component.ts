@@ -36,7 +36,6 @@ export class DetailsComponent implements OnInit {
     getResidentById(id: number) {
         this.residentSrv.fetchById(id).subscribe({
             next: (r) => this.resident = r,
-            complete: () => console.log(this.resident)
         })
     }
 

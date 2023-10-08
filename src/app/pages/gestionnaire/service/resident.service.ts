@@ -27,8 +27,8 @@ export class ResidentService {
         return this.http.get<any[]>(`${this.url}/listeResident/${username}`);
     }
 
-    addResident(doctorId: number, userId: number, body: Resident) {
-        return this.http.post<Resident>(`${this.url}/${doctorId}/${userId}`, body);
+    addResident(doctorId: number, userEmail: string, body: Resident) {
+        return this.http.post<Resident>(`${this.url}/${doctorId}/${userEmail}`, body);
     }
 
     update(body: Resident) {

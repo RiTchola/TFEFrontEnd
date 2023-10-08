@@ -1,22 +1,24 @@
+import { AuthService } from 'src/app/core/services/auth.service';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 
 import { ResidentService } from '../../gestionnaire/service/resident.service';
-
-import { environment } from 'src/environments/environment';
+import { DailyReportService } from '../../gestionnaire/service/daily-report.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class DashboardService {
 
-    private urlResident = `${environment.apiPath}/resident`;
-    private urlRapport = `${environment.apiPath}/rapport-quotidien`;
+    constructor(private authSrv: AuthService,
+        private dailyReportSrv: DailyReportService,
+        private residentSrv: ResidentService
+    ) { }
 
-    constructor(private http: HttpClient, private residentSrv: ResidentService) { }
+    fetchDailyReports(id: number) {
+        return this.dailyReportSrv.fetchByResident(id);
+    }
 
-    fetchAllRapports(): Observable<any[]> {
-        return this.http.get<any[]>(this.urlRapport);
+    fetchAllResidents() {
+        return this.residentSrv.fetchResidents(this.authSrv.getLoggedUser());
     }
 }
