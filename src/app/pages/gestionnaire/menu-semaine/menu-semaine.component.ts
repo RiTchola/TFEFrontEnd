@@ -4,6 +4,8 @@ import { Util } from 'src/app/shared/util';
 import { Router } from '@angular/router';
 import { MenuOfTheWeekService } from '../service/menu-of-the-week.service';
 import { Menu } from 'src/app/models/menu';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { RoleType } from 'src/app/shared/interfaces/roleType';
 
 interface MenuItem {
     title: string;
@@ -25,8 +27,10 @@ export class MenuSemaineComponent implements OnInit {
     selectedItem?: MenuItem;
     show = false;
     dateTime = 0;
+    canAdd = false;
 
     constructor(
+        private authSrv: AuthService,
         private menuSrv: MenuOfTheWeekService,
         private router: Router
     ) {
@@ -38,6 +42,12 @@ export class MenuSemaineComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        // check whether the user can add new menu or not
+        if (this.authSrv.getRole().toLowerCase() == RoleType.etablissement.toLowerCase() ||
+        this.authSrv.getRole().toLowerCase() == RoleType.admin.toLowerCase()) {
+            this.canAdd = true;
+        }
+
         if (isNaN(this.dateTime)) {
             // if no date is defined then set the current date
             const curr = new Date;
