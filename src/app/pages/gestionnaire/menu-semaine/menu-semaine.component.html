@@ -11,7 +11,7 @@
     <div class="p-fluid formgrid grid">
         <div class="field col-3" *ngFor="let item of items" (click)="showDetails(item)">
             <div class="card">
-                <img src="/assets/images/photoUser2.jpg" alt="img" class="col-3" />
+                <img src="/assets/images/menu-card.png" alt="img" class="col-3" />
                 <h6>{{item.title}}</h6>
                 <div class="p-fluid formgrid grid">
                     <p class="field col-6">
@@ -28,7 +28,7 @@
 <div *ngIf="items.length === 0" class="mt-2 card">
     <p>Pas de menu pour cette semaine</p>
     <button pButton label="Ajouter le menu" class="btn-primary ml-auto mt-5" (click)="createMenu()" *ngIf="canAdd"></button>
-    <img src="assets/images/group.png" alt="img" class="col-4 flex mx-auto" *ngIf="!canAdd"/>
+    <img src="assets/images/menu.jpeg" alt="img" class="col-4 flex mx-auto" *ngIf="!canAdd"/>
 </div>
 
 <p-dialog [(visible)]="show" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '30vw'}">
