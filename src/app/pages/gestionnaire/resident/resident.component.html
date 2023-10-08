@@ -1,17 +1,17 @@
 <h3>RÉSIDENTS</h3>
 <p>Liste des résidents de l'Établissement</p>
 <div class="mb-4 flex justify-content-end">
-    <p-button label="Ajouter un résident" routerLink="/gestionnaire/resident/add"></p-button>
+    <button pButton label="Ajouter un résident" routerLink="/gestionnaire/resident/add" class="btn-primary"></button>
 </div>
 <div class="grid">
     <div class="col-12">
         <div class="card">
-           
+
             <p-table *ngIf="residents.length > 0"
                 [value]="residents" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                 [rowsPerPageOptions]="[5, 10, 25, 50]">
-               
+
                 <ng-template pTemplate="header">
                     <tr style="background: #176fe2e0; font-weight: bold;">
                         <th id="name" pSortableColumn="name">Nom <p-sortIcon field="name"></p-sortIcon></th>
@@ -56,7 +56,7 @@
                     </tr>
                 </ng-template>
             </p-table>
-           
+
             <p *ngIf="residents.length === 0">Aucun résident enregistré pour votre établissement.</p>
         </div>
     </div>

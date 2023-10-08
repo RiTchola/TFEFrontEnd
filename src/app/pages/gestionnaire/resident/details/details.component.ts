@@ -26,7 +26,7 @@ export class DetailsComponent implements OnInit {
         private router: Router
     ) {
         const parts = this.router.url.split("/");
-        this.residentId = Number.parseInt(this.router.url.split("/")[this.router.url.split("/").length - 1]);
+        this.residentId = Number.parseInt(parts[parts.length - 1]);
     }
 
     ngOnInit(): void {
@@ -36,7 +36,6 @@ export class DetailsComponent implements OnInit {
     getResidentById(id: number) {
         this.residentSrv.fetchById(id).subscribe({
             next: (r) => this.resident = r,
-            complete: () => console.log(this.resident)
         })
     }
 
@@ -49,13 +48,13 @@ export class DetailsComponent implements OnInit {
     }
 
 
-   /*  disable() {
+    disable() {
         this.confirmationService.confirm({
             header: 'Êtes vous sure?',
             message: 'Cette action est irréversible',
             icon: 'pi pi-info-circle',
-            acceptButtonStyleClass: 'p-button-danger',
-            rejectButtonStyleClass: 'p-button-outlined',
+            acceptButtonStyleClass: 'btn-danger',
+            rejectButtonStyleClass: 'btn-outlined',
             accept: () => {
                 this.residentSrv.remove(this.residentId).subscribe({
                     next: () => this.onSuccess('Le contact à été supprimé'),
@@ -76,5 +75,5 @@ export class DetailsComponent implements OnInit {
 
     onError(msg: string) {
         this.msgSrv.add({ severity: 'error', summary: 'Erreur', detail: msg });
-    } */
+    }
 }

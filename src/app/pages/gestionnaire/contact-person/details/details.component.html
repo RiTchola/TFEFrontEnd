@@ -8,21 +8,20 @@
             <div class="text-center">
                 <img src="assets/images/photoUser2.jpg" alt="user_img"
                     class="d-flex mx-auto align-items-center col-6" />
-                <p><strong>{{person?.nom}}</strong></p> 
+                <p><strong>{{person?.nom}}</strong></p>
                 <p><strong>{{person?.prenom}}</strong></p>
-                <p-button label="Supprimer la personne" class="p-button-danger" (click)="remove()"></p-button>
+                <button pButton type="button" label="Supprimer la personne" class="btn-danger" (click)="remove()"></button>
             </div>
-        </div> 
-        <div class="col-12 md:col-12 text-center">
-            <p-button label="Modifier la personne" class="d-flex mx-auto align-items-center col-12" (click)="personEdit()"></p-button>
         </div>
         <div class="col-12 md:col-12 text-center">
-            <p-button label="Modifier les identifiants" class="d-flex mx-auto align-items-center col-12" (click)="personUserEdit()"></p-button>
-            <!-- <p-button label="Créer les identifiants" class="d-flex mx-auto align-items-center col-12" (click)="personUserCreate()"></p-button> -->
+            <button pButton type="button" label="Modifier la personne" class="d-flex mx-auto align-items-center col-6 btn-primary" (click)="personEdit()"></button>
+        </div>
+        <div class="col-12 md:col-12 text-center">
+            <button pButton type="button" [label]="(person?.idUser && person?.idUser !== 0) ? 'Modifier les identifiants': 'Créer les identifiants'" class="d-flex mx-auto align-items-center col-6 btn-primary" (click)="personUserEdit()"></button>
         </div>
     </div>
-    <div class="col-12 md:col-8">  
-        <div class="card">    
+    <div class="col-12 md:col-8">
+        <div class="card">
             <h5>PERSONNE DE CONTACT</h5>
             <p><strong>Informations Personnelles</strong></p>
             <div class="p-fluid p-formgrid grid mt-5">

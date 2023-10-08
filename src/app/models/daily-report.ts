@@ -1,10 +1,8 @@
-import { Etablissement } from './etablissement';
-import { HumorType } from '../shared/interfaces/humorType';
 export class DailyReport {
-    id?: string;
-    numeroR!: boolean;
-    date!: string;
-    reqCardiaque!: string;
+    id?: number;
+    numeroR!: number;
+    date!: Date;
+    freqCardiaque!: string;
     freqRespiratoire!: string;
     presArterielle!: string;
     temperature!: string;
@@ -17,7 +15,6 @@ export class DailyReport {
     pedicure!: boolean;
     toilette!: boolean;
     vetements!: boolean;
-    humeur!: HumorType;
+    humeur!: string;
     commentaire?: string;
-    etablissement!: Etablissement;
 }

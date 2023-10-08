@@ -99,30 +99,34 @@ export class ContactPersonFormComponent implements OnInit {
     }
 
     get isFormValid() {
-        const dob = this.formData.controls.dob.value;
+        const dob = this.formData.controls.dob.value ?? new Date();
         if (this.formData.controls.status.value == "" || this.formData.controls.type.value == "") {
             return false;
         }
 
-        else if (dob && (dob >new Date()) ){
+
+        if (dob && (new Date().getFullYear() - new Date(dob).getFullYear()) < 18) {
             this.formData.controls.dob.setErrors({ 'greater': true, 'required': false });
             return false;;
+        } else {
+            this.formData.controls.dob.setErrors({ 'greater': false, 'required': false });
         }
+
         return true;
     }
 
     buildBody() {
+        const phone = (!this.formData.controls.tel2.value || this.formData.controls.tel2.value == '') ? this.formData.controls.tel.value : this.formData.controls.tel2.value;
         const data: ContactPerson = {
-        //const phone = !this.formData.controls.tel2.value || this.formData.controls.tel2.value == '' ? this.formData.controls.tel.value : this.formData.controls.tel2.value;
-        adresse: this.formData.controls.address.value ?? '',
-        choix: this.formData.controls.type.value ?? '',
-        dateNaissance: this.formData.controls.dob.value ?? new Date(),
-        email: this.formData.controls.email.value ?? '',
-        nom: this.formData.controls.name.value ?? '',
-        prenom: this.formData.controls.firstname.value ?? '',
-        statut: this.formData.controls.status.value ?? Status.celibataire,
-        tel1: this.formData.controls.tel.value ?? '',
-        tel2: this.formData.controls.tel2.value ?? 'undefined'
+            adresse: this.formData.controls.address.value ?? '',
+            choix: this.formData.controls.type.value ?? '',
+            dateNaissance: this.formData.controls.dob.value ?? new Date(),
+            email: this.formData.controls.email.value ?? '',
+            nom: this.formData.controls.name.value ?? '',
+            prenom: this.formData.controls.firstname.value ?? '',
+            statut: this.formData.controls.status.value ?? Status.celibataire,
+            tel1: this.formData.controls.tel.value ?? '',
+            tel2: phone ?? 'undefined'
         }
         return data;
     }

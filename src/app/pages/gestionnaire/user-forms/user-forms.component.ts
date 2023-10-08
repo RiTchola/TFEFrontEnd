@@ -1,15 +1,20 @@
 import { ObservableService } from '../../../shared/service/observable.service';
 import { RoleType } from '../../../shared/interfaces/roleType';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { ResidentService } from 'src/app/pages/gestionnaire/service/resident.service';
+import { UserService } from '../service/user.service';
+import { Location } from '@angular/common';
+import { MessageService } from 'primeng/api';
+import { ContactPersonService } from '../service/contact-person.service';
 
 @Component({
     selector: 'app-user-forms',
     templateUrl: './user-forms.component.html',
-    styleUrls: ['./user-forms.component.scss']
+    styleUrls: ['./user-forms.component.scss'],
+    providers: [MessageService]
 })
 export class UserFormsComponent implements OnInit {
 
@@ -19,45 +24,74 @@ export class UserFormsComponent implements OnInit {
         pwd1: new FormControl('', [
             Validators.required,
             Validators.minLength(8),
-            Validators.pattern(/[A-Z]/),
-            Validators.pattern(/[0-9]/)
+            Validators.pattern("^[A-Za-z]+[0-9]+$"),
         ]),
         pwd2: new FormControl('', [
             Validators.required,
             Validators.minLength(8)
         ])
     });
-
-    residentId = 0;
+    hide = false;
+    residentId = NaN;
+    userId = NaN;
+    personId = NaN;
+    oneStep = false;
 
     constructor(
+        private contactpersonSrv: ContactPersonService,
         private router: Router,
         private observableSrv: ObservableService,
-        private residentSrv: ResidentService
+        private residentSrv: ResidentService,
+        private userSrv: UserService,
+        private location: Location,
+        private msgSrv: MessageService
     ) {
-        if (this.router.url.includes("edit")) {
-            this.residentId = Number.parseInt(this.router.url.split("/")[4]);
+        const parts = this.router.url.split("/");
+        if ((this.router.url.includes("edit") && this.router.url.includes("resident")) ||
+            (this.router.url.includes("add") && this.router.url.includes("resident"))) {
+            this.residentId = Number.parseInt(parts[4]);
+            // hide the password fields if it is an edit
+            this.hide = this.router.url.includes("edit");
+            return;
+        }
+
+        if (this.router.url.includes("edit") && this.router.url.includes("user")) {
+            this.userId = Number.parseInt(parts[5]);
+            this.personId = Number.parseInt(parts[6]);
+            this.oneStep = true;
+            this.hide = true;
+        }
+
+        if (this.router.url.includes("add") && this.router.url.includes("user")) {
+            this.personId = Number.parseInt(parts[parts.length - 1]);
+            this.oneStep = true;
         }
     }
 
     ngOnInit(): void {
         this.observableSrv.observableResident.subscribe(v => {
             try {
-                const user: User = JSON.parse(v.user);
-                this.formData.controls.username.setValue(user.username);
-                this.formData.controls.pwd1.setValue(user.password);
-                this.formData.controls.pwd2.setValue(user.password);
+                const user = JSON.parse(v.user);
+                this.initForm(user);
             } catch (error) {
 
             }
         });
 
-        if (this.residentId != 0) {
+        if (!isNaN(this.residentId)) {
             this.getResidentById(this.residentId);
+        }
+
+        if (!isNaN(this.userId)) {
+            this.fetchUserById();
+        }
+
+        if (!isNaN(this.personId)) {
+            this.fetchContactPersonById(this.personId);
         }
     }
 
-    buildBody()  {
+    buildBody() {
         const data: User = {
             username: this.formData.controls.username.value ?? "",
             password: this.formData.controls.pwd1.value ?? "",
@@ -68,49 +102,110 @@ export class UserFormsComponent implements OnInit {
     }
 
     next() {
-        const data = this.buildBody() ;
-        if (!this.formData.controls.username.value) {
-            data.username= data.username ?? 'undefined';
+        if (!this.formData.valid) {
+            return;
         }
 
-        if (!this.formData.controls.pwd1.value) {
-            data.password = data.password?? 'undefined';
-        }
+        let data = this.buildBody();
+        this.observableSrv.changeResident({
+            user: JSON.stringify(data),
+            doctor: "",
+            resident: ""
+        });
 
-        if (this.formData.valid) {
-            this.observableSrv.changeResident({
-                user: JSON.stringify(data.username),
-                doctor: "",
-                resident: ""
-            });
-
-            if (this.residentId == 0) {
-                this.router.navigate(['/gestionnaire/resident/add/medecin']);
-            }
-            else {
-                this.router.navigate([`/gestionnaire/resident/edit/${this.residentId}/medecin`]);
-            }
+        if (!this.oneStep) {
+            this.navigateToNextPage();
+        } else {
+            this.saveUser();
         }
     }
 
-    /* get formValid() {
-        if (this.formData.controls.pwd1.value != null && this.formData.controls.pwd1.value?.length < 8 ||
-            this.formData.controls.pwd2.value != null && this.formData.controls.pwd2.value?.length < 8 ||
-            !this.formData.controls.username || this.formData.controls.pwd1.value != this.formData.controls.pwd2.value) {
-            return false;
+    navigateToNextPage() {
+        if (isNaN(this.residentId)) {
+            this.router.navigate(['/gestionnaire/resident/add/medecin']);
         }
-        return true;
+        else {
+            this.router.navigate([`/gestionnaire/resident/edit/${this.residentId}/medecin`]);
+        }
     }
- */
 
     getResidentById(id: number) {
         this.residentSrv.fetchById(id).subscribe({
-            next: (r) => {
-                // init form
-                this.formData.controls.username.setValue(r.user.username);
-                this.formData.controls.pwd1.setValue(r.user.password);
-                this.formData.controls.pwd2.setValue(r.user.password);
+            next: (r) => this.initForm(r.user),
+            complete: () => {
+                // Since it is an update we remove the password
+                this.hide = true;
+                this.formData.controls.pwd1.setValidators([]);
+                this.formData.controls.pwd2.setValidators([]);
+                this.formData.controls.pwd1.updateValueAndValidity();
+                this.formData.controls.pwd2.updateValueAndValidity();
             }
+        });
+    }
+
+    initForm(user: User) {
+        if (!user || user == null)
+            return;
+        this.formData.controls.username.setValue(user.username);
+        this.formData.controls.pwd1.setValue(user.password);
+        this.formData.controls.pwd2.setValue(user.password);
+    }
+
+    fetchUserById() {
+        this.userSrv.fetchById(this.userId).subscribe({
+            next: (r) => {
+                console.log(r);
+                this.initForm(r)
+            },
+            complete: () => {
+                // Since it is an update we remove the password
+                this.hide = true;
+                this.formData.controls.pwd1.setValidators([]);
+                this.formData.controls.pwd2.setValidators([]);
+                this.formData.controls.pwd1.updateValueAndValidity();
+                this.formData.controls.pwd2.updateValueAndValidity();
+            }
+        })
+    }
+
+    saveUser() {
+        const data: User = {
+            id: this.userId,
+            enabled: true,
+            username: this.formData.controls.username.value ?? "",
+            password: this.formData.controls.pwd1.value ?? "",
+            role: RoleType.personnecontact
+        };
+
+        if (!isNaN(this.userId)) {
+            this.userSrv.updateUser(this.userId, data).subscribe({
+                next: (r) => this.onSuccess(),
+            });
+            return;
+        }
+
+        if (isNaN(this.personId)) {
+            this.userSrv.saveUser(this.buildBody()).subscribe({
+                next: (r) => this.onSuccess()
+            })
+        } else {
+            this.userSrv.savePersonUser(this.personId, this.buildBody()).subscribe({
+                next: (r) => this.onSuccess()
+            })
+        }
+    }
+
+    onSuccess() {
+        this.msgSrv.add({ severity: 'success', summary: 'Service Message', detail: 'Informations sauvegardées' });
+        setTimeout(() => {
+            this.location.back();
+        }, 700);
+    }
+
+    fetchContactPersonById(id: number) {
+        this.contactpersonSrv.fetchById(id).subscribe({
+            next: (r) => this.formData.controls.username.setValue(r.email ?? ""),
+            error: (err) => console.error(err)
         })
     }
 }

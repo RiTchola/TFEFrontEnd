@@ -1,7 +1,8 @@
+<p-toast></p-toast>
 <form [formGroup]="formData" #form="ngForm">
-    <h4 class="title mb-0">Remplir les informations du Résident</h4>
+    <h4 class="title mb-0">Remplir les informations</h4>
     <h6 >Identifiants</h6>
-    <div class="grid mt-3">
+    <div class="card mt-3">
         <div class="col-12">
             <div class="p-fluid formgrid grid">
                 <div class="field col-6">
@@ -11,7 +12,7 @@
                     <small
                         *ngIf="(formData.get('username')?.hasError('required') && formData.get('usename')?.touched) || (formData.get('username')?.hasError('required') && form.submitted)">{{required}}</small>
                 </div>
-                <div class="field col-6">
+                <div class="field col-6" [hidden]="hide">
                     <label class="required-field">Mot de passe</label>
                     <input name="pwd1" formControlName="pwd1" type="password" required pInputText class="form-control"
                         type="password" />
@@ -20,7 +21,7 @@
                         *ngIf="formData.get('pwd1')?.hasError('minlength')">Au
                         moins 8 caractéres</small>
                 </div>
-                <div class="field col-6">
+                <div class="field col-6" [hidden]="hide">
                     <label class="required-field">Confirmer Mot de passe</label>
                     <input name="pwd2" formControlName="pwd2" type="password" required pInputText class="form-control"
                         type="password" />
@@ -35,8 +36,8 @@
         </div>
         <div class="col-12">
             <div class="p-fluid formgrid grid">
-                <div class="field col-6 ml-auto">
-                    <p-button label="Prochaine étape" type="submit" (click)="next()"></p-button>
+                <div [ngClass]="hide ? 'field col-6' : 'field col-6 ml-auto'">
+                    <button pButton [label]="!oneStep ? 'Prochaine étape' : 'Enregistrer'" type="submit" class="btn-primary" (click)="next()"></button>
                 </div>
             </div>
         </div>

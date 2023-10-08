@@ -7,6 +7,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { StepsModule } from 'primeng/steps';
@@ -28,6 +29,8 @@ import { DailyReportComponent } from './daily-report/daily-report.component';
 import { ContactPersonComponent } from './contact-person/contact-person.component';
 import { ContactPersonFormComponent } from './contact-person/contact-person-form/contact-person-form.component';
 import { ContactPersonDetailsComponent } from './contact-person/details/details.component';
+import { DailyReportFormsComponent } from './daily-report/daily-report-forms/daily-report-forms.component';
+import { DailyReportDetailsComponent } from './daily-report/daily-report-details/daily-report-details.component';
 
 @NgModule({
     declarations: [
@@ -43,7 +46,9 @@ import { ContactPersonDetailsComponent } from './contact-person/details/details.
         DailyReportComponent,
         ContactPersonComponent,
         ContactPersonFormComponent,
-        ContactPersonDetailsComponent
+        ContactPersonDetailsComponent,
+        DailyReportFormsComponent,
+        DailyReportDetailsComponent
     ],
     imports: [
         CommonModule,
@@ -53,6 +58,7 @@ import { ContactPersonDetailsComponent } from './contact-person/details/details.
         CheckboxModule,
         ConfirmDialogModule,
         ConfirmPopupModule,
+        DialogModule,
         DropdownModule,
         GestionnaireRoutingModule,
         ButtonModule,

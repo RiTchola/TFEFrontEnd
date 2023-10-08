@@ -13,6 +13,8 @@ import { DailyReportComponent } from './daily-report/daily-report.component';
 import { ContactPersonComponent } from './contact-person/contact-person.component';
 import { ContactPersonFormComponent } from './contact-person/contact-person-form/contact-person-form.component';
 import { ContactPersonDetailsComponent } from './contact-person/details/details.component';
+import { DailyReportFormsComponent } from './daily-report/daily-report-forms/daily-report-forms.component';
+import { DailyReportDetailsComponent } from './daily-report/daily-report-details/daily-report-details.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'resident', pathMatch: 'full' },
@@ -37,10 +39,14 @@ const routes: Routes = [
         ],
     },
     { path: 'daily-report/:id', component: DailyReportComponent },
+    { path: 'daily-report/details/:residentId/:reportId', component: DailyReportDetailsComponent },
+    { path: 'daily-report/edit/:reportId', component: DailyReportFormsComponent },
     { path: 'contact-person/:id', component: ContactPersonComponent },
     { path: 'contact-person/:residentId/add', component: ContactPersonFormComponent },
     { path: 'contact-person/edit/:residentId/:personId', component: ContactPersonFormComponent },
     { path: 'contact-person/details/:residentId/:personId', component: ContactPersonDetailsComponent },
+    { path: 'contact-person/edit/user/:userId/:personId', component: UserFormsComponent},
+    { path: 'contact-person/add/user/:personId', component: UserFormsComponent},
     { path: 'menu-semaine', component: MenuSemaineComponent },
     { path: 'meet-up', component: MeetUpComponent },
     { path: 'blog', component: BlogComponent },
