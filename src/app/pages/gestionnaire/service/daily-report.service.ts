@@ -30,4 +30,8 @@ export class DailyReportService {
     fetchAll() {
         return this.http.get<DailyReport[]>(`${this.url}`);
     }
+
+    fetchByResident(residentId: number) {
+        return this.http.get<DailyReport[]>(`${this.url}/liste/${residentId}`);
+    }
 }

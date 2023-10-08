@@ -6,6 +6,7 @@ import { MessageService } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
 
 import { Util } from 'src/app/shared/util';
+import { User } from 'src/app/models/user';
 
 @Component({
     selector: 'app-details',
@@ -15,9 +16,11 @@ import { Util } from 'src/app/shared/util';
 })
 export class ContactPersonDetailsComponent implements OnInit {
 
-    residentId = 0;
-    personId = 0;
+    residentId = NaN;
+    personId = NaN;
     person?: ContactPerson;
+    show = false;
+    user?: User;
 
     constructor(
         private contactpersonSrv: ContactPersonService,
@@ -35,10 +38,12 @@ export class ContactPersonDetailsComponent implements OnInit {
     }
 
     fetchById() {
-        this.contactpersonSrv.fetchById(this.personId).subscribe({
-            next: (r) => this.person = r,
-            error: (err) => console.log(err)
-        });
+        if (!isNaN(this.personId)) {
+            this.contactpersonSrv.fetchById(this.personId).subscribe({
+                next: (r) => this.person = r,
+                error: (err) => console.log(err),
+            });
+        }
     }
 
     remove() {
@@ -67,11 +72,21 @@ export class ContactPersonDetailsComponent implements OnInit {
     }
 
     personEdit() {
-        this.router.navigateByUrl(`/gestionnaire/contact-person/edit/${this.residentId}/${this.personId}`);
+        if (!isNaN(this.residentId) && !isNaN(this.personId)) {
+            this.router.navigateByUrl(`/gestionnaire/contact-person/edit/${this.residentId}/${this.personId}`);
+        }
     }
 
     personUserEdit() {
+        if (this.person?.idUser) {
+            this.router.navigateByUrl(`/gestionnaire/contact-person/edit/user/${this.person?.idUser}/${this.personId}`);
+        } else {
+            this.router.navigateByUrl(`/gestionnaire/contact-person/add/user/${this.personId}`);
+        }
+    }
 
+    onSave(event: boolean) {
+        this.show = !event;
     }
 
     onSuccess(msg: string) {
@@ -81,4 +96,5 @@ export class ContactPersonDetailsComponent implements OnInit {
     onError(msg: string) {
         this.msgSrv.add({ severity: 'error', summary: 'Erreur', detail: msg });
     }
+
 }

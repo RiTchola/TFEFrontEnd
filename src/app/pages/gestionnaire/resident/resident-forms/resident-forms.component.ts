@@ -56,7 +56,7 @@ export class ResidentFormsComponent implements OnInit {
     doctorValue!: MedecinTraitant;
     residentValue!: Resident;
 
-    residentId = 0;
+    residentId = NaN;
     userId = 0;
     doctorId = 0;
     isNewRecord = true;
@@ -86,7 +86,7 @@ export class ResidentFormsComponent implements OnInit {
 
         this.formData.controls.email.setValue(this.userValue.username);
 
-        if (this.residentId != 0) {
+        if (!isNaN(this.residentId)) {
             this.getResidentById(this.residentId);
         }
     }
@@ -138,7 +138,7 @@ export class ResidentFormsComponent implements OnInit {
     }
 
     back() {
-        if (this.residentId == 0) {
+        if (isNaN(this.residentId)) {
             this.router.navigateByUrl('/gestionnaire/resident/add/medecin');
         }
         else {
@@ -147,7 +147,7 @@ export class ResidentFormsComponent implements OnInit {
     }
 
     backToFirstStepOnReload() {
-        if (this.residentId == 0) {
+        if (isNaN(this.residentId)) {
             this.router.navigateByUrl('/gestionnaire/resident/add/user');
         }
         else {
@@ -195,7 +195,7 @@ export class ResidentFormsComponent implements OnInit {
         let userId = 0;
         let doctorId = 0;
 
-        if (this.residentId == 0) {
+        if (isNaN(this.residentId)) {
             this.userSrv.saveUser(this.userValue).subscribe({
                 next: (r) => {
                     userId = Number.parseInt(r.msg)
@@ -232,8 +232,8 @@ export class ResidentFormsComponent implements OnInit {
             user: JSON.stringify(this.userValue)
         });
 
-        if (this.residentId == 0) {
-            this.residentSrv.addResident(doctorId, userId, data).subscribe({
+        if (isNaN(this.residentId)) {
+            this.residentSrv.addResident(doctorId, data.email, data).subscribe({
                 next: (r) => { this.msgService.add({ severity: 'success', summary: 'Success', detail: 'Resident enregistré avec success' }) },
                 error: (err) => {
                     console.log(err)

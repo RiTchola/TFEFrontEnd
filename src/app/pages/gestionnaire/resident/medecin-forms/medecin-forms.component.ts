@@ -26,7 +26,7 @@ export class MedecinFormsComponent implements OnInit {
     });
 
     residentUser = "";
-    residentId = 0;
+    residentId = NaN;
 
     constructor(
         private router: Router,
@@ -57,7 +57,7 @@ export class MedecinFormsComponent implements OnInit {
 
         });
         // init form
-        if (this.residentId != 0) {
+        if (!isNaN(this.residentId)) {
             this.getResidentById(this.residentId);
         }
     }
@@ -94,7 +94,7 @@ export class MedecinFormsComponent implements OnInit {
             resident: ""
         });
 
-        if (this.residentId == 0) {
+        if (isNaN(this.residentId)) {
             this.router.navigate(['/gestionnaire/resident/add/resident']);
         }
         else {
@@ -103,7 +103,7 @@ export class MedecinFormsComponent implements OnInit {
     }
 
     back() {
-        if (this.residentId == 0) {
+        if (isNaN(this.residentId)) {
             this.router.navigate(['/gestionnaire/resident/add/user']);
         }
         else {

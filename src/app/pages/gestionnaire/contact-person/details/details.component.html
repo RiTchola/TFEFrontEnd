@@ -17,7 +17,7 @@
             <button pButton type="button" label="Modifier la personne" class="d-flex mx-auto align-items-center col-6 btn-primary" (click)="personEdit()"></button>
         </div>
         <div class="col-12 md:col-12 text-center">
-            <button pButton type="button" label="Modifier les identifiants" class="d-flex mx-auto align-items-center col-6 btn-primary" (click)="personUserEdit()"></button>
+            <button pButton type="button" [label]="(person?.idUser && person?.idUser !== 0) ? 'Modifier les identifiants': 'Créer les identifiants'" class="d-flex mx-auto align-items-center col-6 btn-primary" (click)="personUserEdit()"></button>
         </div>
     </div>
     <div class="col-12 md:col-8">

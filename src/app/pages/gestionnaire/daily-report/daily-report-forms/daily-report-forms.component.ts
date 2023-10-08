@@ -3,18 +3,21 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HumorType } from 'src/app/shared/interfaces/humorType';
 import { DailyReportService } from '../../service/daily-report.service';
 import { DailyReport } from 'src/app/models/daily-report';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
+import { MessageService } from 'primeng/api';
 
 @Component({
     selector: 'app-daily-report-forms',
     templateUrl: './daily-report-forms.component.html',
-    styleUrls: ['./daily-report-forms.component.scss']
+    styleUrls: ['./daily-report-forms.component.scss'],
+    providers: [MessageService]
 })
 export class DailyReportFormsComponent implements OnInit {
 
     @Input() residentId = 0;
-    @Input() reportId = 0;
     @Input() isNewRecord = true;
-    @Output() saved = new EventEmitter<boolean>(false);
+    @Output() saved = new EventEmitter<string>();
 
     required = 'Ce champ est requis';
     formData = new FormGroup({
@@ -55,10 +58,20 @@ export class DailyReportFormsComponent implements OnInit {
         { name: 'Triste', value: HumorType.triste },
     ];
 
-    constructor(private dailyReportSrv: DailyReportService) { }
+    reportId = NaN;
+
+    constructor(
+        private dailyReportSrv: DailyReportService,
+        private location: Location,
+        private msgSrv: MessageService,
+        private router: Router
+    ) {
+        const parts = this.router.url.split("/");
+        this.reportId = Number.parseInt(parts[parts.length - 1]);
+    }
 
     ngOnInit(): void {
-        if (this.reportId != 0) {
+        if (!isNaN(this.reportId)) {
             this.initForm();
         }
     }
@@ -110,26 +123,32 @@ export class DailyReportFormsComponent implements OnInit {
     }
 
     save() {
-        if (this.isNewRecord) {
+        if (this.isNewRecord && this.residentId != 0) {
             this.dailyReportSrv.add(this.residentId, this.buildBody()).subscribe({
                 next: (r) => {
                     if (r) {
-                        this.saved.emit(true);
+                        this.saved.emit(JSON.stringify(r));
                     }
                 },
                 error: (err) => {
                     console.log(err);
-                    this.saved.emit(false);
+                    this.saved.emit(undefined);
                 }
             });
-        } else {
+        } else if (!isNaN(this.reportId)) {
             this.dailyReportSrv.update(this.reportId, this.buildBody()).subscribe({
                 next: (r) => {
                     if (r) {
-                        this.saved.emit(true);
+                        this.saved.emit(JSON.stringify(r));
                     }
                 },
-                error: () => this.saved.emit(false)
+                error: () => this.saved.emit(undefined),
+                complete: () => {
+                    this.msgSrv.add({ severity: 'success', summary: 'Success', detail: "Informations sauvégardées" });
+                    setTimeout(() => {
+                        this.location.back();
+                    }, 500);
+                }
             });
         }
     }

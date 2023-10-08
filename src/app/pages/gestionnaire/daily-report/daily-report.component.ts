@@ -17,6 +17,7 @@ export class DailyReportComponent implements OnInit {
     residentId = 0;
     report?: DailyReport;
     show = false;
+    isNewRecord = true;
 
     constructor(
         private msgSrv: MessageService,
@@ -31,23 +32,25 @@ export class DailyReportComponent implements OnInit {
     }
 
     fetchAllReports() {
-        this.reportSrv.fetchAll().subscribe({
-            next: (r) => {
-                console.log(r);
-                this.reports = r.filter(x => x.numeroR == this.residentId)
-            },
+        this.reportSrv.fetchByResident(this.residentId).subscribe({
+            next: (r) => this.reports = r,
             error: (err) => console.log(err)
         })
     }
 
-    onSave(event: boolean) {
-        this.show = !event;
-        if (!this.show) {
+    onSave(event: string) {
+        try {
+            const report: DailyReport = JSON.parse(event);
+            this.reports.push(report);
             this.onSuccess('Nouveau rapport ajouté avec success');
+            this.show = false;
+        } catch (error) {
+            this.show = true;
         }
     }
 
     addNewReport() {
+        this.isNewRecord = true;
         this.show = true;
     }
 
@@ -56,8 +59,7 @@ export class DailyReportComponent implements OnInit {
     }
 
     edit(report: DailyReport) {
-        this.report = report;
-        this.show = true;
+        this.router.navigateByUrl(`/gestionnaire/daily-report/edit/${report.id}`);
     }
 
     onSuccess(msg: string) {
