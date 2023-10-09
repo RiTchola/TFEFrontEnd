@@ -47,6 +47,8 @@
                 </tr>
             </ng-template>
         </p-table>
+        <button pButton label="RETOUR" routerLink="/gestionnaire/resident/details/{{residentId}}"
+            class="btn-primary mt-4"><i class="pi pi-arrow-left mr-1"></i></button>
     </div>
 </div>
 
@@ -54,5 +56,6 @@
 
 <p-dialog header="Ajouter un rapport Quotidien" [(visible)]="show" [breakpoints]="{'960px': '75vw', '640px': '100vw'}"
     [style]="{width: '50vw'}">
-    <app-daily-report-forms (saved)="onSave($event)" [isNewRecord]="isNewRecord" [residentId]="residentId"></app-daily-report-forms>
+    <app-daily-report-forms (saved)="onSave($event)" [isNewRecord]="isNewRecord"
+        [residentId]="residentId"></app-daily-report-forms>
 </p-dialog>

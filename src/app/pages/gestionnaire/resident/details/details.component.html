@@ -2,23 +2,32 @@
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 <h5>INFORMATIONS DU RÉSIDENT</h5>
 <p>Détails du résident</p>
-<div class="mb-4 flex justify-content-end">
-    <button pButton label="Voir les personnes de contact" routerLink="/gestionnaire/contact-person/{{residentId}}" class="mr-5 btn-primary"></button>
-    <button pButton label="Voir les rapports quotidiens" routerLink="/gestionnaire/daily-report/{{residentId}}" class="btn-primary"></button>
+<div class="mb-4 grid">
+    <div class="field col-4">
+        <button pButton label="Retour" routerLink="/gestionnaire/resident"
+            class="mr-5 btn-outline-primary"><i class="pi pi-arrow-left mr-1"></i></button>
+    </div>
+    <div class="field col-8 flex justify-content-end">
+        <button pButton label="Voir les personnes de contact" routerLink="/gestionnaire/contact-person/{{residentId}}"
+            class="mr-5 btn-primary"></button>
+        <button pButton label="Voir les rapports quotidiens" routerLink="/gestionnaire/daily-report/{{residentId}}"
+            class="btn-primary"></button>
+    </div>
 </div>
 <div class="grid">
     <div class="field col-12 md:col-2">
         <div class="card col-12 md:col-12">
             <div class="text-center ">
                 <img src="assets/images/photoUser2.jpg" alt="user_img"
-                class="d-flex mx-auto align-items-center col-6" />
-                <p><strong>{{resident?.nom}}  {{resident?.prenom}}</strong></p>
+                    class="d-flex mx-auto align-items-center col-6" />
+                <p><strong>{{resident?.nom}} {{resident?.prenom}}</strong></p>
                 <p><em>>{{resident?.chambre}}</em></p>
                 <button pButton label="Désactiver Compte" class="btn-danger" (click)="disable()"></button>
             </div>
         </div>
         <div class="col-12 md:col-12 text-center">
-            <button pButton label="Modifier le résident" class="d-flex mx-auto align-items-center btn-primary" (click)="residentEdit()"></button>
+            <button pButton label="Modifier le résident" class="d-flex mx-auto align-items-center btn-primary"
+                (click)="residentEdit()"></button>
         </div>
     </div>
     <div class="col-12 md:col-10">
