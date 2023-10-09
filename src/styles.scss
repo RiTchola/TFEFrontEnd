@@ -162,4 +162,18 @@ label.required {
 .custom-steps {
     column-gap: var(--orange-400);
     font-weight: bold;
-  }
+}
+
+.custom-project-description {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 16px;
+    font-weight: 500; 
+    color: rgb(151, 151, 149); 
+}
+
+.custom-project-title {
+    color: orange;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 24px;
+    margin-bottom: 10px; 
+}

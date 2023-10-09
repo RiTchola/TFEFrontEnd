@@ -6,6 +6,7 @@ import { ContactPersonService } from '../../service/contact-person.service';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ContactPerson } from 'src/app/models/contact-person';
+import { Sexe } from 'src/app/shared/interfaces/sexe';
 
 @Component({
     selector: 'app-contact-person-form',
@@ -24,6 +25,7 @@ export class ContactPersonFormComponent implements OnInit {
         status: new FormControl('', [Validators.required]),
         type: new FormControl('', [Validators.required]),
         address: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(120)]),
+        sexe: new FormControl('', [Validators.required]),
         tel: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+$')]),
         tel2: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+$')]),
     });
@@ -37,6 +39,13 @@ export class ContactPersonFormComponent implements OnInit {
         { name: 'Mariée', value: Status.marie },
         { name: 'Veuf', value: Status.veuf },
         { name: 'Veuve', value: Status.veuf }
+    ];
+
+    sexeList = [
+        { name: '', value: '' },
+        { name: 'Masculin', value: Sexe.masculin},
+        { name: 'Féminin', value: Sexe.feminin },
+        { name: 'Neutre', value: Sexe.neutre }
     ];
 
     typeList = [
@@ -93,6 +102,7 @@ export class ContactPersonFormComponent implements OnInit {
                 this.formData.controls.tel.setValue(r.tel1);
                 this.formData.controls.tel2.setValue(r.tel2 ?? '');
                 this.formData.controls.type.setValue(r.choix);
+                this.formData.controls.sexe.setValue(r.sexe);
             },
             error: (err) => console.log(err)
         });
@@ -100,9 +110,10 @@ export class ContactPersonFormComponent implements OnInit {
 
     get isFormValid() {
         const dob = this.formData.controls.dob.value ?? new Date();
-        if (this.formData.controls.status.value == "" || this.formData.controls.type.value == "") {
+        if (this.formData.controls.status.value == "" || this.formData.controls.type.value == "" || this.formData.controls.sexe.value == "") {
             return false;
         }
+
 
         if (dob && (new Date().getFullYear() - new Date(dob).getFullYear()) < 18) {
             this.formData.controls.dob.setErrors({ 'greater': true, 'required': false });
@@ -118,6 +129,7 @@ export class ContactPersonFormComponent implements OnInit {
         const phone = (!this.formData.controls.tel2.value || this.formData.controls.tel2.value == '') ? this.formData.controls.tel.value : this.formData.controls.tel2.value;
         const data: ContactPerson = {
             adresse: this.formData.controls.address.value ?? '',
+            sexe: this.formData.controls.status.value ?? Sexe.neutre,
             choix: this.formData.controls.type.value ?? '',
             dateNaissance: this.formData.controls.dob.value ?? new Date(),
             email: this.formData.controls.email.value ?? '',

@@ -10,6 +10,7 @@ export class ContactPerson {
     tel1!: string;
     tel2?: string;
     adresse!: string;
+    sexe!: string;
     statut!: string;
     choix!: string;
 }
