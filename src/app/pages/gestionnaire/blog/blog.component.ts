@@ -1,41 +1,57 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, ElementRef, OnInit, QueryList, ViewChildren} from "@angular/core";
 import {CommuniqueService} from "../service/communique.service";
 import {MessageService} from "primeng/api";
 import {Communique} from "../../../models/communique";
 
-import { FormGroup, FormControl, Validators } from '@angular/forms'
+import {FormGroup, FormControl, Validators, ValidatorFn, AbstractControl} from '@angular/forms'
+import {HttpEventType, HttpResponse} from "@angular/common/http";
+interface Image {
+    name: string;
+    objectURL: string;
+}
+
+ function futureDateValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const selectedDate = new Date(control.value);
+
+        return selectedDate > today ? null : { 'pastDate': true };
+    };
+}
 
 @Component({
     templateUrl: './blog.component.html',
+    styleUrls: ['./blog-component.scss'],
     providers: [MessageService]
 })
 export class BlogComponent implements OnInit {
+    uploadedImages: any[] = [];
+    isSpinner: boolean = false;
+    isImageNotValid: boolean = false;
+    @ViewChildren('buttonEl') buttonEl!: QueryList<ElementRef>;
+    value:number = 0;
+    answer: string = '';
 
     visible: boolean = false;
     isNewRecord: boolean = true;
     blogItems!: Communique[];
 
     dataForm = new FormGroup({
-        date: new FormControl<Date>(new Date(), [Validators.required]),
+        date: new FormControl<Date>(new Date(), [Validators.required, futureDateValidator]),
         titre: new FormControl('', [Validators.required]),
         contenu: new FormControl('', [Validators.required]),
-        fileUrl: new FormControl([]),
     });
 
     required = 'Ce champ est requis';
-   /*  Communique = {
-        date: new Date(),
-        titre: '',
-        contenu: '',
-        fileUrl: []
-    }; */
+
 
     ngOnInit(): void {
         this.blogItems = this.communiqueService.blogItems;
     }
 
     constructor(
-        private communiqueService: CommuniqueService, 
+        private communiqueService: CommuniqueService,
         private messageService: MessageService
     )  { }
 
@@ -44,63 +60,56 @@ export class BlogComponent implements OnInit {
         this.visible = true;
     }
 
-    buildBody() {
-        const data: Communique = {
-            id : 0,
-            date: this.dataForm.controls.date.value ?? new Date(),
-            titre: this.dataForm.controls.titre.value ?? '',
-            contenu: this.dataForm.controls.contenu.value ?? '',
-            fileUrl: Array.isArray(this.dataForm.controls.fileUrl.value) ? this.dataForm.controls.fileUrl.value: [],
-        };
-        return data;
+    onSelect(event: any) {
+        for (const file of event.files) {
+            this.uploadedImages.push(file);
+        }
     }
 
-  /*  save() {
-        const data = this.buildBody();
-        const date = this.dataForm.controls.date.value;
-        if (date && (new Date(date) > new Date())) {
-            this.dataForm.controls.date.setErrors({ 'greater': true, 'required': false });
-            this.messageService.add({severity:'error', summary:'Error', detail:'Communiqué non enregistré'});
-            return;
-        }
+    onImageMouseOver(file: File) {
+        this.buttonEl.toArray().forEach(el => {
+            el.nativeElement.id === file.name ? el.nativeElement.style.display = 'flex' : null;
+        })
+    }
 
-        this.messageService.add({severity:'success', summary:'Success', detail:'Communiqué enregistré'});
-         if (this.dataForm.valid ) {
-            this.communiqueService.addCommentar(data).subscribe({
-                next: (result) => {
-                    if (result) {
-                        this.visible = false;
-                        this.messageService.add({severity:'success', summary:'Success', detail:'Communiqué enregistré'});
+    onImageMouseLeave(file: File) {
+        this.buttonEl.toArray().forEach(el => {
+            el.nativeElement.id === file.name ? el.nativeElement.style.display = 'none' : null;
+        })
+    }
+
+    removeImage(file: File) {
+        this.uploadedImages = this.uploadedImages.filter(i=> i!==file);
+    }
+
+
+    submit(){
+        if(this.dataForm.valid && this.uploadedImages.length!=0){
+            this.communiqueService.createCommunique(
+                this.dataForm.controls.contenu.value ?? '',
+                this.dataForm.controls.titre.value ?? '',
+                this.dataForm.controls.date.value?.toISOString() ?? new Date().toISOString(),
+                this.uploadedImages
+            ).subscribe({
+                next: (event)=>{
+                    if(event.type === HttpEventType.UploadProgress){
+                        this.value = Math.round((100 * event.loaded) / (event.total?event.total: 1));
+                    }else if (event instanceof HttpResponse) {
+                        this.messageService.add({severity:'success', summary:'Success', detail:'merci'})
+                        this.answer = event.body.message;
                     }
                 },
-                error: (err) => {
-                    console.error(err);
-                    this.saved.emit(undefined);
+                error: (error)=>{
+                    this.messageService.add({severity:'error', summary:'Error', detail:error.message},)
                 }
-            });
-        } 
-    }  */
-
-    get isFormValid() {
-        const date = this.dataForm.controls.date.value;
-        if (date && (new Date(date) > new Date())) {
-            this.dataForm.controls.date.setErrors({ 'greater': true, 'required': false });
-            this.messageService.add({severity:'error', summary:'Error', detail:'Communiqué non enregistré'});
-            return false;
-        }
-
-        return true;
-    }
-
-    save() {
-        if (!this.isFormValid) {
-            return;
-        }
-        this.messageService.add({severity:'success', summary:'Success', detail:'Communiqué enregistré'});
-        if (this.isNewRecord) {
-            return true;
-        } else {
-            return false;
+            })
+        }else{
+            this.dataForm.markAllAsTouched();
+            if(this.uploadedImages.length==0){
+                this.isImageNotValid = true;
+            }
+            this.messageService.add({severity:'error', summary: 'Error', detail: 'Form is invalid. Please correct the errors and try again.'});
         }
     }
+
 }

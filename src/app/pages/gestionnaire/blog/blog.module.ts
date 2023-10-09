@@ -15,6 +15,7 @@ import {CalendarModule} from "primeng/calendar";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {FileUploadComponent} from "../../../shared/components/file-upload/file-upload.component";
 import {ImageModule} from "primeng/image";
+import {FileUploadModule} from "primeng/fileupload";
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import {ImageModule} from "primeng/image";
         CalendarModule,
         InputTextareaModule,
         FileUploadComponent,
-        ImageModule
+        ImageModule,
+        FileUploadModule
     ],
     providers: [MessageService]
 })

@@ -32,7 +32,7 @@
 
 
 <p-dialog  [(visible)]="visible" [modal]="true" [style]="{ width: '70vw' }" [draggable]="false" [resizable]="false">
-    <form [formGroup]="dataForm" (ngSubmit)="save()" #form="ngForm">
+    <form [formGroup]="dataForm" (ngSubmit)="submit()">
         <div class="grid">
             <div class="col-6 md:col-6">
                 <div class="card">
@@ -41,26 +41,67 @@
                         <div class="field col-12">
                             <label class="required-field">Titre</label>
                             <input titre="titre" formControlName="titre" type="text" required pInputText class="form-control" />
-                            <small
-                                *ngIf="(dataForm.get('titre')?.hasError('required') && dataForm.get('titre')?.touched) || (dataForm.get('titre')?.hasError('required') && form.submitted)">{{required}}</small>
+                            <small style="color: red;" class="error-text"
+                                   *ngIf="dataForm.get('titre')?.invalid && dataForm.get('titre')?.touched && dataForm.get('titre')?.hasError('required')">
+                                {{required}}
+                            </small>
                         </div>
                         <div class="field col-12">
                             <label class="required-field">Date</label>
                             <p-calendar formControlName="date" [showIcon]="true" [required]="true"></p-calendar>
-                            <small *ngIf="dataForm.get('date')?.hasError('required') && form.submitted">{{required}}</small>
-                            <small *ngIf="dataForm.get('date')?.hasError('greater') && form.submitted">La date ne peut être
-                                supérieur à celle d'aujourd'hui</small>
+                            <small style="color: red;" class="error-text"
+                                   *ngIf="dataForm.get('date')?.invalid && dataForm.get('date')?.touched && dataForm.get('date')?.hasError('required')">
+                                {{required}}
+                            </small>
+                            <small style="color: red;" class="error-text"
+                                   *ngIf="dataForm.get('date')?.invalid && dataForm.get('date')?.touched && dataForm.get('date')?.hasError('pastDate')">
+                                La date ne peut être supérieur à celle d'aujourd'hui
+                            </small>
                         </div>
                         <div class="field col-12">
                             <label class="required-field">Contenu</label>
                             <input contenu="contenu" formControlName="contenu" type="text" rows="6" required pInputTextarea
                                 class="form-control" />
-                            <small
-                                *ngIf="(dataForm.get('contenu')?.hasError('required') && dataForm.get('contenu')?.touched) || (dataForm.get('contenu')?.hasError('required') && form.submitted)">{{required}}</small>
+                            <small style="color: red;" class="error-text"
+                                   *ngIf="dataForm.get('contenu')?.invalid && dataForm.get('contenu')?.touched && dataForm.get('contenu')?.hasError('required')">
+                                {{required}}
+                            </small>
                         </div>
                         <div class="field col-12">
-                            <label>Ajouter une image </label>
-                            <app-file-upload></app-file-upload>
+                            <div class="card">
+                                <label>Ajouter des images</label>
+                                <p-fileUpload #fileUploader
+                                              [customUpload]="true"
+                                              [multiple]="true"
+                                              (onSelect)="onSelect($event)"
+                                              accept="image/*"
+                                              [showUploadButton]="false"
+                                              [showCancelButton]="false"
+                                              [auto]="false"
+                                              styleClass="border-1 surface-border surface-card border-round mt-2"
+                                >
+                                    <ng-template pTemplate="content">
+                                        <p-progressBar [value]="value" [showValue]="true"></p-progressBar>
+                                        <div class="overflow-y-auto border-round" style="cursor: copy" (click)="fileUploader.advancedFileInput.nativeElement.click()">
+                                            <div *ngIf="!uploadedImages.length" class="flex flex-column w-full h-full justify-content-center align-items-center">
+                                                <i class="pi pi-images text-4xl text-primary"></i>
+                                                <span class="block font-semibold text-900 text-lg mt-3">Glisser ou sélectionner des images</span>
+                                            </div>
+                                            <div class="flex flex-wrap gap-3 border-round" *ngIf="uploadedImages.length">
+                                                <div *ngFor="let file of uploadedImages; let i = index;" class="h-full relative w-7rem h-7rem border-3 border-transparent border-round hover:bg-primary transition-duration-100 cursor-auto" (mouseenter)="onImageMouseOver(file)" (mouseleave)="onImageMouseLeave(file)" style="padding: 1px;">
+                                                    <img [src]="file.objectURL" class="w-full h-full border-round shadow-2" [alt]="file.name">
+                                                    <button [id]="file.name" #buttonEl pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-primary text-sm absolute justify-content-center align-items-center cursor-pointer w-2rem h-2rem" style="top: -10px; right: -10px; display: none;" (click)="$event.stopPropagation(); removeImage(file)"></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </p-fileUpload>
+                            </div>
+                            <small style="color: red;" class="error-text"
+                                   *ngIf="isImageNotValid && uploadedImages.length==0">
+                                Merci de télécharger au moins une image.
+                            </small>
+
                         </div>
                     </div>
                     <div class="p-fluid formgrid grid">
@@ -72,7 +113,7 @@
             </div>
             <div class="col-6 md:col-6">
                 <img style="width: 620px;  height: 485px;" src="/assets/images/group.png" alt="Image de décoration" />
-            </div>       
+            </div>
         </div>
     </form>
 </p-dialog>

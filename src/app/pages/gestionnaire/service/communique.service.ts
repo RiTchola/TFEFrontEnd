@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 import {Communique} from "../../../models/communique";
+import {HttpClient, HttpErrorResponse, HttpRequest} from "@angular/common/http";
+import {catchError, Observable, throwError} from "rxjs";
+import {environment} from "../../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommuniqueService {
+    apiUrl: string= environment.apiPath+'/communique';
 
     blogItems: Communique[] = [
         {
@@ -86,13 +90,32 @@ export class CommuniqueService {
                 'assets/images/image6.png']
         }
     ]
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+    createCommunique(contenu: string, titre: string, date: string, files: File[]): Observable<any> {
+        const formData: FormData = new FormData();
+        formData.append('contenu', contenu);
+        formData.append('titre', titre);
+        formData.append('date', date);
+
+        files.forEach((file, index) => {
+            formData.append('files', file, file.name);
+        });
+        const req: HttpRequest<FormData> = new HttpRequest(
+            "POST",
+            this.apiUrl,
+            formData, {
+                reportProgress: true,
+                responseType: "json",
+            });
+        return this.http.request(req);
+    }
 
     getCommuniqueById(id: number){
         return this.blogItems.filter(item=> item.id===id)[0];
     }
 
     addCommentar(data: Communique){
-        
+
     }
 }
