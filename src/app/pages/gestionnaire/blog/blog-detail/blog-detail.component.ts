@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {CommuniqueService} from "../../service/communique.service";
 import {Communique} from "../../../../models/communique";
 import { Util } from 'src/app/shared/util';
+import {MessageService} from "primeng/api";
 
 
 @Component({
@@ -16,10 +17,11 @@ export class BlogDetailComponent implements OnInit{
         date: new Date(),
         titre: '',
         contenu: '',
-        fileUrl: []
+        fileURL: []
     };
     constructor(private activatedRoute: ActivatedRoute,
                 private communiqueService: CommuniqueService,
+                private messageService: MessageService,
                 private router: Router, ) {
 
 
@@ -30,9 +32,18 @@ export class BlogDetailComponent implements OnInit{
         if (idString) {
             const id = Number(idString);
             if (!isNaN(id)) {
-                this.blog = this.communiqueService.getCommuniqueById(id);
+                this.communiqueService.getCommuniqueById(id).subscribe(
+                    {
+                        next: (res)=>{
+                           this.blog = res;
+                        },
+                        error: (error)=>{
+                            this.messageService.add({severity:'error', summary:'Error', detail:error.message});
+                        }
+                    }
+                )
             } else {
-                console.error('Invalid ID format');
+                this.messageService.add({severity:'error', summary:'Error', detail:'Invalid ID format'});
             }
         }
     }

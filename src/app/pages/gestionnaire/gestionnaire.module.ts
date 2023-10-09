@@ -17,22 +17,24 @@ import { ResidentFormsComponent } from './resident-forms/resident-forms.componen
 
 
 @NgModule({
-  declarations: [
-    ResidentComponent,
-    MenuSemaineComponent,
-    MeetUpComponent,
-    ResidentFormsComponent
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    CalendarModule,
-    DropdownModule,
-    GestionnaireRoutingModule,
-    ButtonModule,
-    InputTextModule,
-    TableModule,
-    TagModule
-  ]
+    declarations: [
+        ResidentComponent,
+        MenuSemaineComponent,
+        MeetUpComponent,
+        ResidentFormsComponent
+    ],
+    exports: [
+    ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        CalendarModule,
+        DropdownModule,
+        GestionnaireRoutingModule,
+        ButtonModule,
+        InputTextModule,
+        TableModule,
+        TagModule
+    ]
 })
 export class GestionnaireModule { }

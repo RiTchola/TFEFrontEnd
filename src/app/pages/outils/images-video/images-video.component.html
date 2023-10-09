@@ -13,17 +13,17 @@
                 <ng-template pTemplate="header">
                     <tr>
                         <th pSortableColumn="date">Date <p-sortIcon field="date"></p-sortIcon></th>
-                        <th pSortableColumn="fileURL">File URL <p-sortIcon field="fileURL"></p-sortIcon></th>
+                        <th pSortableColumn="personneContact">Personne de contact<p-sortIcon field="personneContact"></p-sortIcon></th>
                         <th pSortableColumn="typeF">Type de Fichier <p-sortIcon field="typeF"></p-sortIcon></th>
                         <th>Actions</th>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-rvt>
+                <ng-template pTemplate="body" let-iv>
                     <tr>
-                        <td>{{rvt.date | date : "EEEE, dd MMMM YYYY"}}</td>
-                        <td>{{rvt.fileURL}}</td>
+                        <td>{{iv.date | date : "EEEE, dd MMMM YYYY"}}</td>
+                        <td>{{iv.personneContact}}</td>
                         <td>
-                            <i class="pi {{rvt.typeF=='IMAGE'? 'pi-image': 'pi-video'}}" style="font-size: 2.5rem"></i>
+                            <i class="pi {{iv.typeF=='IMAGE'? 'pi-image': 'pi-video'}}" style="font-size: 2.5rem"></i>
                         </td>
                         <td>
                             <i class="pi pi-download" (click)="downloadFile()"></i>
@@ -38,29 +38,57 @@
     <ng-template pTemplate="header">
         <h4>Envoyer une image ou une video</h4>
     </ng-template>
-    <p>S'il vous plait entrer kes informations de votre fichier</p>
-    <div class="p-fluid formgrid grid">
-        <div class="field col-12">
-            <label>Date *</label>
-            <p-calendar [(ngModel)]="fichierHelper.date" [showIcon]="true"></p-calendar>
-        </div>
-        <div class="field col-12">
-            <label>Type de Fichier *</label>
-            <p-dropdown [options]="typeFichiers"
-                        [(ngModel)]="fichierHelper.typeF"
-                        optionLabel="key"
-                        optionValue="value"
-            ></p-dropdown>
-        </div>
-        <div class="field col-12">
-            <label>Upload de l'image </label>
-            <app-file-upload></app-file-upload>
-        </div>
+    <p>S'il vous plait entrer les informations de votre fichier</p>
+    <form [formGroup]="dataForm" (ngSubmit)="submit()">
         <div class="p-fluid formgrid grid">
             <div class="field col-12">
-                <p-button label="Enregistrer" type="submit"></p-button>
+                <label>Date</label>
+                <p-calendar [(ngModel)]="fichierHelper.date" [showIcon]="true"></p-calendar>
+            </div>
+            <div class="field col-12">
+                <label>Type de Fichier</label>
+                <p-dropdown [options]="typeFichiers"
+                            [(ngModel)]="fichierHelper.typeF"
+                            optionLabel="key"
+                            optionValue="value"
+                ></p-dropdown>
+            </div>
+            <div class="field col-12">
+                <label>Upload de l'image </label>
+                <p-fileUpload #fileUploader
+                              [customUpload]="true"
+                              [multiple]="false"
+                              (onSelect)="onSelect($event)"
+                              accept="image/*"
+                              [showUploadButton]="false"
+                              [showCancelButton]="false"
+                              [auto]="false"
+                              styleClass="border-1 surface-border surface-card border-round mt-2"
+                >
+                    <ng-template pTemplate="content">
+                        <p-progressBar [value]="value" [showValue]="true"></p-progressBar>
+                        <div class="overflow-y-auto border-round" style="cursor: copy" (click)="fileUploader.advancedFileInput.nativeElement.click()">
+                            <div *ngIf="!uploadedImages.length" class="flex flex-column w-full h-full justify-content-center align-items-center">
+                                <i class="pi pi-images text-4xl text-primary"></i>
+                                <span class="block font-semibold text-900 text-lg mt-3">Glisser ou sélectionner des images</span>
+                            </div>
+                            <div class="flex flex-wrap gap-3 border-round" *ngIf="uploadedImages.length">
+                                <div *ngFor="let file of uploadedImages; let i = index;" class="h-full relative w-7rem h-7rem border-3 border-transparent border-round hover:bg-primary transition-duration-100 cursor-auto" (mouseenter)="onImageMouseOver(file)" (mouseleave)="onImageMouseLeave(file)" style="padding: 1px;">
+                                    <img [src]="file.objectURL" class="w-full h-full border-round shadow-2" [alt]="file.name">
+                                    <button [id]="file.name" #buttonEl pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-primary text-sm absolute justify-content-center align-items-center cursor-pointer w-2rem h-2rem" style="top: -10px; right: -10px; display: none;" (click)="$event.stopPropagation(); removeImage(file)"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </p-fileUpload>
+            </div>
+            <div class="p-fluid formgrid grid">
+                <div class="field col-12">
+                    <p-button label="Enregistrer" type="submit"></p-button>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
+
 </p-dialog>
 

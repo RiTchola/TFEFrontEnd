@@ -16,6 +16,9 @@ import {InputTextareaModule} from "primeng/inputtextarea";
 import {FileUploadComponent} from "../../../shared/components/file-upload/file-upload.component";
 import {ImageModule} from "primeng/image";
 import {FileUploadModule} from "primeng/fileupload";
+import {GestionnaireModule} from "../gestionnaire.module";
+import {TroncatePipe} from "../../../shared/pipes/troncate.pipe";
+import {SharedModule} from "../../../shared/shared.module";
 
 
 @NgModule({
@@ -37,7 +40,8 @@ import {FileUploadModule} from "primeng/fileupload";
         InputTextareaModule,
         FileUploadComponent,
         ImageModule,
-        FileUploadModule
+        FileUploadModule,
+        SharedModule
     ],
     providers: [MessageService]
 })

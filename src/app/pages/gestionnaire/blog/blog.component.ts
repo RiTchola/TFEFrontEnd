@@ -10,15 +10,7 @@ interface Image {
     objectURL: string;
 }
 
- function futureDateValidator(): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        const selectedDate = new Date(control.value);
 
-        return selectedDate > today ? null : { 'pastDate': true };
-    };
-}
 
 @Component({
     templateUrl: './blog.component.html',
@@ -27,18 +19,18 @@ interface Image {
 })
 export class BlogComponent implements OnInit {
     uploadedImages: any[] = [];
-    isSpinner: boolean = false;
-    isImageNotValid: boolean = false;
+    today = new Date();
+
     @ViewChildren('buttonEl') buttonEl!: QueryList<ElementRef>;
     value:number = 0;
     answer: string = '';
 
     visible: boolean = false;
     isNewRecord: boolean = true;
-    blogItems!: Communique[];
+    blogItems: Communique[] = [];
 
     dataForm = new FormGroup({
-        date: new FormControl<Date>(new Date(), [Validators.required, futureDateValidator]),
+        date: new FormControl<Date>(new Date(), [Validators.required]),
         titre: new FormControl('', [Validators.required]),
         contenu: new FormControl('', [Validators.required]),
     });
@@ -47,13 +39,26 @@ export class BlogComponent implements OnInit {
 
 
     ngOnInit(): void {
-        this.blogItems = this.communiqueService.blogItems;
+        this.getBlogs();
     }
 
     constructor(
         private communiqueService: CommuniqueService,
         private messageService: MessageService
     )  { }
+
+    getBlogs(){
+        this.communiqueService.getAllCommunique().subscribe(
+            {
+                next: (res)=>{
+                    this.blogItems = res;
+                },
+                error: (error)=>{
+                    this.messageService.add({severity:'error', summary:'Error', detail:error.message})
+                }
+            }
+        )
+    }
 
 
     showDialog() {
@@ -84,7 +89,7 @@ export class BlogComponent implements OnInit {
 
 
     submit(){
-        if(this.dataForm.valid && this.uploadedImages.length!=0){
+        if(this.dataForm.valid){
             this.communiqueService.createCommunique(
                 this.dataForm.controls.contenu.value ?? '',
                 this.dataForm.controls.titre.value ?? '',
@@ -95,6 +100,8 @@ export class BlogComponent implements OnInit {
                     if(event.type === HttpEventType.UploadProgress){
                         this.value = Math.round((100 * event.loaded) / (event.total?event.total: 1));
                     }else if (event instanceof HttpResponse) {
+                        this.visible = false;
+                        this.getBlogs();
                         this.messageService.add({severity:'success', summary:'Success', detail:'merci'})
                         this.answer = event.body.message;
                     }
@@ -105,9 +112,6 @@ export class BlogComponent implements OnInit {
             })
         }else{
             this.dataForm.markAllAsTouched();
-            if(this.uploadedImages.length==0){
-                this.isImageNotValid = true;
-            }
             this.messageService.add({severity:'error', summary: 'Error', detail: 'Form is invalid. Please correct the errors and try again.'});
         }
     }

@@ -1,6 +1,6 @@
 <p-toast></p-toast>
 <h3>BLOG</h3>
-<p>Notre actualité sur la plateforme</p>
+<p>Notre actualité à l'établissement</p>
 <div class="grid">
     <div class="col-12 md:col-12">
         <div class="mb-4 flex justify-content-end">
@@ -10,13 +10,13 @@
     <div class="col-12 md:col-12">
         <div class="grid">
             <div class="col-12 md:col-12 lg:col-4 xl:col-3" *ngFor="let item of blogItems; index as i" >
-                <p-card header="{{item.titre}}" subheader="{{item.date | date}}" >
+                <p-card  header="{{item.titre}}" subheader="{{item.date | date}}" >
                     <ng-template pTemplate="header">
-                        <img alt="Card" src="{{item.fileUrl[i]}}" />
+                        <img class="listing-photo"  alt="Card" src="{{item.fileURL[i]}}" />
                     </ng-template>
                     <ng-template pTemplate="content">
                         <p>
-                            {{item.contenu}}
+                            {{item.contenu | troncate:50}}
                         </p>
                     </ng-template>
                     <ng-template pTemplate="footer">
@@ -41,28 +41,27 @@
                         <div class="field col-12">
                             <label class="required-field">Titre</label>
                             <input titre="titre" formControlName="titre" type="text" required pInputText class="form-control" />
-                            <small style="color: red;" class="error-text"
+                            <small
                                    *ngIf="dataForm.get('titre')?.invalid && dataForm.get('titre')?.touched && dataForm.get('titre')?.hasError('required')">
                                 {{required}}
                             </small>
                         </div>
                         <div class="field col-12">
                             <label class="required-field">Date</label>
-                            <p-calendar formControlName="date" [showIcon]="true" [required]="true"></p-calendar>
-                            <small style="color: red;" class="error-text"
+                            <p-calendar formControlName="date" [maxDate]="today" [showIcon]="true" [required]="true"></p-calendar>
+                            <small
                                    *ngIf="dataForm.get('date')?.invalid && dataForm.get('date')?.touched && dataForm.get('date')?.hasError('required')">
                                 {{required}}
                             </small>
-                            <small style="color: red;" class="error-text"
+                            <small
                                    *ngIf="dataForm.get('date')?.invalid && dataForm.get('date')?.touched && dataForm.get('date')?.hasError('pastDate')">
                                 La date ne peut être supérieur à celle d'aujourd'hui
                             </small>
                         </div>
                         <div class="field col-12">
                             <label class="required-field">Contenu</label>
-                            <input contenu="contenu" formControlName="contenu" type="text" rows="6" required pInputTextarea
-                                class="form-control" />
-                            <small style="color: red;" class="error-text"
+                            <textarea  formControlName="contenu" rows="5" class="form-control" cols="6" pInputTextarea  required></textarea>
+                            <small
                                    *ngIf="dataForm.get('contenu')?.invalid && dataForm.get('contenu')?.touched && dataForm.get('contenu')?.hasError('required')">
                                 {{required}}
                             </small>
@@ -97,10 +96,7 @@
                                     </ng-template>
                                 </p-fileUpload>
                             </div>
-                            <small style="color: red;" class="error-text"
-                                   *ngIf="isImageNotValid && uploadedImages.length==0">
-                                Merci de télécharger au moins une image.
-                            </small>
+
 
                         </div>
                     </div>

@@ -13,6 +13,9 @@ import { RapportVisiteComponent } from './rapport-visite/rapport-visite.componen
 import {CalendarModule} from "primeng/calendar";
 import {DropdownModule} from "primeng/dropdown";
 import {FileUploadComponent} from "../../shared/components/file-upload/file-upload.component";
+import {FileUploadModule} from "primeng/fileupload";
+import {ProgressBarModule} from "primeng/progressbar";
+import {RippleModule} from "primeng/ripple";
 
 @NgModule({
     declarations: [
@@ -32,7 +35,10 @@ import {FileUploadComponent} from "../../shared/components/file-upload/file-uplo
         ToastModule,
         CalendarModule,
         DropdownModule,
-        FileUploadComponent
+        FileUploadComponent,
+        FileUploadModule,
+        ProgressBarModule,
+        RippleModule
 
     ]
 })

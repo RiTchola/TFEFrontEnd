@@ -1,6 +1,6 @@
 export interface Fichier{
     id: number,
     date: Date,
-    fileURL: string,
+    personneContact: string,
     typeF: 'VIDEO' | 'IMAGE'
 }

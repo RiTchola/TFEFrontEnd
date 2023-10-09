@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <h3>BLOG</h3>
 <p>Notre actualité à l'établissement</p>
 <div class="card">
@@ -5,7 +6,7 @@
     <h6>{{getDateOf(blog.date)}}</h6>
     <p>{{blog.contenu}}</p>
     <div class="p-fluid formgrid grid">
-        <div class="field col-12 md:col-3" *ngFor="let item of blog.fileUrl">
+        <div class="field col-12 md:col-3" *ngFor="let item of blog.fileURL">
             <p-image src="{{item}}" alt="Image" width="250" [preview]="true"></p-image>
         </div>
     </div>

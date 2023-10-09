@@ -3,5 +3,5 @@ export interface Communique {
     date: Date,
     titre: string,
     contenu: string,
-    fileUrl: string[]
+    fileURL: string[]
 }
