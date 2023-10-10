@@ -7,7 +7,7 @@
     <div class="col-12">
         <div class="card">
 
-            <p-table *ngIf="residents.length > 0"
+            <p-table *ngIf="residents"
                 [value]="residents" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                 [rowsPerPageOptions]="[5, 10, 25, 50]">

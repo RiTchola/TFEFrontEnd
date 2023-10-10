@@ -51,7 +51,7 @@ export class EtablissementComponent implements OnInit {
         this.msgSrv.add({ key: 'tst', severity: 'success', summary: 'Success', detail: msg });
     }
 
-    displayDate(date: string) {
-        return Util.toDate(date);
+    displayDate(date: Date) {
+        return Util.displayAsDate(date);
     }
 }
