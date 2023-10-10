@@ -34,6 +34,7 @@ import { DailyReportDetailsComponent } from './daily-report/daily-report-details
 import { MenuFormsComponent } from './menu-semaine/menu-forms/menu-forms.component';
 import { CreateMenuComponent } from './menu-semaine/create-menu/create-menu.component';
 import { EditMenuComponent } from './menu-semaine/edit-menu/edit-menu.component';
+import { MeetUpFormsComponent } from './meet-up/meet-up-forms/meet-up-forms.component';
 
 @NgModule({
     declarations: [
@@ -54,7 +55,8 @@ import { EditMenuComponent } from './menu-semaine/edit-menu/edit-menu.component'
         DailyReportDetailsComponent,
         MenuFormsComponent,
         CreateMenuComponent,
-        EditMenuComponent
+        EditMenuComponent,
+        MeetUpFormsComponent
     ],
     imports: [
         CommonModule,

@@ -1,0 +1,78 @@
+<p-toast></p-toast>
+<form [formGroup]="formData" #form="ngForm">
+    <h5 class="title mb-0">Remplir les informations pour le Meet</h5>
+    <div class="card mt-3">
+        <div class="col-12">
+            <div class="p-fluid formgrid grid">
+                <div class="field col-12">
+                    <label>Etat</label>
+                    <p-dropdown [options]="statusList" formControlName="status" optionLabel="name" optionValue="value"></p-dropdown>
+                    <small *ngIf="(formData.get('status')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-12">
+                    <label class="required-field">Motif</label>
+                    <input name="reason" formControlName="reason" type="text" required pInputText
+                        class="form-control" />
+                    <small
+                        *ngIf="(formData.get('reason')?.hasError('required') && formData.get('reason')?.touched) || (formData.get('reason')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-12">
+                    <label class="required-field">Date</label>
+                    <p-calendar formControlName="date" [showIcon]="true"></p-calendar>
+                    <small *ngIf="formData.get('date')?.hasError('required') && form.submitted">{{required}}</small>
+                </div>
+                <div class="field col-12">
+                    <label class="required-field">Heure</label>
+                    <p-calendar formControlName="time" [timeOnly]="true" [hourFormat]="'24'"></p-calendar>
+                    <small
+                        *ngIf="(formData.get('time')?.hasError('required') && formData.get('time')?.touched) || (formData.get('time')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+
+                <div class="field col-12">
+                    <label>Type de personne</label>
+                    <p-dropdown [options]="typeList" formControlName="personType" optionLabel="name" optionValue="value"></p-dropdown>
+                    <small *ngIf="(formData.get('personType')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-12">
+                    <label class="required-field">Nom resident</label>
+                    <input name="name" formControlName="name" type="text" required pInputText
+                        class="form-control" />
+                    <small
+                        *ngIf="(formData.get('name')?.hasError('required') && formData.get('name')?.touched) || (formData.get('name')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-12">
+                    <label class="required-field">Prénom Résident</label>
+                    <input name="firstname" formControlName="firstname" type="text" required pInputText
+                        class="form-control" />
+                    <small
+                        *ngIf="(formData.get('firstname')?.hasError('required') && formData.get('firstname')?.touched) || (formData.get('firstname')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-12">
+                    <label class="required-field">Date de Naissance Resident</label>
+                    <p-calendar formControlName="dob" [showIcon]="true"></p-calendar>
+                    <small *ngIf="formData.get('dob')?.hasError('required') && form.submitted">{{required}}</small>
+                    <small *ngIf="formData.get('dob')?.hasError('greater')">L'âge dois être supérieur à 25 ans</small>
+                </div>
+                <div class="field col-12">
+                    <label class="required-field">Nombre de participants</label>
+                    <input name="participants" formControlName="participants" type="number" required pInputText
+                        class="form-control" />
+                    <small
+                        *ngIf="(formData.get('participants')?.hasError('required') && formData.get('participants')?.touched) || (formData.get('participants')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-12">
+                    <label class="required-field">Motif refus</label>
+                    <input name="comment" formControlName="comment" type="text" required pInputText
+                        class="form-control" />
+                    <small
+                        *ngIf="(formData.get('comment')?.hasError('required') && formData.get('comment')?.touched) || (formData.get('comment')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-content-end">
+            <button pButton label="Enregistrer" type="submit" class="btn-primary" (click)="save()"></button>
+        </div>
+    </div>
+</form>
+
+
