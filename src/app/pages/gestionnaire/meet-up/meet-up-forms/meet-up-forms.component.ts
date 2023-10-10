@@ -47,9 +47,9 @@ export class MeetUpFormsComponent implements OnInit {
         { name: 'Autre', value: MeetUpType.autre },
         { name: 'Fleuriste', value: MeetUpType.fleuriste },
         { name: 'Prestation Coiffure', value: MeetUpType.prestationCoiffure },
-        { name: 'Prestation Kinesitherapeutre', value: MeetUpType.prestation_kine },
-        { name: 'Prestation Manicure pdicure', value: MeetUpType.prestation_manicure_pedicure },
-        { name: 'Sortie Etablissement', value: MeetUpType.sortie_etab },
+        { name: 'Prestation Kinesithérapeutre', value: MeetUpType.prestation_kine },
+        { name: 'Prestation Manicure-pédicure', value: MeetUpType.prestation_manicure_pedicure },
+        { name: 'Sortie de Établissement', value: MeetUpType.sortie_etab },
         { name: 'Visite Groupée', value: MeetUpType.visiteGroupe },
     ];
 
