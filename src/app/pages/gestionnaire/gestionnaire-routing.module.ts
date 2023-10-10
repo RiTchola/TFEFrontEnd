@@ -1,3 +1,4 @@
+import { MeetUpFormsComponent } from './meet-up/meet-up-forms/meet-up-forms.component';
 import { CreateMenuComponent } from './menu-semaine/create-menu/create-menu.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -67,6 +68,7 @@ const routes: Routes = [
         ],
     },
     { path: 'meet-up', component: MeetUpComponent },
+    { path: 'meet-up/edit/:id', component: MeetUpFormsComponent },
     { path: 'blog', component: BlogComponent },
 ];
 

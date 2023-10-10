@@ -18,7 +18,7 @@ export class MeetupService {
     }
 
     fetchAll(email: string) {
-        return this.http.get<MeetUp>(`${this.url}/liste/${email}`);
+        return this.http.get<MeetUp[]>(`${this.url}/liste/${email}`);
     }
 
     add(email: string, data: MeetUp) {
@@ -26,6 +26,6 @@ export class MeetupService {
     }
 
     update(email: string, data: MeetUp) {
-        return this.http.post<MeetUp>(`${this.url}/${data.id}/${email}`, data);
+        return this.http.put<MeetUp>(`${this.url}/${data.id}/${email}`, data);
     }
 }
