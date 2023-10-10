@@ -1,0 +1,60 @@
+.title {
+    text-transform: uppercase;
+}
+
+.grid {
+    i {
+        margin: 0 1rem 0 1rem;
+        background-color: var(--orange-200);
+        padding: 3px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    i:hover {
+        background-color: var(--orange-400);
+    }
+}
+
+.content {
+    img {
+        padding-left: 0 !important;
+    }
+
+    .card {
+        padding: 15px 10px 0 10px !important;
+        cursor: pointer;
+    }
+
+    i {
+        background: none !important;
+    }
+}
+
+p-dialog h5 {
+    color: #000;
+}
+
+.p-dialog .p-dialog-header {
+    padding: 0.9rem;
+}
+
+.custom-dialog-content {
+    display: flex;
+    flex-direction: row;
+}
+
+.custom-dialog-content .col-6 {
+    flex: 0 0 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem; 
+}
+
+.custom-dialog-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 80%;
+    padding: 1rem; 
+}

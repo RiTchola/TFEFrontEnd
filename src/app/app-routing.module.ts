@@ -65,7 +65,7 @@ import { adminGuard } from './core/guards/auth.guard';
                     ),
             },
             { path: 'notfound', component: NotfoundComponent },
-            { path: 'externe', loadChildren: () => import('./pages/externe/externe.module').then(m => m.ExterneModule) },
+            // { path: 'externe', loadChildren: () => import('./pages/externe/externe.module').then(m => m.ExterneModule) },
             { path: '**', redirectTo: '/notfound' },
         ]),
     ],

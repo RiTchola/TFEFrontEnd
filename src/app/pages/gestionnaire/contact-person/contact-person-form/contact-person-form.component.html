@@ -1,0 +1,83 @@
+<p-toast></p-toast>
+<h5>INFORMATIONS PERSONNE CONTACT</h5>
+<p>Créer une personne</p>
+<form [formGroup]="formData" #form="ngForm">
+    <div class="card mt-5">
+        <p>Remplir les informations de la personne de contact</p>
+        <div class="col-12">
+            <p>Informations personnelles</p>
+            <div class="p-fluid formgrid grid">
+                <div class="field col-6">
+                    <label>Nom</label>
+                    <input name="name" formControlName="name" type="text" required pInputText class="form-control" />
+                    <small  *ngIf="(formData.get('name')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label class="required-field">Prénom</label>
+                    <input name="firstname" formControlName="firstname" type="text" required pInputText class="form-control" />
+                    <small  *ngIf="(formData.get('firstname')?.hasError('required') && formData.get('firstname')?.touched) || (formData.get('firstname')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label class="required-field">Émail</label>
+                    <input name="email" formControlName="email" type="text" pInputText class="form-control" readonly/>
+                    <small *ngIf="formData.get('email')?.value && formData.get('email')?.invalid && form.submitted">Invalide
+                        </small>
+                </div>
+                <div class="field col-6">
+                    <label class="required-field">Date de Naissance</label>
+                    <p-calendar formControlName="dob" [showIcon]="true"></p-calendar>
+                    <small *ngIf="formData.get('dob')?.hasError('required') && form.submitted">{{required}}</small>
+                    <small *ngIf="formData.get('dob')?.hasError('greater')">L'âge dois être supérieur à 1 jour</small>
+                </div>
+                <div class="field col-6">
+                    <label>Sexe</label>
+                    <p-dropdown [options]="sexeList" formControlName="sexe" optionLabel="name"
+                        optionValue="value"></p-dropdown>
+                    <small *ngIf="(formData.get('sexe')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label>Statut Matrimoniale</label>
+                    <p-dropdown [options]="statusList" formControlName="status" optionLabel="name" optionValue="value"></p-dropdown>
+                    <small *ngIf="(formData.get('status')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label>Type de personne</label>
+                    <p-dropdown [options]="typeList" formControlName="type" optionLabel="name" optionValue="value"></p-dropdown>
+                    <small *ngIf="(formData.get('type')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <p>Information de contact</p>
+            <div class="p-fluid formgrid grid">
+                <div class="field col-6">
+                    <label>Adresse</label>
+                    <input name="address" formControlName="address" type="text" required pInputText
+                        class="form-control" placeholder="Rue de marchant 3, 1000 Bruxelles"/>
+                    <small
+                        *ngIf="(formData.get('address')?.hasError('required') && form.submitted)">{{required}}</small>
+                        <small
+                        *ngIf="formData.get('address')?.invalid && formData.get('address')?.touched">Valeur invalide</small>
+                </div>
+                <div class="field col-6">
+                    <label class="required-field">Téléphone 1</label>
+                    <input name="tel" formControlName="tel" type="text" required pInputText class="form-control" placeholder="32465488904"/>
+                    <small  *ngIf="(formData.get('tel')?.hasError('required') && formData.get('tel')?.touched) || (formData.get('tel')?.hasError('required') && form.submitted)">{{required}}</small>
+                    <small  *ngIf="formData.get('tel')?.value && formData.get('tel')?.invalid && form.submitted">Invalide
+                            Exemple : 32465488904</small>
+                </div>
+                <div class="field col-6">
+                    <label>Téléphone 2</label>
+                    <input name="tel2" formControlName="tel2" type="text" required pInputText class="form-control" placeholder="32465488904 ou vide"/>
+                    <small *ngIf="formData.get('tel')?.value && formData.get('tel')?.invalid && form.submitted">Invalide
+                        Exemple : 32465488904</small>
+                </div>
+            </div>
+            <div class="p-fluid formgrid grid">
+                <div class="field col-6 ml-auto">
+                    <button pButton class="btn-primary" label="Enrégistrer" type="submit" (click)="save()"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -21,4 +21,8 @@ export class Util {
 
         return `${day} ${MONTHS[idx]} ${year}`;
     }
+    public static toDate(date: string) {
+        const idx = Number.parseInt(date.split('-')[1]) - 1;
+        return `${date.split('-')[2]} ${MONTHS[idx]} ${date.split('-')[0]}`;
+    }
 }

@@ -1,0 +1,60 @@
+<p-toast></p-toast>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<h5>INFORMATIONS DE LA PERSONNE CONTACT</h5>
+<p>Détails de la personne</p>
+<div class="grid">
+    <div class="col-12 md:col-4">
+        <div class="card col-12 md:col-12">
+            <div class="text-center">
+                <img src="assets/images/photoUser2.jpg" alt="user_img"
+                    class="d-flex mx-auto align-items-center col-6" />
+                <p><strong>{{person?.nom}}</strong></p>
+                <p><strong>{{person?.prenom}}</strong></p>
+                <button pButton type="button" label="Supprimer la personne" class="btn-danger" (click)="remove()"></button>
+            </div>
+        </div>
+        <div class="col-12 md:col-12 text-center">
+            <button pButton type="button" label="Modifier la personne" class="d-flex mx-auto align-items-center col-6 btn-primary" (click)="personEdit()"></button>
+        </div>
+        <div class="col-12 md:col-12 text-center">
+            <button pButton type="button" [label]="(person?.idUser && person?.idUser !== 0) ? 'Modifier les identifiants': 'Créer les identifiants'" class="d-flex mx-auto align-items-center col-6 btn-primary" (click)="personUserEdit()"></button>
+        </div>
+    </div>
+    <div class="col-12 md:col-8">
+        <div class="card">
+            <h5>PERSONNE DE CONTACT</h5>
+            <p><strong>Informations Personnelles</strong></p>
+            <div class="p-fluid p-formgrid grid mt-5">
+                <div class="col-6">
+                    <h6>Nom</h6>
+                    <p>{{person?.nom}}</p>
+                    <h6>Date De Naissance</h6>
+                    <p>{{person?.dateNaissance}}</p>
+                    <h6>Type de personne</h6>
+                    <p>{{person?.choix}}</p>
+                </div>
+                <div class="col-6 content">
+                    <h6>Prénom</h6>
+                    <p>{{person?.prenom}}</p>
+                    <h6>Statut Matrimoniale</h6>
+                    <p>{{person?.statut}}</p>
+                </div>
+            </div>
+            <p class="my-3"><strong>Informations de Contact</strong></p>
+            <div class="p-fluid p-formgrid grid mt-1">
+                <div class="col-6">
+                    <h6>Téléphone 1</h6>
+                    <p>{{person?.tel1}}</p>
+                    <h6>Adresse</h6>
+                    <p>{{person?.adresse}}</p>
+                </div>
+                <div class="col-6 content">
+                    <h6>Téléphone 2</h6>
+                    <p>{{person?.tel1}}</p>
+                    <h6>Émail</h6>
+                    <p>{{person?.email}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,1 +1,55 @@
-<p>menu-semaine works!</p>
+<h5 class="title">MENU DES RÉSIDENTS</h5>
+<p>Menu de la semaine</p>
+<div class="card flex align-items-center justify-content-center mb-2">
+    <div class="grid">
+        <i class="pi pi-caret-left" (click)="previousWeek()"></i>
+        <strong>Début de Semaine: {{displayAsDate(date)}}</strong>
+        <i class="pi pi-caret-right" (click)="nextWeek()"></i>
+    </div>
+</div>
+<div class="mt-0 content" *ngIf="items.length > 0">
+    <div class="p-fluid formgrid grid">
+        <div class="field col-3" *ngFor="let item of items" (click)="showDetails(item)">
+            <div class="card">
+                <img src="/assets/images/menu-card.png" alt="img" class="col-3" />
+                <h6>{{item.title}}</h6>
+                <div class="p-fluid formgrid grid">
+                    <p class="field col-6">
+                        {{item.subtitle}}
+                    </p>
+                    <p class="field flex ml-auto " style="color: rgba(255, 166, 0, 0.884);">
+                        <i class="pi pi-arrow-right"></i>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="items.length === 0" class="mt-2 card">
+    <p>Aucun Menu disponible pour cette semaine</p>
+    <button pButton label="Ajouter le menu" class="btn-primary ml-auto mt-5" (click)="createMenu()" *ngIf="canAdd"></button>
+    <img src="assets/images/menu.jpeg" alt="Menu" class="col-4 flex mx-auto" *ngIf="!canAdd"/>
+</div>
+
+<p-dialog [(visible)]="show" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
+    <ng-template pTemplate="header">
+        <h5 class="title">SEMAINE DU {{displayAsDate(date)}}</h5>
+    </ng-template>
+    <div class="custom-dialog-content">
+        <div class="col-6">
+            <p><strong>Au Menu le {{selectedItem?.title}}</strong></p>
+            <h6>Petit Déjeuner</h6>
+            <p>{{getValue(0)}}</p>
+            <h6>Déjeuner</h6>
+            <p>{{getValue(1)}}</p>
+            <h6>Diner</h6>
+            <p>{{getValue(2)}}</p>
+        </div>
+        <div class="col-6">
+            <img src="assets/images/menu1.jpg" alt="repas" class="ml-auto"/> 
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <button pButton label="Modifier" class="btn-primary col-12" (click)="editMenu()"></button>
+    </ng-template>
+</p-dialog>

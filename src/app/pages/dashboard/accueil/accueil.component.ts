@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { PrimeIcons } from 'primeng/api';
 
 import { DashboardService } from '../services/dashboard.service';
+import { ResidentService } from '../../gestionnaire/service/resident.service';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { Resident } from 'src/app/models/resident';
+import { DailyReport } from 'src/app/models/daily-report';
 
 interface Item {
     color?: string;
@@ -20,42 +24,68 @@ interface Item {
 export class AccueilComponent implements OnInit {
 
     items: Item[] = [];
+    residents!: Resident[];
+    dailyReports: DailyReport[] = [];
 
-    constructor(private dashboardSrv: DashboardService) { }
+    constructor(
+        private authSrv: AuthService,
+        private dashboardSrv: DashboardService,
+        private residentSrv: ResidentService
+    ) { }
 
     ngOnInit(): void {
-        //this.populateItems();
+        this.populateItems();
     }
 
     populateItems() {
-        this.fetchAllRapports();
-        //this.fetchAllResidents();
+        this.fetchAllResidents();
     }
 
     fetchAllResidents() {
-        this.items.push({
-            color: 'orange',
-            description: "résidents",
-            icon: PrimeIcons.USER,
-            text: 0,
-            header: "Résident",
-            total: 0
-        });
-    }
-
-    fetchAllRapports() {
-        this.dashboardSrv.fetchAllRapports().subscribe({
+        this.residentSrv.fetchResidents(this.authSrv.getLoggedUser()).subscribe({
             next: (r) => {
+                this.residents = r;
                 this.items.push({
-                    color: 'green',
-                    description: "rapports",
-                    icon: PrimeIcons.FILE_PDF,
+                    color: 'orange',
+                    description: "résidents",
+                    icon: PrimeIcons.USER,
                     text: r.length,
-                    header: "Rapport upload",
+                    header: "Résident",
                     total: r.length
                 });
+            }, complete: () => {
+                this.residents.forEach(x => {
+                    if (x.id) {
+                        this.fetchDailyReports(x.id);
+                    }
+                });
+            }
+        })
+    }
+
+    fetchDailyReports(id: number) {
+        this.dashboardSrv.fetchDailyReports(id).subscribe({
+            next: (r) => {
+                r.forEach(x => this.dailyReports.push(x));
             },
-            error: (err) => console.error(err)
+            error: (err) => console.error(err),
+            complete: () => {
+                const item = this.items.find(x => x.description == 'rapports');
+                if (item) {
+                    item.total = this.dailyReports?.length;
+                    item.text = item.total;
+                }
+                else {
+                    this.items.push({
+                        color: 'green',
+                        description: "rapports",
+                        icon: PrimeIcons.FILE_PDF,
+                        text: this.dailyReports?.length,
+                        header: "Rapports",
+                        total: this.dailyReports?.length
+                    });
+                }
+            }
         });
     }
 }

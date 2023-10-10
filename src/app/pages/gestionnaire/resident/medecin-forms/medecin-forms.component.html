@@ -1,0 +1,73 @@
+<p-toast></p-toast>
+<form [formGroup]="formData" #form="ngForm">
+    <h4 class="title mb-0">Remplir les informations du Médécin Traitant</h4>
+    <h6>Informations personnelles</h6>
+    <div class="grid mt-3">
+        <div class="col-12">
+            <div class="p-fluid formgrid grid">
+                <div class="field col-6">
+                    <label class="required-field">Matricule ou Numéro Inami</label>
+                    <input name="mat" formControlName="mat" type="text" required pInputText class="form-control" />
+                    <small
+                        *ngIf="(formData.get('mat')?.hasError('required') && formData.get('mat')?.touched) || (formData.get('mat')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label class="required-field">Émail</label>
+                    <input name="email" formControlName="email" type="text" required pInputText class="form-control" />
+                    <small
+                        *ngIf="(formData.get('email')?.hasError('required') && formData.get('email')?.touched) || (formData.get('email')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label class="required-field">Nom</label>
+                    <input name="lastname" formControlName="lastname" type="text" required pInputText
+                        class="form-control" />
+                    <small
+                        *ngIf="(formData.get('lastname')?.hasError('required') && formData.get('lastname')?.touched) || (formData.get('lastname')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label class="required-field">Prénom</label>
+                    <input name="firstname" formControlName="firstname" type="text" required pInputText
+                        class="form-control" />
+                    <small
+                        *ngIf="(formData.get('firstname')?.hasError('required') && formData.get('firstname')?.touched) || (formData.get('firstname')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label class="required-field">Téléphone 1</label>
+                    <input name="tel1" formControlName="tel1" type="text" required pInputText class="form-control"
+                        placeholder="32465488904" />
+                    <small
+                        *ngIf="(formData.get('tel1')?.hasError('required') && formData.get('tel1')?.touched) || (formData.get('tel')?.hasError('required') && form.submitted)">{{required}}</small>
+                    <small
+                        *ngIf="formData.get('tel1')?.value && formData.get('tel1')?.invalid && form.submitted">Invalide
+                        Exemple : 32465488904</small>
+                </div>
+                <div class="field col-6">
+                    <label>Téléphone 2</label>
+                    <input name="tel2" formControlName="tel2" type="text" pInputText class="form-control" />
+                    <small *ngIf="formData.get('tel2')?.invalid && form.submitted">Invalide Exemple :
+                        32465488904</small>
+                </div>
+                <div class="field col-6">
+                    <label class="required-field">Adresse</label>
+                    <input name="address" formControlName="address" type="text" required pInputText class="form-control"
+                        placeholder="Rue de marchant 3, 1000 Bruxelles" />
+                    <small
+                        *ngIf="(formData.get('address')?.hasError('required') && formData.get('address')?.touched) || (formData.get('address')?.hasError('required') && form.submitted)">{{required}}</small>
+                    <small
+                        *ngIf="formData.get('address')?.value && formData.get('address')?.invalid && form.submitted">Adresse
+                        invalide (Min. 10 caractères)</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="p-fluid formgrid grid">
+                <div class="field col-6 ">
+                    <button pButton label="Précédent" (click)="back()" class="btn-outline-primary"></button>
+                </div>
+                <div class="field col-6 ">
+                    <button pButton label="Prochaine étape" type="submit" class="btn-primary" (click)="next()"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
