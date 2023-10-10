@@ -15,7 +15,7 @@ export class AppMenuComponent implements OnInit {
     ngOnInit() {
         this.model = [
             {
-                label: 'Dashboard',
+                label: 'Tableau de Bord',
                 items: [
                     { label: 'Accueil', icon: 'pi pi-fw pi-home', routerLink: ['/dashboard/accueil'] }
                 ]
@@ -23,14 +23,14 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Calendrier',
                 items: [
-                    { label: 'Calendrier des activités', icon: 'pi pi-fw pi-calendar-plus', routerLink: ['/calendrier/activites'] },
-                    { label: 'Calendrier des évenements', icon: 'pi pi-fw pi-calendar-plus', routerLink: ['/calendrier/evenements'] }                ]
+                    { label: 'Calendrier des Activités', icon: 'pi pi-fw pi-calendar-plus', routerLink: ['/calendrier/activites'] },
+                    { label: 'Calendrier des Évènements', icon: 'pi pi-fw pi-calendar-plus', routerLink: ['/calendrier/evenements'] }                ]
             },
             {
                 label: 'Gestionnaire',
                 items: [
                     { label: 'Résidents', icon: 'pi pi-fw pi-users', routerLink: ['/gestionnaire/resident'] },
-                    { label: 'Menu de la semaine', icon: 'pi pi-fw pi-box', routerLink: ['/gestionnaire/menu-semaine'] },
+                    { label: 'Menu de la Semaine', icon: 'pi pi-fw pi-box', routerLink: ['/gestionnaire/menu-semaine'] },
                     { label: 'Meet-Up', icon: 'pi pi-fw pi-file-edit', routerLink: ['/gestionnaire/meet-up'] },
                     { label: 'Blog', icon: 'pi pi-fw pi-megaphone', routerLink: ['/gestionnaire/blog'] }
                 ]
@@ -39,15 +39,15 @@ export class AppMenuComponent implements OnInit {
                 label: 'Outils',
                 items: [
                     { label: 'Image/Video', icon: 'pi pi-fw pi-video', routerLink: ['/outils/images-video'] },
-                    { label: 'Rapport de visite', icon: 'pi pi-fw pi-comment', routerLink: ['/outils/rapport-visite'] },
-                    { label: 'Etablissement', icon: 'pi pi-fw pi-building', routerLink: ['/outils/etablissement'] }
+                    { label: 'Rapport de Visite', icon: 'pi pi-fw pi-comment', routerLink: ['/outils/rapport-visite'] },
+                    { label: 'Établissement', icon: 'pi pi-fw pi-building', routerLink: ['/outils/etablissement'] }
                 ]
             },
             {
-                label: 'Parametre',
+                label: 'Paramètres',
                 items: [
-                    {label: 'Paramètre de compte', icon: 'pi pi-fw pi-cog', routerLink: ['/parametre/compte'] },
-                    {label: 'Deconnexion', icon: 'pi pi-fw pi-sign-out',  routerLink: ['/parametre/deconnexion'] }
+                    {label: 'Paramètre de Compte', icon: 'pi pi-fw pi-cog', routerLink: ['/parametre/compte'] },
+                    {label: 'Déconnexion', icon: 'pi pi-fw pi-sign-out',  routerLink: ['/parametre/deconnexion'] }
                 ]
             }
 
