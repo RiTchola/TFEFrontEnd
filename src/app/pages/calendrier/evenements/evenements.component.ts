@@ -7,6 +7,8 @@ import { MessageService } from "primeng/api";
 
 import { Evenement } from "../../../models/evenement";
 import frLocale from '@fullcalendar/core/locales/fr';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { RoleType } from 'src/app/shared/interfaces/roleType';
 
 @Component({
   selector: 'app-evenements',
@@ -16,6 +18,7 @@ import frLocale from '@fullcalendar/core/locales/fr';
 export class EvenementsComponent implements OnInit{
     events: Evenement[] = [];
     formData:  Evenement= {id: 0, title: "", date: new Date, allDay:true};
+    canAdd = false;
 
     calendarOptions: any = {
         initialView: 'timeGridDay'
@@ -27,10 +30,14 @@ export class EvenementsComponent implements OnInit{
     view: string = '';
     changedEvent: any;
 
-    constructor(private eventService: CalendarService , private messageService: MessageService) {
+    constructor(
+        private authSrv: AuthService,
+        private eventService: CalendarService , 
+        private messageService: MessageService) {
     }
 
     ngOnInit(): void {
+        this.canAdd = this.authSrv.isAdmin() || this.authSrv.getRole().toLowerCase() === RoleType.etablissement.toLowerCase()
         this.eventService.getAllEvenement().subscribe(events => {
             this.events = events;
             this.calendarOptions = { ...this.calendarOptions, ...{ events: events } };
@@ -70,9 +77,11 @@ export class EvenementsComponent implements OnInit{
     }
 
     onDateSelect(e: any) {
-        this.view = 'new'
-        this.showDialog = true;
-        this.changedEvent = { ...e, title: null, description: null, location: null, backgroundColor: 'lightorange', borderColor: 'orange',  textColor: 'black', font: 'Times New Roman' };
+        if (this.canAdd){
+            this.view = 'new'
+            this.showDialog = true;
+            this.changedEvent = { ...e, title: null, description: null, location: null, backgroundColor: 'lightorange', borderColor: 'orange',  textColor: 'black', font: 'Times New Roman' };
+        }
     }
 
     handleSave() {
@@ -106,12 +115,14 @@ export class EvenementsComponent implements OnInit{
     }
 
     delete() {
-        this.events = this.events.filter(i => i.id.toString() !== this.clickedEvent.id.toString());
-        this.calendarOptions = { ...this.calendarOptions, ...{ events: this.events } };
-        this.showDialog = false;
-        this.eventService.deleteEvenement(this.clickedEvent.id).subscribe(()=>{
-            this.messageService.add({severity: "success", summary: "Success", detail: 'Evènement supprimée' });
-        });
+        if (this.canAdd){
+            this.events = this.events.filter(i => i.id.toString() !== this.clickedEvent.id.toString());
+            this.calendarOptions = { ...this.calendarOptions, ...{ events: this.events } };
+            this.showDialog = false;
+            this.eventService.deleteEvenement(this.clickedEvent.id).subscribe(()=>{
+                this.messageService.add({severity: "success", summary: "Success", detail: 'Evènement supprimée' });
+            });
+        }
     }
 
     validate() {
