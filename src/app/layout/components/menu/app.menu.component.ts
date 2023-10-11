@@ -38,7 +38,7 @@ export class AppMenuComponent implements OnInit {
             },
             {
                 label: 'Paramètres',
-                items: this.getItems('paramètres')
+                items: this.getItems('parametre')
             }
 
         ];
@@ -54,7 +54,7 @@ export class AppMenuComponent implements OnInit {
             }
         }
 
-        if (placeholder.toLowerCase() == 'paramètres') {
+        if (placeholder.toLowerCase() == 'parametre') {
             if (this.authSrv.getRole() == RoleType.etablissement.toLowerCase() || this.authSrv.isAdmin()) {
                 items.push({ label: 'Paramètre de compte', icon: 'pi pi-fw pi-cog', routerLink: ['/parametre/compte'] });
             }
