@@ -10,7 +10,7 @@
                     <input name="username" formControlName="username" type="text" required pInputText
                         class="form-control" placeholder="mpacrina@gmail.com"/>
                     <small
-                        *ngIf="(formData.get('username')?.hasError('required') && formData.get('usename')?.touched) || (formData.get('username')?.hasError('required') && form.submitted)">{{required}}</small>
+                        *ngIf="(formData.get('username')?.hasError('required') && formData.get('username')?.touched) || (formData.get('username')?.hasError('required') && form.submitted)">{{required}}</small>
                 </div>
                 <div class="field col-6" [hidden]="hide">
                     <label class="required-field">Mot de passe</label>

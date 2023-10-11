@@ -19,7 +19,7 @@
                 </div>
                 <div class="field col-6">
                     <label class="required-field">Émail</label>
-                    <input name="email" formControlName="email" type="text" pInputText class="form-control" readonly/>
+                    <input name="email" formControlName="email" type="text" pInputText class="form-control" [readonly]="!isNewRecord"/>
                     <small *ngIf="formData.get('email')?.value && formData.get('email')?.invalid && form.submitted">Invalide
                         </small>
                 </div>

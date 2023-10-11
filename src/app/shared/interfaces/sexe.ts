@@ -1,5 +1,5 @@
 export const Sexe = {
-    masculin: 'MASCULIN',
-    feminin: 'FEMININ',
+    homme: 'HOMME',
+    femme: 'FEMME',
     neutre: 'NEUTRE'
 }

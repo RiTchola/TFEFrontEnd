@@ -102,7 +102,6 @@ export class EtablissementFormsComponent implements OnInit {
         }
 
         if (this.dataForm.valid && this.update) {
-            console.log(data)
             data.id = this.toUpdate?.id;
             this.etablisSrv.update(data).subscribe({
                 next: (result) => {

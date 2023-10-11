@@ -10,6 +10,7 @@ import { MessageService } from 'primeng/api';
 import { Status } from 'src/app/shared/interfaces/person-status';
 import { Sexe } from 'src/app/shared/interfaces/sexe';
 import { UserService } from '../../service/user.service';
+import { RoleType } from 'src/app/shared/interfaces/roleType';
 
 
 @Component({
@@ -33,8 +34,8 @@ export class ResidentFormsComponent implements OnInit {
 
     sexeList = [
         { name: '', value: '' },
-        { name: 'Masculin', value: Sexe.masculin},
-        { name: 'Féminin', value: Sexe.feminin },
+        { name: 'Homme', value: Sexe.homme},
+        { name: 'Femme', value: Sexe.femme },
         { name: 'Neutre', value: Sexe.neutre }
     ];
 
@@ -142,7 +143,7 @@ export class ResidentFormsComponent implements OnInit {
             motifSortie: this.formData.controls.reasonExit.value ?? '',
             chambre: this.formData.controls.room.value ?? '',
             statut: this.formData.controls.status.value ?? Status.celibataire,
-            sexe: this.formData.controls.status.value ?? Sexe.neutre,
+            sexe: this.formData.controls.sexe.value ?? Sexe.neutre,
             tel: this.formData.controls.tel.value ?? "",
         };
         return data;
@@ -207,6 +208,7 @@ export class ResidentFormsComponent implements OnInit {
         let doctorId = 0;
 
         if (isNaN(this.residentId)) {
+            this.userValue.role = RoleType.resident;
             this.userSrv.saveUser(this.userValue).subscribe({
                 next: (r) => {
                     userId = Number.parseInt(r.msg)

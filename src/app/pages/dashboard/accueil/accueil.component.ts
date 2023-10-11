@@ -6,6 +6,7 @@ import { ResidentService } from '../../gestionnaire/service/resident.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Resident } from 'src/app/models/resident';
 import { DailyReport } from 'src/app/models/daily-report';
+import { RoleType } from 'src/app/shared/interfaces/roleType';
 
 interface Item {
     color?: string;
@@ -26,6 +27,7 @@ export class AccueilComponent implements OnInit {
     items: Item[] = [];
     residents!: Resident[];
     dailyReports: DailyReport[] = [];
+    isAdmin = false;
 
     constructor(
         private authSrv: AuthService,
@@ -34,6 +36,7 @@ export class AccueilComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
+        this.isAdmin = this.authSrv.isAdmin() || this.authSrv.getRole().toLowerCase() == RoleType.etablissement.toLowerCase();
         this.populateItems();
     }
 

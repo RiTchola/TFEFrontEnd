@@ -56,6 +56,7 @@ export class UserFormsComponent implements OnInit {
         }
 
         if (this.router.url.includes("edit") && this.router.url.includes("user")) {
+            // edit contact person user
             this.userId = Number.parseInt(parts[5]);
             this.personId = Number.parseInt(parts[6]);
             this.oneStep = true;
@@ -154,7 +155,6 @@ export class UserFormsComponent implements OnInit {
     fetchUserById() {
         this.userSrv.fetchById(this.userId).subscribe({
             next: (r) => {
-                console.log(r);
                 this.initForm(r)
             },
             complete: () => {
@@ -174,7 +174,6 @@ export class UserFormsComponent implements OnInit {
             enabled: true,
             username: this.formData.controls.username.value ?? "",
             password: this.formData.controls.pwd1.value ?? "",
-            role: RoleType.personnecontact
         };
 
         if (!isNaN(this.userId)) {
@@ -185,11 +184,14 @@ export class UserFormsComponent implements OnInit {
         }
 
         if (isNaN(this.personId)) {
-            this.userSrv.saveUser(this.buildBody()).subscribe({
+            let body = this.buildBody();
+            this.userSrv.saveUser(body).subscribe({
                 next: (r) => this.onSuccess()
             })
         } else {
-            this.userSrv.savePersonUser(this.personId, this.buildBody()).subscribe({
+            let body = this.buildBody();
+            body.role = RoleType.personnecontact;
+            this.userSrv.savePersonUser(this.personId, data).subscribe({
                 next: (r) => this.onSuccess()
             })
         }
