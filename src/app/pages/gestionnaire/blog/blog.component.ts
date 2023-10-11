@@ -102,8 +102,8 @@ export class BlogComponent implements OnInit {
                     }else if (event instanceof HttpResponse) {
                         this.visible = false;
                         this.getBlogs();
-                        this.messageService.add({severity:'success', summary:'Success', detail:'merci'})
-                        this.answer = event.body.message;
+                        this.messageService.add({severity:'success', summary:'Success', detail:event.body.message})
+
                     }
                 },
                 error: (error)=>{

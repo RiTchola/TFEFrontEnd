@@ -1,12 +1,10 @@
-import {Component, ElementRef, OnInit, QueryList, ViewChildren} from '@angular/core';
-import {RapportVisite, TypePersonne} from "../../../models/rapport-visite";
-import {RapportDeVisiteService} from "../services/rapport-de-visite.service";
+import {Component, OnInit} from '@angular/core';
 import {MessageService} from "primeng/api";
 import {Fichier} from "../../../models/fichier";
 import {FichierService} from "../services/fichier.service";
 import {KeyValue} from "@angular/common";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {HttpEventType, HttpResponse} from "@angular/common/http";
+import {HttpResponse} from "@angular/common/http";
+
 
 @Component({
     selector: 'app-images-video',
@@ -15,27 +13,12 @@ import {HttpEventType, HttpResponse} from "@angular/common/http";
     providers: [MessageService],
 })
 export class ImagesVideoComponent implements OnInit{
-    uploadedImages: any[] = [];
+    uploadedImages!: any;
     today = new Date();
-    @ViewChildren('buttonEl') buttonEl!: QueryList<ElementRef>;
-    value:number = 0;
-    answer: string = '';
-
-    dataForm = new FormGroup({
-        date: new FormControl<Date>(new Date(), [Validators.required]),
-        typeF: new FormControl('', [Validators.required]),
-    });
-
-    required = 'Ce champ est requis';
 
 
-    fichier: Fichier[] = [
-        {id: 0, date: new Date(), typeF: "IMAGE", personneContact: "text.png"},
-        {id: 2, date: new Date(), typeF: "VIDEO", personneContact: "text.mp4"},
-        {id: 3, date: new Date(), typeF: "VIDEO", personneContact: "te23.mp4"},
-        {id: 4, date: new Date(), typeF: "IMAGE", personneContact: "text3.png"},
-        {id: 5, date: new Date(), typeF: "IMAGE", personneContact: "text5.png"}
-    ];
+
+    fichier: Fichier[] = [];
     typeFichiers: KeyValue<string, string>[] = [
         {key: "Image", value: "IMAGE"},
         {key: "Video", value: "VIDEO"}];
@@ -53,27 +36,63 @@ export class ImagesVideoComponent implements OnInit{
     }
 
     getFiles(){
-
+        this.fichierService.getAllFiles().subscribe(
+            {
+                next: (res)=>{
+                    this.fichier = res;
+                },
+                error: (error)=>{
+                    this.messageService.add({severity:'error', summary:'Error', detail:error.message})
+                }
+            }
+        )
     }
 
     ngOnInit(): void {
         this.getFiles();
     }
 
-    loadRapports() {
-        this.fichierService.getAllFichiers().subscribe({
-            next: (data) => {
-                this.fichier = data;
-                this.messageService.add({severity: 'success', summary: 'Success', detail: 'succès'});
-            },
-            error: (err) => {
-                this.messageService.add({severity: 'error', summary: 'Error', detail: err.message},)
+
+    downloadFile(url: string){
+        this.fichierService.downloadFile(url).subscribe(
+            {
+                next: (data)=>{
+                    const contentDispositionHeader = data.headers.get('Content-Disposition');
+                    const filename = this.extractFilename(contentDispositionHeader);
+                    this.createAndDownloadBlobFile(data.body, filename);
+                },
+                error: (error)=>{
+                    this.messageService.add({severity:'error', summary:'Error', detail:error.message})
+                }
             }
-        });
+        )
     }
 
-    downloadFile(){
+    private createAndDownloadBlobFile(body: any, filename: string): void {
+        const blob = new Blob([body]);
+        const fileName = filename;
+        const link = document.createElement('a');
+        const url = URL.createObjectURL(blob);
 
+        link.href = url;
+        link.download = fileName;
+        link.click();
+
+        URL.revokeObjectURL(url);
+        link.remove();
+    }
+
+
+
+    private extractFilename(contentDispositionHeader: string|null): string {
+        if (!contentDispositionHeader) {
+            return 'default-filename';
+        }
+        const filenameMatch = contentDispositionHeader.match(/filename="?([^"]*)"?/);
+        if (filenameMatch && filenameMatch.length > 1) {
+            return filenameMatch[1];
+        }
+        return 'default-filename';
     }
 
     showDialog() {
@@ -81,54 +100,30 @@ export class ImagesVideoComponent implements OnInit{
     }
 
     onSelect(event: any) {
-        for (const file of event.files) {
-            this.uploadedImages.push(file);
-        }
+        this.uploadedImages = event.files[0];
     }
-
-    onImageMouseOver(file: File) {
-        this.buttonEl.toArray().forEach(el => {
-            el.nativeElement.id === file.name ? el.nativeElement.style.display = 'flex' : null;
-        })
-    }
-
-    onImageMouseLeave(file: File) {
-        this.buttonEl.toArray().forEach(el => {
-            el.nativeElement.id === file.name ? el.nativeElement.style.display = 'none' : null;
-        })
-    }
-
-    removeImage(file: File) {
-        this.uploadedImages = this.uploadedImages.filter(i=> i!==file);
-    }
-
 
     submit(){
-        if(this.dataForm.valid){
-            /*
-            this.communiqueService.createCommunique(
-                this.dataForm.controls.contenu.value ?? '',
-                this.dataForm.controls.titre.value ?? '',
-                this.dataForm.controls.date.value?.toISOString() ?? new Date().toISOString(),
-                this.uploadedImages
-            ).subscribe({
+        this.fichierService.addFile(this.fichierHelper.date, this.fichierHelper.typeF, this.uploadedImages).subscribe(
+            {
                 next: (event)=>{
-                    if(event.type === HttpEventType.UploadProgress){
-                        this.value = Math.round((100 * event.loaded) / (event.total?event.total: 1));
-                    }else if (event instanceof HttpResponse) {
+                    if(event instanceof HttpResponse){
                         this.visible = false;
                         this.getFiles();
-                        this.messageService.add({severity:'success', summary:'Success', detail:'merci'})
-                        this.answer = event.body.message;
+                        this.messageService.add({severity:'success', summary:'Success', detail:event.body.message})
+                        this.fichierHelper= {
+                            id: 0,
+                            date: new Date(),
+                            personneContact: '',
+                            typeF: "IMAGE"
+                        };
+                        this.uploadedImages =  null;
                     }
                 },
                 error: (error)=>{
-                    this.messageService.add({severity:'error', summary:'Error', detail:error.message},)
+                    this.messageService.add({severity:'error', summary:'Error', detail:error.message});
                 }
-            })*/
-        }else{
-            this.dataForm.markAllAsTouched();
-            this.messageService.add({severity:'error', summary: 'Error', detail: 'Form is invalid. Please correct the errors and try again.'});
-        }
+            }
+        )
     }
 }
