@@ -12,14 +12,14 @@
     </button>
 
     <div #topbarmenu class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
-        <div class="layout-topbar-logo ">
-            <div>
-                <span style="color: gray; font-family: 'Times New Roman', sans-serif;">{{ username }}</span>
-                <span style="color: gray; font-family: 'Times New Roman', sans-serif; font-size: smaller;">{{ role }}</span>
+        <div class="flex justify-content-end col-12">
+            <div class="my-auto">
+                <span style="color: gray; font-family: 'Times New Roman', sans-serif; font-size: 1.1em;">{{ username }}</span>
+                <!--span style="color: gray; font-family: 'Times New Roman', sans-serif; font-size: smaller;">{{ role }}</span-->
             </div>
-            <img *ngIf="role == 'admin' || 'etablissement'" src="/assets/images/etablissement-trans.png" alt="Etablissement"   >
-            <img *ngIf="role == 'resident'" src="/assets/images/resid-trans.png" alt="Resident" class="mb-6">
-            <img *ngIf="role == 'personnecontact'" src="/assets/images/personContact-trans.png" alt="Personne Contact" >
+            <img *ngIf="role === 'admin' || 'etablissement'" src="/assets/images/etablissement-trans.png" alt="Etablissement" class="col-2" />
+            <img *ngIf="role === 'resident'" src="/assets/images/resid-trans.png" alt="Resident" class="col-2" />
+            <img *ngIf="role === 'personnecontact'" src="/assets/images/personContact-trans.png" alt="Personne Contact" class="col-2" />
         </div>
     </div>
 </div>

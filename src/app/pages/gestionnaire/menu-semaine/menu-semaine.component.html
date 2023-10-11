@@ -46,10 +46,10 @@
             <p>{{getValue(2)}}</p>
         </div>
         <div class="col-6">
-            <img [src]="'assets/images/' + randomImage" alt="repas" class="ml-auto"/> 
+            <img [src]="'assets/images/' + randomImage" alt="repas" class="ml-auto"/>
         </div>
     </div>
-    <ng-template pTemplate="footer">
+    <ng-template pTemplate="footer" *ngIf="canAdd">
         <button pButton label="Modifier" class="btn-primary col-12" (click)="editMenu()"></button>
     </ng-template>
 </p-dialog>

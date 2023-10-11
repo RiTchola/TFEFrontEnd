@@ -39,7 +39,7 @@ export class AuthService {
 
     getUsername(): string {
         const jwtToken = this.getToken();
-        return jwtToken != "" ? this.jwtHelper.decodeToken(jwtToken).username : "";
+        return jwtToken != "" ? this.jwtHelper.decodeToken(jwtToken).sub : "";
     }
 
     getToken(): string {
