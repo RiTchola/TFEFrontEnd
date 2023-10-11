@@ -24,7 +24,7 @@ import { contactPersonGuard, estabAndContactPerson, establissementGuard } from '
 const routes: Routes = [
     { path: '', redirectTo: 'resident', pathMatch: 'full' },
     { path: 'resident', component: ResidentComponent, canActivate: [estabAndContactPerson] },
-    { path: 'resident/details/:id', component: DetailsComponent, canActivate: [establissementGuard, contactPersonGuard] },
+    { path: 'resident/details/:id', component: DetailsComponent, canActivate: [estabAndContactPerson] },
     {
         path: 'resident/add', component: ManageComponent,
         canActivate: [establissementGuard],
@@ -45,7 +45,7 @@ const routes: Routes = [
             { path: '', redirectTo: 'user', pathMatch: 'full' },
         ],
     },
-    { path: 'daily-report/:id', component: DailyReportComponent, canActivate: [establissementGuard, contactPersonGuard] },
+    { path: 'daily-report/:id', component: DailyReportComponent, canActivate: [estabAndContactPerson] },
     { path: 'daily-report/details/:residentId/:reportId', component: DailyReportDetailsComponent, canActivate: [establissementGuard, contactPersonGuard] },
     { path: 'daily-report/edit/:reportId', component: DailyReportFormsComponent, canActivate: [establissementGuard, contactPersonGuard] },
     { path: 'contact-person/:id', component: ContactPersonComponent },

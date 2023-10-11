@@ -4,6 +4,8 @@ import { DailyReport } from 'src/app/models/daily-report';
 import { MessageService } from 'primeng/api';
 import { DailyReportService } from '../service/daily-report.service';
 import { Util } from 'src/app/shared/util';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { RoleType } from 'src/app/shared/interfaces/roleType';
 
 @Component({
     selector: 'app-daily-report',
@@ -18,8 +20,10 @@ export class DailyReportComponent implements OnInit {
     report?: DailyReport;
     show = false;
     isNewRecord = true;
+    canAdd = false;
 
     constructor(
+        private authSrv: AuthService,
         private msgSrv: MessageService,
         private reportSrv: DailyReportService,
         private router: Router
@@ -28,6 +32,7 @@ export class DailyReportComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.canAdd = this.authSrv.isAdmin() || this.authSrv.getRole().toLowerCase() === RoleType.etablissement.toLowerCase()
         this.fetchAllReports();
     }
 

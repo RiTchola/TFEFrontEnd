@@ -20,7 +20,7 @@
                         <th id="entryDate" pSortableColumn="entryDate">Date d'Éntrée'<p-sortIcon field="dob"></p-sortIcon></th>
                         <th id="account" pSortableColumn="account">Compte <p-sortIcon field="account"></p-sortIcon></th>
                         <th id="room" pSortableColumn="room">Chambre <p-sortIcon field="room"></p-sortIcon></th>
-                        <th>Actions</th>
+                        <th id="actions">Actions</th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-resident>
@@ -44,14 +44,14 @@
                         <td style="min-width: 200px;">
                             {{resident.chambre}}
                         </td>
-                        <td>
+                        <td >
                             <i class="pi pi-eye"
                                [ngClass]="{'active-icon': resident.actif, 'inactive-icon': !resident.actif}"
                                (click)="resident.actif ? view(resident) : null"
                                [style.color]="resident.actif ? '#1ec054ce' : 'red'"
                                style="margin-right: 8px">
                             </i>
-                            <i class="pi pi-pencil" (click)="edit(resident)"></i>
+                            <i *ngIf="canAdd" class="pi pi-pencil" (click)="edit(resident)"></i>
                           </td>
                     </tr>
                 </ng-template>
