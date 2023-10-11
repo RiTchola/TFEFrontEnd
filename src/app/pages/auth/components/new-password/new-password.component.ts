@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {UserService} from "../../../gestionnaire/service/user.service";
 
 @Component({
   selector: 'app-new-password',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class NewPasswordComponent {
     username:string='';
+    constructor(private userService: UserService) {
+    }
+
+
+
+
 }
