@@ -34,8 +34,8 @@ export class ResidentFormsComponent implements OnInit {
 
     sexeList = [
         { name: '', value: '' },
-        { name: 'Masculin', value: Sexe.masculin},
-        { name: 'Féminin', value: Sexe.feminin },
+        { name: 'Homme', value: Sexe.homme},
+        { name: 'Femme', value: Sexe.femme },
         { name: 'Neutre', value: Sexe.neutre }
     ];
 
@@ -143,7 +143,7 @@ export class ResidentFormsComponent implements OnInit {
             motifSortie: this.formData.controls.reasonExit.value ?? '',
             chambre: this.formData.controls.room.value ?? '',
             statut: this.formData.controls.status.value ?? Status.celibataire,
-            sexe: this.formData.controls.status.value ?? Sexe.neutre,
+            sexe: this.formData.controls.sexe.value ?? Sexe.neutre,
             tel: this.formData.controls.tel.value ?? "",
         };
         return data;
