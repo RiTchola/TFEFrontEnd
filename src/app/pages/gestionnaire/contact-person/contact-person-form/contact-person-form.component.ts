@@ -43,8 +43,8 @@ export class ContactPersonFormComponent implements OnInit {
 
     sexeList = [
         { name: '', value: '' },
-        { name: 'Masculin', value: Sexe.masculin},
-        { name: 'Féminin', value: Sexe.feminin },
+        { name: 'Homme', value: Sexe.homme},
+        { name: 'Femme', value: Sexe.femme },
         { name: 'Neutre', value: Sexe.neutre }
     ];
 
@@ -129,7 +129,7 @@ export class ContactPersonFormComponent implements OnInit {
         const phone = (!this.formData.controls.tel2.value || this.formData.controls.tel2.value == '') ? this.formData.controls.tel.value : this.formData.controls.tel2.value;
         const data: ContactPerson = {
             adresse: this.formData.controls.address.value ?? '',
-            sexe: this.formData.controls.status.value ?? Sexe.neutre,
+            sexe: this.formData.controls.sexe.value ?? Sexe.neutre,
             choix: this.formData.controls.type.value ?? '',
             dateNaissance: this.formData.controls.dob.value ?? new Date(),
             email: this.formData.controls.email.value ?? '',
@@ -155,6 +155,7 @@ export class ContactPersonFormComponent implements OnInit {
     }
 
     add() {
+        console.log(this.buildBody())
         this.contactpersonSrv.add(this.residentId, this.buildBody()).subscribe({
             next: (r) => this.onSuccess('Personne de contact enrégistrée.'),
             error: (err) => {
