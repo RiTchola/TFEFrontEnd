@@ -1,4 +1,17 @@
 i:first-child {
-    margin-right: 8px !important;
+    margin-right: 20px !important;
     color: chocolate;
+}
+
+i {
+    color: #3e3e3e;
+}
+
+th {
+    color: #3e3e3e !important;
+    background: var(--orange-300) !important;
+}
+
+td {
+    min-width: 200px;
 }

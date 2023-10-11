@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Dialog } from 'primeng/dialog';
 import { Util } from 'src/app/shared/util';
 import { Router } from '@angular/router';
 import { MenuOfTheWeekService } from '../service/menu-of-the-week.service';
@@ -29,6 +29,12 @@ export class MenuSemaineComponent implements OnInit {
     dateTime = 0;
     canAdd = false;
 
+    @ViewChild('menuDialog') menuDialog?: Dialog;
+    // Liste d'images disponibles
+    images = ['menu1.jpg', 'menu2.jpg', 'menu3.jpg', 'menu4.jpg', 'menu5.jpg', 'menu6.jpeg',  'menu7.jpeg',  'menu8.jpeg',];
+    // Image aléatoire
+    randomImage?: string;
+
     constructor(
         private authSrv: AuthService,
         private menuSrv: MenuOfTheWeekService,
@@ -54,6 +60,17 @@ export class MenuSemaineComponent implements OnInit {
             this.date = new Date(curr.setDate(curr.getDate() - curr.getDay()));
         }
         this.fetchMenu();
+
+        this.randomImage = this.getRandomImage();
+    }
+
+    onShow() {
+        this.randomImage = this.getRandomImage();
+    }
+
+    getRandomImage(): string {
+        const randomIndex = Math.floor(Math.random() * this.images.length);
+        return this.images[randomIndex];
     }
 
     private fetchMenu() {

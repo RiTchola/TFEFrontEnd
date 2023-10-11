@@ -1,16 +1,16 @@
 <p-toast></p-toast>
 <form [formGroup]="formData" #form="ngForm">
-    <h5 class="title mb-0">Remplir les informations pour le Meet</h5>
+    <h5 class="title mb-0">Remplir les informations pour le Meet-Up</h5>
     <div class="card mt-3">
         <div class="col-12">
             <div class="p-fluid formgrid grid">
                 <div class="field col-12" [hidden]="isContactPerson">
-                    <label>Etat</label>
+                    <label>État de la demande</label>
                     <p-dropdown [options]="statusList" formControlName="status" optionLabel="name"
                         optionValue="value"></p-dropdown>
                 </div>
                 <div class="field col-12">
-                    <label class="required-field">Motif</label>
+                    <label class="required-field">Motif du Meet-Up</label>
                     <input name="reason" formControlName="reason" type="text" required pInputText class="form-control"
                         [readonly]="!isContactPerson" />
                     <small
@@ -30,28 +30,28 @@
                 </div>-->
 
                 <div class="field col-12">
-                    <label>Type</label>
+                    <label>Type de Meet-Up</label>
                     <p-dropdown [options]="typeList" formControlName="personType" optionLabel="name" optionValue="value"
                         [readonly]="!isContactPerson"></p-dropdown>
                     <small
                         *ngIf="(formData.get('personType')?.hasError('required') && form.submitted)">{{required}}</small>
                 </div>
                 <div class="field col-12">
-                    <label class="required-field">Nom resident</label>
+                    <label class="required-field">Nom du Résident</label>
                     <input name="name" formControlName="name" type="text" required pInputText class="form-control"
                         [readonly]="!isContactPerson" />
                     <small
                         *ngIf="(formData.get('name')?.hasError('required') && formData.get('name')?.touched) || (formData.get('name')?.hasError('required') && form.submitted)">{{required}}</small>
                 </div>
                 <div class="field col-12">
-                    <label class="required-field">Prénom Résident</label>
+                    <label class="required-field">Prénom du Résident</label>
                     <input name="firstname" formControlName="firstname" type="text" required pInputText
                         class="form-control" [readonly]="!isContactPerson" />
                     <small
                         *ngIf="(formData.get('firstname')?.hasError('required') && formData.get('firstname')?.touched) || (formData.get('firstname')?.hasError('required') && form.submitted)">{{required}}</small>
                 </div>
                 <div class="field col-12">
-                    <label class="required-field">Date de Naissance Resident</label>
+                    <label class="required-field">Date de Naissance du Résident</label>
                     <p-calendar formControlName="dob" [showIcon]="true" [readonlyInput]="!isContactPerson"
                         [readonlyInput]="!isContactPerson"></p-calendar>
                     <small *ngIf="formData.get('dob')?.hasError('required') && form.submitted">{{required}}</small>
@@ -65,13 +65,13 @@
                         *ngIf="(formData.get('participants')?.hasError('required') && formData.get('participants')?.touched) || (formData.get('participants')?.hasError('required') && form.submitted)">{{required}}</small>
                 </div>
                 <div class="field col-12" [hidden]="isContactPerson">
-                    <label class="required-field">Motif refus</label>
+                    <label>Motif de Refus</label>
                     <input name="dismiss" formControlName="dismiss" type="text" pInputText class="form-control" />
                 </div>
             </div>
         </div>
         <div class="flex justify-content-end">
-            <button pButton label="Enregistrer" type="submit" class="btn-primary" (click)="save()"></button>
+            <button pButton label="Sousmettre" type="submit" class="btn-primary" (click)="save()"></button>
         </div>
     </div>
 </form>

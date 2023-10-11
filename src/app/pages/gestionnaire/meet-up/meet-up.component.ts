@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { RoleType } from 'src/app/shared/interfaces/roleType';
+import { Util } from 'src/app/shared/util';
 
 @Component({
     selector: 'app-meet-up',
@@ -66,10 +67,15 @@ export class MeetUpComponent implements OnInit {
     }
 
     displayDate(date: string) {
-        return date.split(" ")[0];
+        const d = date.split(" ")[0];
+        return Util.displayAsDate(new Date(d));
     }
 
     displayTime(date: string) {
         return date.split(" ")[1].split(".")[0];
+    }
+
+    getDateOf(date: Date){
+        return Util.displayAsDate(date);
     }
 }
