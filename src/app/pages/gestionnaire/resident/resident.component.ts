@@ -7,6 +7,7 @@ import { MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Util } from 'src/app/shared/util';
 import { Router } from '@angular/router';
+import { RoleType } from 'src/app/shared/interfaces/roleType';
 
 @Component({
     selector: 'app-resident',
@@ -17,6 +18,7 @@ import { Router } from '@angular/router';
 export class ResidentComponent implements OnInit {
 
     residents: Resident[] = [];
+    canAdd = false;
 
     constructor(
         private authSrv: AuthService,
@@ -26,6 +28,7 @@ export class ResidentComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
+        this.canAdd = this.authSrv.isAdmin() || this.authSrv.getRole().toLowerCase() === RoleType.etablissement.toLowerCase()
         this.populateList();
     }
 

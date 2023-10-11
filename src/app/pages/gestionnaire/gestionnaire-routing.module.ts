@@ -19,11 +19,11 @@ import { DailyReportFormsComponent } from './daily-report/daily-report-forms/dai
 import { DailyReportDetailsComponent } from './daily-report/daily-report-details/daily-report-details.component';
 import { MenuFormsComponent } from './menu-semaine/menu-forms/menu-forms.component';
 import { EditMenuComponent } from './menu-semaine/edit-menu/edit-menu.component';
-import { contactPersonGuard, establissementGuard } from 'src/app/core/guards/auth.guard';
+import { contactPersonGuard, estabAndContactPerson, establissementGuard } from 'src/app/core/guards/auth.guard';
 
 const routes: Routes = [
     { path: '', redirectTo: 'resident', pathMatch: 'full' },
-    { path: 'resident', component: ResidentComponent, canActivate: [establissementGuard] },
+    { path: 'resident', component: ResidentComponent, canActivate: [estabAndContactPerson] },
     { path: 'resident/details/:id', component: DetailsComponent, canActivate: [establissementGuard, contactPersonGuard] },
     {
         path: 'resident/add', component: ManageComponent,

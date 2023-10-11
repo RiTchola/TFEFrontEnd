@@ -29,7 +29,7 @@ export class LoginComponent implements OnDestroy{
                     next: (res)=>{
                         sessionStorage.setItem('accessToken', res.accessToken);
                         this.authService.setLoggedIn(true);
-                        this.router.navigate(["/"]);
+                        this.router.navigate(["/dashboard"]);
                     },
                     error: (err)=>{
                         this.messageService.add({severity: "error", summary: "Error ("+err.status+")", detail: "Invalid username or password ("+err.message+")" });

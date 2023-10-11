@@ -47,8 +47,9 @@ export class AppMenuComponent implements OnInit {
     getItems(placeholder: string) {
         let items = [];
         if (placeholder.toLowerCase() == 'outils') {
-            items.push({ label: 'Image/Video', icon: 'pi pi-fw pi-video', routerLink: ['/outils/images-video'] });
-            if (this.authSrv.getRole() == RoleType.etablissement.toLowerCase() || this.authSrv.isAdmin()) {
+            if (this.authSrv.getRole() == RoleType.etablissement.toLowerCase() || this.authSrv.isAdmin() ||
+                this.authSrv.getRole() == RoleType.resident.toLowerCase()) {
+                items.push({ label: 'Image/Video', icon: 'pi pi-fw pi-video', routerLink: ['/outils/images-video'] });
                 items.push({ label: 'Rapport de visite', icon: 'pi pi-fw pi-comment', routerLink: ['/outils/rapport-visite'] });
                 items.push({ label: 'Etablissement', icon: 'pi pi-fw pi-building', routerLink: ['/outils/etablissement'] });
             }
@@ -62,7 +63,7 @@ export class AppMenuComponent implements OnInit {
         }
 
         if (placeholder.toLowerCase() == 'gestionnaire') {
-            if (this.authSrv.getRole() == RoleType.etablissement.toLowerCase() || this.authSrv.getRole() == RoleType.personnecontact.toLowerCase() || this.authSrv.isAdmin()) {
+            if (this.authSrv.getRole() == RoleType.etablissement.toLowerCase() || this.authSrv.getRole().toLowerCase() == RoleType.personnecontact.toLowerCase() || this.authSrv.isAdmin()) {
                 items.push({ label: 'Résidents', icon: 'pi pi-fw pi-users', routerLink: ['/gestionnaire/resident'] });
             }
             items.push({ label: 'Menu de la semaine', icon: 'pi pi-fw pi-box', routerLink: ['/gestionnaire/menu-semaine'] });
