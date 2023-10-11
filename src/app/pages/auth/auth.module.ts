@@ -5,7 +5,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { NewPasswordComponent } from './components/new-password/new-password.component';
 import { PasswordModule } from "primeng/password";
-import { FormsModule } from "@angular/forms";
+import { FormsModule , ReactiveFormsModule} from "@angular/forms";
 import { ButtonModule } from "primeng/button";
 import { RippleModule } from "primeng/ripple";
 import { InputTextModule } from "primeng/inputtext";
@@ -18,6 +18,7 @@ import { ToastModule } from "primeng/toast";
         AuthRoutingModule,
         PasswordModule,
         FormsModule,
+        ReactiveFormsModule,
         ButtonModule,
         RippleModule,
         InputTextModule,

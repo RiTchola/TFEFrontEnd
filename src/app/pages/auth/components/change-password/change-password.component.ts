@@ -1,17 +1,21 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../../../gestionnaire/service/user.service";
+import { MessageService } from 'primeng/api';
 
 @Component({
     selector: 'app-change-password',
     templateUrl: './change-password.component.html',
-    styleUrls: ['./change-password.component.scss']
+    styleUrls: ['./change-password.component.scss'],
+    providers: [MessageService]
 })
 export class ChangePasswordComponent {
+    oldPassword: string = '';
 
     required = 'Ce champ est requis';
     formData = new FormGroup({
         username: new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+        oldPassword: new FormControl('', [Validators.required]),
         pwd1: new FormControl('', [
             Validators.required,
             Validators.minLength(8),
@@ -23,25 +27,44 @@ export class ChangePasswordComponent {
         ])
     });
 
-    constructor(private userService: UserService) {
+    constructor(private userService: UserService, private msgSrv: MessageService) {
 
     }
 
+    buildBody() {
+        const data =  {
+            username: this.formData.controls.username.value ?? '',
+            oldPassword: this.formData.controls.oldPassword.value ?? '',
+            pwd1: this.formData.controls. pwd1.value ?? '',
+            pwd2: this.formData.controls. pwd2.value ?? '',
+        };
+        return data;
+    }
+
+
     save() {
-        this.userService.changePassword(this.username, this.oldPassword, this.password1).subscribe(
+        const data = this.buildBody();
+
+        this.userService.changePassword(data.username, data.oldPassword, data.pwd1).subscribe(
             {
                 next: (res) => {
-                    console.log(res);
+                    console.log(res)
+                    if (res.msg.includes("compte"))
+                    {
+                        this.msgSrv.add({ severity: 'error', summary: 'Error', detail: res.msg });
+                        return
+                    }
+                    else { 
+                        this.msgSrv.add({ severity: 'success', summary: 'Success', detail: res.msg });
+                        return
+                    }
                 },
                 error: (error) =>{
-                    console.log(error.message);
+                    this.msgSrv.add({ severity: 'error', summary: 'Error', detail: error.message });
+                    return
                 }
             }
         )
     }
 
-    username: string = '';
-    oldPassword: string = '';
-    password1: string = '';
-    password2: string = '';
 }

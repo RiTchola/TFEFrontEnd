@@ -51,7 +51,7 @@ export class UserService {
         });
     }
 
-    newPassword(){
-
+    newPassword(username: string){
+        return this.http.get<Response>(`${this.url}/${username}/newPassword`)
     }
 }
