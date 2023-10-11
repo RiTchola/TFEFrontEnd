@@ -10,6 +10,7 @@ import { MessageService } from 'primeng/api';
 import { Status } from 'src/app/shared/interfaces/person-status';
 import { Sexe } from 'src/app/shared/interfaces/sexe';
 import { UserService } from '../../service/user.service';
+import { RoleType } from 'src/app/shared/interfaces/roleType';
 
 
 @Component({
@@ -207,6 +208,7 @@ export class ResidentFormsComponent implements OnInit {
         let doctorId = 0;
 
         if (isNaN(this.residentId)) {
+            this.userValue.role = RoleType.resident;
             this.userSrv.saveUser(this.userValue).subscribe({
                 next: (r) => {
                     userId = Number.parseInt(r.msg)
