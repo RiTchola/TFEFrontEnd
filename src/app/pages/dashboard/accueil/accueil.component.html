@@ -1,16 +1,50 @@
 <div class="col-12">
-    <div class="grid">
-        <div class="col-12 lg:col-6 xl:col-4" *ngFor="let item of items">
+    <div class="grid" *ngIf="isAdmin">
+        <div class="col-12 md:col-6 lg:col-6 xl:col-6" *ngFor="let item of items">
             <div class="surface-card shadow-2 p-3 border-1 border-50 border-round">
                 <div class="flex justify-content-between mb-3">
-                    <div><span class="block text-500 font-medium mb-3">{{item.header}}</span>
+                    <div>
+                        <span class="block text-500 font-medium mb-3">{{item.header}}</span>
                         <div class="text-900 font-medium text-xl">{{item.text}}</div>
                     </div>
-                    <div class="flex align-items-center justify-content-center bg-{{item.color}}-50 border-round"
-                        style="width: 2.5rem; height: 2.5rem;"><i class="{{item.icon}} text-{{item.color}}-500 text-xl"></i>
+                    <div class="flex items-center justify-center bg-{{item.color}}-50 border-round" style="width: 2.5rem; height: 2.5rem;">
+                        <i class="{{item.icon}} text-{{item.color}}-500 text-xl"></i>
                     </div>
-                </div><span class="text-green-500 font-medium">+{{item.total}} new </span><span class="text-500">{{item.description}}</span>
+                </div>
+                <span class="text-green-500 font-medium">+{{item.total}} Nouveaux </span>
+                <span class="text-500">{{item.description}}</span>
             </div>
+        </div>
+    </div>
+    <div class="col-12 md:col-12">
+        <div class="surface-card shadow-2 p-3 border-1 border-50 border-round">
+            <div class="col-12 md:col-12 text-center">
+                <img src="assets/logo-transparent.png" alt="Icône de projet" style="width: 160px; height: 110px; margin-right: 10px;">
+            </div>
+            <div class="flex justify-content-between mb-3">
+                <div class="custom-project-title" >
+                    <span>Projet MPAC</span>
+                    <p style="color: black;">
+                        MPAC  Application de consultation et suivi des informations des résidents en maison de repos par leurs proches.
+                    </p>
+                </div>
+            </div>
+            <p class="custom-project-description">MPAC vise à améliorer la communication entre les établissements d'hébergement et les familles des résidents.
+                Elle permet aux établissements de diffuser des informations essentielles via un blog accessible aux parties concernées,
+                y compris les résidents indépendants. La sécurité des données est une priorité pour assurer la confidentialité et la protection des informations sensibles.</p>
+            <p class="custom-project-description">
+                Le projet met en lumière le besoin de communication accru des familles des résidents, en particulier dans les maisons de repos.
+                L'arrivée en institution marque une discontinuité dans la vie des résidents, et le manque d'informations intensifie ce sentiment de déracinement.
+            </p>
+            <p class="custom-project-description">
+                Son objectif est de fournir un outil sur mesure qui facilite la communication entre les résidents âgés, leurs familles et les établissements d'hébergement.
+                Cela inclut la transmission d'informations sur l'état de la personne âgée, son hygiène, son appétit et ses activités.
+                L'outil vise également à réduire le nombre d'appels des familles au personnel de l'établissement.
+            </p>
+            <p class="custom-project-description">
+                Enfin, les avantages de l'application MPAC sont multiples. Elle améliore la réputation des maisons de repos en offrant une tranquillité d'esprit aux familles des résidents.
+                L'investissement initial en personnel et en ressources est justifié par les avantages potentiels pour les établissements, les familles et les résidents eux-mêmes.
+            </p>
         </div>
     </div>
 </div>

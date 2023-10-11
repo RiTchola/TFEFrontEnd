@@ -1,5 +1,4 @@
-export interface RoleType  {
-    user: 'USER',
+export const RoleType = {
     admin: 'ADMIN',
     resident: 'RESIDENT',
     personnecontact: 'PERSONNECONTACT',

@@ -2,13 +2,13 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { NotfoundComponent } from './shared/components/notfound/notfound.component';
 import { AppLayoutComponent } from './layout/app.layout.component';
-import { adminGuard } from './core/guards/auth.guard';
+import { adminGuard, establissementGuard } from './core/guards/auth.guard';
 
 @NgModule({
     imports: [
         RouterModule.forRoot([
             {
-                path: '', canActivate: [adminGuard],
+                path: '',
                 component: AppLayoutComponent,
                 children: [
                     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -64,7 +64,7 @@ import { adminGuard } from './core/guards/auth.guard';
                     ),
             },
             { path: 'notfound', component: NotfoundComponent },
-            { path: 'externe', loadChildren: () => import('./pages/externe/externe.module').then(m => m.ExterneModule) },
+            // { path: 'externe', loadChildren: () => import('./pages/externe/externe.module').then(m => m.ExterneModule) },
             { path: '**', redirectTo: '/notfound' },
         ]),
     ],

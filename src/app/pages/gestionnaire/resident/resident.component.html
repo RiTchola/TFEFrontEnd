@@ -1,22 +1,26 @@
-<h3>RESIDENTS</h3>
-<p>Liste des résidents de l'établissement</p>
+<h3>RÉSIDENTS</h3>
+<p>Liste des résidents de l'Établissement</p>
 <div class="mb-4 flex justify-content-end">
-    <p-button label="Enrégistrer un résident" routerLink="/gestionnaire/resident/1"></p-button>
+    <button pButton label="Ajouter un résident" routerLink="/gestionnaire/resident/add" class="btn-primary"></button>
 </div>
-<div class="grid" *ngIf="residents2.length > 0">
+<div class="grid">
     <div class="col-12">
         <div class="card">
-            <p-table [value]="residents2" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
+
+            <p-table *ngIf="residents"
+                [value]="residents" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                 [rowsPerPageOptions]="[5, 10, 25, 50]">
+
                 <ng-template pTemplate="header">
-                    <tr>
+                    <tr style="font-weight: bold;">
                         <th id="name" pSortableColumn="name">Nom <p-sortIcon field="name"></p-sortIcon></th>
-                        <th id="email" pSortableColumn="email">Email <p-sortIcon field="email"></p-sortIcon></th>
-                        <th id="dob" pSortableColumn="dob">Date Naissance <p-sortIcon field="dob"></p-sortIcon></th>
+                        <th id="prenom" pSortableColumn="prenom">Prénom <p-sortIcon field="prenom"></p-sortIcon></th>
+                        <th id="dob" pSortableColumn="dob">Date de Naissance <p-sortIcon field="dob"></p-sortIcon></th>
+                        <th id="entryDate" pSortableColumn="entryDate">Date d'Éntrée'<p-sortIcon field="dob"></p-sortIcon></th>
                         <th id="account" pSortableColumn="account">Compte <p-sortIcon field="account"></p-sortIcon></th>
                         <th id="room" pSortableColumn="room">Chambre <p-sortIcon field="room"></p-sortIcon></th>
-                        <th id="action" pSortableColumn="name">Actions</th>
+                        <th>Actions</th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-resident>
@@ -25,10 +29,13 @@
                             {{resident.nom}}
                         </td>
                         <td style="min-width: 200px;">
-                            {{resident.email}}
+                            {{resident.prenom}}
                         </td>
                         <td style="min-width: 200px;">
-                            {{resident.dateNaissance}}
+                            {{getDateOf(resident.dateNaissance)}}
+                        </td>
+                        <td style="min-width: 200px;">
+                            {{getDateOf(resident.dateEntree)}}
                         </td>
                         <td style="min-width: 200px;">
                             <p-tag [value]="resident.actif ? 'ACTIVER':'DESACTIVER'"
@@ -38,14 +45,19 @@
                             {{resident.chambre}}
                         </td>
                         <td>
-                            <i class="pi pi-eye" style="color: red; margin-right: 8px" (click)="view()"></i>
-                            <i class="pi pi-pencil" (click)="edit()"></i>
-                        </td>
+                            <i class="pi pi-eye"
+                               [ngClass]="{'active-icon': resident.actif, 'inactive-icon': !resident.actif}"
+                               (click)="resident.actif ? view(resident) : null"
+                               [style.color]="resident.actif ? '#1ec054ce' : 'red'"
+                               style="margin-right: 8px">
+                            </i>
+                            <i class="pi pi-pencil" (click)="edit(resident)"></i>
+                          </td>
                     </tr>
                 </ng-template>
             </p-table>
+
+            <p *ngIf="residents.length === 0">Aucun résident enregistré pour votre établissement.</p>
         </div>
     </div>
 </div>
-
-<p *ngIf="residents2.length === 0">Il y'a pas de résident enrégistré pour l'instant.</p>

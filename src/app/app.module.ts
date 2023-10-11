@@ -1,11 +1,13 @@
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppLayoutModule } from './layout/app.layout.module';
 import {SharedModule} from "./shared/shared.module";
-import {JwtInterceptor} from "./core/interceptors/jwt.interceptor";
-import {HTTP_INTERCEPTORS} from "@angular/common/http";
 
+import localeFR from "@angular/common/locales/fr";
+import {registerLocaleData} from "@angular/common";
+
+registerLocaleData(localeFR);
 
 @NgModule({
     declarations: [
@@ -16,9 +18,7 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
         AppRoutingModule,
         AppLayoutModule
     ],
-    providers: [
-        {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
-    ],
+    providers: [{provide: LOCALE_ID, useValue: 'fr-FR'}],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

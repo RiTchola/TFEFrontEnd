@@ -1,0 +1,75 @@
+<h5>RAPPORT QUOTIDIEN</h5>
+<p>Détail du rapport quotidien</p>
+
+<div class="card mt-5">
+    <div class="col-12">
+        <p><strong>Paramètres vitaux</strong></p>
+        <div class="p-fluid formgrid grid">
+            <div class="field col-4">
+                <h5>Date</h5>
+                <label>{{getDate(report?.date)}}</label>
+            </div>
+            <div class="field col-4">
+                <h5>Fréquence respiratoire</h5>
+                <label>{{report?.freqRespiratoire}}</label>
+            </div>
+            <div class="field col-4">
+                <h5>Fréquence cardiaque</h5>
+                <label>{{report?.freqCardiaque}}</label>
+            </div>
+            <div class="field col-4">
+                <h5>Température</h5>
+                <label>{{report?.temperature}}</label>
+            </div>
+            <div class="field col-4">
+                <h5>Sat Oxygène</h5>
+                <label>{{report?.satOxygene}}</label>
+            </div>
+            <div class="field col-4">
+                <h5>Pression artérielle</h5>
+                <label>{{report?.presArterielle}}</label>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <p><strong>Autres informations</strong></p>
+        <div class="p-fluid formgrid grid">
+            <div class="field col-4">
+                <h5>Sommeil</h5>
+                <label>{{report?.sommeil ? 'Oui' : 'Nom'}}</label>
+            </div>
+            <div class="field col-4">
+                <h5>Urine</h5>
+                <label>{{report?.urine ? 'Oui' : 'Nom'}}</label>
+            </div>
+            <div class="field col-4">
+                <h5>Selle</h5>
+                <label>{{report?.selle ? 'Oui' : 'Nom'}}</label>
+            </div>
+            <div class="field col-4">
+                <h5>Toillete</h5>
+                <label>{{report?.toilette ? 'Oui' : 'Nom'}}</label>
+            </div>
+            <div class="field col-4">
+                <h5>Vetements</h5>
+                <label>{{report?.vetements ? 'Oui' : 'Nom'}}</label>
+            </div>
+            <div class="field col-4">
+                <h5>Crise</h5>
+                <label>{{report?.humeur}}</label>
+            </div>
+            <div class="field col-4">
+                <h5>Coiffure</h5>
+                <label>{{report?.coiffure ? 'Oui' : 'Nom'}}</label>
+            </div>
+            <div class="field col-4">
+                <h5>Manicure</h5>
+                <label>{{report?.manicure ? 'Oui' : 'Nom'}}</label>
+            </div>
+            <div class="field col-4">
+                <h5>Pedicure</h5>
+                <label>{{report?.pedicure ? 'Oui' : 'Nom'}}</label>
+            </div>
+        </div>
+    </div>
+</div>
