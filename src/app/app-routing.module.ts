@@ -2,16 +2,15 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { NotfoundComponent } from './shared/components/notfound/notfound.component';
 import { AppLayoutComponent } from './layout/app.layout.component';
-import { adminGuard, establissementGuard } from './core/guards/auth.guard';
 
 @NgModule({
     imports: [
         RouterModule.forRoot([
+            { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
             {
                 path: '',
                 component: AppLayoutComponent,
                 children: [
-                    { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
                     {
                         path: 'dashboard',
                         loadChildren: () =>

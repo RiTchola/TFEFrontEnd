@@ -31,7 +31,7 @@ export const establissementGuard: CanActivateFn = () => {
     if (authService.getRole().toLowerCase() === RoleType.etablissement.toLowerCase() || authService.isAdmin()) {
         return true;
     } else {
-        router.navigate(["/notfound"]);
+
         return false;
     }
 };
@@ -51,6 +51,21 @@ export const contactPersonGuard: CanActivateFn = () => {
     const authService = inject(AuthService);
     const router = inject(Router);
     if (authService.getRole().toLowerCase() === RoleType.personnecontact.toLowerCase() || authService.isAdmin()) {
+        return true;
+    } else {
+        router.navigate(["/notfound"]);
+        return false;
+    }
+};
+
+
+
+export const estabAndContactPerson: CanActivateFn = () => {
+    const authService = inject(AuthService);
+    const router = inject(Router);
+    if (authService.getRole().toLowerCase() === RoleType.resident.toLowerCase() ||
+        authService.getRole().toLowerCase() === RoleType.personnecontact.toLowerCase() ||
+        authService.isAdmin()) {
         return true;
     } else {
         router.navigate(["/notfound"]);

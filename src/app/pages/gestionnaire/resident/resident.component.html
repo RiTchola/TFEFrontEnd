@@ -1,6 +1,6 @@
 <h3>RÉSIDENTS</h3>
 <p>Liste des résidents de l'Établissement</p>
-<div class="mb-4 flex justify-content-end">
+<div class="mb-4 flex justify-content-end" *ngIf="canAdd">
     <button pButton label="Ajouter un résident" routerLink="/gestionnaire/resident/add" class="btn-primary"></button>
 </div>
 <div class="grid">
