@@ -4,7 +4,7 @@
 <div class="grid">
     <div class="col-12">
         <div class="card" style="padding: 0">
-            <p-table *ngIf="rapportVisite.length > 0"
+            <p-table *ngIf="rapportVisite"
                 [value]="rapportVisite" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                 [rowsPerPageOptions]="[5, 10, 25, 50]">
@@ -14,7 +14,7 @@
                         <th pSortableColumn="prenomResid">Prénom Résident <p-sortIcon field="prenomResid"></p-sortIcon></th>
                         <th pSortableColumn="dateVisite">Date de Visite <p-sortIcon field="dateVisite"></p-sortIcon></th>
                         <th pSortableColumn="nomVisiteur">Nom Visiteur <p-sortIcon field="nomVisiteur"></p-sortIcon></th>
-                        <th id="action" pSortableColumn="name" pSortableColumn="typePersonne">Type de Personne <p-sortIcon field="typePersonne"></p-sortIcon></th>
+                        <th pSortableColumn="typePersonne">Type de Personne <p-sortIcon field="typePersonne"></p-sortIcon></th>
                         <th >Actions</th>
                     </tr>
                 </ng-template>

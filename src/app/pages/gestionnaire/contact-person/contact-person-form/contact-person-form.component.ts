@@ -31,7 +31,7 @@ export class ContactPersonFormComponent implements OnInit {
     });
 
     statusList = [
-        { name: '', value: '' },
+        { name: 'Veuillez faire un choix', value: '' },
         { name: 'Célibataire', value: Status.celibataire },
         { name: 'Divorcé', value: Status.divorce },
         { name: 'Divorcée', value: Status.divorce },
@@ -42,7 +42,7 @@ export class ContactPersonFormComponent implements OnInit {
     ];
 
     sexeList = [
-        { name: '', value: '' },
+        { name: 'Veuillez faire un choix', value: '' },
         { name: 'Homme', value: Sexe.homme},
         { name: 'Femme', value: Sexe.femme },
         { name: 'Neutre', value: Sexe.neutre }
@@ -63,7 +63,7 @@ export class ContactPersonFormComponent implements OnInit {
         { name: 'Médécin Traitant', value: ContactPersonType.medecin_traitant },
         { name: 'Parent', value: ContactPersonType.parent },
         { name: 'Pétit-Fils', value: ContactPersonType.petit_fils },
-        { name: 'Pétit-Fille', value: ContactPersonType.petit_fille }
+        { name: 'Pétite-Fille', value: ContactPersonType.petit_fille }
     ];
 
     residentId = 0;
@@ -130,7 +130,7 @@ export class ContactPersonFormComponent implements OnInit {
         const data: ContactPerson = {
             adresse: this.formData.controls.address.value ?? '',
             sexe: this.formData.controls.sexe.value ?? Sexe.neutre,
-            choix: this.formData.controls.type.value ?? '',
+            choix: this.formData.controls.type.value ?? ContactPersonType.autre,
             dateNaissance: this.formData.controls.dob.value ?? new Date(),
             email: this.formData.controls.email.value ?? '',
             nom: this.formData.controls.name.value ?? '',
@@ -155,7 +155,6 @@ export class ContactPersonFormComponent implements OnInit {
     }
 
     add() {
-        console.log(this.buildBody())
         this.contactpersonSrv.add(this.residentId, this.buildBody()).subscribe({
             next: (r) => this.onSuccess('Personne de contact enrégistrée.'),
             error: (err) => {
