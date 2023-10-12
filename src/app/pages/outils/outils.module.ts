@@ -8,6 +8,7 @@ import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from "primeng/inputtext";
 import { HttpClientModule } from "@angular/common/http";
 import { ToastModule } from 'primeng/toast';
+import { QRCodeModule } from 'angularx-qrcode';
 
 import { ImagesVideoComponent } from './images-video/images-video.component';
 import { RapportVisiteComponent } from './rapport-visite/rapport-visite.component';
@@ -27,8 +28,8 @@ import { RapportVisiteComponent } from './rapport-visite/rapport-visite.componen
         HttpClientModule,
         ButtonModule,
         InputTextModule,
-        ToastModule
-
+        ToastModule,
+        QRCodeModule
     ]
 })
 export class OutilsModule {
