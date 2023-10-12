@@ -5,6 +5,7 @@ import {RapportDeVisiteService} from "../../outils/services/rapport-de-visite.se
 import {take} from "rxjs";
 import {KeyValue} from "@angular/common";
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,6 +16,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class SubmitVisitReportComponent {
     enableForm: boolean = true;
+    code: 0;
     @Output() saved: EventEmitter<string> = new EventEmitter<string>(undefined);
 
     dataForm = new FormGroup({
@@ -59,8 +61,16 @@ export class SubmitVisitReportComponent {
         return data;
     }
 
-    constructor(private rapportVisiteService: RapportDeVisiteService, private messageService: MessageService) {
+    constructor(
+        private rapportVisiteService: RapportDeVisiteService, 
+        private messageService: MessageService,
+        private router: Router) {
+            const parts = this.router.url.split("/");
+            this.code = Number.Parse(parts[parts.length-1]);
+            console.log(this.code);
     }
+
+
 
     submit(){
         const data = this.buildBody();
