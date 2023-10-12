@@ -11,7 +11,6 @@ import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { StepsModule } from 'primeng/steps';
-import { StepsModule } from 'primeng/steps';
 import { TableModule } from 'primeng/table'
 import { TagModule } from 'primeng/tag';;
 import { ToastModule } from 'primeng/toast';
