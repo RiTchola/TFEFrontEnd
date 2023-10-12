@@ -1,4 +1,5 @@
 export type TypePersonne =
+    | ""
     | "EPOUX"
     | "EPOUSE"
     | "PARENT"

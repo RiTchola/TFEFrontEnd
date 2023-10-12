@@ -1,0 +1,171 @@
+<p-toast></p-toast>
+<form [formGroup]="formData" #form="ngForm">
+    <h4 class="title mb-0">Remplir les informations du Résident</h4>
+    <h6>Informations personnelles</h6>
+    <div class="grid mt-3">
+        <div class="col-12">
+            <div class="p-fluid formgrid grid">
+                <div class="field col-6">
+                    <label class="required-field">Nom</label>
+                    <input name="lastname" formControlName="lastname" type="text" required pInputText
+                        class="form-control" />
+                    <small
+                        *ngIf="(formData.get('lastname')?.hasError('required') && formData.get('lastname')?.touched) || (formData.get('lastname')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label class="required-field">Prénom</label>
+                    <input name="firstname" formControlName="firstname" type="text" required pInputText
+                        class="form-control" />
+                    <small
+                        *ngIf="(formData.get('firstname')?.hasError('required') && formData.get('firstname')?.touched) || (formData.get('firstname')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label class="required-field">Émail</label>
+                    <input name="email" formControlName="email" type="text" required pInputText class="form-control" readonly />
+                    <small
+                        *ngIf="(formData.get('email')?.hasError('required') && formData.get('email')?.touched) || (formData.get('email')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label class="required-field">Date de Naissance</label>
+                    <p-calendar formControlName="dob" [showIcon]="true"></p-calendar>
+                    <small *ngIf="formData.get('dob')?.hasError('required') && form.submitted">{{required}}</small>
+                    <small *ngIf="formData.get('dob')?.hasError('greater')">L'âge dois être supérieur à 25 ans</small>
+                </div>
+                <div class="field col-6">
+                    <label>Sexe</label>
+                    <p-dropdown [options]="sexeList" formControlName="sexe" optionLabel="name"
+                        optionValue="value"></p-dropdown>
+                    <small *ngIf="(formData.get('sexe')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label>Statut Matrimoniale</label>
+                    <p-dropdown [options]="statusList" formControlName="status" optionLabel="name"
+                        optionValue="value"></p-dropdown>
+                    <small *ngIf="(formData.get('status')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+                <div class="field col-6">
+                    <label class="required-field">Nombre d'enfants</label>
+                    <input name="nbOfChild" formControlName="nbOfChild" type="number" required pInputText
+                        class="form-control" />
+                    <small
+                        *ngIf="(formData.get('nbOfChild')?.hasError('required') && formData.get('nbOfChild')?.touched) || (formData.get('nbOfChild')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <h6>Informations de contact</h6>
+            <div class="p-fluid formgrid grid">
+                <div class="field col-6">
+                    <label class="required-field">Téléphone</label>
+                    <input name="tel" formControlName="tel" type="text" required pInputText class="form-control"
+                        placeholder="32465488904" />
+                    <small
+                        *ngIf="(formData.get('tel')?.hasError('required') && formData.get('tel')?.touched) || (formData.get('tel')?.hasError('required') && form.submitted)">{{required}}</small>
+                    <small *ngIf="formData.get('tel')?.value && formData.get('tel')?.invalid && form.submitted">Invalide
+                        Exemple : 32465488904</small>
+                </div>
+                <div class="field col-6">
+                    <label class="required-field">Adresse</label>
+                    <input name="address" formControlName="address" type="text" required pInputText class="form-control"
+                        placeholder="Rue de marchant 3, 1000 Bruxelles" />
+                    <small
+                        *ngIf="(formData.get('address')?.hasError('required') && formData.get('address')?.touched) || (formData.get('address')?.hasError('required') && form.submitted)">{{required}}</small>
+                    <small
+                        *ngIf="formData.get('address')?.value && formData.get('address')?.invalid && form.submitted">Adresse
+                        invalide (Min. 10 caractères)</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <h6>Informations de la résidence</h6>
+            <div class="p-fluid formgrid grid">
+                <div class="field col-6">
+                    <label class="required-field">Date Entrée</label>
+                    <p-calendar formControlName="entryDate" [showIcon]="true"></p-calendar>
+                    <small
+                        *ngIf="(formData.get('entryDate')?.hasError('required') && form.submitted)">{{required}}</small>
+                    <small *ngIf="(formData.get('entryDate')?.hasError('greater') && form.submitted)">La date doit être
+                        supérieur à la date de sortie</small>
+                </div>
+                <div class="field col-6">
+                    <label class="required-field">Motif Entrée</label>
+                    <input name="reasonEntry" formControlName="reasonEntry" type="text" required pInputText
+                        class="form-control" placeholder="Insérez la virgule pour séparer,Répifamiliale" />
+                    <small
+                        *ngIf="(formData.get('reasonEntry')?.hasError('required') && formData.get('reasonEntry')?.touched) || (formData.get('reasonEntry')?.hasError('required') && form.submitted)">{{required}}</small>
+                    <small
+                        *ngIf="formData.get('reasonEntry')?.value && formData.get('reasonEntry')?.invalid && form.submitted">
+                        Attention message compris entre 3 et 400 mots</small>
+                </div>
+                <div class="field col-6">
+                    <label>Date Sortie</label>
+                    <p-calendar formControlName="exitDate" [showIcon]="true"></p-calendar>
+                </div>
+                <div class="field col-6">
+                    <label>Motif Sortie</label>
+                    <input name="reasonExit" formControlName="reasonExit" type="text" pInputText
+                        class="form-control" />
+                    <small
+                        *ngIf="formData.get('reasonExit')?.value && formData.get('reasonEntry')?.invalid && form.submitted">
+                        Attention message compris entre 5 et 400 mots</small>
+                </div>
+                <div class="field col-6">
+                    <label class="required-field">Numéro de chambre</label>
+                    <input name="room" formControlName="room" type="text" required pInputText class="form-control" />
+                    <small *ngIf="(formData.get('room')?.hasError('required') && form.submitted)">{{required}}</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <h6>Informations Médicaux</h6>
+            <div class="p-fluid formgrid grid">
+                <div class="field col-6">
+                    <label class="required-field">Antécédents Médicaux</label>
+                    <input name="antMedical" formControlName="antMedical" type="text" required pInputText
+                        class="form-control"
+                        placeholder="Insérez la virgule pour séparer,Confusion, Insuffisance rénale" />
+                    <small
+                        *ngIf="(formData.get('antMedical')?.hasError('required') && formData.get('antMedical')?.touched) || (formData.get('antMedical')?.hasError('required') && form.submitted)">{{required}}</small>
+                    <small
+                        *ngIf="formData.get('antMedical')?.value && formData.get('antMedical')?.invalid && form.submitted">
+                        Attention message compris entre 3 et 800 mots, insérez la virgule comme séparateur</small>
+                </div>
+                <div class="field col-6">
+                    <label class="required-field">Antécédent chirugical</label>
+                    <input name="antChirugical" formControlName="antChirugical" type="text" required pInputText
+                        class="form-control" placeholder="Insérez la virgule pour séparer,Appendice cecotomie" />
+                    <small
+                        *ngIf="(formData.get('antChirugical')?.hasError('required') && formData.get('antChirugical')?.touched) || (formData.get('antChirugical')?.hasError('required') && form.submitted)">{{required}}</small>
+                    <small
+                        *ngIf="formData.get('antChirugical')?.value && formData.get('antChirugical')?.invalid && form.submitted">
+                        Attention message compris entre 3 et 800 mots</small>
+                </div>
+                <div class="field col-6">
+                    <label class="required-field">État de santé</label>
+                    <input name="healthStatus" formControlName="healthStatus" type="text" required pInputText
+                        class="form-control"
+                        placeholder="Insérez la virgule pour séparer,Dégradation l'état générale" />
+                    <small
+                        *ngIf="(formData.get('healthStatus')?.hasError('required') && formData.get('healthStatus')?.touched) || (formData.get('healthStatus')?.hasError('required') && form.submitted)">{{required}}</small>
+                    <small
+                        *ngIf="formData.get('healthStatus')?.value && formData.get('healthStatus')?.invalid && form.submitted">
+                        Attention message compris entre 3 et 600 mots</small>
+                </div>
+                <div class="flex align-items-center gap-1 col-6">
+                    <p-checkbox formControlName="actif" [binary]="true" inputId="binary" value="Actif"></p-checkbox>
+                    <label for="ny">Actif</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="p-fluid formgrid grid">
+                <div class="field col-6 ">
+                    <button pButton label="Précédent" (click)="back()" class="btn-outline-primary"></button>
+                </div>
+                <div class="field col-6 ">
+                    <button pButton label="Enregitrer" type="submit" class="btn-primary" (click)="save()"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

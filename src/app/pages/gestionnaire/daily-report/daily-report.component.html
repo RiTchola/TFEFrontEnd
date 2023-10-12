@@ -1,0 +1,61 @@
+<p-toast></p-toast>
+<h5>INFROMATIONS RESIDENTS</h5>
+<p>Liste des rapports quotidien du résident</p>
+<div class="mb-4 flex justify-content-end">
+    <button pButton label="Ajouter un rapport" class="btn-primary" (click)="addNewReport()"></button>
+</div>
+<div class="grid" *ngIf="reports.length > 0">
+    <div class="col-12">
+        <p-table [value]="reports" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [rowsPerPageOptions]="[5, 10, 25, 50]">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th id="date" pSortableColumn="date">Date <p-sortIcon field="date"></p-sortIcon></th>
+                    <th id="freqCardiaque" pSortableColumn="freqCardiaque">Frequence cardiaque <p-sortIcon
+                            field="freqCardiaque"></p-sortIcon></th>
+                    <th id="freqRespiratoire" pSortableColumn="freqRespiratoire">Frequence respiratiore <p-sortIcon
+                            field="freqRespiratoire"></p-sortIcon></th>
+                    <th id="presArterielle" pSortableColumn="presArterielle">Pression Arterielle <p-sortIcon
+                            field="presArterielle"></p-sortIcon></th>
+                    <th id="satOxygene" pSortableColumn="satOxygene">Sat Oxygene <p-sortIcon
+                            field="satOxygene"></p-sortIcon></th>
+                    <th id="action" pSortableColumn="name">Actions</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-report>
+                <tr>
+                    <td>
+                        {{getDate(report.date)}}
+                    </td>
+                    <td>
+                        {{report.freqCardiaque}}
+                    </td>
+                    <td>
+                        {{report.freqRespiratoire}}
+                    </td>
+                    <td>
+                        {{report.presArterielle}}
+                    </td>
+                    <td>
+                        {{report.satOxygene}}
+                    </td>
+                    <td>
+                        <i class="pi pi-eye" (click)="view(report)"></i>
+                        <i class="pi pi-pencil" (click)="edit(report)"></i>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <button pButton label="RETOUR" routerLink="/gestionnaire/resident/details/{{residentId}}"
+            class="btn-primary mt-4"><i class="pi pi-arrow-left mr-1"></i></button>
+    </div>
+</div>
+
+<p *ngIf="reports.length === 0">Aucun rapport.</p>
+
+<p-dialog header="Ajouter un rapport Quotidien" [(visible)]="show" [breakpoints]="{'960px': '75vw', '640px': '100vw'}"
+    [style]="{width: '50vw'}">
+    <app-daily-report-forms (saved)="onSave($event)" [isNewRecord]="isNewRecord"
+        [residentId]="residentId"></app-daily-report-forms>
+</p-dialog>

@@ -1,1 +1,103 @@
-<p>meet-up works!</p>
+<p-toast></p-toast>
+<h5>MEET UP</h5>
+<p>Liste des demandes de Meet-Up</p>
+<div class="mb-4 flex justify-content-end">
+    <button pButton label="Sousmettre une Meet-Up" (click)="add()" class="btn-primary"></button>
+</div>
+<div class="grid">
+    <div class="col-12">
+        <div class="card" style="padding: 0">
+            <p-table *ngIf="meetUp" [value]="meetUp" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                [rowsPerPageOptions]="[5, 10, 25, 50]">
+                <ng-template pTemplate="header">
+                    <tr style="background-color: #627bb4; font-weight: bold;">
+                        <th id="motifDemande" pSortableColumn="motifDemande">Motif de la demande <p-sortIcon
+                                field="motifDemande"></p-sortIcon></th>
+                        <th id="date" pSortableColumn="date">Date <p-sortIcon field="date"></p-sortIcon></th>
+                        <th id="time" pSortableColumn="time">Heure <p-sortIcon field="time"></p-sortIcon></th>
+                        <th id="etat" pSortableColumn="etat">Statut de la demande<p-sortIcon field="etat"></p-sortIcon></th>
+                        <th id="nomResid" pSortableColumn="nomResid">Nom du résident <p-sortIcon  field="nomResid"></p-sortIcon></th>
+                        <th id="action">Actions</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-item>
+                    <tr>
+                        <td style="min-width: 200px;">
+                            {{item.motifDemande}}
+                        </td>
+                        <td style="min-width: 200px;">
+                            {{displayDate(item.date)}}
+                        </td>
+                        <td style="min-width: 200px;">
+                            {{displayTime(item.date)}}
+                        </td>
+                        <td style="min-width: 200px;">
+                            {{item.etat}}
+                        </td>
+                        <td style="min-width: 200px;">
+                            {{item.nomResid}} {{item.prenomResid}}
+                        </td>
+                        <td style="min-width: 200px;">
+                            <i class="pi pi-eye" *ngIf="!isContactPerson" (click)="view(item)"></i>
+                            <i class="pi pi-pencil" (click)="edit(item)"></i>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+            <p *ngIf="!meetUp">Aucune demande de Meet-Up.</p>
+        </div>
+    </div>
+</div>
+
+<p-dialog [(visible)]="show" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
+    <app-meet-up-forms (saved)="saved($event)"></app-meet-up-forms>
+</p-dialog>
+
+<p-dialog [(visible)]="showDetails" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
+    <ng-template pTemplate="header">
+        <h4>DÉTAIL DU MEET-UP</h4>
+    </ng-template>
+    <h5 style="color: black">Informations du Meet</h5>
+    <div class="p-fluid formgrid grid">
+        <div class="field col-12 md:col-4">
+            <h5>Motif de la Demande</h5>
+            <label>{{selectedMeetUp?.motifDemande}}</label>
+        </div>
+        <div class="field col-12 md:col-4">
+            <h5>Type de Meet-Up</h5>
+            <label>{{selectedMeetUp?.typeM}}</label>
+        </div>
+        <div class="field col-12 md:col-4">
+            <h5>Nom du résident</h5>
+            <label>{{selectedMeetUp?.nomResid}}</label>
+        </div>
+        <div class="field col-12 md:col-4">
+            <h5>Prénom du résident</h5>
+            <label>{{selectedMeetUp?.prenomResid}}</label>
+        </div>
+        <div class="field col-12 md:col-4">
+            <h5>Date de naissance </h5>
+            <label>{{selectedMeetUp?.dateBirthresid}}</label>
+        </div>
+        <div class="field col-12 md:col-4">
+            <h5>Date et Heure</h5>
+            <label>{{selectedMeetUp?.date}}</label>
+        </div>
+        <div class="field col-12 md:col-4">
+            <h5>Nombre de participants</h5>
+            <label>{{selectedMeetUp?.nbParticipants}}</label>
+        </div>
+    </div>
+    <h5 style="color: black">Statut de la Demande</h5>
+    <div class="p-fluid formgrid grid">
+        <div class="field col-12 md:col-4">
+            <h5>État de la demande</h5>
+            <label>{{selectedMeetUp?.etat}}</label>
+        </div>
+        <div class="field col-12 md:col-4" *ngIf="selectedMeetUp?.motifRefus">
+            <h5>Motif de Refus</h5>
+            <label>{{selectedMeetUp?.motifRefus}}</label>
+        </div>
+    </div>
+</p-dialog>

@@ -10,7 +10,7 @@ import {environment} from "../../../../environments/environment";
 export class RapportDeVisiteService {
 
     private apiUrl: string = environment.apiPath+'/rapport-visite';
-    private apiExternalUrl: string = environment.apiPath+'/externe/rapport-visite';
+    // private apiExternalUrl: string = environment.apiPath+'/externe/rapport-visite';
 
     constructor(private http: HttpClient) { }
 
@@ -22,8 +22,8 @@ export class RapportDeVisiteService {
         return this.http.get<RapportVisite>(`${this.apiUrl}/${id}`);
     }
 
-    createRapport(rapport: RapportVisite): Observable<any> {
+   /*  createRapport(rapport: RapportVisite): Observable<any> {
         return this.http.post(this.apiExternalUrl, rapport);
-    }
+    } */
 
 }

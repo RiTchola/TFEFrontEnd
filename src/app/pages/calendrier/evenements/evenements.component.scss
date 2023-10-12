@@ -1,0 +1,16 @@
+.text-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%
+}
+
+button{
+    color: white;
+}
+
+.required-field::before{
+    content: '*';
+    color: #f97316;
+    margin-left: 4px;
+}

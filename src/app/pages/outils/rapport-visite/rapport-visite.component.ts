@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {RapportVisite} from 'src/app/models/rapport-visite';
 import {RapportDeVisiteService} from '../services/rapport-de-visite.service';
 import {MessageService} from "primeng/api";
+import { Util } from 'src/app/shared/util';
 
 @Component({
     selector: 'app-rapport-visite',
@@ -48,5 +49,9 @@ export class RapportVisiteComponent implements OnInit {
         this.visible = true;
         this.rapportVisiteHelper = rv;
 
+    }
+
+    getDateOf(date: Date) {
+        return Util.displayAsDate(date);
     }
 }

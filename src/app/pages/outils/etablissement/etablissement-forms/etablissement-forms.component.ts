@@ -21,7 +21,7 @@ export class EtablissementFormsComponent implements OnInit {
         email2: new FormControl('', [Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
         tel1: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+$')]),
         tel2: new FormControl('', [Validators.pattern('^[0-9]+$'), Validators.minLength(4), Validators.maxLength(30)]),
-        address: new FormControl('', [Validators.required, Validators.minLength(10)]),
+        address: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(120)]),
         date: new FormControl<Date>(new Date(), [Validators.required]),
     });
 
@@ -71,7 +71,7 @@ export class EtablissementFormsComponent implements OnInit {
             email2: this.dataForm.controls.email2.value ?? '',
             tel1: `+${this.dataForm.controls.tel1.value}`,
             tel2: `+${this.dataForm.controls.tel2.value}`,
-            dateCreation: this.isoDateToDate(this.dataForm.controls.date.value ?? undefined),
+            dateCreation: this.dataForm.controls.date.value ?? new Date(),
             nom: this.dataForm.controls.name.value ?? '',
             etabUsername: this.username,
         };
@@ -80,14 +80,7 @@ export class EtablissementFormsComponent implements OnInit {
 
     save() {
         const data = this.buildBody();
-        if (!this.dataForm.controls.email2.value) {
-            data.email2 = data.email1 ?? this.username;
-        }
-
-        if (!this.dataForm.controls.tel2.value) {
-            data.tel2 = data.tel1 ?? 'undefined';
-        }
-
+        
         const date = this.dataForm.controls.date.value;
         if (date && new Date(date) > new Date()) {
             this.dataForm.controls.date.setErrors({ 'greater': true, 'required': false });
@@ -98,7 +91,7 @@ export class EtablissementFormsComponent implements OnInit {
             this.etablisSrv.add(data).subscribe({
                 next: (result) => {
                     if (result) {
-                        this.saved.emit(result.message);
+                        this.saved.emit(result.msg);
                     }
                 },
                 error: (err) => {
@@ -109,7 +102,6 @@ export class EtablissementFormsComponent implements OnInit {
         }
 
         if (this.dataForm.valid && this.update) {
-            console.log(data)
             data.id = this.toUpdate?.id;
             this.etablisSrv.update(data).subscribe({
                 next: (result) => {
@@ -124,12 +116,4 @@ export class EtablissementFormsComponent implements OnInit {
             });
         }
     }
-
-    private isoDateToDate(date?: Date) {
-        if (!date) return '';
-        date.setDate(date.getDate() + 1);
-        const d = date.toISOString().split('T')[0];
-        return d;
-    }
-
 }
