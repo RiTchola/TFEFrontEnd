@@ -24,7 +24,7 @@ export class UserFormsComponent implements OnInit {
         pwd1: new FormControl('', [
             Validators.required,
             Validators.minLength(8),
-            Validators.pattern("^[A-Za-z]+[0-9]+$"),
+            Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/),
         ]),
         pwd2: new FormControl('', [
             Validators.required,

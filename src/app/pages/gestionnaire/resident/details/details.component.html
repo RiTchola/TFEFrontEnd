@@ -1,7 +1,7 @@
 <p-toast></p-toast>
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 <h5>INFORMATIONS DU RÉSIDENT</h5>
-<p>Détails du résident</p>
+<p>Détails du Résident</p>
 <div class="mb-4 grid">
     <div class="field col-4">
         <button pButton label="Retour" routerLink="/gestionnaire/resident"
@@ -21,7 +21,7 @@
                 <img src="assets/images/photoUser2.jpg" alt="user_img"
                     class="d-flex mx-auto align-items-center col-6" />
                 <p><strong>{{resident?.nom}} {{resident?.prenom}}</strong></p>
-                <p><em>>{{resident?.chambre}}</em></p>
+                <p><em>{{resident?.chambre}}</em></p>
                 <button pButton label="Désactiver Compte" class="btn-danger" (click)="disable()" *ngIf="canEdit"></button>
             </div>
         </div>
