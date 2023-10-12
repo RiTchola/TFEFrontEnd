@@ -5,6 +5,7 @@ import { EtablissementComponent } from './etablissement/etablissement.component'
 import { RapportVisiteComponent } from './rapport-visite/rapport-visite.component';
 import { establissementGuard } from 'src/app/core/guards/auth.guard';
 import { QrcodeComponent } from './qrcode/qrcode.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 const routes: Routes = [
     { path: '', redirectTo: 'images-video', pathMatch: 'full' },
@@ -15,7 +16,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
+    imports: [RouterModule.forChild(routes) ,
+        QRCodeModule],
     exports: [RouterModule],
 })
 export class OutilsRoutingModule {}

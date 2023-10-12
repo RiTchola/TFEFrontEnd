@@ -18,12 +18,17 @@ export class QrcodeComponent {
     ) { }
 
     submitReport() {
+        console.log("QR Code entrer:"); // Ajoutez cette ligne pour déboguer
         this.qrcodeSrv.generateQrCode().subscribe({
-            next: (r) => this.qrcode = r,
+            next: (r) => {
+                this.qrcode = r;
+                console.log("QR Code Data:", r); // Ajoutez cette ligne pour déboguer
+            },
             error: (res) => {
                 this.msgSrv.add({ severity: 'error', summary: 'Erreur', detail: "Erreur de traitement" });
             },
             complete: () => console.log(this.qrcode)
         });
+        
     }
 }
