@@ -19,7 +19,6 @@ import { GestionnaireRoutingModule } from './gestionnaire-routing.module';
 import { ResidentComponent } from './resident/resident.component';
 import { MenuSemaineComponent } from './menu-semaine/menu-semaine.component';
 import { MeetUpComponent } from './meet-up/meet-up.component';
-import { BlogComponent } from './blog/blog.component';
 import { ResidentFormsComponent } from './resident/resident-forms/resident-forms.component';
 import { MedecinFormsComponent } from './resident/medecin-forms/medecin-forms.component';
 import { UserFormsComponent } from './user-forms/user-forms.component';
