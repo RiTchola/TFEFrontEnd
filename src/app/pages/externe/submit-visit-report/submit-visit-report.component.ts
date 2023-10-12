@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 })
 export class SubmitVisitReportComponent {
     enableForm: boolean = true;
-    code: 0;
+    code = 0;
     @Output() saved: EventEmitter<string> = new EventEmitter<string>(undefined);
 
     dataForm = new FormGroup({
@@ -65,8 +65,7 @@ export class SubmitVisitReportComponent {
         private rapportVisiteService: RapportDeVisiteService, 
         private messageService: MessageService,
         private router: Router) {
-            const parts = this.router.url.split("/");
-            this.code = Number.Parse(parts[parts.length-1]);
+            this.code = Number.parseInt(this.router.url.split("?")[1].split("=")[1]);
             console.log(this.code);
     }
 
@@ -75,22 +74,10 @@ export class SubmitVisitReportComponent {
     submit(){
         const data = this.buildBody();
 
-        if (!this.dataForm.controls.nomResid.value) {
-            data.nomResid = data.nomResid ?? 'undefined';
-        }
-
-        if (!this.dataForm.controls.prenomResid.value) {
-            data.prenomResid = data.prenomResid ?? 'undefined';
-        }
-
         const dateBirthResid = this.dataForm.controls.dateBirthResid.value;
-        if (dateBirthResid && ((new Date().getFullYear() - new Date(dateBirthResid).getFullYear())) > 25) {
+        if (dateBirthResid && ((new Date().getFullYear() - new Date(dateBirthResid).getFullYear())) < 25) {
             this.dataForm.controls.dateBirthResid.setErrors({ 'greater': true, 'required': false });
             return;
-        }
-
-        if (!this.dataForm.controls.nomVisiteur.value) {
-            data.nomVisiteur = data.nomVisiteur ?? 'undefined';
         }
 
         const dateVisite = this.dataForm.controls.dateVisite.value;
@@ -103,17 +90,15 @@ export class SubmitVisitReportComponent {
             data.typePersonne = data.typePersonne ?? 'undefined';
         }
 
-        if (!this.dataForm.controls.commentaire.value) {
-            data.commentaire  = data.commentaire ?? 'undefined';
-        }
-
-        if (this.dataForm.valid ) {
-            this.rapportVisiteService.createRapport(data).subscribe({
-                next: (res)=>{
+        if (this.dataForm) {
+            console.log("je suis ici");
+            this.rapportVisiteService.createRapport(this.code, data).subscribe({
+                next: (res:any)=>{
                     this.enableForm = false;
+                    console.log(data);
                     this.messageService.add({severity:'success', summary:'Success', detail:res.message});
                 },
-                error: (error) =>{
+                error: (error:any) =>{
                     this.messageService.add({severity:'error', summary:'Error', detail:error.message},)
                 }
             });
