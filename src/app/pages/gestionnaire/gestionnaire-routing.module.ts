@@ -20,6 +20,20 @@ import { DailyReportDetailsComponent } from './daily-report/daily-report-details
 import { MenuFormsComponent } from './menu-semaine/menu-forms/menu-forms.component';
 import { EditMenuComponent } from './menu-semaine/edit-menu/edit-menu.component';
 import { contactPersonGuard, establissementGuard } from 'src/app/core/guards/auth.guard';
+import { ResidentFormsComponent } from './resident/resident-forms/resident-forms.component';
+import { MedecinFormsComponent } from './resident/medecin-forms/medecin-forms.component';
+import { UserFormsComponent } from './user-forms/user-forms.component';
+import { ManageComponent } from './resident/manage/manage.component';
+import { DetailsComponent } from './resident/details/details.component';
+import { DailyReportComponent } from './daily-report/daily-report.component';
+import { ContactPersonComponent } from './contact-person/contact-person.component';
+import { ContactPersonFormComponent } from './contact-person/contact-person-form/contact-person-form.component';
+import { ContactPersonDetailsComponent } from './contact-person/details/details.component';
+import { DailyReportFormsComponent } from './daily-report/daily-report-forms/daily-report-forms.component';
+import { DailyReportDetailsComponent } from './daily-report/daily-report-details/daily-report-details.component';
+import { MenuFormsComponent } from './menu-semaine/menu-forms/menu-forms.component';
+import { EditMenuComponent } from './menu-semaine/edit-menu/edit-menu.component';
+import { contactPersonGuard, establissementGuard } from 'src/app/core/guards/auth.guard';
 
 const routes: Routes = [
     { path: '', redirectTo: 'resident', pathMatch: 'full' },
@@ -73,7 +87,7 @@ const routes: Routes = [
     },
     { path: 'meet-up', component: MeetUpComponent, canActivate: [establissementGuard, contactPersonGuard] },
     { path: 'meet-up/edit/:id', component: MeetUpFormsComponent, canActivate: [establissementGuard, contactPersonGuard] },
-    { path: 'blog', component: BlogComponent },
+    { path: 'blog', loadChildren: () => import('../gestionnaire/blog/blog.module').then(m => m.BlogModule) },
 ];
 
 @NgModule({
