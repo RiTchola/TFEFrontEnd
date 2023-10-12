@@ -41,7 +41,6 @@ import { MeetUpFormsComponent } from './meet-up/meet-up-forms/meet-up-forms.comp
         ResidentComponent,
         MenuSemaineComponent,
         MeetUpComponent,
-        BlogComponent,
         ResidentFormsComponent,
         UserFormsComponent,
         MedecinFormsComponent,

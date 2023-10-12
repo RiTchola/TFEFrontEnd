@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MenuSemaineComponent } from './menu-semaine/menu-semaine.component';
 import { MeetUpComponent } from './meet-up/meet-up.component';
-import { BlogComponent } from './blog/blog.component';
 import { ResidentComponent } from './resident/resident.component';
 import { ResidentFormsComponent } from './resident/resident-forms/resident-forms.component';
 import { MedecinFormsComponent } from './resident/medecin-forms/medecin-forms.component';
@@ -73,7 +72,7 @@ const routes: Routes = [
     },
     { path: 'meet-up', component: MeetUpComponent, canActivate: [establissementGuard, contactPersonGuard] },
     { path: 'meet-up/edit/:id', component: MeetUpFormsComponent, canActivate: [establissementGuard, contactPersonGuard] },
-    { path: 'blog', component: BlogComponent },
+    { path: 'blog', loadChildren: () => import('../gestionnaire/blog/blog.module').then(m => m.BlogModule) },
 ];
 
 @NgModule({
