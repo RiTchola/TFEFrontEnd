@@ -53,6 +53,10 @@ export class AppMenuComponent implements OnInit {
                 items.push({ label: 'Rapport de visite', icon: 'pi pi-fw pi-comment', routerLink: ['/outils/rapport-visite'] });
                 items.push({ label: 'Établissement', icon: 'pi pi-fw pi-building', routerLink: ['/outils/etablissement'] });
             }
+
+            if (this.authSrv.getRole() == RoleType.etablissement.toLowerCase() || this.authSrv.isAdmin()) {
+                items.push({ label: 'Obtenir un QrCode', icon: 'pi pi-qrcode', routerLink: ['/outils/qrcode'] });
+            }
         }
 
         if (placeholder.toLowerCase() == 'parametre') {
