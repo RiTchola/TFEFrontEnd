@@ -11,14 +11,11 @@ import { ToastModule } from 'primeng/toast';
 
 import { ImagesVideoComponent } from './images-video/images-video.component';
 import { RapportVisiteComponent } from './rapport-visite/rapport-visite.component';
-import { QrcodeComponent } from './qrcode/qrcode.component';
-import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
     declarations: [
         ImagesVideoComponent,
-        RapportVisiteComponent,
-        QrcodeComponent
+        RapportVisiteComponent
     ],
     imports: [
         CommonModule,
@@ -30,8 +27,7 @@ import { QRCodeModule } from 'angularx-qrcode';
         HttpClientModule,
         ButtonModule,
         InputTextModule,
-        ToastModule,
-        QRCodeModule
+        ToastModule
 
     ]
 })
