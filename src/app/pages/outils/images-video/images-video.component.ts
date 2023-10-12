@@ -52,6 +52,9 @@ export class ImagesVideoComponent implements OnInit{
         this.getFiles();
     }
 
+   new(code: string){
+        console.log(code);
+    }
 
     downloadFile(url: string){
         this.fichierService.downloadFile(url).subscribe(
