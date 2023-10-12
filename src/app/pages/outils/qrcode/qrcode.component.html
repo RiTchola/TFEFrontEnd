@@ -1,5 +1,13 @@
 <div class="card">
-    <p>Custom Text ...</p>
-    <img [src]="qrcode" alt="" />
-    <button pButton label="Ajouter un résident" (click)="submitReport()" class="btn-primary"></button>
+    <h5>Obtenir un QrCode pour soumettre un commentaire</h5>
+    <div>
+        <div class="col-6 flex">
+            <img src="assets/images/boy_and_girl_standing_and_laughing.png" alt="computer" class="col-10 mx-auto my-auto" />
+        </div>
+    </div>
+    <div class="col-6">
+        <img [src]="qrcode" alt="" />
+        <button pButton label="Nouveau QrCode" (click)="submitReport()" class="btn-primary"></button>
+    </div>
 </div>
+
