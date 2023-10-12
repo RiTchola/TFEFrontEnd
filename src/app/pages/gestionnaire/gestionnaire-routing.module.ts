@@ -45,7 +45,7 @@ const routes: Routes = [
             { path: '', redirectTo: 'user', pathMatch: 'full' },
         ],
     },
-    { path: 'daily-report/:id', component: DailyReportComponent, canActivate: [establissementGuard, contactPersonGuard] },
+    { path: 'daily-report/:id', component: DailyReportComponent, canActivate: [estabAndContactPerson] },
     { path: 'daily-report/details/:residentId/:reportId', component: DailyReportDetailsComponent, canActivate: [establissementGuard, contactPersonGuard] },
     { path: 'daily-report/edit/:reportId', component: DailyReportFormsComponent, canActivate: [establissementGuard, contactPersonGuard] },
     { path: 'contact-person/:id', component: ContactPersonComponent },

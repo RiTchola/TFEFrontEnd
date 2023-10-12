@@ -6,7 +6,6 @@ import {SharedModule} from "./shared/shared.module";
 import {JwtInterceptor} from "./core/interceptors/jwt.interceptor";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 
-
 @NgModule({
     declarations: [
         AppComponent,

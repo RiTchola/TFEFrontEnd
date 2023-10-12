@@ -6,6 +6,8 @@ import { Util } from 'src/app/shared/util';
 import { MessageService } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
 import { MedecinTraitant } from 'src/app/models/medecin-traitant';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { RoleType } from 'src/app/shared/interfaces/roleType';
 
 @Component({
     selector: 'app-details',
@@ -18,8 +20,10 @@ export class DetailsComponent implements OnInit {
     residentId = 0;
     resident?: Resident;
     medecin?: MedecinTraitant;
+    canEdit = false;
 
     constructor(
+        private authSrv: AuthService,
         private residentSrv: ResidentService,
         private confirmationService: ConfirmationService,
         private msgSrv: MessageService,
@@ -30,12 +34,16 @@ export class DetailsComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.canEdit = this.authSrv.isAdmin() || this.authSrv.getRole().toLowerCase() == RoleType.etablissement.toLowerCase();
         this.getResidentById(this.residentId);
     }
 
     getResidentById(id: number) {
         this.residentSrv.fetchById(id).subscribe({
-            next: (r) => this.resident = r,
+            next: (r) => {
+                this.resident = r;
+                this.medecin = r.medecinTraitant;
+            }
         })
     }
 
