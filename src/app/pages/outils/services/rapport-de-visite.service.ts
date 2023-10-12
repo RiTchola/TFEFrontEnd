@@ -10,7 +10,7 @@ import {environment} from "../../../../environments/environment";
 export class RapportDeVisiteService {
 
     private apiUrl: string = environment.apiPath+'/rapport-visite';
-    // private apiExternalUrl: string = environment.apiPath+'/externe/rapport-visite';
+    private apiExternalUrl: string = environment.apiPath+'/externe/rapport-visite';
 
     constructor(private http: HttpClient) { }
 
