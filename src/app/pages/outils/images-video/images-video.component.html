@@ -6,7 +6,7 @@
 </div>
 <div class="grid">
     <div class="col-12">
-        <div class="card">
+        <div class="card" style="padding: 0">
             <p-table [value]="fichier" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
                      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                      [rowsPerPageOptions]="[5, 10, 25, 50]">
@@ -15,19 +15,19 @@
                         <th pSortableColumn="date">Date <p-sortIcon field="date"></p-sortIcon></th>
                         <th pSortableColumn="personneContact">Personne de contact<p-sortIcon field="personneContact"></p-sortIcon></th>
                         <th pSortableColumn="typeF">Type de Fichier <p-sortIcon field="typeF"></p-sortIcon></th>
-                        <th>Actions</th>
+                        <th>Télécharger</th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-iv>
                     <tr>
-                        <td>{{iv.date | date : "EEEE, dd MMMM YYYY"}}</td>
+                        <td>{{getDateOf(iv.date)}}</td>
                         <td>{{iv.personneContact}}</td>
                         <td>
-                            <i class="pi {{iv.typeF=='IMAGE'? 'pi-image': 'pi-video'}}" style="font-size: 2.5rem"></i>
+                            <img [src]="iv.typeF=='IMAGE'? 'assets/images/logoimage.png' : 'assets/images/video.png'" alt="Media" style="font-size: 2.5rem" >
                         </td>
                         <td>
                             <a href="{{iv.fileURL}}">
-                                <i class="pi pi-download"></i>
+                                <i class="pi pi-download" style="color:rgba(241, 163, 16, 0.87)"></i>
                             </a>
                         </td>
                     </tr>
@@ -38,9 +38,9 @@
 </div>
 <p-dialog  [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
     <ng-template pTemplate="header">
-        <h4>Envoyer une image ou une video</h4>
+        <h4>Téléverserer une Image ou une Vidéo</h4>
     </ng-template>
-    <p>S'il vous plait entrer les informations de votre fichier</p>
+    <p>Téléversez votre Fichier</p>
         <div class="p-fluid formgrid grid">
             <div class="field col-12">
                 <label>Date</label>
@@ -55,7 +55,7 @@
                 ></p-dropdown>
             </div>
             <div class="field col-12">
-                <label>Upload de l'{{fichierHelper.typeF==='IMAGE'? 'image' : 'video'}} </label>
+                <label>Déposer une {{fichierHelper.typeF==='IMAGE'? 'image' : 'vidéo'}} </label>
                 <p-fileUpload
                               [customUpload]="true"
                               [multiple]="false"

@@ -4,6 +4,7 @@ import {Fichier} from "../../../models/fichier";
 import {FichierService} from "../services/fichier.service";
 import {KeyValue} from "@angular/common";
 import {HttpResponse} from "@angular/common/http";
+import { Util } from 'src/app/shared/util';
 
 
 @Component({
@@ -16,12 +17,10 @@ export class ImagesVideoComponent implements OnInit{
     uploadedImages!: any;
     today = new Date();
 
-
-
     fichier: Fichier[] = [];
     typeFichiers: KeyValue<string, string>[] = [
         {key: "Image", value: "IMAGE"},
-        {key: "Video", value: "VIDEO"}];
+        {key: "Vidéo", value: "VIDEO"}];
 
     fichierHelper: Fichier = {
         id: 0,
@@ -52,10 +51,10 @@ export class ImagesVideoComponent implements OnInit{
         this.getFiles();
     }
 
-   new(code: string){
-        console.log(code);
+    getDateOf(date: Date) {
+        return Util.displayAsDate(date);
     }
-
+    
     downloadFile(url: string){
         this.fichierService.downloadFile(url).subscribe(
             {
@@ -84,8 +83,6 @@ export class ImagesVideoComponent implements OnInit{
         URL.revokeObjectURL(url);
         link.remove();
     }
-
-
 
     private extractFilename(contentDispositionHeader: string|null): string {
         if (!contentDispositionHeader) {
