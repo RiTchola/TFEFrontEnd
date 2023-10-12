@@ -1,13 +1,11 @@
 <div class="card ">
-    <h5>Obtenir un QrCode pour soumettre un commentaire</h5>
-    <button pButton label="Générer le code" (click)="submitReport()" class="btn-primary"></button>
+    <div>
+        <h5>Obtenir un QrCode pour soumettre un commentaire</h5>
+        <button pButton label="Générer le code" (click)="submitReport()" class="btn-primary"></button>
+        <qrcode [qrdata]="qrcode"  [width]="400" [errorCorrectionLevel]="'M'" *ngIf="qrcode"></qrcode>
+    </div>
     <div class="col-12">
-        <div class="col-6">
-            <qrcode [qrdata]="qrcode" [width]="256" [errorCorrectionLevel]="'M'" *ngIf="qrcode"></qrcode>
-        </div>
-        <div class="col-6">
-            <img src="assets/images/boy_and_girl_standing_and_laughing.png" alt="computer" />
-        </div>
+        <img src="assets/images/boy_and_girl_standing_and_laughing.png" alt="computer" />
     </div>
 </div>
 
