@@ -26,7 +26,11 @@
                             <i class="pi {{iv.typeF=='IMAGE'? 'pi-image': 'pi-video'}}" style="font-size: 2.5rem"></i>
                         </td>
                         <td>
-                            <i class="pi pi-download" (click)="downloadFile(iv.fileURL)"></i>
+
+                                <a href="{{iv.fileURL}">
+                                    <i class="pi pi-download"></i>
+                                </a>
+
                         </td>
                     </tr>
                 </ng-template>
