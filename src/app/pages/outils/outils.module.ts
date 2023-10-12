@@ -1,3 +1,5 @@
+
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -12,11 +14,13 @@ import { QRCodeModule } from 'angularx-qrcode';
 
 import { ImagesVideoComponent } from './images-video/images-video.component';
 import { RapportVisiteComponent } from './rapport-visite/rapport-visite.component';
+import { QrcodeComponent } from './qrcode/qrcode.component';
 
 @NgModule({
     declarations: [
         ImagesVideoComponent,
-        RapportVisiteComponent
+        RapportVisiteComponent,
+        QrcodeComponent
     ],
     imports: [
         CommonModule,
