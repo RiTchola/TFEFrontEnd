@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {RapportVisite} from "../../../models/rapport-visite";
 import {Observable} from "rxjs";
 import {environment} from "../../../../environments/environment";
@@ -22,8 +22,9 @@ export class RapportDeVisiteService {
         return this.http.get<RapportVisite>(`${this.apiUrl}/${id}`);
     }
 
-   /*  createRapport(rapport: RapportVisite): Observable<any> {
-        return this.http.post(this.apiExternalUrl, rapport);
-    } */
+    createRapport(code: number, rapport: RapportVisite): Observable<any> {
+        const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this.http.post(`${this.apiExternalUrl}/${code}`, rapport, {headers: headers} );
+    }
 
 }
