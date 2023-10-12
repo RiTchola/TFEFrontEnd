@@ -9,7 +9,7 @@ import { QrcodeComponent } from './qrcode/qrcode.component';
 const routes: Routes = [
     { path: '', redirectTo: 'images-video', pathMatch: 'full' },
     { path: 'images-video', component: ImagesVideoComponent },
-    { path: 'rapport-visite', component: RapportVisiteComponent, canActivate: [establissementGuard]},
+    { path: 'rapport-visite', component: RapportVisiteComponent, canActivate: [establissementGuard] },
     { path: 'qrcode', component: QrcodeComponent, canActivate: [establissementGuard] },
     { path: 'etablissement', component: EtablissementComponent, canActivate: [establissementGuard] },
 ];
@@ -18,4 +18,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-export class OutilsRoutingModule {}
+export class OutilsRoutingModule { }
