@@ -9,7 +9,7 @@
         class="mr-5 btn-outline-primary"><i class="pi pi-arrow-left mr-1"></i></button>
 </div>
 
-<div class="grid" *ngIf="reports.length > 0">
+<div class="grid" *ngIf="reports">
     <div class="col-12">
         <p-table [value]="reports" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -51,7 +51,7 @@
                     </td>
                 </tr>
             </ng-template>
-            <p *ngIf="reports.length === 0">Aucun rapport pour le résident</p>
+            <p *ngIf="!reports">Aucun rapport pour le résident</p>
         </p-table>
        
     </div>

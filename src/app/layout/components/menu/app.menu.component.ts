@@ -47,31 +47,31 @@ export class AppMenuComponent implements OnInit {
     getItems(placeholder: string) {
         let items = [];
         if (placeholder.toLowerCase() == 'outils') {
-            if (this.authSrv.getRole() == RoleType.etablissement.toLowerCase() || this.authSrv.isAdmin() ||
-                this.authSrv.getRole() == RoleType.resident.toLowerCase()) {
+            if (this.authSrv.getRole().toLowerCase() == RoleType.etablissement.toLowerCase() || this.authSrv.isAdmin() ||
+                this.authSrv.getRole().toLowerCase() == RoleType.personnecontact.toLowerCase()) {
                 items.push({ label: 'Image/Video', icon: 'pi pi-fw pi-video', routerLink: ['/outils/images-video'] });
-                items.push({ label: 'Rapport de visite', icon: 'pi pi-fw pi-comment', routerLink: ['/outils/rapport-visite'] });
-                items.push({ label: 'Établissement', icon: 'pi pi-fw pi-building', routerLink: ['/outils/etablissement'] });
             }
 
-            if (this.authSrv.getRole() == RoleType.etablissement.toLowerCase() || this.authSrv.isAdmin()) {
+            if (this.authSrv.getRole().toLowerCase() == RoleType.etablissement.toLowerCase() || this.authSrv.isAdmin()) {
+                items.push({ label: 'Rapport de visite', icon: 'pi pi-fw pi-comment', routerLink: ['/outils/rapport-visite'] });
+                items.push({ label: 'Établissement', icon: 'pi pi-fw pi-building', routerLink: ['/outils/etablissement'] });
                 items.push({ label: 'Obtenir un QrCode', icon: 'pi pi-qrcode', routerLink: ['/outils/qrcode'] });
             }
         }
 
         if (placeholder.toLowerCase() == 'parametre') {
-            if (this.authSrv.getRole() == RoleType.etablissement.toLowerCase() || this.authSrv.isAdmin()) {
+            if (this.authSrv.getRole().toLowerCase() == RoleType.etablissement.toLowerCase() || this.authSrv.isAdmin()) {
                 items.push({ label: 'Paramètre de compte', icon: 'pi pi-fw pi-cog', routerLink: ['/parametre/compte'] });
             }
             items.push({ label: 'Déconnexion', icon: 'pi pi-fw pi-sign-out', routerLink: ['/parametre/deconnexion'] });
         }
 
         if (placeholder.toLowerCase() == 'gestionnaire') {
-            if (this.authSrv.getRole() == RoleType.etablissement.toLowerCase() || this.authSrv.getRole().toLowerCase() == RoleType.personnecontact.toLowerCase() || this.authSrv.isAdmin()) {
+            if (this.authSrv.getRole().toLowerCase().toLowerCase() == RoleType.etablissement.toLowerCase() || this.authSrv.getRole().toLowerCase() == RoleType.personnecontact.toLowerCase() || this.authSrv.isAdmin()) {
                 items.push({ label: 'Résidents', icon: 'pi pi-fw pi-users', routerLink: ['/gestionnaire/resident'] });
             }
             items.push({ label: 'Menu de la Semaine', icon: 'pi pi-fw pi-box', routerLink: ['/gestionnaire/menu-semaine'] });
-            if (this.authSrv.getRole() == RoleType.etablissement.toLowerCase() || this.authSrv.getRole() == RoleType.personnecontact.toLowerCase() || this.authSrv.isAdmin()) {
+            if (this.authSrv.getRole().toLowerCase() == RoleType.etablissement.toLowerCase() || this.authSrv.getRole().toLowerCase() == RoleType.personnecontact.toLowerCase() || this.authSrv.isAdmin()) {
                 items.push({ label: 'Meet-Up', icon: 'pi pi-fw pi-file-edit', routerLink: ['/gestionnaire/meet-up'] });
             }
             items.push({ label: 'Blog', icon: 'pi pi-fw pi-megaphone', routerLink: ['/gestionnaire/blog'] });

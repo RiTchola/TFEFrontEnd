@@ -72,10 +72,9 @@ const routes: Routes = [
             { path: '', redirectTo: 'lundi', pathMatch: 'full' },
         ],
     },
-    { path: 'meet-up', component: MeetUpComponent, canActivate: [establissementGuard, contactPersonGuard] },
+    { path: 'meet-up', component: MeetUpComponent, canActivate: [estabAndContactPerson] },
     { path: 'meet-up/edit/:id', component: MeetUpFormsComponent, canActivate: [establissementGuard, contactPersonGuard] }, 
     { path: 'blog', loadChildren: () => import('../gestionnaire/blog/blog.module').then(m => m.BlogModule) },
-    { path: 'images/video', component: ImagesVideoComponent, canActivate: [establissementGuard, contactPersonGuard] },
 
        
 ];

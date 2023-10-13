@@ -7,7 +7,7 @@
 <div class="grid">
     <div class="col-12">
         <div class="card">
-            <p-table *ngIf="contacts.length > 0" [value]="contacts" [paginator]="true" [rows]="5"
+            <p-table *ngIf="contacts" [value]="contacts" [paginator]="true" [rows]="5"
                 [showCurrentPageReport]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                 [rowsPerPageOptions]="[5, 10, 25, 50]">
@@ -46,7 +46,7 @@
                     </tr>
                 </ng-template>
             </p-table>
-            <p *ngIf="contacts.length === 0">Aucune personne de contact.</p>
+            <p *ngIf="!contacts">Aucune personne de contact.</p>
         </div>
         <button pButton label="RETOUR" routerLink="/gestionnaire/resident/details/{{residentId}}"
             class="btn-primary mt-4"><i class="pi pi-arrow-left mr-1"></i></button>
