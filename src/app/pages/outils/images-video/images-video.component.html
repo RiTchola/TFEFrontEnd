@@ -1,8 +1,8 @@
 <p-toast></p-toast>
-<h3>Images-Videos</h3>
-<p>Liste des fichiers</p>
+<h3>Images-Vidéos</h3>
+<p>Liste des Fichiers</p>
 <div class="mb-4 flex justify-content-end">
-    <p-button label="Créer image/video" (click)="showDialog()"></p-button>
+    <p-button label="Téléverser Image/Vidéo" (click)="showDialog()"></p-button>
 </div>
 <div class="grid">
     <div class="col-12">
@@ -38,7 +38,7 @@
 </div>
 <p-dialog  [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
     <ng-template pTemplate="header">
-        <h4>Téléverserer une Image ou une Vidéo</h4>
+        <h4>Téléverser une Image ou une Vidéo</h4>
     </ng-template>
     <p>Téléversez votre Fichier</p>
         <div class="p-fluid formgrid grid">
