@@ -8,7 +8,7 @@
                 </div>
                 <div *ngIf="enableForm" class="field col-12 md:col-6">
                     <div class="card">
-                        <h5>Sousmettre un rapport de votre visite</h5>
+                        <h5>Soumettre un rapport de votre visite</h5>
                         <div class="p-fluid formgrid grid">
                             <div class="field col-12 md:col-6">
                                 <label class="required-field">Date de visite</label>
@@ -27,7 +27,7 @@
                                     {{required}}</small>
                             </div>
                             <div class="field col-12 md:col-6">
-                                <label class="required-field">Date de naissance du resident</label>
+                                <label class="required-field">Date de naissance du résident</label>
                                 <p-calendar formControlName="dateBirthResid" [showIcon]="true" [required]="true"></p-calendar>
                                 <small 
                                     *ngIf="dataForm.get('dateBirthResid')?.hasError('required') && form.submitted">{{required}}</small>

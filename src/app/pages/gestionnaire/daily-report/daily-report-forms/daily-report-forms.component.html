@@ -29,14 +29,14 @@
                     </small>
                 </div>
                 <div class="field col-6">
-                    <label class="required-field">Temperature</label>
+                    <label class="required-field">Température</label>
                     <input name="temp" formControlName="temp" type="text" pInputText class="form-control" />
                     <small
                         *ngIf="formData.get('temp')?.value && formData.get('temp')?.invalid && form.submitted">{{required}}
                     </small>
                 </div>
                 <div class="field col-6">
-                    <label class="required-field">Oxygene</label>
+                    <label class="required-field">Oxygène</label>
                     <input name="oxygen" formControlName="oxygen" type="text" pInputText class="form-control" />
                     <small
                         *ngIf="formData.get('oxygen')?.value && formData.get('oxygen')?.invalid && form.submitted">{{required}}
@@ -65,7 +65,7 @@
                 <div class="field col-3 flex align-items-center gap-1">
                     <p-checkbox formControlName="clothe" [binary]="true" inputId="binary" value="clothe"
                         class="align-items-center my-auto"></p-checkbox>
-                    <label for="Vetements">Vetements</label>
+                    <label for="Vetements">Vêtements</label>
                 </div>
             </div>
             <div class="p-fluid formgrid grid">
@@ -82,7 +82,7 @@
                 <div class="field col-3 flex align-items-center gap-1">
                     <p-checkbox formControlName="pedicure" [binary]="true" inputId="binary" value="pedicure"
                         class="align-items-center my-auto"></p-checkbox>
-                    <label for="Pedicure">Pedicure</label>
+                    <label for="Pedicure">Pédicure</label>
                 </div>
                 <div class="field col-3 flex align-items-center gap-1">
                     <p-checkbox formControlName="toilet" [binary]="true" inputId="binary" value="toilet"

@@ -4,18 +4,18 @@
     <form [formGroup]="formData" #form="ngForm">
         <div class="p-fluid formgrid grid">
             <div class="field col-12">
-                <label class="required-field">Petit Déjeuner</label>
+                <label class="required-field">Petit-Déjeuner</label>
                 <input name="breakfast" formControlName="breakfast" type="text" required pInputText
                     class="form-control" placeholder="repas du matin"/>
                 <small *ngIf="(formData.get('breakfast')?.hasError('required') && form.submitted)">{{required}}</small>
             </div>
             <div class="field col-12">
-                <label class="required-field">Déjeuner</label>
+                <label class="required-field">Diner</label>
                 <input name="lunch" formControlName="lunch" type="text" required pInputText class="form-control" placeholder="repas du midi"/>
                 <small *ngIf="(formData.get('lunch')?.hasError('required') && form.submitted)">{{required}}</small>
             </div>
             <div class="field col-12">
-                <label class="required-field">Diner</label>
+                <label class="required-field">Souper</label>
                 <input name="dinner" formControlName="dinner" type="text" required pInputText class="form-control" placeholder="repas du soir"/>
                 <small *ngIf="(formData.get('dinner')?.hasError('required') && form.submitted)">{{required}}</small>
             </div>

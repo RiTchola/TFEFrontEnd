@@ -24,7 +24,6 @@ export class MeetUpFormsComponent implements OnInit {
         status: new FormControl(Etat.Entraitement),
         reason: new FormControl('', [Validators.required]),
         date: new FormControl(new Date(), [Validators.required]),
-        //time: new FormControl('', [Validators.required]),
         personType: new FormControl('', [Validators.required]),
         name: new FormControl('', [Validators.required]),
         firstname: new FormControl('', [Validators.required]),
@@ -37,7 +36,7 @@ export class MeetUpFormsComponent implements OnInit {
         { name: '', value: '' },
         { name: 'En Traitement', value: Etat.Entraitement },
         { name: 'Approuvé', value: Etat.approuve },
-        { name: 'Réjecté', value: Etat.rejecte }
+        { name: 'Rejècté', value: Etat.rejecte }
     ];
 
     typeList = [
@@ -143,5 +142,5 @@ export class MeetUpFormsComponent implements OnInit {
             });
         }
     }
-
+    
 }

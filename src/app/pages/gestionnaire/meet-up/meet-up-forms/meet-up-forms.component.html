@@ -1,6 +1,6 @@
 <p-toast></p-toast>
 <form [formGroup]="formData" #form="ngForm">
-    <h5 class="title mb-0">Remplir les informations pour le Meet-Up</h5>
+    <h5 class="title mb-0">Remplir les informations du Meet-Up</h5>
     <div class="card mt-3">
         <div class="col-12">
             <div class="p-fluid formgrid grid">
@@ -17,18 +17,11 @@
                         *ngIf="(formData.get('reason')?.hasError('required') && formData.get('reason')?.touched) || (formData.get('reason')?.hasError('required') && form.submitted)">{{required}}</small>
                 </div>
                 <div class="field col-12">
-                    <label class="required-field">Date</label>
+                    <label class="required-field">Date & Heure</label>
                     <p-calendar formControlName="date" [showIcon]="true" [showTime]="true" [hourFormat]="'24'"
                         [readonlyInput]="!isContactPerson"></p-calendar>
                     <small *ngIf="formData.get('date')?.hasError('required') && form.submitted">{{required}}</small>
                 </div>
-                <!--<div class="field col-12">
-                    <label class="required-field">Heure</label>
-                    <p-calendar formControlName="time" [timeOnly]="true" [hourFormat]="'24'"></p-calendar>
-                    <small
-                        *ngIf="(formData.get('time')?.hasError('required') && formData.get('time')?.touched) || (formData.get('time')?.hasError('required') && form.submitted)">{{required}}</small>
-                </div>-->
-
                 <div class="field col-12">
                     <label>Type de Meet-Up</label>
                     <p-dropdown [options]="typeList" formControlName="personType" optionLabel="name" optionValue="value"

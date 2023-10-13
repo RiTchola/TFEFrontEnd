@@ -1,6 +1,6 @@
 <p-toast></p-toast>
-<h5>INFROMATIONS RESIDENTS</h5>
-<p>Liste des rapports quotidien du résident</p>
+<h5>INFROMATIONS RÉSIDENTS</h5>
+<p>Liste des rapports quotidiens du résident</p>
 <div class="mb-4 flex justify-content-end" *ngIf="canAdd">
     <button pButton label="Ajouter un rapport" class="btn-primary" (click)="addNewReport()"></button>
 </div>
@@ -17,21 +17,21 @@
             <ng-template pTemplate="header">
                 <tr>
                     <th id="date" pSortableColumn="date">Date <p-sortIcon field="date"></p-sortIcon></th>
-                    <th id="freqCardiaque" pSortableColumn="freqCardiaque">Frequence cardiaque <p-sortIcon
-                            field="freqCardiaque"></p-sortIcon></th>
-                    <th id="freqRespiratoire" pSortableColumn="freqRespiratoire">Frequence respiratiore <p-sortIcon
-                            field="freqRespiratoire"></p-sortIcon></th>
-                    <th id="presArterielle" pSortableColumn="presArterielle">Pression Arterielle <p-sortIcon
-                            field="presArterielle"></p-sortIcon></th>
-                    <th id="satOxygene" pSortableColumn="satOxygene">Sat Oxygene <p-sortIcon
-                            field="satOxygene"></p-sortIcon></th>
-                    <th id="action" pSortableColumn="name">Actions</th>
+                    <th id="humeur" pSortableColumn="humeur">Humeur <p-sortIcon field="humeur"></p-sortIcon></th>
+                    <th id="freqCardiaque" pSortableColumn="freqCardiaque">Fréquence cardiaque <p-sortIcon field="freqCardiaque"></p-sortIcon></th>
+                    <th id="freqRespiratoire" pSortableColumn="freqRespiratoire">Fréquence respiratiore <p-sortIcon field="freqRespiratoire"></p-sortIcon></th>
+                    <th id="presArterielle" pSortableColumn="presArterielle">Préssion Artérielle <p-sortIcon field="presArterielle"></p-sortIcon></th>
+                    <th id="satOxygene" pSortableColumn="satOxygene">Saturation Oxygène <p-sortIcon field="satOxygene"></p-sortIcon></th>
+                    <th >Actions</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-report>
                 <tr>
                     <td>
                         {{getDate(report.date)}}
+                    </td>
+                    <td>
+                        {{report.humeur}}
                     </td>
                     <td>
                         {{report.freqCardiaque}}
@@ -51,12 +51,11 @@
                     </td>
                 </tr>
             </ng-template>
+            <p *ngIf="reports.length === 0">Aucun rapport pour le résident</p>
         </p-table>
        
     </div>
 </div>
-
-<p *ngIf="reports.length === 0">Aucun rapport.</p>
 
 <p-dialog header="Ajouter un rapport Quotidien" [(visible)]="show" [breakpoints]="{'960px': '75vw', '640px': '100vw'}"
     [style]="{width: '50vw'}">

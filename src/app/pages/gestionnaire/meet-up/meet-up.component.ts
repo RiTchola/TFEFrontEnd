@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { RoleType } from 'src/app/shared/interfaces/roleType';
 import { Util } from 'src/app/shared/util';
+import { Etat } from 'src/app/shared/interfaces/etat';
 
 @Component({
     selector: 'app-meet-up',
@@ -77,5 +78,17 @@ export class MeetUpComponent implements OnInit {
 
     getDateOf(date: Date){
         return Util.displayAsDate(date);
+    }
+
+    getColorByEtat(etat: string): string {
+        switch (etat) {
+            case Etat.approuve:
+                return 'rgba(50, 167, 95, 0.808)';
+; 
+            case Etat.rejecte:
+                return 'rgb(192, 19, 19)'; 
+            default:
+                return 'rgb(216, 115, 33)';
+        }
     }
 }

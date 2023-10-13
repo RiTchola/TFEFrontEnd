@@ -15,10 +15,11 @@
                         <th id="motifDemande" pSortableColumn="motifDemande">Motif de la demande <p-sortIcon
                                 field="motifDemande"></p-sortIcon></th>
                         <th id="date" pSortableColumn="date">Date <p-sortIcon field="date"></p-sortIcon></th>
-                        <th id="time" pSortableColumn="time">Heure <p-sortIcon field="time"></p-sortIcon></th>
+                        <th id="time" pSortableColumn="date">Heure <p-sortIcon field="date"></p-sortIcon></th>
                         <th id="etat" pSortableColumn="etat">Statut de la demande<p-sortIcon field="etat"></p-sortIcon></th>
                         <th id="nomResid" pSortableColumn="nomResid">Nom du résident <p-sortIcon  field="nomResid"></p-sortIcon></th>
-                        <th id="action">Actions</th>
+                        <th id="prenomResid" pSortableColumn="prenomResid">Prénom du résident <p-sortIcon  field="prenomResid"></p-sortIcon></th>
+                        <th>Actions</th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-item>
@@ -33,10 +34,15 @@
                             {{displayTime(item.date)}}
                         </td>
                         <td style="min-width: 200px;">
-                            {{item.etat}}
+                            <div [ngStyle]="{'background-color': getColorByEtat(item.etat), 'border-radius': '10px', 'padding': '8px', 'color': 'white', 'text-align': 'center'}">
+                                {{item.etat}}
+                            </div>
                         </td>
                         <td style="min-width: 200px;">
-                            {{item.nomResid}} {{item.prenomResid}}
+                            {{item.nomResid}}
+                        </td>
+                        <td style="min-width: 200px;">
+                            {{item.prenomResid}}
                         </td>
                         <td style="min-width: 200px;">
                             <i class="pi pi-eye" *ngIf="!isContactPerson" (click)="view(item)"></i>
