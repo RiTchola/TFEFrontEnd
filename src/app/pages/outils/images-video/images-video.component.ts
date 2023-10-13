@@ -29,12 +29,15 @@ export class ImagesVideoComponent implements OnInit{
     fichierHelper: Fichier = {
         id: 0,
         date: new Date(),
-        personneContact: '',
+        destinataire: '',
+        nomPersContact: '',
+        prenomPersContact: '',
         typeF: "IMAGE"
     };
 
     visible: boolean = false;
-
+    required = 'Ce champ est requis';
+    
     constructor(
         private authSrv: AuthService,
         private fichierService: FichierService, 
@@ -122,7 +125,7 @@ export class ImagesVideoComponent implements OnInit{
     }
 
     submit(){
-        this.fichierService.addFile(this.fichierHelper.date, this.fichierHelper.typeF, this.uploadedImages).subscribe(
+        this.fichierService.addFile(this.fichierHelper.date, this.fichierHelper.destinataire, this.fichierHelper.typeF, this.uploadedImages).subscribe(
             {
                 next: (event)=>{
                     if(event instanceof HttpResponse){
@@ -132,7 +135,9 @@ export class ImagesVideoComponent implements OnInit{
                         this.fichierHelper= {
                             id: 0,
                             date: new Date(),
-                            personneContact: '',
+                            destinataire: '',
+                            nomPersContact: '',
+                            prenomPersContact: '',
                             typeF: "IMAGE"
                         };
                         this.uploadedImages =  null;

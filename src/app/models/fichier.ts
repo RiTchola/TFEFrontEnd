@@ -1,7 +1,9 @@
 export interface Fichier{
     id: number,
+    destinataire: string,
     date: Date,
-    personneContact: string,
+    nomPersContact: string,
+    prenomPersContact: string,
     fileURL?: string,
     typeF: 'VIDEO' | 'IMAGE'
 }

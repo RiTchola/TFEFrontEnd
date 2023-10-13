@@ -2,7 +2,7 @@
 <h3>Images-Vidéos</h3>
 <p>Liste des Fichiers</p>
 <div class="mb-4 flex justify-content-end" *ngIf="canAdd">
-    <p-button label="Téléverser Image/Vidéo" (click)="showDialog()"></p-button>
+    <p-button label="Téléverser Image/Vidéo" (click)="showDialog()" class="btn-primary"></p-button>
 </div>
 <div class="grid">
     <div class="col-12">
@@ -13,7 +13,9 @@
                 <ng-template pTemplate="header">
                     <tr>
                         <th pSortableColumn="date">Date <p-sortIcon field="date"></p-sortIcon></th>
-                        <th pSortableColumn="personneContact">Personne de contact<p-sortIcon field="personneContact"></p-sortIcon></th>
+                        <th pSortableColumn="destinataire">Destinataire<p-sortIcon field="destinataire"></p-sortIcon></th>
+                        <th pSortableColumn="nomPersContact">Nom Personne C.<p-sortIcon field="nomPersContact"></p-sortIcon></th>
+                        <th pSortableColumn="prenomPersContact">Prenom Personne C.<p-sortIcon field="prenomPersContact"></p-sortIcon></th>
                         <th pSortableColumn="typeF">Type de Fichier <p-sortIcon field="typeF"></p-sortIcon></th>
                         <th *ngIf="canTake">Télécharger</th>
                     </tr>
@@ -24,7 +26,13 @@
                             {{getDateOf(iv.date)}}
                         </td>
                         <td style="min-width: auto;">
-                            {{iv.personneContact}}
+                            {{iv.destinataire}}
+                        </td>
+                        <td style="min-width: auto;">
+                            {{iv.nomPersContact}}
+                        </td>
+                        <td style="min-width: auto;">
+                            {{iv.prenomPersContact}}
                         </td>
                         <td style="min-width: auto;">
                             <img [src]="iv.typeF=='IMAGE'? 'assets/images/logoimage.png' : 'assets/images/video.png'" alt="Media" style="font-size: 2.5rem" >
@@ -48,7 +56,11 @@
         <div class="p-fluid formgrid grid">
             <div class="field col-12">
                 <label>Date</label>
-                <p-calendar [(ngModel)]="fichierHelper.date" [showIcon]="true"></p-calendar>
+                <p-calendar [(ngModel)]="fichierHelper.date" [showIcon]="true" styleClass="btn-primary"></p-calendar>
+            </div>
+            <div class="field col-12">
+                <label>Destinataire</label>
+                <input [(ngModel)]="fichierHelper.destinataire" name="destinataire" type="text" required pInputText class="form-control" />
             </div>
             <div class="field col-12">
                 <label>Type de Fichier</label>
@@ -74,7 +86,7 @@
             </div>
             <div class="p-fluid formgrid grid">
                 <div class="field col-12">
-                    <p-button [disabled]="!uploadedImages" label="Enregistrer" (onClick)="submit()"></p-button>
+                    <p-button [disabled]="!uploadedImages" label="Enregistrer" (onClick)="submit()" styleClass="btn-primary"></p-button>
                 </div>
             </div>
         </div>

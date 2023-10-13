@@ -21,10 +21,11 @@ export class FichierService {
       return this.http.get<Fichier[]>(this.apiUrl);
     }
 
-    addFile(date: Date, typeF: string, file: File): Observable<HttpEvent<any>> {
+    addFile(date: Date, destinataire: string, typeF: string, file: File): Observable<HttpEvent<any>> {
         const formData: FormData = new FormData();
 
         formData.append('date', date.toISOString());
+        formData.append('destinataire', destinataire);
         formData.append('typeF', typeF);
         formData.append('username', this.authService.getUsername());
         formData.append('file', file);
