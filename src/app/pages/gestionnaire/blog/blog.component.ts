@@ -5,12 +5,12 @@ import {Communique} from "../../../models/communique";
 
 import {FormGroup, FormControl, Validators, ValidatorFn, AbstractControl} from '@angular/forms'
 import {HttpEventType, HttpResponse} from "@angular/common/http";
+import { RoleType } from "src/app/shared/interfaces/roleType";
+import { AuthService } from "src/app/core/services/auth.service";
 interface Image {
     name: string;
     objectURL: string;
 }
-
-
 
 @Component({
     templateUrl: './blog.component.html',
@@ -20,6 +20,7 @@ interface Image {
 export class BlogComponent implements OnInit {
     uploadedImages: any[] = [];
     today = new Date();
+    canAdd = false;
 
     @ViewChildren('buttonEl') buttonEl!: QueryList<ElementRef>;
     value:number = 0;
@@ -37,15 +38,20 @@ export class BlogComponent implements OnInit {
 
     required = 'Ce champ est requis';
 
-
-    ngOnInit(): void {
-        this.getBlogs();
-    }
-
     constructor(
+        private authSrv: AuthService,
         private communiqueService: CommuniqueService,
         private messageService: MessageService
     )  { }
+
+    ngOnInit(): void {
+        // check whether the user can add new menu or not
+        if (this.authSrv.getRole().toLowerCase() == RoleType.etablissement.toLowerCase() ||
+        this.authSrv.getRole().toLowerCase() == RoleType.admin.toLowerCase()) {
+            this.canAdd = true;
+        }
+        this.getBlogs();
+    }
 
     getBlogs(){
         this.communiqueService.getAllCommunique().subscribe(

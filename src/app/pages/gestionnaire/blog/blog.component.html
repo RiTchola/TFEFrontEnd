@@ -2,7 +2,7 @@
 <h3>BLOG</h3>
 <p>Notre actualité à l'établissement</p>
 <div class="grid">
-    <div class="col-12 md:col-12">
+    <div class="col-12 md:col-12" *ngIf="canAdd">
         <div class="mb-4 flex justify-content-end">
             <p-button label="Enrégistrer un blog" (onClick)="showDialog()"></p-button>
         </div>

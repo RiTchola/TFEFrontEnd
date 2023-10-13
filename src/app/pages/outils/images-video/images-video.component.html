@@ -1,7 +1,7 @@
 <p-toast></p-toast>
 <h3>Images-Vidéos</h3>
 <p>Liste des Fichiers</p>
-<div class="mb-4 flex justify-content-end">
+<div class="mb-4 flex justify-content-end" *ngIf="canAdd">
     <p-button label="Téléverser Image/Vidéo" (click)="showDialog()"></p-button>
 </div>
 <div class="grid">
@@ -15,7 +15,7 @@
                         <th pSortableColumn="date">Date <p-sortIcon field="date"></p-sortIcon></th>
                         <th pSortableColumn="personneContact">Personne de contact<p-sortIcon field="personneContact"></p-sortIcon></th>
                         <th pSortableColumn="typeF">Type de Fichier <p-sortIcon field="typeF"></p-sortIcon></th>
-                        <th>Télécharger</th>
+                        <th *ngIf="canTake">Télécharger</th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-iv>
@@ -29,7 +29,7 @@
                         <td style="min-width: auto;">
                             <img [src]="iv.typeF=='IMAGE'? 'assets/images/logoimage.png' : 'assets/images/video.png'" alt="Media" style="font-size: 2.5rem" >
                         </td>
-                        <td style="min-width: auto;">
+                        <td style="min-width: auto;" *ngIf="canTake">
                             <a href="{{iv.fileURL}}">
                                 <i class="pi pi-download" style="color:rgba(241, 163, 16, 0.87)"></i>
                             </a>

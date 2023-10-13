@@ -20,6 +20,7 @@ import { DailyReportDetailsComponent } from './daily-report/daily-report-details
 import { MenuFormsComponent } from './menu-semaine/menu-forms/menu-forms.component';
 import { EditMenuComponent } from './menu-semaine/edit-menu/edit-menu.component';
 import { contactPersonGuard, establissementGuard } from 'src/app/core/guards/auth.guard';
+import { ImagesVideoComponent } from '../outils/images-video/images-video.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'resident', pathMatch: 'full' },
@@ -74,6 +75,9 @@ const routes: Routes = [
     { path: 'meet-up', component: MeetUpComponent, canActivate: [establissementGuard, contactPersonGuard] },
     { path: 'meet-up/edit/:id', component: MeetUpFormsComponent, canActivate: [establissementGuard, contactPersonGuard] },
     { path: 'blog', loadChildren: () => import('../gestionnaire/blog/blog.module').then(m => m.BlogModule) },
+    { path: 'images/video', component: ImagesVideoComponent, canActivate: [establissementGuard, contactPersonGuard] },
+
+       
 ];
 
 @NgModule({

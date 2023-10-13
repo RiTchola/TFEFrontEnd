@@ -5,6 +5,8 @@ import {FichierService} from "../services/fichier.service";
 import {KeyValue} from "@angular/common";
 import {HttpResponse} from "@angular/common/http";
 import { Util } from 'src/app/shared/util';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { RoleType } from 'src/app/shared/interfaces/roleType';
 
 
 @Component({
@@ -16,6 +18,8 @@ import { Util } from 'src/app/shared/util';
 export class ImagesVideoComponent implements OnInit{
     uploadedImages!: any;
     today = new Date();
+    canAdd = false;
+    canTake = false;
 
     fichier: Fichier[] = [];
     typeFichiers: KeyValue<string, string>[] = [
@@ -31,7 +35,10 @@ export class ImagesVideoComponent implements OnInit{
 
     visible: boolean = false;
 
-    constructor(private fichierService: FichierService, private messageService: MessageService) {
+    constructor(
+        private authSrv: AuthService,
+        private fichierService: FichierService, 
+        private messageService: MessageService) {
     }
 
     getFiles(){
@@ -48,6 +55,17 @@ export class ImagesVideoComponent implements OnInit{
     }
 
     ngOnInit(): void {
+        // check whether the user can add or not
+        if (this.authSrv.getRole().toLowerCase() == RoleType.personnecontact.toLowerCase() ||
+        this.authSrv.getRole().toLowerCase() == RoleType.admin.toLowerCase()) {
+            this.canAdd = true;
+        }
+
+        if (this.authSrv.getRole().toLowerCase() == RoleType.etablissement.toLowerCase() ||
+        this.authSrv.getRole().toLowerCase() == RoleType.admin.toLowerCase()) {
+            this.canTake = true;
+        }
+
         this.getFiles();
     }
 
