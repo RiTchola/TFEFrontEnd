@@ -20,12 +20,16 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-iv>
                     <tr>
-                        <td>{{getDateOf(iv.date)}}</td>
-                        <td>{{iv.personneContact}}</td>
-                        <td>
+                        <td style="min-width: auto;">
+                            {{getDateOf(iv.date)}}
+                        </td>
+                        <td style="min-width: auto;">
+                            {{iv.personneContact}}
+                        </td>
+                        <td style="min-width: auto;">
                             <img [src]="iv.typeF=='IMAGE'? 'assets/images/logoimage.png' : 'assets/images/video.png'" alt="Media" style="font-size: 2.5rem" >
                         </td>
-                        <td>
+                        <td style="min-width: auto;">
                             <a href="{{iv.fileURL}}">
                                 <i class="pi pi-download" style="color:rgba(241, 163, 16, 0.87)"></i>
                             </a>
