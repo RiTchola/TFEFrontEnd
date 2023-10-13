@@ -25,7 +25,8 @@ import {RippleModule} from "primeng/ripple";
 @NgModule({
     declarations: [
         ImagesVideoComponent,
-        RapportVisiteComponent
+        RapportVisiteComponent,
+        QrcodeComponent
     ],
     imports: [
         CommonModule,
