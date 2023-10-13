@@ -63,7 +63,7 @@ import { AppLayoutComponent } from './layout/app.layout.component';
                     ),
             },
             { path: 'notfound', component: NotfoundComponent },
-            // { path: 'externe', loadChildren: () => import('./pages/externe/externe.module').then(m => m.ExterneModule) },
+            { path: 'externe', loadChildren: () => import('./pages/externe/externe.module').then(m => m.ExterneModule) },
             { path: '**', redirectTo: '/notfound' },
         ]),
     ],

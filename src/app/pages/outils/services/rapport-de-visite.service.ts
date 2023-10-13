@@ -22,9 +22,9 @@ export class RapportDeVisiteService {
         return this.http.get<RapportVisite>(`${this.apiUrl}/${id}`);
     }
 
-    createRapport(code: number, rapport: RapportVisite): Observable<any> {
-        const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
-        return this.http.post(`${this.apiExternalUrl}/${code}`, rapport, {headers: headers} );
+    createRapport(code: number, rapport: RapportVisite){
+        //const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');, {headers: headers}
+        return this.http.post(`${this.apiExternalUrl}/${code}`, rapport );
     }
 
 }

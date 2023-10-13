@@ -12,7 +12,7 @@
                         <div class="p-fluid formgrid grid">
                             <div class="field col-12 md:col-6">
                                 <label class="required-field">Date de visite</label>
-                                <p-calendar formControlName="dateVisite" [showIcon]="true" [showTime]="true" [showSeconds]="true" [required]="true"></p-calendar>
+                                <p-calendar formControlName="dateVisite" [showIcon]="true" [showTime]="true" [showSeconds]="true" [required]="true" styleClass="btn-primary"></p-calendar>
                                 <small 
                                     *ngIf="dataForm.get('dateVisite')?.hasError('required') && form.submitted">{{required}}</small>
                                 <small 
@@ -28,7 +28,7 @@
                             </div>
                             <div class="field col-12 md:col-6">
                                 <label class="required-field">Date de naissance du résident</label>
-                                <p-calendar formControlName="dateBirthResid" [showIcon]="true" [required]="true"></p-calendar>
+                                <p-calendar formControlName="dateBirthResid" [showIcon]="true" [required]="true" styleClass="btn-primary"></p-calendar>
                                 <small 
                                     *ngIf="dataForm.get('dateBirthResid')?.hasError('required') && form.submitted">{{required}}</small>
                                 <small 
@@ -66,7 +66,7 @@
                         </div>
                         <div class="p-fluid formgrid grid">
                             <div class="field col-12">
-                                <p-button label="Enregistrer" type="submit"></p-button>
+                                <p-button label="Enregistrer" type="submit" styleClass="btn-primary"></p-button>
                             </div>
                         </div>
                     </div>

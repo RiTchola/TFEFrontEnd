@@ -24,7 +24,7 @@ export class SubmitVisitReportComponent {
         { name: 'Veuillez faire un choix', value: '' },
         { name: 'Ami', value: ContactPersonType.ami },
         { name: 'Amie', value: ContactPersonType.ami },
-        { name: 'Autre', value: ContactPersonType.autre },
+        { name: 'Autre(Préciser SVP dans le commentaire)', value: ContactPersonType.autre },
         { name: 'Autre Membre de Famille', value: ContactPersonType.autre_famille },
         { name: 'Avocat', value: ContactPersonType.avocat },
         { name: 'Avocate', value: ContactPersonType.avocat },
