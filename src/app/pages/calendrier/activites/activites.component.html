@@ -4,7 +4,7 @@
     <p-dialog #dd [(visible)]="showDialog" [breakpoints]="{'960px': '75vw', '640px': '90vw'}" [style]="{width: '36rem'}" [modal]="true" [closable]="true" (onHide)="view = ''">
         <ng-template pTemplate="header">
             <div class="text-header">
-                <span class="my-text">{{view === '' ? changedEvent.title : view === 'new' ? 'Ajouter activité' : 'Supprimer activité'}}</span>
+                <span class="my-text">{{view === '' ? changedEvent.title : view === 'new' ? 'Ajouter Activité' : 'Activité'}}</span>
             </div>
         </ng-template>
 
@@ -38,7 +38,7 @@
             </div>
         </ng-template>
 
-        <ng-template pTemplate="footer">
+        <ng-template pTemplate="footer" *ngIf="canAdd">
             <button pButton *ngIf="view === 'display'" label="Supprimer"  [style]="{width: '100%'}" (click)="delete()"></button>
             <button pButton *ngIf="view === 'new' || view === 'edit'" label="Enregistrer"  (click)="handleSave()" [disabled]="changedEvent.title ===null || changedEvent.title === ''" [style]="{width: '100%'}"></button>
         </ng-template>

@@ -1,9 +1,12 @@
 <h5>RAPPORT QUOTIDIEN</h5>
 <p>Détail du rapport quotidien</p>
-
+<div class="field col-4">
+    <button pButton label="Retour" routerLink="/gestionnaire/daily-report/{{residentId}}"
+        class="mr-5 btn-outline-primary"><i class="pi pi-arrow-left mr-1"></i></button>
+</div>
 <div class="card mt-5">
     <div class="col-12">
-        <p><strong>Paramètres vitaux</strong></p>
+        <p><strong>Paramètres Vitaux</strong></p>
         <div class="p-fluid formgrid grid">
             <div class="field col-4">
                 <h5>Date</h5>
@@ -22,11 +25,11 @@
                 <label>{{report?.temperature}}</label>
             </div>
             <div class="field col-4">
-                <h5>Sat Oxygène</h5>
+                <h5>Saturation en Oxygène</h5>
                 <label>{{report?.satOxygene}}</label>
             </div>
             <div class="field col-4">
-                <h5>Pression artérielle</h5>
+                <h5>Préssion artérielle</h5>
                 <label>{{report?.presArterielle}}</label>
             </div>
         </div>
@@ -51,11 +54,11 @@
                 <label>{{report?.toilette ? 'Oui' : 'Nom'}}</label>
             </div>
             <div class="field col-4">
-                <h5>Vetements</h5>
+                <h5>Vêtements</h5>
                 <label>{{report?.vetements ? 'Oui' : 'Nom'}}</label>
             </div>
             <div class="field col-4">
-                <h5>Crise</h5>
+                <h5>Humeur</h5>
                 <label>{{report?.humeur}}</label>
             </div>
             <div class="field col-4">
@@ -67,9 +70,13 @@
                 <label>{{report?.manicure ? 'Oui' : 'Nom'}}</label>
             </div>
             <div class="field col-4">
-                <h5>Pedicure</h5>
+                <h5>Pédicure</h5>
                 <label>{{report?.pedicure ? 'Oui' : 'Nom'}}</label>
             </div>
         </div>
+    </div>
+    <div class="field col-12">
+        <h5>Commentaire</h5>
+        <label>{{report?.commentaire}}</label>
     </div>
 </div>

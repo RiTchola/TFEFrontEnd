@@ -1,12 +1,11 @@
 <h3>RÉSIDENTS</h3>
 <p>Liste des résidents de l'Établissement</p>
-<div class="mb-4 flex justify-content-end">
+<div class="mb-4 flex justify-content-end" *ngIf="canAdd">
     <button pButton label="Ajouter un résident" routerLink="/gestionnaire/resident/add" class="btn-primary"></button>
 </div>
 <div class="grid">
     <div class="col-12">
         <div class="card">
-
             <p-table *ngIf="residents"
                 [value]="residents" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -14,13 +13,13 @@
 
                 <ng-template pTemplate="header">
                     <tr style="font-weight: bold;">
-                        <th id="name" pSortableColumn="name">Nom <p-sortIcon field="name"></p-sortIcon></th>
+                        <th id="name" pSortableColumn="nom">Nom <p-sortIcon field="nom"></p-sortIcon></th>
                         <th id="prenom" pSortableColumn="prenom">Prénom <p-sortIcon field="prenom"></p-sortIcon></th>
-                        <th id="dob" pSortableColumn="dob">Date de Naissance <p-sortIcon field="dob"></p-sortIcon></th>
-                        <th id="entryDate" pSortableColumn="entryDate">Date d'Éntrée'<p-sortIcon field="dob"></p-sortIcon></th>
-                        <th id="account" pSortableColumn="account">Compte <p-sortIcon field="account"></p-sortIcon></th>
-                        <th id="room" pSortableColumn="room">Chambre <p-sortIcon field="room"></p-sortIcon></th>
-                        <th>Actions</th>
+                        <th id="dob" pSortableColumn="dateNaissance">Date de Naissance <p-sortIcon field="dateNaissance"></p-sortIcon></th>
+                        <th id="entryDate" pSortableColumn="dateEntree">Date d'Éntrée<p-sortIcon field="dateEntree"></p-sortIcon></th>
+                        <th id="account">Compte <p-sortIcon field="actif"></p-sortIcon></th>
+                        <th id="room" pSortableColumn="chambre">Chambre <p-sortIcon field="chambre"></p-sortIcon></th>
+                        <th id="actions">Actions</th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-resident>
@@ -38,25 +37,24 @@
                             {{getDateOf(resident.dateEntree)}}
                         </td>
                         <td style="min-width: 200px;">
-                            <p-tag [value]="resident.actif ? 'ACTIVER':'DESACTIVER'"
+                            <p-tag [value]="resident.actif ? 'ACTIF':'INACTIF'"
                                 severity="{{resident.actif  ? 'success' : 'danger'}}"></p-tag>
                         </td>
                         <td style="min-width: 200px;">
                             {{resident.chambre}}
                         </td>
-                        <td>
+                        <td >
                             <i class="pi pi-eye"
                                [ngClass]="{'active-icon': resident.actif, 'inactive-icon': !resident.actif}"
                                (click)="resident.actif ? view(resident) : null"
                                [style.color]="resident.actif ? '#1ec054ce' : 'red'"
                                style="margin-right: 8px">
                             </i>
-                            <i class="pi pi-pencil" (click)="edit(resident)"></i>
+                            <i *ngIf="canAdd" class="pi pi-pencil" (click)="edit(resident)"></i>
                           </td>
                     </tr>
                 </ng-template>
             </p-table>
-
             <p *ngIf="residents.length === 0">Aucun résident enregistré pour votre établissement.</p>
         </div>
     </div>

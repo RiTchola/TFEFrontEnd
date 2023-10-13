@@ -8,6 +8,8 @@ import { MessageService } from "primeng/api";
 import { Activite } from "../../../models/activite";
 import { Util } from 'src/app/shared/util';
 import frLocale from '@fullcalendar/core/locales/fr';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { RoleType } from 'src/app/shared/interfaces/roleType';
 
 @Component({
   selector: 'app-activites',
@@ -17,6 +19,8 @@ import frLocale from '@fullcalendar/core/locales/fr';
 export class ActivitesComponent implements OnInit{
     events: any[] = [];
     formData:  Activite= {id: 0, title: "", date: new Date};
+
+    canAdd = false;
 
     calendarOptions: any = {
         initialView: 'timeGridDay',
@@ -28,10 +32,14 @@ export class ActivitesComponent implements OnInit{
     view: string = '';
     changedEvent: any;
 
-    constructor(private eventService: CalendarService, private messageService: MessageService ) {
+    constructor(
+        private authSrv: AuthService,
+        private eventService: CalendarService, 
+        private messageService: MessageService ) {
     }
 
     ngOnInit(): void {
+        this.canAdd = this.authSrv.isAdmin() || this.authSrv.getRole().toLowerCase() === RoleType.etablissement.toLowerCase()
         this.eventService.getAllActivity().subscribe(events => {
             this.events = events;
             this.calendarOptions = { ...this.calendarOptions, ...{ events: events }};
@@ -71,9 +79,11 @@ export class ActivitesComponent implements OnInit{
     }
 
     onDateSelect(e: any) {
-        this.view = 'new'
-        this.showDialog = true;
-        this.changedEvent = { ...e, title: null, description: null, location: null, backgroundColor: 'lightorange', borderColor: 'orange',  textColor: 'black', font: 'Times New Roman' };
+        if (this.canAdd){
+            this.view = 'new'
+            this.showDialog = true;
+            this.changedEvent = { ...e, title: null, description: null, location: null, backgroundColor: 'lightorange', borderColor: 'orange',  textColor: 'black', font: 'Times New Roman' };
+        }    
     }
 
     handleSave() {
@@ -107,12 +117,14 @@ export class ActivitesComponent implements OnInit{
     }
 
     delete() {
-        this.events = this.events.filter(i => i.id.toString() !== this.clickedEvent.id.toString());
-        this.calendarOptions = { ...this.calendarOptions, ...{ events: this.events } };
-        this.showDialog = false;
-        this.eventService.deleteActivity(this.clickedEvent.id).subscribe(()=>{
-            this.messageService.add({severity: "success", summary: "Success", detail: 'Activité supprimée' });
-        });
+        if (this.canAdd){
+            this.events = this.events.filter(i => i.id.toString() !== this.clickedEvent.id.toString());
+            this.calendarOptions = { ...this.calendarOptions, ...{ events: this.events } };
+            this.showDialog = false;
+            this.eventService.deleteActivity(this.clickedEvent.id).subscribe(()=>{
+                this.messageService.add({severity: "success", summary: "Success", detail: 'Activité supprimée' });
+            });
+        }
     }
 
     validate() {

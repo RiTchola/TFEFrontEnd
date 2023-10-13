@@ -22,7 +22,7 @@ import { RoleType } from 'src/app/shared/interfaces/roleType';
 export class ResidentFormsComponent implements OnInit {
 
     statusList = [
-        { name: '', value: '' },
+        { name: 'Veuillez faire un choix', value: '' },
         { name: 'Célibataire', value: Status.celibataire },
         { name: 'Divorcé', value: Status.divorce },
         { name: 'Divorcée', value: Status.divorce },
@@ -33,7 +33,7 @@ export class ResidentFormsComponent implements OnInit {
     ];
 
     sexeList = [
-        { name: '', value: '' },
+        { name: 'Veuillez faire un choix', value: '' },
         { name: 'Homme', value: Sexe.homme},
         { name: 'Femme', value: Sexe.femme },
         { name: 'Neutre', value: Sexe.neutre }

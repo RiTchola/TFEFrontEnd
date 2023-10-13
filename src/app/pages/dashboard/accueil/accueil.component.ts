@@ -47,21 +47,25 @@ export class AccueilComponent implements OnInit {
     fetchAllResidents() {
         this.residentSrv.fetchResidents(this.authSrv.getLoggedUser()).subscribe({
             next: (r) => {
-                this.residents = r;
-                this.items.push({
-                    color: 'orange',
-                    description: "résidents",
-                    icon: PrimeIcons.USER,
-                    text: r.length,
-                    header: "Résident",
-                    total: r.length
-                });
+                if (r) {
+                    this.residents = r;
+                    this.items.push({
+                        color: 'orange',
+                        description: "résidents",
+                        icon: PrimeIcons.USER,
+                        text: r.length,
+                        header: "Résident",
+                        total: r.length
+                    });
+                }  
             }, complete: () => {
-                this.residents.forEach(x => {
-                    if (x.id) {
-                        this.fetchDailyReports(x.id);
-                    }
-                });
+                if (this.residents){
+                    this.residents.forEach(x => {
+                        if (x.id) {
+                            this.fetchDailyReports(x.id);
+                        }
+                    });
+                } 
             }
         })
     }
@@ -69,7 +73,9 @@ export class AccueilComponent implements OnInit {
     fetchDailyReports(id: number) {
         this.dashboardSrv.fetchDailyReports(id).subscribe({
             next: (r) => {
-                r.forEach(x => this.dailyReports.push(x));
+                if (r){
+                    r.forEach(x => this.dailyReports.push(x));
+                }
             },
             error: (err) => console.error(err),
             complete: () => {

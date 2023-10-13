@@ -19,13 +19,13 @@ import { DailyReportFormsComponent } from './daily-report/daily-report-forms/dai
 import { DailyReportDetailsComponent } from './daily-report/daily-report-details/daily-report-details.component';
 import { MenuFormsComponent } from './menu-semaine/menu-forms/menu-forms.component';
 import { EditMenuComponent } from './menu-semaine/edit-menu/edit-menu.component';
-import { contactPersonGuard, establissementGuard } from 'src/app/core/guards/auth.guard';
+import { contactPersonGuard, estabAndContactPerson, establissementGuard } from 'src/app/core/guards/auth.guard';
 import { ImagesVideoComponent } from '../outils/images-video/images-video.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'resident', pathMatch: 'full' },
-    { path: 'resident', component: ResidentComponent, canActivate: [establissementGuard] },
-    { path: 'resident/details/:id', component: DetailsComponent, canActivate: [establissementGuard, contactPersonGuard] },
+    { path: 'resident', component: ResidentComponent, canActivate: [estabAndContactPerson] },
+    { path: 'resident/details/:id', component: DetailsComponent, canActivate: [estabAndContactPerson] },
     {
         path: 'resident/add', component: ManageComponent,
         canActivate: [establissementGuard],
@@ -46,7 +46,7 @@ const routes: Routes = [
             { path: '', redirectTo: 'user', pathMatch: 'full' },
         ],
     },
-    { path: 'daily-report/:id', component: DailyReportComponent, canActivate: [establissementGuard, contactPersonGuard] },
+    { path: 'daily-report/:id', component: DailyReportComponent, canActivate: [estabAndContactPerson] },
     { path: 'daily-report/details/:residentId/:reportId', component: DailyReportDetailsComponent, canActivate: [establissementGuard, contactPersonGuard] },
     { path: 'daily-report/edit/:reportId', component: DailyReportFormsComponent, canActivate: [establissementGuard, contactPersonGuard] },
     { path: 'contact-person/:id', component: ContactPersonComponent },

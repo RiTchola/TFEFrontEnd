@@ -22,9 +22,5 @@ export class AppTopBarComponent {
     constructor(public layoutService: LayoutService, private authService: AuthService) {
         this.role = authService.getRole().toLowerCase();
         this.username = authService.getUsername();
-        if(this.role == 'admin') this.role ='Admin';
-        if(this.role == 'etablissement') this.role ='Etablissement';
-        if(this.role == 'resident') this.role ='Résident';
-        if(this.role == 'personnecontact') this.role ='Personne Contact';
     }
 }
