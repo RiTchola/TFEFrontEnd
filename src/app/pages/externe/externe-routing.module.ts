@@ -1,8 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {ExterneComponent} from './externe.component';
 
-const routes: Routes = [{path: '', component: ExterneComponent},
+const routes: Routes = [{path: '', redirectTo: 'rapport-visite', pathMatch: 'full'},
     {
         path: 'rapport-visite',
         loadChildren: () =>

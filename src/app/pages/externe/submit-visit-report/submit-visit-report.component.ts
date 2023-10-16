@@ -107,8 +107,8 @@ export class SubmitVisitReportComponent {
             this.rapportVisiteService.createRapport(this.code, data).subscribe({
                 next: (res:any)=>{
                     this.enableForm = false;
-                    console.log(data);
-                    this.messageService.add({severity:'success', summary:'Success', detail:res.message});
+                    console.log(res.msg);
+                    this.messageService.add({severity:'success', summary:'Success', detail:res.msg});
                 },
                 error: (error:any) =>{
                     this.messageService.add({severity:'error', summary:'Error', detail:error.message},)
